@@ -2,11 +2,15 @@ package tk.sebastjanmevlja.doodlejump.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import tk.sebastjanmevlja.doodlejump.MyGdxGame;
+import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MyGdxGame(), config);
+		config.width = 400;
+		config.height = 800;
+		new LwjglApplication(new Main(), config);
 	}
 }
+
+

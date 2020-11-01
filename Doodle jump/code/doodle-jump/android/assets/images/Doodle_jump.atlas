@@ -1,0 +1,524 @@
+
+Doodle_jump.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+aliens1
+  rotate: false
+  xy: 1245, 511
+  size: 130, 177
+  orig: 130, 177
+  offset: 0, 0
+  index: 0
+aliens1
+  rotate: false
+  xy: 1377, 511
+  size: 130, 177
+  orig: 130, 177
+  offset: 0, 0
+  index: 1
+aliens1
+  rotate: false
+  xy: 1099, 240
+  size: 130, 177
+  orig: 130, 177
+  offset: 0, 0
+  index: 2
+aliens2
+  rotate: false
+  xy: 936, 77
+  size: 161, 91
+  orig: 161, 91
+  offset: 0, 0
+  index: 1
+aliens2
+  rotate: false
+  xy: 1534, 358
+  size: 161, 91
+  orig: 161, 91
+  offset: 0, 0
+  index: 0
+aliens2
+  rotate: false
+  xy: 1297, 252
+  size: 161, 91
+  orig: 161, 91
+  offset: 0, 0
+  index: 2
+background
+  rotate: false
+  xy: 2, 1016
+  size: 640, 1024
+  orig: 640, 1024
+  offset: 0, 0
+  index: -1
+background_dark
+  rotate: false
+  xy: 644, 1016
+  size: 640, 1024
+  orig: 640, 1024
+  offset: 0, 0
+  index: -1
+brown_platform
+  rotate: false
+  xy: 2, 8
+  size: 128, 44
+  orig: 128, 44
+  offset: 0, 0
+  index: 1
+brown_platform
+  rotate: false
+  xy: 132, 13
+  size: 128, 39
+  orig: 128, 39
+  offset: 0, 0
+  index: 0
+brown_platform
+  rotate: false
+  xy: 1740, 596
+  size: 127, 61
+  orig: 127, 61
+  offset: 0, 0
+  index: 2
+brown_platform
+  rotate: false
+  xy: 1249, 54
+  size: 128, 74
+  orig: 128, 74
+  offset: 0, 0
+  index: 3
+button_cancel
+  rotate: false
+  xy: 1514, 697
+  size: 224, 82
+  orig: 224, 82
+  offset: 0, 0
+  index: -1
+button_challenge
+  rotate: false
+  xy: 1308, 345
+  size: 224, 80
+  orig: 224, 80
+  offset: 0, 0
+  index: -1
+button_done
+  rotate: false
+  xy: 1509, 533
+  size: 224, 80
+  orig: 224, 80
+  offset: 0, 0
+  index: -1
+button_menu
+  rotate: false
+  xy: 1308, 427
+  size: 224, 82
+  orig: 224, 82
+  offset: 0, 0
+  index: -1
+button_options
+  rotate: false
+  xy: 644, 2
+  size: 224, 80
+  orig: 224, 80
+  offset: 0, 0
+  index: -1
+button_play
+  rotate: false
+  xy: 1534, 451
+  size: 222, 80
+  orig: 222, 80
+  offset: 0, 0
+  index: -1
+button_play_again
+  rotate: false
+  xy: 1286, 690
+  size: 226, 89
+  orig: 226, 89
+  offset: 0, 0
+  index: -1
+button_set
+  rotate: false
+  xy: 1514, 615
+  size: 224, 80
+  orig: 224, 80
+  offset: 0, 0
+  index: -1
+button_submit
+  rotate: false
+  xy: 1082, 419
+  size: 224, 82
+  orig: 224, 82
+  offset: 0, 0
+  index: -1
+hat
+  rotate: false
+  xy: 870, 18
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+hat
+  rotate: false
+  xy: 1870, 790
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+hat
+  rotate: false
+  xy: 1102, 28
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+hat
+  rotate: false
+  xy: 1168, 28
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+hole
+  rotate: false
+  xy: 1099, 94
+  size: 148, 144
+  orig: 148, 144
+  offset: 0, 0
+  index: -1
+jetpack
+  rotate: false
+  xy: 1653, 281
+  size: 55, 75
+  orig: 55, 75
+  offset: 0, 0
+  index: -1
+loading_screen
+  rotate: false
+  xy: 1286, 1114
+  size: 640, 926
+  orig: 640, 926
+  offset: 0, 0
+  index: -1
+monster
+  rotate: false
+  xy: 1546, 279
+  size: 105, 77
+  orig: 105, 77
+  offset: 0, 0
+  index: -1
+paper
+  rotate: false
+  xy: 644, 750
+  size: 640, 264
+  orig: 640, 264
+  offset: 0, 0
+  index: -1
+pause_screen
+  rotate: false
+  xy: 2, 54
+  size: 640, 960
+  orig: 640, 960
+  offset: 0, 0
+  index: -1
+platform__blue
+  rotate: false
+  xy: 1758, 437
+  size: 121, 35
+  orig: 121, 35
+  offset: 0, 0
+  index: -1
+platform_green
+  rotate: false
+  xy: 385, 17
+  size: 121, 35
+  orig: 121, 35
+  offset: 0, 0
+  index: -1
+platform_softblue
+  rotate: false
+  xy: 262, 17
+  size: 121, 35
+  orig: 121, 35
+  offset: 0, 0
+  index: -1
+platform_white
+  rotate: false
+  xy: 508, 17
+  size: 121, 35
+  orig: 121, 35
+  offset: 0, 0
+  index: -1
+player_left
+  rotate: false
+  xy: 1375, 130
+  size: 124, 120
+  orig: 124, 120
+  offset: 0, 0
+  index: -1
+player_left_jump
+  rotate: false
+  xy: 1740, 659
+  size: 124, 120
+  orig: 124, 120
+  offset: 0, 0
+  index: -1
+player_nose
+  rotate: false
+  xy: 1994, 1920
+  size: 28, 120
+  orig: 28, 120
+  offset: 0, 0
+  index: -1
+player_right
+  rotate: false
+  xy: 1379, 8
+  size: 124, 120
+  orig: 124, 120
+  offset: 0, 0
+  index: -1
+player_right_jump
+  rotate: false
+  xy: 1249, 130
+  size: 124, 120
+  orig: 124, 120
+  offset: 0, 0
+  index: -1
+player_up
+  rotate: false
+  xy: 1758, 474
+  size: 124, 120
+  orig: 124, 120
+  offset: 0, 0
+  index: -1
+rocket
+  rotate: false
+  xy: 1928, 1913
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 0
+rocket
+  rotate: false
+  xy: 1231, 290
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 1
+rocket
+  rotate: false
+  xy: 1928, 1784
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 2
+rocket
+  rotate: false
+  xy: 1928, 1655
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 5
+rocket
+  rotate: false
+  xy: 1928, 1526
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 6
+rocket
+  rotate: false
+  xy: 1928, 1397
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 7
+rocket
+  rotate: false
+  xy: 1928, 1268
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: -1
+rocket
+  rotate: false
+  xy: 1928, 1139
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 8
+rocket
+  rotate: false
+  xy: 1870, 985
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 4
+rocket
+  rotate: false
+  xy: 1870, 856
+  size: 64, 127
+  orig: 64, 127
+  offset: 0, 0
+  index: 3
+shield
+  rotate: false
+  xy: 1460, 261
+  size: 84, 82
+  orig: 84, 82
+  offset: 0, 0
+  index: -1
+shoes
+  rotate: false
+  xy: 1697, 383
+  size: 59, 66
+  orig: 59, 66
+  offset: 0, 0
+  index: -1
+spaceship
+  rotate: false
+  xy: 1286, 781
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 0
+spaceship
+  rotate: false
+  xy: 644, 417
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 1
+spaceship
+  rotate: false
+  xy: 1432, 781
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 2
+spaceship
+  rotate: false
+  xy: 644, 84
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 3
+spaceship
+  rotate: false
+  xy: 790, 417
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 4
+spaceship
+  rotate: false
+  xy: 1578, 781
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 5
+spaceship
+  rotate: false
+  xy: 790, 84
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 6
+spaceship
+  rotate: false
+  xy: 936, 417
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 7
+spaceship
+  rotate: false
+  xy: 1724, 781
+  size: 144, 331
+  orig: 144, 331
+  offset: 0, 0
+  index: 8
+spring_big
+  rotate: false
+  xy: 1844, 376
+  size: 37, 59
+  orig: 37, 59
+  offset: 0, 0
+  index: -1
+spring_small
+  rotate: false
+  xy: 1501, 130
+  size: 44, 29
+  orig: 44, 29
+  offset: 0, 0
+  index: -1
+springs
+  rotate: false
+  xy: 1501, 211
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: 1
+springs
+  rotate: false
+  xy: 1501, 161
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: 3
+springs
+  rotate: false
+  xy: 1563, 229
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: 4
+springs
+  rotate: false
+  xy: 1563, 179
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: 0
+springs
+  rotate: false
+  xy: 1936, 1089
+  size: 60, 48
+  orig: 60, 48
+  offset: 0, 0
+  index: 2
+trampoline
+  rotate: false
+  xy: 1758, 381
+  size: 84, 54
+  orig: 84, 54
+  offset: 0, 0
+  index: 0
+trampoline
+  rotate: false
+  xy: 936, 30
+  size: 81, 45
+  orig: 81, 45
+  offset: 0, 0
+  index: 1
+trampoline
+  rotate: false
+  xy: 1019, 30
+  size: 81, 45
+  orig: 81, 45
+  offset: 0, 0
+  index: 2
+ufo
+  rotate: false
+  xy: 936, 170
+  size: 161, 245
+  orig: 161, 245
+  offset: 0, 0
+  index: -1
+ufo_light
+  rotate: false
+  xy: 1082, 503
+  size: 161, 245
+  orig: 161, 245
+  offset: 0, 0
+  index: -1
