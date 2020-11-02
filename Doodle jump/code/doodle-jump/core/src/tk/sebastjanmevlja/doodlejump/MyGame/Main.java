@@ -23,14 +23,9 @@ public class Main extends Game {
     public void create() {
         batch = new SpriteBatch();
         main = this;
-
-        Main.assetManager.queueAddSkin();
-        Main.assetManager.manager.finishLoading();
-        // load loading images and wait until finished
-        Main.assetManager.queueAddLoadingImages();
-        Main.assetManager.manager.finishLoading();
-        Main.assetManager.queueAddImages();
+        load();
         changeScreen(Screens.LOADINGSCREEN);
+
     }
 
 
@@ -55,6 +50,19 @@ public class Main extends Game {
     public void render() {
         super.render();
     }
+
+
+    public void load()
+    {
+        Main.assetManager.queueAddSkin();
+        Main.assetManager.manager.finishLoading();
+        // load loading images and wait until finished
+        Main.assetManager.queueAddLoadingImages();
+        Main.assetManager.manager.finishLoading();
+        Main.assetManager.queueAddImages();
+
+    }
+
 
     @Override
     public void dispose() {
