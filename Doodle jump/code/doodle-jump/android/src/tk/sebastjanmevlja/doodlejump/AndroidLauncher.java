@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
-import tk.sebastjanmevlja.doodlejump.MyGdxGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
