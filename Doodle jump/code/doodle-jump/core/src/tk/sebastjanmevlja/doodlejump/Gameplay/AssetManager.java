@@ -2,7 +2,6 @@ package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.assets.loaders.SkinLoader.SkinParameter;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -10,8 +9,6 @@ import static tk.sebastjanmevlja.doodlejump.MyGame.Main.assetManager;
 
 public class AssetManager {
 
-    public static Texture backgroundTexture;
-    public static Texture playerTexture;
     public static TextureAtlas mainAtlas;
     public static Texture loadingBackgroundTexture;
 
@@ -20,10 +17,8 @@ public class AssetManager {
 
 
     // Textures
-
-    private final String mainImage = "images/Doodle_jump.atlas";
     public final String loadingBackgroundImage = "images/loadingBackground.jpg";
-
+    private final String mainImage = "images/Doodle_jump.atlas";
 
     public void queueAddImages() {
         manager.load(mainImage, TextureAtlas.class);
@@ -45,13 +40,9 @@ public class AssetManager {
     }
 
 
-
-
-
     public void dispose() {
-        backgroundTexture.dispose();
-        playerTexture.dispose();
         loadingBackgroundTexture.dispose();
+        mainAtlas.dispose();
 
     }
 }

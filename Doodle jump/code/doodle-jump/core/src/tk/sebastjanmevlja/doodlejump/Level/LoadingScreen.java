@@ -8,14 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
-import tk.sebastjanmevlja.doodlejump.Level.Screens;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
 public class LoadingScreen implements Screen {
-    private Main main;
+    private final Main main;
 
 
     private int currentLoadingStage = 0;
@@ -23,8 +21,8 @@ public class LoadingScreen implements Screen {
     // timer for exiting loading screen
     private float countDown = 2f;
 
-    private Stage stage;
-    private ProgressBar progressBar;
+    private final Stage stage;
+    private final ProgressBar progressBar;
 
 
     public LoadingScreen(Main main) {
@@ -80,7 +78,7 @@ public class LoadingScreen implements Screen {
                 case 1:
                     progressBar.setValue(2);
                     Main.assetManager.inicializeImages();
-                    System.out.println("Loading fonts....");
+                    System.out.println("Initializing images....");
                     break;
             }
             if (currentLoadingStage > 2) {

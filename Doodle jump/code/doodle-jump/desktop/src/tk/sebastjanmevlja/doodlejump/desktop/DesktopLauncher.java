@@ -9,6 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 400;
 		config.height = 800;
+//		Bug fix for crashing while exiting the program.
+		config.forceExit = false;
 		new LwjglApplication(new Main(), config);
 	}
 }

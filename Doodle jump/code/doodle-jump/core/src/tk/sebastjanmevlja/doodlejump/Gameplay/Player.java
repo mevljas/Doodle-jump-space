@@ -1,8 +1,6 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
 
@@ -23,7 +21,6 @@ public class Player extends Sprite {
         game.getBatch().draw(this, getX(), getY(), getWidth(), getHeight());
 
     }
-
 
 
 }

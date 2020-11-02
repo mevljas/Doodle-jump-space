@@ -2,7 +2,6 @@ package tk.sebastjanmevlja.doodlejump.MyGame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
@@ -15,12 +14,9 @@ public class Main extends Game {
     public static Main main;
 
 
-
     private SpriteBatch batch;
     private LoadingScreen loadingScreen;
     private Level1Screen level1Screen;
-
-
 
 
     @Override
