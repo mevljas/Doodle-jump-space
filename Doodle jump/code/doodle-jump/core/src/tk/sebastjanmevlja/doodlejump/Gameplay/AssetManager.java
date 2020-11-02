@@ -1,7 +1,6 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.assets.loaders.SkinLoader.SkinParameter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -12,10 +11,9 @@ import static tk.sebastjanmevlja.doodlejump.MyGame.Main.assetManager;
 public class AssetManager {
 
     public static Texture backgroundTexture;
-    public static Texture playerTExture;
+    public static Texture playerTexture;
     public static TextureAtlas mainAtlas;
     public static Texture loadingBackgroundTexture;
-    public static BitmapFont font;
 
 
     public final com.badlogic.gdx.assets.AssetManager manager = new com.badlogic.gdx.assets.AssetManager();
@@ -25,19 +23,6 @@ public class AssetManager {
 
     private final String mainImage = "images/Doodle_jump.atlas";
     public final String loadingBackgroundImage = "images/loadingBackground.jpg";
-
-    //font
-    private final String fontFile = "fonts/OpenSans-Bold.fnt";
-
-
-    public void queueAddFonts() {
-        manager.load(fontFile, BitmapFont.class);
-    }
-
-    public void inicializeFonts() {
-        font = assetManager.manager.get(assetManager.fontFile);
-        font.setColor(255, 249, 129, 1);
-    }
 
 
     public void queueAddImages() {
@@ -65,9 +50,8 @@ public class AssetManager {
 
     public void dispose() {
         backgroundTexture.dispose();
-        playerTExture.dispose();
+        playerTexture.dispose();
         loadingBackgroundTexture.dispose();
-        font.dispose();
 
     }
 }

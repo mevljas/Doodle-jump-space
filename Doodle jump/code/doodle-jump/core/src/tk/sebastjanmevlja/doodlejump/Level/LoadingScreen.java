@@ -17,10 +17,6 @@ import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 public class LoadingScreen implements Screen {
     private Main main;
 
-    private final int FONT = 1;        // loading fonts
-    private final int FONT2 = 2;        // loading particle effects
-    private final int SOUND = 3;        // loading sounds
-    private final int MUSIC = 4;        // loading music
 
     private int currentLoadingStage = 0;
 
@@ -73,7 +69,7 @@ public class LoadingScreen implements Screen {
 
         Batch gameBatch = main.getBatch();
 
-        gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
+        gameBatch.begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameBatch.draw(AssetManager.loadingBackgroundTexture, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         gameBatch.end();
@@ -81,21 +77,16 @@ public class LoadingScreen implements Screen {
         if (Main.assetManager.manager.update()) { // Load some, will return true if done loading
             currentLoadingStage += 1;
             switch (currentLoadingStage) {
-                case FONT:
-                    progressBar.setValue(1);
+                case 1:
+                    progressBar.setValue(2);
                     Main.assetManager.inicializeImages();
                     System.out.println("Loading fonts....");
-                    Main.assetManager.queueAddFonts();
-                    break;
-                case FONT2:
-                    progressBar.setValue(4);
-                    System.out.println("Inicializing fonts....");
-                    Main.assetManager.inicializeFonts();
                     break;
             }
-            if (currentLoadingStage > 5) {
+            if (currentLoadingStage > 2) {
+                progressBar.setValue(3);
                 countDown -= delta;
-                currentLoadingStage = 5;
+                currentLoadingStage = 2;
                 if (countDown < 0) {
                     main.changeScreen(Screens.LEVEL1SCREEN);
                 }

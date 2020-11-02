@@ -1,12 +1,8 @@
 package tk.sebastjanmevlja.doodlejump.Level;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
@@ -26,7 +22,6 @@ public class Level1Screen implements Screen {
     @Override
     public void show() { //create, setup method
 
-        Gdx.input.setInputProcessor(null); //cleara gumbe od menuja
         player = new Player();
 
     }
