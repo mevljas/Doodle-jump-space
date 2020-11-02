@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
 
@@ -13,6 +14,7 @@ public class Level1Screen implements Screen {
 
     private Main main;
     private Player player;
+    private Platform platform;
 
 
     public Level1Screen(Main main) {
@@ -23,11 +25,13 @@ public class Level1Screen implements Screen {
     public void show() { //create, setup method
 
         player = new Player();
+        platform = new Platform();
 
     }
 
     private void update(float dt) {
         player.update(dt);
+        platform.update(dt);
 
     }
 
@@ -42,6 +46,7 @@ public class Level1Screen implements Screen {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
         gameBatch.draw(AssetManager.mainAtlas.findRegion("background"), 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         player.draw(main);
+        platform.draw(main);
 
 
 
