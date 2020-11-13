@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-import static tk.sebastjanmevlja.doodlejump.MyGame.Main.assetManager;
+
 
 public class AssetManager {
 
@@ -25,7 +25,7 @@ public class AssetManager {
     }
 
     public void inicializeImages() {
-        mainAtlas = assetManager.manager.get(assetManager.mainImage);
+        mainAtlas = this.manager.get(this.mainImage);
     }
 
     // a small set of images used by the loading screen

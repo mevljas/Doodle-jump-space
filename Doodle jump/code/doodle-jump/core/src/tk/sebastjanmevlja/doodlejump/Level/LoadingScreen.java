@@ -30,9 +30,9 @@ public class LoadingScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
 
-        Main.assetManager.queueAddSkin();
-        Main.assetManager.manager.finishLoading();
-        Skin skin = Main.assetManager.manager.get("skin/glassy-ui.json");
+        main.assetManager.queueAddSkin();
+        main.assetManager.manager.finishLoading();
+        Skin skin = main.assetManager.manager.get("skin/glassy-ui.json");
         progressBar = new ProgressBar(0, 5, 1, false, skin);
         progressBar.setValue(0);
         progressBar.setWidth(GameInfo.WIDTH * 0.7f);
@@ -44,17 +44,17 @@ public class LoadingScreen implements Screen {
         stage.addActor(progressBar);
         loadAssets();
         // initiate queueing of images but don't start loading
-        Main.assetManager.queueAddImages();
+        main.assetManager.queueAddImages();
         System.out.println("Loading images....");
     }
 
     private void loadAssets() {
         // load loading images and wait until finished
-        Main.assetManager.queueAddLoadingImages();
-        Main.assetManager.manager.finishLoading();
+        main.assetManager.queueAddLoadingImages();
+        main.assetManager.manager.finishLoading();
 
         // get images used to display loading progress
-        AssetManager.loadingBackgroundTexture = Main.assetManager.manager.get(Main.assetManager.loadingBackgroundImage);
+        AssetManager.loadingBackgroundTexture = main.assetManager.manager.get(main.assetManager.loadingBackgroundImage);
 
     }
 
@@ -72,12 +72,12 @@ public class LoadingScreen implements Screen {
         gameBatch.draw(AssetManager.loadingBackgroundTexture, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         gameBatch.end();
 
-        if (Main.assetManager.manager.update()) { // Load some, will return true if done loading
+        if (main.assetManager.manager.update()) { // Load some, will return true if done loading
             currentLoadingStage += 1;
             switch (currentLoadingStage) {
                 case 1:
                     progressBar.setValue(2);
-                    Main.assetManager.inicializeImages();
+                    main.assetManager.inicializeImages();
                     System.out.println("Initializing images....");
                     break;
             }
