@@ -2,7 +2,7 @@ package tk.sebastjanmevlja.doodlejump.Level;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
+import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
@@ -43,7 +43,7 @@ public class Level1Screen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
-        gameBatch.draw(AssetManager.mainAtlas.findRegion("background"), 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        gameBatch.draw(Main.assetManager.get(AssetDescriptors.atlas).findRegion("background"), 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         player.draw(main);
         platform.draw(main);
 

@@ -1,8 +1,13 @@
 package tk.sebastjanmevlja.doodlejump.MyGame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.SkinLoader;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetManager;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
 import tk.sebastjanmevlja.doodlejump.Level.Screens;
@@ -10,7 +15,7 @@ import tk.sebastjanmevlja.doodlejump.Level.Screens;
 
 public class Main extends Game {
 
-    public AssetManager assetManager = new AssetManager();
+    public static AssetManager assetManager;
     public static Main main;
 
 
@@ -23,7 +28,12 @@ public class Main extends Game {
     public void create() {
         batch = new SpriteBatch();
         main = this;
-        load();
+        assetManager = new AssetManager();
+        loadAssets();
+
+
+
+
         changeScreen(Screens.LOADINGSCREEN);
 
     }
@@ -52,14 +62,15 @@ public class Main extends Game {
     }
 
 
-    public void load()
+    public void loadAssets()
     {
-        this.assetManager.queueAddSkin();
-        this.assetManager.manager.finishLoading();
-        // load loading images and wait until finished
-        this.assetManager.queueAddLoadingImages();
-        this.assetManager.manager.finishLoading();
-        this.assetManager.queueAddImages();
+        SkinLoader.SkinParameter params = new SkinLoader.SkinParameter(String.valueOf(AssetDescriptors.skin));
+        assetManager.load(AssetDescriptors.skin);
+        assetManager.load(AssetDescriptors.backgroundImage);
+
+        assetManager.finishLoading();
+
+
 
     }
 

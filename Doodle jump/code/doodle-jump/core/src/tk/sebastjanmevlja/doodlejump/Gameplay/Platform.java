@@ -5,10 +5,10 @@ import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
 
 public class Platform extends Sprite {
-
+    Main main;
 
     public Platform() {
-        super(AssetManager.mainAtlas.findRegion("platform_green")); //sprite superclass
+        super(Main.assetManager.get(AssetDescriptors.atlas).findRegion("platform_green")); //sprite superclass
         setBounds((GameInfo.WIDTH / 2f) - (getWidth() / 2f), (GameInfo.HEIGHT / 2f), GameInfo.WIDTH / 4f, GameInfo.HEIGHT / 25f);
     }
 
