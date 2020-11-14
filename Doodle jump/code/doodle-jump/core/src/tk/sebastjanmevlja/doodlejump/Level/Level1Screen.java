@@ -11,7 +11,6 @@ public class Level1Screen implements Screen {
 
     private final Game game;
     private Player player;
-    private Platform platform;
     private TextureAtlas.AtlasRegion background;
 
 
@@ -20,7 +19,6 @@ public class Level1Screen implements Screen {
 
 
         player = new Player();
-        platform = new Platform();
         background = AssetStorage.atlas.findRegion("background");
     }
 
@@ -36,7 +34,6 @@ public class Level1Screen implements Screen {
 
     private void update(float dt) {
         player.update(dt);
-        platform.update(dt);
 
     }
 
@@ -51,7 +48,6 @@ public class Level1Screen implements Screen {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
         gameBatch.draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         player.draw(game);
-        platform.draw(game);
 
 
         gameBatch.end();
