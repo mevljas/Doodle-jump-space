@@ -3,6 +3,8 @@ package tk.sebastjanmevlja.doodlejump.Level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,11 +21,15 @@ public class Level1Screen implements Screen {
     private Viewport viewport;
     private Player player;
     private TextureAtlas.AtlasRegion background;
+    World world;
 
 
     public Level1Screen(Game game) {
         this.game = game;
         background = AssetStorage.atlas.findRegion("background");
+
+        // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
+        world = new World(new Vector2(0, -98f), true);
     }
 
 
@@ -37,7 +43,7 @@ public class Level1Screen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
 
-        player = new Player(AssetStorage.atlas.findRegion("player_right"));
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), world);
 
 
         stage.addActor(player);
@@ -52,6 +58,15 @@ public class Level1Screen implements Screen {
     @Override
     public void render(float delta) {   //draw, loop called every frame
 
+
+        // Advance the world, by the amount of time that has elapsed since the  last frame
+        // Generally in a real game, dont do this in the render loop, as you are  tying the physics
+        // update rate to the frame rate, and vice versa
+
+        // Now update the spritee position accordingly to it's now updated Physics body
+        player.updatePos();
+
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 
         stage.act(Gdx.graphics.getDeltaTime());
 
@@ -87,6 +102,7 @@ public class Level1Screen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        world.dispose();
 
     }
 
