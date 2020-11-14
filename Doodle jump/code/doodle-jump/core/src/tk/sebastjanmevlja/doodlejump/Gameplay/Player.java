@@ -1,7 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import tk.sebastjanmevlja.doodlejump.MyGame.Main;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 
 public class Player extends Sprite {
@@ -17,7 +17,7 @@ public class Player extends Sprite {
 
     }
 
-    public void draw(Main game) {
+    public void draw(Game game) {
         game.getBatch().draw(this, getX(), getY(), getWidth(), getHeight());
 
     }

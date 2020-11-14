@@ -1,12 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.MyGame;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.SkinLoader;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
@@ -14,10 +9,10 @@ import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
 import tk.sebastjanmevlja.doodlejump.Level.Screens;
 
 
-public class Main extends Game {
+public class Game extends com.badlogic.gdx.Game {
 
     public static AssetManager assetManager;
-    public static Main main;
+    public static Game main;
 
 
     private SpriteBatch batch;
@@ -32,8 +27,8 @@ public class Main extends Game {
         assetManager = new AssetManager();
         loadAssets();
 
-        AssetStorage.loadingBackgroundTexture = Main.assetManager.get(AssetDescriptors.backgroundImage);
-        AssetStorage.skin = Main.assetManager.get(AssetDescriptors.skin);
+        AssetStorage.loadingBackgroundTexture = Game.assetManager.get(AssetDescriptors.backgroundImage);
+        AssetStorage.skin = Game.assetManager.get(AssetDescriptors.skin);
 
 
         changeScreen(Screens.LOADINGSCREEN);

@@ -4,19 +4,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
-import tk.sebastjanmevlja.doodlejump.MyGame.Main;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 
 public class Level1Screen implements Screen {
 
-    private final Main main;
+    private final Game game;
     private Player player;
     private Platform platform;
     private TextureAtlas.AtlasRegion background;
 
 
-    public Level1Screen(Main main) {
-        this.main = main;
+    public Level1Screen(Game game) {
+        this.game = game;
 
 
         player = new Player();
@@ -45,13 +45,13 @@ public class Level1Screen implements Screen {
     public void render(float delta) {   //draw, loop called every frame
 
 
-        Batch gameBatch = main.getBatch();
+        Batch gameBatch = game.getBatch();
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
         gameBatch.draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
-        player.draw(main);
-        platform.draw(main);
+        player.draw(game);
+        platform.draw(game);
 
 
         gameBatch.end();

@@ -2,7 +2,7 @@ package tk.sebastjanmevlja.doodlejump.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import tk.sebastjanmevlja.doodlejump.MyGame.Main;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -12,7 +12,7 @@ public class DesktopLauncher {
 //		Bug fix for crashing while exiting the program.
 		config.forceExit = false;
 
-		new LwjglApplication(new Main(), config);
+		new LwjglApplication(new Game(), config);
 	}
 }
 

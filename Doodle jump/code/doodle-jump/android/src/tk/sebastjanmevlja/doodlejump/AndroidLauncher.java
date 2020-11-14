@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import tk.sebastjanmevlja.doodlejump.MyGame.Main;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
@@ -12,6 +12,6 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useWakelock = true; //screen stays on
-		initialize(new Main(), config);
+		initialize(new Game(), config);
 	}
 }

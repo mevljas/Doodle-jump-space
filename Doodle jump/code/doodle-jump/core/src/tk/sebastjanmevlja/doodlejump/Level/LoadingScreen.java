@@ -3,27 +3,24 @@ package tk.sebastjanmevlja.doodlejump.Level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
-import tk.sebastjanmevlja.doodlejump.MyGame.Main;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class LoadingScreen implements Screen {
-    private final Main main;
+    private final Game main;
 
     private final Stage stage;
     private final ProgressBar progressBar;
 
 
 
-    public LoadingScreen(Main main) {
+    public LoadingScreen(Game main) {
         this.main = main;
 
         stage = new Stage(new ScreenViewport());
@@ -44,13 +41,13 @@ public class LoadingScreen implements Screen {
     }
 
     private void addAssets() {
-        Main.assetManager.load(AssetDescriptors.atlas);
+        Game.assetManager.load(AssetDescriptors.atlas);
 
 
     }
 
     private void getAssets(){
-        AssetStorage.atlas = Main.assetManager.get(AssetDescriptors.atlas);
+        AssetStorage.atlas = Game.assetManager.get(AssetDescriptors.atlas);
     }
 
     @Override
@@ -68,9 +65,9 @@ public class LoadingScreen implements Screen {
         gameBatch.end();
 
 
-        while(!Main.assetManager.update()) {
+        while(!Game.assetManager.update()) {
 
-            float progress = Main.assetManager.getProgress();
+            float progress = Game.assetManager.getProgress();
             progressBar.setValue(progress);
 
             stage.draw();
