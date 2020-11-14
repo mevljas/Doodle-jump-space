@@ -37,7 +37,7 @@ public class Level1Screen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
 
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), "player_right");
+        player = new Player(AssetStorage.atlas.findRegion("player_right"));
 
 
         stage.addActor(player);

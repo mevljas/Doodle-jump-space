@@ -12,12 +12,12 @@ public class Player extends Actor {
     Sprite sprite;
 
 
-    public Player(TextureAtlas.AtlasRegion texture, final String actorName) {
+    public Player(TextureAtlas.AtlasRegion texture) {
         sprite = new Sprite(texture);
         sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
         sprite.setPosition(0,0);
         sprite.setCenterX(GameInfo.WIDTH / 2f);
-        
+
     }
 
 
