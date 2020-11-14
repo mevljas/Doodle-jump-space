@@ -1,24 +1,28 @@
 package tk.sebastjanmevlja.doodlejump.Level;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import tk.sebastjanmevlja.doodlejump.Gameplay.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
+import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 
 public class Level1Screen implements Screen {
 
     private final Game game;
+    private Stage stage;
+    private Viewport viewport;
     private Player player;
     private TextureAtlas.AtlasRegion background;
 
 
     public Level1Screen(Game game) {
         this.game = game;
-
-
-        player = new Player();
         background = AssetStorage.atlas.findRegion("background");
     }
 
@@ -27,36 +31,43 @@ public class Level1Screen implements Screen {
 
     @Override
     public void show() { //create, setup method
+        viewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT);
+        stage = new Stage(viewport);
+
+        Gdx.input.setInputProcessor(stage);
+
+
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), "player_right");
+
+
+        stage.addActor(player);
 
 
 
     }
 
-    private void update(float dt) {
-        player.update(dt);
 
-    }
 
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
 
 
-        Batch gameBatch = game.getBatch();
+        stage.act(Gdx.graphics.getDeltaTime());
 
-        gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
-        gameBatch.draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
-        player.draw(game);
+        stage.getBatch().begin();
+        stage.getBatch().draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        stage.getBatch().end();
 
 
-        gameBatch.end();
+        stage.draw();
 
     }
 
 
     @Override
     public void resize(int width, int height) {
+        viewport.update(width, height, true);
     }
 
     @Override
@@ -75,8 +86,7 @@ public class Level1Screen implements Screen {
 
     @Override
     public void dispose() {
-        //when we terminate our app or if we change menu, actvity
-        //dispose resources
+        stage.dispose();
 
     }
 
