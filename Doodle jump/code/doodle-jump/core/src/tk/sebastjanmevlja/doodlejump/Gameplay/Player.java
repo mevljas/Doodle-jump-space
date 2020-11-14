@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 
 
@@ -18,12 +17,7 @@ public class Player extends Actor {
         sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
         sprite.setPosition(0,0);
         sprite.setCenterX(GameInfo.WIDTH / 2f);
-
-//        sprite.setBounds((GameInfo.WIDTH / 2f) - (sprite.getWidth() ), 0, GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
-
-        spritePos(sprite.getX(), sprite.getY());
-        setTouchable(Touchable.enabled);
-
+        
     }
 
 
