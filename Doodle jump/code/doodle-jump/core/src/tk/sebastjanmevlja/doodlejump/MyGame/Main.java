@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
+import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
 import tk.sebastjanmevlja.doodlejump.Level.Screens;
@@ -31,7 +32,8 @@ public class Main extends Game {
         assetManager = new AssetManager();
         loadAssets();
 
-
+        AssetStorage.loadingBackgroundTexture = Main.assetManager.get(AssetDescriptors.backgroundImage);
+        AssetStorage.skin = Main.assetManager.get(AssetDescriptors.skin);
 
 
         changeScreen(Screens.LOADINGSCREEN);
@@ -64,7 +66,6 @@ public class Main extends Game {
 
     public void loadAssets()
     {
-        SkinLoader.SkinParameter params = new SkinLoader.SkinParameter(String.valueOf(AssetDescriptors.skin));
         assetManager.load(AssetDescriptors.skin);
         assetManager.load(AssetDescriptors.backgroundImage);
 
@@ -80,6 +81,8 @@ public class Main extends Game {
 
         batch.dispose();
         assetManager.dispose();
+        AssetStorage.loadingBackgroundTexture.dispose();
+        AssetStorage.skin.dispose();
     }
 
 

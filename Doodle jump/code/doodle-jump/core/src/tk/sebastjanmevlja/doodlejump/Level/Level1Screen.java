@@ -2,10 +2,8 @@ package tk.sebastjanmevlja.doodlejump.Level;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
-import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
 
@@ -14,17 +12,25 @@ public class Level1Screen implements Screen {
     private final Main main;
     private Player player;
     private Platform platform;
+    private TextureAtlas.AtlasRegion background;
 
 
     public Level1Screen(Main main) {
         this.main = main;
+
+
+        player = new Player();
+        platform = new Platform();
+        background = AssetStorage.atlas.findRegion("background");
     }
+
+
+
 
     @Override
     public void show() { //create, setup method
 
-        player = new Player();
-        platform = new Platform();
+
 
     }
 
@@ -43,7 +49,7 @@ public class Level1Screen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); //clear the screen
-        gameBatch.draw(Main.assetManager.get(AssetDescriptors.atlas).findRegion("background"), 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        gameBatch.draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         player.draw(main);
         platform.draw(main);
 

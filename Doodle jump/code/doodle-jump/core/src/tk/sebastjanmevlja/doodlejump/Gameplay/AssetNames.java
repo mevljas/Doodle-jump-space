@@ -3,7 +3,7 @@ package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 
 
-public class Assets {
+public class AssetNames {
 
 
 
@@ -12,7 +12,7 @@ public class Assets {
     public static String SKIN = "skin/glassy-ui.json";
 
 
-    private Assets(){}
+    private AssetNames(){}
 
 
 }

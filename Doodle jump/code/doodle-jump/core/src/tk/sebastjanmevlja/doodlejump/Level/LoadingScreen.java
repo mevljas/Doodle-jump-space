@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
+import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
 import tk.sebastjanmevlja.doodlejump.MyGame.Main;
 
@@ -19,7 +20,7 @@ public class LoadingScreen implements Screen {
 
     private final Stage stage;
     private final ProgressBar progressBar;
-    private final Texture loadingBackgroundTexture;
+
 
 
     public LoadingScreen(Main main) {
@@ -27,11 +28,10 @@ public class LoadingScreen implements Screen {
 
         stage = new Stage(new ScreenViewport());
 
-        loadingBackgroundTexture = Main.assetManager.get(AssetDescriptors.backgroundImage);
-        Skin skin = Main.assetManager.get(AssetDescriptors.skin);
 
 
-        progressBar = new ProgressBar(0, 5, 1, false, skin);
+
+        progressBar = new ProgressBar(0, 5, 1, false, AssetStorage.skin);
         progressBar.setValue(0);
         progressBar.setWidth(GameInfo.WIDTH * 0.7f);
         progressBar.getStyle().background.setMinHeight(GameInfo.HEIGHT * 0.06f);
@@ -50,7 +50,7 @@ public class LoadingScreen implements Screen {
     }
 
     private void getAssets(){
-        TextureAtlas atlas = Main.assetManager.get(AssetDescriptors.atlas);
+        AssetStorage.atlas = Main.assetManager.get(AssetDescriptors.atlas);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class LoadingScreen implements Screen {
 
         gameBatch.begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(loadingBackgroundTexture, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        gameBatch.draw(AssetStorage.loadingBackgroundTexture, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
         gameBatch.end();
 
 
@@ -104,6 +104,7 @@ public class LoadingScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
+        AssetStorage.atlas.dispose();
     }
 
 }

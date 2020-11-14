@@ -8,7 +8,7 @@ public class Platform extends Sprite {
     Main main;
 
     public Platform() {
-        super(Main.assetManager.get(AssetDescriptors.atlas).findRegion("platform_green")); //sprite superclass
+        super(AssetStorage.atlas.findRegion("platform_green")); //sprite superclass
         setBounds((GameInfo.WIDTH / 2f) - (getWidth() / 2f), (GameInfo.HEIGHT / 2f), GameInfo.WIDTH / 4f, GameInfo.HEIGHT / 25f);
     }
 

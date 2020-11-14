@@ -8,7 +8,7 @@ public class Player extends Sprite {
 
 
     public Player( ) {
-        super(Main.assetManager.get(AssetDescriptors.atlas).findRegion("player_right")); //sprite superclass
+        super(AssetStorage.atlas.findRegion("player_right")); //sprite superclass
         setBounds((GameInfo.WIDTH / 2f) - (getWidth() / 2f), 0, GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
     }
 
