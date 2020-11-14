@@ -50,7 +50,7 @@ public class Player extends Actor {
 //        mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 10000f;
+        fixtureDef.density = 1f;
         Fixture fixture = body.createFixture(fixtureDef);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
@@ -74,6 +74,10 @@ public class Player extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
+    }
+
+    public void moveUp(){
+        body.applyForceToCenter(0f,10000000000000000000f,true);
     }
 
 
