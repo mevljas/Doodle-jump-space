@@ -18,7 +18,7 @@ public class Player extends Actor {
     public Player(TextureAtlas.AtlasRegion texture, World world) {
         sprite = new Sprite(texture);
         sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
-        sprite.setPosition(0,0);
+        sprite.setPosition(0,GameInfo.HEIGHT / 4f);
         sprite.setCenterX(GameInfo.WIDTH / 2f);
 
         this.world = world;
@@ -40,7 +40,7 @@ public class Player extends Actor {
         // We are a box, so this makes sense, no?
         // Basically set the physics polygon to a box with the same dimensions
 //        as our sprite
-        shape.setAsBox(sprite.getWidth()/2, sprite.getHeight()/2);
+        shape.setAsBox(sprite.getWidth()/2, sprite.getHeight()/9);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the
 //        body
@@ -50,7 +50,7 @@ public class Player extends Actor {
 //        mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
+        fixtureDef.density = 10000f;
         Fixture fixture = body.createFixture(fixtureDef);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();

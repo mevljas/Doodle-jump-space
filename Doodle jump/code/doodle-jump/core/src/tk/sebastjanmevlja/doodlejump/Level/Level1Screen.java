@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
 import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
@@ -20,6 +21,7 @@ public class Level1Screen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Player player;
+    private Platform platform;
     private TextureAtlas.AtlasRegion background;
     World world;
 
@@ -29,7 +31,7 @@ public class Level1Screen implements Screen {
         background = AssetStorage.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
-        world = new World(new Vector2(0, -98f), true);
+        world = new World(new Vector2(0, -100000f), true);
     }
 
 
@@ -44,9 +46,11 @@ public class Level1Screen implements Screen {
 
 
         player = new Player(AssetStorage.atlas.findRegion("player_right"), world);
+        platform = new Platform(AssetStorage.atlas.findRegion("platform_green"), world);
 
 
         stage.addActor(player);
+        stage.addActor(platform);
 
 
 
@@ -64,9 +68,10 @@ public class Level1Screen implements Screen {
         // update rate to the frame rate, and vice versa
 
         // Now update the spritee position accordingly to it's now updated Physics body
-        player.updatePos();
 
         world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+
+        player.updatePos();
 
         stage.act(Gdx.graphics.getDeltaTime());
 
