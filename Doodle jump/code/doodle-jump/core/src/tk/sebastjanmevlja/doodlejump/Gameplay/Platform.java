@@ -24,12 +24,10 @@ public class Platform extends Actor {
 
         // Now create a BodyDefinition.  This defines the physics objects type and position in the simulation
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = BodyDef.BodyType.StaticBody;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
         bodyDef.position.set(sprite.getX() + sprite.getWidth() / 2f , sprite.getY() + sprite.getHeight() / 2f);
-
-
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);

@@ -2,6 +2,7 @@ package tk.sebastjanmevlja.doodlejump.Level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -63,17 +64,17 @@ public class Level1Screen implements Screen {
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
-
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Advance the world, by the amount of time that has elapsed since the  last frame
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics
         // update rate to the frame rate, and vice versa
-
+        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
         // Now update the spritee position accordingly to it's now updated Physics body
 
-        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
 
-        player.updatePos();
+
+//        player.updatePos();
 
         stage.act(Gdx.graphics.getDeltaTime());
 
