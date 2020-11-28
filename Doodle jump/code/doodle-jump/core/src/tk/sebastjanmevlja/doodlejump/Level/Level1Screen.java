@@ -43,12 +43,12 @@ public class Level1Screen implements Screen {
         world = new World(new Vector2(0, -5), true);
 
         PlatformFactory.generatePlatforms(platforms, world);
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() + 5);
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
         Input = new Input(player);
 
 //        Set contact listener
-        world.setContactListener(new WorldContactListener());
+        world.setContactListener(new WorldContactListener(player));
 
 
 

@@ -13,9 +13,9 @@ public class Input implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            case com.badlogic.gdx.Input.Keys.UP:
-                player.moveUp();
-                break;
+//            case com.badlogic.gdx.Input.Keys.UP:
+//                player.moveUp();
+//                break;
 
             case com.badlogic.gdx.Input.Keys.LEFT:
                 player.body.applyForceToCenter(new Vector2(-5, 0), true);

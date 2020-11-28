@@ -6,6 +6,12 @@ import com.badlogic.gdx.physics.box2d.*;
 public class WorldContactListener implements ContactListener {
 
     private boolean movingOut;
+    private Player player;
+
+    public WorldContactListener(Player player) {
+        this.player = player;
+    }
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
@@ -33,8 +39,12 @@ public class WorldContactListener implements ContactListener {
 
 
                     Vector2 relVel = new Vector2(heroVel.x-plfVel.x,heroVel.y-plfVel.y);
-                    if(relVel.y < 0)
+                    if(relVel.y < 0){
+//                        player.moveUp();
                         return;
+                    }
+
+
                 }
 
                 movingOut = true;
@@ -46,15 +56,16 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void endContact(Contact contact) {
-
         movingOut = false;
     }
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-
         if(movingOut){
             contact.setEnabled(false);
+        }
+        else{
+            player.moveUp();
         }
     }
 
