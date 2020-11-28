@@ -16,11 +16,11 @@ public class Player extends Actor {
     Body body;
 
 
-    public Player(TextureAtlas.AtlasRegion texture, World world) {
+    public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
         sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
-        sprite.setPosition(0,GameInfo.HEIGHT / 4f);
-        sprite.setCenterX(GameInfo.WIDTH / 2f);
+        sprite.setPosition(x, y);
+        sprite.setCenterX(x);
 
 
         this.world = world;

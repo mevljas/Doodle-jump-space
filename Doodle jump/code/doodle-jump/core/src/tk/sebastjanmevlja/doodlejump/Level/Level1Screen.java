@@ -15,6 +15,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
+import java.util.ArrayList;
+
 import static tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo.PIXELS_TO_METERS;
 
 
@@ -24,13 +26,13 @@ public class Level1Screen implements Screen {
     private Stage stage;
     private Viewport viewport;
     private Player player;
-    private Platform platform;
     private TextureAtlas.AtlasRegion background;
     World world;
     private Input Input;
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
+    ArrayList<Platform> platforms = new ArrayList<Platform>();
 
 
     public Level1Screen(Game game) {
@@ -40,8 +42,8 @@ public class Level1Screen implements Screen {
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
         world = new World(new Vector2(0, -5), true);
 
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), world);
-        platform = new Platform(AssetStorage.atlas.findRegion("platform_green"), world);
+        PlatformFactory.generatePlatforms(platforms, world);
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, GameInfo.WIDTH / 2f,  platforms.get(0).spriteHeight());
 
         Input = new Input(player);
 
@@ -67,9 +69,9 @@ public class Level1Screen implements Screen {
 
 
         stage.addActor(player);
-        stage.addActor(platform);
-
-
+        for (Platform platform : platforms) {
+            stage.addActor(platform);
+        }
 
     }
 

@@ -16,11 +16,11 @@ public class Platform extends Actor {
     Body body;
 
 
-    public Platform(TextureAtlas.AtlasRegion texture, World world) {
+    public Platform(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
         sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 22f);
-        sprite.setPosition(0,0);
-        sprite.setCenterX(GameInfo.WIDTH / 2f);
+        sprite.setPosition(x,y);
+        sprite.setCenterX(x);
 
         this.world = world;
 
@@ -65,6 +65,14 @@ public class Platform extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
+    }
+
+    public float spriteHeight(){
+        return this.sprite.getHeight();
+    }
+
+    public float spriteWidth(){
+        return this.sprite.getWidth();
     }
 
 
