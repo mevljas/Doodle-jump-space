@@ -43,7 +43,7 @@ public class Level1Screen implements Screen {
         world = new World(new Vector2(0, -5), true);
 
         PlatformFactory.generatePlatforms(platforms, world);
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight());
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() + 5);
 
         Input = new Input(player);
 
