@@ -72,10 +72,10 @@ public class Level1Screen implements Screen {
 
 
 
-        stage.addActor(player);
         for (Platform platform : platforms) {
             stage.addActor(platform);
         }
+        stage.addActor(player);
 
     }
 
