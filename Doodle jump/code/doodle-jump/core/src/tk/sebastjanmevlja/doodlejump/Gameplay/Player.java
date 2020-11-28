@@ -37,6 +37,8 @@ public class Player extends Actor {
                         PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM);
 
+        bodyDef.fixedRotation = true;
+
 
 
         // Create a body in the world using our definition
