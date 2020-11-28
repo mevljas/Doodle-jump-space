@@ -3,6 +3,7 @@ package tk.sebastjanmevlja.doodlejump.Level;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -13,6 +14,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
+
+import static tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo.PIXELS_TO_METERS;
 
 
 public class Level1Screen implements Screen {
@@ -27,6 +30,7 @@ public class Level1Screen implements Screen {
     private Input Input;
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
+    OrthographicCamera camera;
 
 
     public Level1Screen(Game game) {
@@ -34,15 +38,17 @@ public class Level1Screen implements Screen {
         background = AssetStorage.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
-        world = new World(new Vector2(0, -30f), true);
+        world = new World(new Vector2(0, -5), true);
 
         player = new Player(AssetStorage.atlas.findRegion("player_right"), world);
         platform = new Platform(AssetStorage.atlas.findRegion("platform_green"), world);
 
         Input = new Input(player);
 
+
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
+
     }
 
 
@@ -50,7 +56,8 @@ public class Level1Screen implements Screen {
 
     @Override
     public void show() { //create, setup method
-        viewport = new FitViewport(GameInfo.WIDTH, GameInfo.HEIGHT);
+        camera = new OrthographicCamera(GameInfo.WIDTH,GameInfo.HEIGHT);
+        viewport = new FitViewport(GameInfo.WIDTH,GameInfo.HEIGHT,camera);
         stage = new Stage(viewport);
 
         Gdx.input.setInputProcessor(Input);
@@ -71,7 +78,7 @@ public class Level1Screen implements Screen {
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
 
         // Advance the world, by the amount of time that has elapsed since the  last frame
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics
@@ -83,9 +90,11 @@ public class Level1Screen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stage.getBatch().setProjectionMatrix(camera.combined);
+
         // Scale down the sprite batches projection matrix to box2D size
-        debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(1,
-                1, 0);
+        debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
+                PIXELS_TO_METERS, 0);
 
         stage.act(Gdx.graphics.getDeltaTime());
 

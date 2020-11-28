@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import static tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo.PIXELS_TO_METERS;
+
 
 public class Platform extends Actor {
 
@@ -27,7 +29,9 @@ public class Platform extends Actor {
         bodyDef.type = BodyDef.BodyType.StaticBody;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set(sprite.getX() + sprite.getWidth() / 2f , sprite.getY() + sprite.getHeight() / 2f);
+        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+                        PIXELS_TO_METERS,
+                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -36,7 +40,8 @@ public class Platform extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        shape.setAsBox(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
+                /2 / PIXELS_TO_METERS);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
