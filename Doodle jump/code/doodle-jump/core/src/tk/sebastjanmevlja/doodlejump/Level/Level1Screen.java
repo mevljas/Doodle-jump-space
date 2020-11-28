@@ -29,7 +29,7 @@ public class Level1Screen implements Screen {
         background = AssetStorage.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
-        world = new World(new Vector2(0, -89f), true);
+        world = new World(new Vector2(0, -30f), true);
 
         player = new Player(AssetStorage.atlas.findRegion("player_right"), world);
         platform = new Platform(AssetStorage.atlas.findRegion("platform_green"), world);

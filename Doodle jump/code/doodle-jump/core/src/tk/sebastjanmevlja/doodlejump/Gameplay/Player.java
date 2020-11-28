@@ -23,13 +23,14 @@ public class Player extends Actor {
 
         this.world = world;
 
-        // Now create a BodyDefinition.  This defines the physics objects type
-//        and position in the simulation
+        // Now create a BodyDefinition.  This defines the physics objects type and position in the simulation
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set(sprite.getX(), sprite.getY());
+        bodyDef.position.set(sprite.getX() + sprite.getWidth() / 2f , sprite.getY() + sprite.getHeight() / 2f);
+
+
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -37,17 +38,12 @@ public class Player extends Actor {
 
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
-        // We are a box, so this makes sense, no?
-        // Basically set the physics polygon to a box with the same dimensions
-//        as our sprite
-        shape.setAsBox(sprite.getWidth()/2, sprite.getHeight()/9);
+        // Basically set the physics polygon to a box with the same dimensions as our sprite
+        shape.setAsBox(sprite.getWidth() / 2, sprite.getHeight() / 2);
         // FixtureDef is a confusing expression for physical properties
-        // Basically this is where you, in addition to defining the shape of the
-//        body
+        // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
-//        we will see shortly
-        // If you are wondering, density and area are used to calculate over all
-//        mass
+        // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
@@ -63,7 +59,8 @@ public class Player extends Actor {
     }
 
     public void updatePos(){
-        sprite.setPosition(body.getPosition().x, body.getPosition().y);
+        sprite.setPosition(body.getPosition().x - sprite.getWidth()/2f,
+                body.getPosition().y - sprite.getHeight()/2f );
     }
 
     @Override
@@ -77,7 +74,7 @@ public class Player extends Actor {
     }
 
     public void moveUp(){
-        body.applyForceToCenter(0f,10000000000000000000f,true);
+        body.applyForceToCenter(0f,1000000000000000f,true);
     }
 
 
