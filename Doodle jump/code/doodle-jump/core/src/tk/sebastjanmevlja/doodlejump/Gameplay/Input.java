@@ -1,6 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 public class Input implements InputProcessor {
 
@@ -11,7 +12,21 @@ public class Input implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        return false;
+        switch (keycode) {
+            case com.badlogic.gdx.Input.Keys.UP:
+                player.moveUp();
+                break;
+
+            case com.badlogic.gdx.Input.Keys.LEFT:
+                player.body.applyForceToCenter(new Vector2(-20, 0), true);
+                break;
+
+            case com.badlogic.gdx.Input.Keys.RIGHT:
+                player.body.applyForceToCenter(new Vector2(20, 0), true);
+                break;
+
+        }
+        return true;
     }
 
     @Override
