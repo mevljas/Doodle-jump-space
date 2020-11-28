@@ -20,7 +20,7 @@ public class WorldContactListener implements ContactListener {
         int collide = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (collide){
-            case Constants.HERO_BIT | Constants.PLATFORM_BIT:
+            case Constants.PLAYER_BIT | Constants.PLATFORM_BIT:
 
                 int pointCount = contact.getWorldManifold().getNumberOfContactPoints();
                 Vector2[] points = contact.getWorldManifold().getPoints();
@@ -28,7 +28,7 @@ public class WorldContactListener implements ContactListener {
                 for(int i = 0;i<pointCount;i++){
                     points[i].scl(Constants.PPM);
                     Vector2 heroVel,plfVel;
-                    if(fixA.getFilterData().categoryBits == Constants.HERO_BIT){
+                    if(fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
                         heroVel = fixA.getBody().getLinearVelocityFromWorldPoint(points[i]);
                         plfVel = fixB.getBody().getLinearVelocityFromWorldPoint(points[i]);
                     }
@@ -64,7 +64,7 @@ public class WorldContactListener implements ContactListener {
         if(movingOut){
             contact.setEnabled(false);
         }
-        else{
+        else {
             player.moveUp();
         }
     }

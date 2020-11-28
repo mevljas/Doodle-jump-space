@@ -9,6 +9,6 @@ public class Constants {
     public static final float PPM = 100f;
 
     public static final short PLATFORM_BIT = 2;
-    public static final short HERO_BIT = 4;
+    public static final short PLAYER_BIT = 4;
 
 }

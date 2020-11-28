@@ -59,7 +59,7 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
-        fixtureDef.filter.categoryBits = Constants.HERO_BIT;
+        fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
         fixtureDef.filter.maskBits = Constants.PLATFORM_BIT;
         Fixture fixture = body.createFixture(fixtureDef);
         // Shape is the only disposable of the lot, so get rid of it
@@ -89,7 +89,6 @@ public class Player extends Actor {
     }
 
     public void moveUp(){
-        System.out.println("called");
         body.applyForceToCenter(0f,JUMP_VELOCITY,true);
     }
 
