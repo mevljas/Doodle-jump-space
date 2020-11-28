@@ -70,11 +70,11 @@ public class Level1Screen implements Screen {
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics
         // update rate to the frame rate, and vice versa
         world.step(Gdx.graphics.getDeltaTime(), 6, 2);
-        // Now update the spritee position accordingly to it's now updated Physics body
 
 
 
-//        player.updatePos();
+        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());
 
