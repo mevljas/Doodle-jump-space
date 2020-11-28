@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,6 +25,8 @@ public class Level1Screen implements Screen {
     private TextureAtlas.AtlasRegion background;
     World world;
     private Input Input;
+    Box2DDebugRenderer debugRenderer;
+    Matrix4 debugMatrix;
 
 
     public Level1Screen(Game game) {
@@ -36,6 +40,9 @@ public class Level1Screen implements Screen {
         platform = new Platform(AssetStorage.atlas.findRegion("platform_green"), world);
 
         Input = new Input(player);
+
+//       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
+        debugRenderer = new Box2DDebugRenderer();
     }
 
 
@@ -76,6 +83,10 @@ public class Level1Screen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        // Scale down the sprite batches projection matrix to box2D size
+        debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(1,
+                1, 0);
+
         stage.act(Gdx.graphics.getDeltaTime());
 
         stage.getBatch().begin();
@@ -84,6 +95,11 @@ public class Level1Screen implements Screen {
 
 
         stage.draw();
+
+
+        // Now render the physics world using our scaled down matrix
+        // Note, this is strictly optional and is, as the name suggests, just  for debugging purposes
+        debugRenderer.render(world, debugMatrix);
 
 
 
