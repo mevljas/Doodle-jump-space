@@ -15,6 +15,8 @@ public class Player extends Actor {
     World world;
     Body body;
 
+    public static final float JUMP_VELOCITY = 30f;
+
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
@@ -83,7 +85,7 @@ public class Player extends Actor {
     }
 
     public void moveUp(){
-        body.applyForceToCenter(0f,10f,true);
+        body.applyForceToCenter(0f,JUMP_VELOCITY,true);
     }
 
 

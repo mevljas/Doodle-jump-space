@@ -14,6 +14,8 @@ public class Platform extends Actor {
     Sprite sprite;
     World world;
     Body body;
+    public static float PLATFORM_WIDTH = GameInfo.WIDTH / 3.5f;
+    public static float PLATFORM_HEIGHT = GameInfo.HEIGHT / 22f;
 
 
     public Platform(TextureAtlas.AtlasRegion texture, World world, float x, float y) {

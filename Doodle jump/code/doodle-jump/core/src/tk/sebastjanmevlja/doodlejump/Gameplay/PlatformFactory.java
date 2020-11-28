@@ -16,13 +16,26 @@ public class PlatformFactory {
         Platform firstPlatform = generatePlatform(world, GameInfo.WIDTH / 2f, 0);
         platforms.add(firstPlatform);
 
-        for (float y = (firstPlatform.getWidth() * 20); y < GameInfo.HEIGHT; y += firstPlatform.spriteHeight() * 3) {
-            for (float x = 0; x < GameInfo.WIDTH; x += firstPlatform.spriteWidth()) {
-                if (random.nextInt() % 3 == 0){
-                    platforms.add(generatePlatform(world, x, y));
-                }
-            }
+        float y = Platform.PLATFORM_HEIGHT * 7;
+        float maxJumpHeight = Player.JUMP_VELOCITY * 8;
+        while (y < GameInfo.HEIGHT - GameInfo.WIDTH / 2f) {
+            float x = random.nextFloat() * (GameInfo.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
+
+            Platform platform = generatePlatform(world, x, y);
+            platforms.add(platform);
+
+            y += (maxJumpHeight - 0.5f);
+            y -= random.nextFloat() * (maxJumpHeight / 3);
         }
+
+
+//        for (float y = (firstPlatform.getWidth() * 20); y < GameInfo.HEIGHT; y += firstPlatform.spriteHeight() * 3) {
+//            for (float x = 0; x < GameInfo.WIDTH; x += firstPlatform.spriteWidth()) {
+//                if (random.nextInt() % 3 == 0){
+//                    platforms.add(generatePlatform(world, x, y));
+//                }
+//            }
+//        }
     }
     
     
