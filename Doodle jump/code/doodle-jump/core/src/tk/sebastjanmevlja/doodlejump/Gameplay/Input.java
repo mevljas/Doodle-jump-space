@@ -18,11 +18,11 @@ public class Input implements InputProcessor {
                 break;
 
             case com.badlogic.gdx.Input.Keys.LEFT:
-                player.body.applyForceToCenter(new Vector2(-20, 0), true);
+                player.body.applyForceToCenter(new Vector2(-5, 0), true);
                 break;
 
             case com.badlogic.gdx.Input.Keys.RIGHT:
-                player.body.applyForceToCenter(new Vector2(20, 0), true);
+                player.body.applyForceToCenter(new Vector2(5, 0), true);
                 break;
 
         }
