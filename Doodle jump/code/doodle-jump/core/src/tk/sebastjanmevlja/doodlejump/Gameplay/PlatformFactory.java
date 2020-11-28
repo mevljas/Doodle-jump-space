@@ -13,13 +13,13 @@ public class PlatformFactory {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegion = AssetStorage.atlas.findRegion("platform_green");
 
     public static void generatePlatforms(ArrayList<Platform> platforms, World world){
-        Platform firstPlatform = generatePlatform(world, GameInfo.WIDTH / 2f, 0);
+        Platform firstPlatform = generatePlatform(world, Constants.WIDTH / 2f, 0);
         platforms.add(firstPlatform);
 
         float y = Platform.PLATFORM_HEIGHT * 7;
         float maxJumpHeight = Player.JUMP_VELOCITY * 8;
-        while (y < GameInfo.HEIGHT - GameInfo.WIDTH / 2f) {
-            float x = random.nextFloat() * (GameInfo.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
+        while (y < Constants.HEIGHT - Constants.WIDTH / 2f) {
+            float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
 
             Platform platform = generatePlatform(world, x, y);
             platforms.add(platform);

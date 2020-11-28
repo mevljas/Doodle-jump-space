@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import static tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo.PIXELS_TO_METERS;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
 public class Player extends Actor {
@@ -20,7 +20,7 @@ public class Player extends Actor {
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
-        sprite.setSize(GameInfo.WIDTH / 3.5f, GameInfo.HEIGHT / 8f);
+        sprite.setSize(Constants.WIDTH / 3.5f, Constants.HEIGHT / 8f);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
 
@@ -34,8 +34,8 @@ public class Player extends Actor {
         // Set our body to the same position as our sprite
 //        bodyDef.position.set(sprite.getX() + sprite.getWidth() / 2f , sprite.getY() + sprite.getHeight() / 2f);
         bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
-                        PIXELS_TO_METERS,
-                (sprite.getY() + sprite.getHeight()/2) / PIXELS_TO_METERS);
+                        PPM,
+                (sprite.getY() + sprite.getHeight()/2) / PPM);
 
 
 
@@ -46,8 +46,8 @@ public class Player extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth()/2 / PIXELS_TO_METERS, sprite.getHeight()
-                /2 / PIXELS_TO_METERS);
+        shape.setAsBox(sprite.getWidth()/2 / PPM, sprite.getHeight()
+                /2 / PPM);
 //        shape.setAsBox(sprite.getWidth()/2f / PIXELS_TO_METERS, sprite.getHeight()
 //                /2f / PIXELS_TO_METERS);
         // FixtureDef is a confusing expression for physical properties
@@ -57,6 +57,8 @@ public class Player extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
+        fixtureDef.filter.categoryBits = Constants.HERO_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT;
         Fixture fixture = body.createFixture(fixtureDef);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
@@ -67,9 +69,9 @@ public class Player extends Actor {
 
     public void updatePos(){
         // Set the sprite's position from the updated physics body location
-        sprite.setPosition((body.getPosition().x * PIXELS_TO_METERS) - sprite.
+        sprite.setPosition((body.getPosition().x * PPM) - sprite.
                         getWidth()/2 ,
-                (body.getPosition().y * PIXELS_TO_METERS) -sprite.getHeight()/2 );
+                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
     }
 
     @Override

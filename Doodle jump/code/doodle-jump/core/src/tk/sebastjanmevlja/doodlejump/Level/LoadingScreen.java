@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
 import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
-import tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class LoadingScreen implements Screen {
@@ -30,12 +30,12 @@ public class LoadingScreen implements Screen {
 
         progressBar = new ProgressBar(0, 5, 1, false, AssetStorage.skin);
         progressBar.setValue(0);
-        progressBar.setWidth(GameInfo.WIDTH * 0.7f);
-        progressBar.getStyle().background.setMinHeight(GameInfo.HEIGHT * 0.06f);
-        progressBar.getStyle().knobBefore.setMinHeight(GameInfo.HEIGHT * 0.05f);
+        progressBar.setWidth(Constants.WIDTH * 0.7f);
+        progressBar.getStyle().background.setMinHeight(Constants.HEIGHT * 0.06f);
+        progressBar.getStyle().knobBefore.setMinHeight(Constants.HEIGHT * 0.05f);
 
-        progressBar.setX(GameInfo.WIDTH / 2 - progressBar.getWidth() / 2);
-        progressBar.setY(GameInfo.HEIGHT * 0.2f);
+        progressBar.setX(Constants.WIDTH / 2 - progressBar.getWidth() / 2);
+        progressBar.setY(Constants.HEIGHT * 0.2f);
         stage.addActor(progressBar);
         addAssets();
     }
@@ -61,7 +61,7 @@ public class LoadingScreen implements Screen {
 
         gameBatch.begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(AssetStorage.loadingBackgroundTexture, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        gameBatch.draw(AssetStorage.loadingBackgroundTexture, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
 

@@ -17,7 +17,7 @@ import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 import java.util.ArrayList;
 
-import static tk.sebastjanmevlja.doodlejump.Gameplay.GameInfo.PIXELS_TO_METERS;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
 public class Level1Screen implements Screen {
@@ -43,9 +43,13 @@ public class Level1Screen implements Screen {
         world = new World(new Vector2(0, -5), true);
 
         PlatformFactory.generatePlatforms(platforms, world);
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, GameInfo.WIDTH / 2f,  platforms.get(0).spriteHeight());
+        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight());
 
         Input = new Input(player);
+
+//        Set contact listener
+        world.setContactListener(new WorldContactListener());
+
 
 
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
@@ -58,8 +62,8 @@ public class Level1Screen implements Screen {
 
     @Override
     public void show() { //create, setup method
-        camera = new OrthographicCamera(GameInfo.WIDTH,GameInfo.HEIGHT);
-        viewport = new FitViewport(GameInfo.WIDTH,GameInfo.HEIGHT,camera);
+        camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
+        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
         stage = new Stage(viewport);
 
         Gdx.input.setInputProcessor(Input);
@@ -95,13 +99,13 @@ public class Level1Screen implements Screen {
         stage.getBatch().setProjectionMatrix(camera.combined);
 
         // Scale down the sprite batches projection matrix to box2D size
-        debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(PIXELS_TO_METERS,
-                PIXELS_TO_METERS, 0);
+        debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(PPM,
+                PPM, 0);
 
         stage.act(Gdx.graphics.getDeltaTime());
 
         stage.getBatch().begin();
-        stage.getBatch().draw(background, 0, 0, GameInfo.WIDTH, GameInfo.HEIGHT);
+        stage.getBatch().draw(background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         stage.getBatch().end();
 
 
