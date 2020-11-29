@@ -60,8 +60,6 @@ public class Player extends Actor {
         // Basically set the physics polygon to a box with the same dimensions as our sprite
         shape.setAsBox(sprite.getWidth()/2 / PPM, sprite.getHeight()
                 /2 / PPM);
-//        shape.setAsBox(sprite.getWidth()/2f / PIXELS_TO_METERS, sprite.getHeight()
-//                /2f / PIXELS_TO_METERS);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
@@ -106,14 +104,15 @@ public class Player extends Actor {
     }
 
     public void jump(){
-        body.setLinearVelocity(0f,JUMP_VELOCITY);
+
         direction = Direction.UP;
         if (sprite.getY() > Constants.HEIGHT * 0.7){
-            moveWorld(JUMP_VELOCITY * 2);
+            body.setLinearVelocity(0f,JUMP_VELOCITY * 0.8f);
         }
         else {
-            moveWorld(JUMP_VELOCITY);
+            body.setLinearVelocity(0f,JUMP_VELOCITY);
         }
+        moveWorld(JUMP_VELOCITY);
     }
 
 

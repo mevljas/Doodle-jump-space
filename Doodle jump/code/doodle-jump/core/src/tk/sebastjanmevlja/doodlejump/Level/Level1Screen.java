@@ -103,7 +103,6 @@ public class Level1Screen implements Screen {
             removePlatform(p);
             p.addAction(Actions.removeActor());
             world.destroyBody(p.getBody());
-            System.out.println("platform removed");
         }
 
         if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){

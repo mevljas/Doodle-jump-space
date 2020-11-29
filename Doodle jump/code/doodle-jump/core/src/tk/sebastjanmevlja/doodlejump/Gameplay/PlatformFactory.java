@@ -15,7 +15,7 @@ public class PlatformFactory {
 
     private  static final TextureAtlas.AtlasRegion plaformTextureRegion = AssetStorage.atlas.findRegion("platform_green");
 
-    private static float maxJumpHeight = Player.JUMP_VELOCITY * 70;
+    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 70;
     public static int InitiaPlatformSize;
 
 
@@ -23,9 +23,9 @@ public class PlatformFactory {
     public static void generatePlatforms( World world){
         generatePlatform(world, Constants.WIDTH / 2f, 0);
 
-        float y = Platform.PLATFORM_HEIGHT * 6;
+        float y = Platform.PLATFORM_HEIGHT * 4;
 
-        while (y < Constants.HEIGHT * 4) {
+        while (y < Constants.HEIGHT * 5) {
             float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
 
             generatePlatform(world, x, y);
@@ -36,6 +36,29 @@ public class PlatformFactory {
 
 
         InitiaPlatformSize = platforms.size();
+    }
+
+    public static ArrayList<Platform> generateMorePlatforms(World world){
+
+        ArrayList<Platform> list = new ArrayList<>();
+
+        float y = platforms.getLast().sprite.getY() + Platform.PLATFORM_HEIGHT * 3;
+        while (y < Constants.HEIGHT * 5) {
+            float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
+
+            generatePlatform(world, x, y);
+            list.add(platforms.getLast());
+
+            y += (maxJumpHeight - 0.5f);
+            y -= random.nextFloat() * (maxJumpHeight / 3);
+        }
+
+        System.out.println(list.size());
+
+        return list;
+
+
+
     }
     
     
@@ -60,26 +83,7 @@ public class PlatformFactory {
     }
 
 
-    public static ArrayList<Platform> generateMorePlatforms(World world){
 
-        ArrayList<Platform> list = new ArrayList<>();
-
-        float y = platforms.getLast().sprite.getY();
-        while (y < Constants.HEIGHT * 2) {
-            float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
-
-            generatePlatform(world, x, y);
-            list.add(platforms.getLast());
-
-            y += (maxJumpHeight - 0.5f);
-            y -= random.nextFloat() * (maxJumpHeight / 3);
-        }
-
-        return list;
-
-
-
-    }
 
     public static void removePlatform(Platform p){
         platforms.removeFirst();
