@@ -27,6 +27,7 @@ public class WorldContactListener implements ContactListener {
         Object objA = fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData();
         Object objB = fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData();
 
+
         if (objA instanceof Player && objB instanceof Platform){
             player = (Player) objA;
             platform = (Platform) objB;
@@ -40,6 +41,7 @@ public class WorldContactListener implements ContactListener {
 
             }
         }
+
 
 
     }

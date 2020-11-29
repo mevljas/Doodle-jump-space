@@ -24,7 +24,8 @@ public class Walls {
         fixtureDef.shape = edgeShape;
 
         Body bodyEdgeScreen = world.createBody(bodyDef);
-        bodyEdgeScreen.createFixture(fixtureDef);
+        Fixture f = bodyEdgeScreen.createFixture(fixtureDef);
+        f.setUserData(this);
 
 
         //        Right wall
@@ -39,6 +40,10 @@ public class Walls {
         fixtureDef.shape = edgeShape;
 
         bodyEdgeScreen = world.createBody(bodyDef);
-        bodyEdgeScreen.createFixture(fixtureDef);
+        f = bodyEdgeScreen.createFixture(fixtureDef);
+        f.setUserData(this);
+
+
+
     }
 }

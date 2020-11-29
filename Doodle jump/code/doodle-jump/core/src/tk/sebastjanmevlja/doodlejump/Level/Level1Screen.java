@@ -7,16 +7,21 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
+import java.util.ArrayList;
+
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.platforms;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.removePlatform;
 
 
 public class Level1Screen implements Screen {
@@ -83,10 +88,38 @@ public class Level1Screen implements Screen {
 
 
 
+    private void updatePlatforms(){
+        ArrayList<Platform> removePlatforms = new ArrayList<>();
+        for(Platform platform : platforms)
+        {
+            Vector3 windowCoordinates = new Vector3(0, platform.getSprite().getY(), 0);
+            camera.project(windowCoordinates);
+            if(windowCoordinates.y + platform.getSprite().getHeight() < 0){
+                removePlatforms.add(platform);
+            }
+
+        }
+        for (Platform p: removePlatforms) {
+            removePlatform(p);
+            p.addAction(Actions.removeActor());
+            world.destroyBody(p.getBody());
+            System.out.println("platform removed");
+        }
+
+        if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
+            ArrayList<Platform> list = PlatformFactory.generateMorePlatforms(world);
+            for (Platform p: list) {
+                stage.addActor(p);
+            }
+        }
+    }
+
+
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
         camera.update();
+        updatePlatforms();
 
         // Advance the world, by the amount of time that has elapsed since the  last frame
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics

@@ -11,6 +11,7 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.moveWorld;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.stopWorld;
 
+
 enum Direction {
     UP,DOWN, STILL
 }
@@ -24,7 +25,7 @@ public class Player extends Actor {
 
     Direction direction = Direction.STILL;
 
-    public static final float JUMP_VELOCITY = 6;
+    public static final float JUMP_VELOCITY = 3;
 
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
@@ -107,7 +108,12 @@ public class Player extends Actor {
     public void jump(){
         body.setLinearVelocity(0f,JUMP_VELOCITY);
         direction = Direction.UP;
-        moveWorld();
+        if (sprite.getY() > Constants.HEIGHT * 0.7){
+            moveWorld(JUMP_VELOCITY * 2);
+        }
+        else {
+            moveWorld(JUMP_VELOCITY);
+        }
     }
 
 

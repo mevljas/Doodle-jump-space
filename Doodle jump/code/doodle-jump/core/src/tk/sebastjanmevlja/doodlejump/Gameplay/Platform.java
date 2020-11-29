@@ -35,7 +35,7 @@ public class Platform extends Actor {
         bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM);
-        
+
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
 
@@ -92,8 +92,11 @@ public class Platform extends Actor {
         return body.getPosition();
     }
 
+    public Sprite getSprite() {
+        return sprite;
+    }
 
-
-
-
+    public Body getBody() {
+        return body;
+    }
 }
