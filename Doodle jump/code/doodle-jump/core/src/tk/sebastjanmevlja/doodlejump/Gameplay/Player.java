@@ -105,26 +105,28 @@ public class Player extends Actor {
 
     public void jump(){
 
-        direction = Direction.UP;
-        if (sprite.getY() > Constants.HEIGHT * 0.7){
-            body.setLinearVelocity(0f,JUMP_VELOCITY * 0.8f);
+
+        if (direction != Direction.UP) {
+            direction = Direction.UP;
+            if (sprite.getY() > Constants.HEIGHT * 0.7){
+                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.8f);
+            }
+            else {
+                body.setLinearVelocity(0f,JUMP_VELOCITY);
+            }
+            moveWorld(JUMP_VELOCITY);
         }
-        else {
-            body.setLinearVelocity(0f,JUMP_VELOCITY);
-        }
-        moveWorld(JUMP_VELOCITY);
+
     }
 
 
     void checkState(){
-        if (direction == Direction.UP){
-            if (body.getLinearVelocity().y > 0){
-                direction = Direction.UP;
-            }
-            else{
-                direction = Direction.DOWN;
-                stopWorld();
-            }
+        if (body.getLinearVelocity().y > 0){
+            direction = Direction.UP;
+        }
+        else{
+            direction = Direction.DOWN;
+            stopWorld();
         }
 
 

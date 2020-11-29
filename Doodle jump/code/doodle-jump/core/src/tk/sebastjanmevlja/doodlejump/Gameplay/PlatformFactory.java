@@ -50,7 +50,7 @@ public class PlatformFactory {
             list.add(platforms.getLast());
 
             y += (maxJumpHeight - 0.5f);
-            y -= random.nextFloat() * (maxJumpHeight / 3);
+            y -= random.nextFloat() * (maxJumpHeight / 33);
         }
 
         return list;
