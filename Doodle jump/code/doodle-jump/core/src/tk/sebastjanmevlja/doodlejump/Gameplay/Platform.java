@@ -52,8 +52,6 @@ public class Platform extends Actor {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;
-        fixtureDef.filter.categoryBits = Constants.PLATFORM_BIT;
-        fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData(this);
         // Shape is the only disposable of the lot, so get rid of it
