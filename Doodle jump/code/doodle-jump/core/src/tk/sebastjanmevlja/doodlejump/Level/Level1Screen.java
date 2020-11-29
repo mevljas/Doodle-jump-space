@@ -15,9 +15,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
-import java.util.ArrayList;
-
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.platforms;
 
 
 public class Level1Screen implements Screen {
@@ -32,7 +31,6 @@ public class Level1Screen implements Screen {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
-    ArrayList<Platform> platforms = new ArrayList<Platform>();
 
 
     public Level1Screen(Game game) {
@@ -42,7 +40,7 @@ public class Level1Screen implements Screen {
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
         world = new World(new Vector2(0, -5), true);
 
-        PlatformFactory.generatePlatforms(platforms, world);
+        PlatformFactory.generatePlatforms(world);
         player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
 //        Generate walls
@@ -57,6 +55,7 @@ public class Level1Screen implements Screen {
 
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
+
 
     }
 
@@ -149,6 +148,7 @@ public class Level1Screen implements Screen {
         world.dispose();
 
     }
+
 
 
 }

@@ -8,6 +8,12 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.moveWorld;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.stopWorld;
+
+enum Direction {
+    UP,DOWN, STILL
+}
 
 
 public class Player extends Actor {
@@ -15,6 +21,8 @@ public class Player extends Actor {
     Sprite sprite;
     World world;
     Body body;
+
+    Direction direction = Direction.STILL;
 
     public static final float JUMP_VELOCITY = 6;
 
@@ -87,6 +95,7 @@ public class Player extends Actor {
     public void act(float delta) {
         super.act(delta);
         updatePos();
+        checkState();
 
     }
 
@@ -97,7 +106,26 @@ public class Player extends Actor {
 
     public void jump(){
         body.setLinearVelocity(0f,JUMP_VELOCITY);
+        direction = Direction.UP;
+        moveWorld();
     }
+
+
+    void checkState(){
+        if (direction == Direction.UP){
+            if (body.getLinearVelocity().y > 0){
+                direction = Direction.UP;
+            }
+            else{
+                direction = Direction.DOWN;
+                stopWorld();
+            }
+        }
+
+
+    }
+
+
 
 
 

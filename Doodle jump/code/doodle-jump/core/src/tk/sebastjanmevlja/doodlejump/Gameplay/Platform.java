@@ -29,13 +29,13 @@ public class Platform extends Actor {
 
         // Now create a BodyDefinition.  This defines the physics objects type and position in the simulation
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
         bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
                         PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM);
-
+        
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
 
@@ -51,12 +51,20 @@ public class Platform extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
+        fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData(this);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
+
+    }
+
+    public void updatePos(){
+        // Set the sprite's position from the updated physics body location
+        sprite.setPosition((body.getPosition().x * PPM) - sprite.
+                        getWidth()/2 ,
+                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
     }
 
 
@@ -64,6 +72,7 @@ public class Platform extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        updatePos();
     }
 
     @Override
