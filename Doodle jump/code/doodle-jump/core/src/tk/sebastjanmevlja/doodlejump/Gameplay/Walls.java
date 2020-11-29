@@ -14,7 +14,7 @@ public class Walls {
 //        Left wall
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-//        bodyDef.position.set(0,0);
+        bodyDef.position.set(0,0);
 
         FixtureDef fixtureDef = new FixtureDef();
         EdgeShape edgeShape = new EdgeShape();
@@ -29,10 +29,11 @@ public class Walls {
 
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
+//        bodyDef.position.set(Constants.WIDTH,0);
 
         fixtureDef = new FixtureDef();
         edgeShape = new EdgeShape();
-        edgeShape.set(width,width,height,height);
+        edgeShape.set(width,0,width,height);
         fixtureDef.shape = edgeShape;
 
         bodyEdgeScreen = world.createBody(bodyDef);
