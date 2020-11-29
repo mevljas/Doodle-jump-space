@@ -1,12 +1,13 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class WorldContactListener implements ContactListener {
 
     private boolean movingOut;
+    private boolean jump;
     private Player player;
+    private Platform platform;
 
     public WorldContactListener(Player player) {
         this.player = player;
@@ -17,55 +18,40 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        int collide = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
+        Object objA = fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData();
+        Object objB = fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData();
 
-        switch (collide){
-            case Constants.PLAYER_BIT | Constants.PLATFORM_BIT:
-
-                int pointCount = contact.getWorldManifold().getNumberOfContactPoints();
-                Vector2[] points = contact.getWorldManifold().getPoints();
-
-                for(int i = 0;i<pointCount;i++){
-                    points[i].scl(Constants.PPM);
-                    Vector2 heroVel,plfVel;
-                    if(fixA.getFilterData().categoryBits == Constants.PLAYER_BIT){
-                        heroVel = fixA.getBody().getLinearVelocityFromWorldPoint(points[i]);
-                        plfVel = fixB.getBody().getLinearVelocityFromWorldPoint(points[i]);
-                    }
-                    else {
-                        heroVel = fixB.getBody().getLinearVelocityFromWorldPoint(points[i]);
-                        plfVel = fixA.getBody().getLinearVelocityFromWorldPoint(points[i]);
-                    }
-
-
-                    Vector2 relVel = new Vector2(heroVel.x-plfVel.x,heroVel.y-plfVel.y);
-                    if(relVel.y < 0){
-//                        player.moveUp();
-                        return;
-                    }
-
-
-                }
-
+        if (objA instanceof Player && objB instanceof Platform){
+            player = (Player) objA;
+            platform = (Platform) objB;
+            Shape playerShape = player.body.getFixtureList().first().getShape();
+            if (player.getBodyPosition().y < platform.getBodyPosition().y) {
                 movingOut = true;
+                jump = false;
+            }
+            else if ((player.getBodyPosition().y + playerShape.getRadius() * 2 ) > platform.getBodyPosition().y) {
+                movingOut = false;
+                jump = true;
 
-                break;
+            }
         }
+
 
     }
 
     @Override
     public void endContact(Contact contact) {
-        movingOut = false;
+
+
     }
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        if(movingOut){
+        if (movingOut){
             contact.setEnabled(false);
         }
-        else {
-            player.moveUp();
+        else if (jump){
+            player.jump();
         }
     }
 

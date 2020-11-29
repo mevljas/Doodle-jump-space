@@ -3,6 +3,7 @@ package tk.sebastjanmevlja.doodlejump.Gameplay;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
@@ -54,6 +55,7 @@ public class Platform extends Actor {
         fixtureDef.filter.categoryBits = Constants.PLATFORM_BIT;
         fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData(this);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
@@ -77,6 +79,10 @@ public class Platform extends Actor {
 
     public float spriteWidth(){
         return this.sprite.getWidth();
+    }
+
+    public Vector2 getBodyPosition(){
+        return body.getPosition();
     }
 
 
