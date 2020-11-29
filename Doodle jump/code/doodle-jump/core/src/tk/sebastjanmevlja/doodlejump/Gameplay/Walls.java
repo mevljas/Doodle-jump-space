@@ -23,6 +23,7 @@ public class Walls {
         edgeShape.set(0,0,0,height);
         fixtureDef.shape = edgeShape;
 
+
         Body bodyEdgeScreen = world.createBody(bodyDef);
         Fixture f = bodyEdgeScreen.createFixture(fixtureDef);
         f.setUserData(this);
@@ -38,6 +39,23 @@ public class Walls {
         edgeShape = new EdgeShape();
         edgeShape.set(width,0,width,height);
         fixtureDef.shape = edgeShape;
+
+        bodyEdgeScreen = world.createBody(bodyDef);
+        f = bodyEdgeScreen.createFixture(fixtureDef);
+        f.setUserData(this);
+
+        //        Bottom wall - sensor
+
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+//        bodyDef.position.set(Constants.WIDTH,0);
+
+        fixtureDef = new FixtureDef();
+        edgeShape = new EdgeShape();
+        edgeShape.set(0,0,width,0);
+        fixtureDef.shape = edgeShape;
+//         object will no longer cause a reaction when collided with, except whatever you provide in code.
+        fixtureDef.isSensor = true;
 
         bodyEdgeScreen = world.createBody(bodyDef);
         f = bodyEdgeScreen.createFixture(fixtureDef);
