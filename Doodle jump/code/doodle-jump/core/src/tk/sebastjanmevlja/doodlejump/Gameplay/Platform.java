@@ -43,7 +43,7 @@ public class Platform extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth()/2 / PPM, sprite.getHeight()
+        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight()
                 /2 / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body

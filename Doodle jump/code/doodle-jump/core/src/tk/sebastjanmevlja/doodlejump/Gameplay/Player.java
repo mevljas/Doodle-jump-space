@@ -25,7 +25,7 @@ public class Player extends Actor {
 
     Direction direction = Direction.STILL;
 
-    public static final float JUMP_VELOCITY = 3;
+    public static final float JUMP_VELOCITY = 4f;
 
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
@@ -58,7 +58,7 @@ public class Player extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth()/2 / PPM, sprite.getHeight()
+        shape.setAsBox(sprite.getWidth() / 3 / PPM, sprite.getHeight()
                 /2 / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
@@ -109,12 +109,12 @@ public class Player extends Actor {
         if (direction != Direction.UP) {
             direction = Direction.UP;
             if (sprite.getY() > Constants.HEIGHT * 0.7){
-                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.8f);
+                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.7f);
             }
             else {
                 body.setLinearVelocity(0f,JUMP_VELOCITY);
             }
-            moveWorld(JUMP_VELOCITY);
+            moveWorld(JUMP_VELOCITY * 0.7f);
         }
 
     }
