@@ -31,7 +31,7 @@ public class PlatformFactory {
             generatePlatform(world, x, y);
 
             y += (maxJumpHeight - 0.5f);
-            y -= random.nextFloat() * (maxJumpHeight / 32);
+            y -= random.nextFloat() * (maxJumpHeight / 31);
         }
 
 
@@ -50,7 +50,7 @@ public class PlatformFactory {
             list.add(platforms.getLast());
 
             y += (maxJumpHeight - 0.5f);
-            y -= random.nextFloat() * (maxJumpHeight / 32);
+            y -= random.nextFloat() * (maxJumpHeight / 31);
         }
 
         return list;
