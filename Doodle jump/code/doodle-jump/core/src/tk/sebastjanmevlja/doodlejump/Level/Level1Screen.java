@@ -45,6 +45,9 @@ public class Level1Screen implements Screen {
         PlatformFactory.generatePlatforms(platforms, world);
         player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
+//        Generate walls
+        new Walls(world);
+
         Input = new Input(player);
 
 //        Set contact listener

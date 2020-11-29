@@ -16,7 +16,7 @@ public class Player extends Actor {
     World world;
     Body body;
 
-    public static final float JUMP_VELOCITY = 40f;
+    public static final float JUMP_VELOCITY = 6;
 
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
@@ -96,8 +96,7 @@ public class Player extends Actor {
     }
 
     public void jump(){
-        body.applyForceToCenter(0f,JUMP_VELOCITY,true);
-        System.out.println("jump");
+        body.setLinearVelocity(0f,JUMP_VELOCITY);
     }
 
 

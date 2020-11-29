@@ -16,8 +16,8 @@ public class PlatformFactory {
         Platform firstPlatform = generatePlatform(world, Constants.WIDTH / 2f, 0);
         platforms.add(firstPlatform);
 
-        float y = Platform.PLATFORM_HEIGHT * 7;
-        float maxJumpHeight = Player.JUMP_VELOCITY * 6;
+        float y = Platform.PLATFORM_HEIGHT * 6;
+        float maxJumpHeight = Player.JUMP_VELOCITY * 50;
         while (y < Constants.HEIGHT) {
             float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
 
