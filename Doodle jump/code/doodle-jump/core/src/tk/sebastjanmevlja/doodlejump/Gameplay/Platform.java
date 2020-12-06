@@ -10,20 +10,26 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
+
+
+
 public class Platform extends Actor {
 
     Sprite sprite;
     World world;
     Body body;
+    PlatformType type;
     public static float PLATFORM_WIDTH = Constants.WIDTH / 3.5f;
     public static float PLATFORM_HEIGHT = Constants.HEIGHT / 22f;
 
 
-    public Platform(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+    public Platform(PlatformType type, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+        System.out.println(type);
         sprite = new Sprite(texture);
         sprite.setSize(Constants.WIDTH / 3.5f, Constants.HEIGHT / 22f);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
+        this.type = type;
 
         this.world = world;
 
