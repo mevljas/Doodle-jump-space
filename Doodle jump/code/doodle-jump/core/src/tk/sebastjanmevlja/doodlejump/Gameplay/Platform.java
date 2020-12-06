@@ -1,8 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,10 +20,16 @@ public class Platform extends Actor {
     PlatformType type;
     public static float PLATFORM_WIDTH = Constants.WIDTH / 3.5f;
     public static float PLATFORM_HEIGHT = Constants.HEIGHT / 22f;
+    private boolean broken = false;
+    public Animation<TextureRegion> runningAnimation;
+    private boolean alive = true;
+
+    // A variable for tracking elapsed time for the animation
+    float stateTime;
+
 
 
     public Platform(PlatformType type, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
-        System.out.println(type);
         sprite = new Sprite(texture);
         sprite.setSize(Constants.WIDTH / 3.5f, Constants.HEIGHT / 22f);
         sprite.setPosition(x,y);
@@ -63,7 +68,10 @@ public class Platform extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
-
+        if (type == PlatformType.BROWN){
+            runningAnimation = new Animation<TextureRegion>(0.08f, AssetStorage.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
+            this.stateTime = 0f;
+        }
     }
 
     public void updatePos(){
@@ -79,11 +87,35 @@ public class Platform extends Actor {
     public void act(float delta) {
         super.act(delta);
         updatePos();
+        updateAnimations();
+    }
+
+
+    private void updateAnimations(){
+        if (this.broken){
+            this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+            if (this.runningAnimation.isAnimationFinished(this.stateTime)){
+                this.alive = false;
+//              Move platform offscreen.
+//                this.body.setLinearVelocity(0f,-1000);
+            }
+        }
+
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch);
+
+        if (!broken){
+            sprite.draw(batch);
+        }
+        else if (alive){
+            // Get current frame of animation for the current stateTime
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+            batch.draw(currentFrame, sprite.getX(), sprite.getY());
+
+        }
+
     }
 
     public float spriteHeight(){
@@ -104,5 +136,18 @@ public class Platform extends Actor {
 
     public Body getBody() {
         return body;
+    }
+
+    public void breakPlatform(){
+        if (this.type == PlatformType.BROWN){
+            this.broken = true;
+//            this.world.destroyBody(body);
+            this.stateTime = 0f;
+        }
+
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }

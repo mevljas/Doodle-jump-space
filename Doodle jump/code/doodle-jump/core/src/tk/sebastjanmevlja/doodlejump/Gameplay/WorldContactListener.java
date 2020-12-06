@@ -11,6 +11,7 @@ public class WorldContactListener implements ContactListener {
     private Player player;
     private Platform platform;
     private static int test = 0;
+    private boolean ignoreCollsion = true;
 
     public WorldContactListener(Player player) {
         this.player = player;
@@ -23,14 +24,20 @@ public class WorldContactListener implements ContactListener {
 
         movingOut = false;
         jump = false;
+        ignoreCollsion = false;
 
         Object objA = fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData();
         Object objB = fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData();
 
 
         if (objA instanceof Player && objB instanceof Platform){
+            if (!((Platform) objB).isAlive()){
+                ignoreCollsion = true;
+            }
             player = (Player) objA;
             platform = (Platform) objB;
+
+
             if (player.getBodyPosition().y < platform.getBodyPosition().y) {
                 movingOut = true;
                 jump = false;
@@ -38,6 +45,9 @@ public class WorldContactListener implements ContactListener {
             else if ((player.getBodyPosition().y + (player.sprite.getHeight() / PPM) ) > platform.getBodyPosition().y) {
                 movingOut = false;
                 jump = true;
+
+//                Break brown platform
+                ((Platform) objB).breakPlatform();
 
             }
         }
@@ -54,7 +64,7 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        if (movingOut){
+        if (movingOut || ignoreCollsion){
             contact.setEnabled(false);
         }
         else if (jump){
