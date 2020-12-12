@@ -27,10 +27,13 @@ public class Player extends Actor {
 
     public static final float JUMP_VELOCITY = 4f;
 
+    public static float WIDTH = Constants.WIDTH / 3.5f;
+    public static float HEIGHT = Constants.HEIGHT / 8f;
+
 
     public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
-        sprite.setSize(Constants.WIDTH / 3.5f, Constants.HEIGHT / 8f);
+        sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
 

@@ -103,10 +103,7 @@ public class Platform extends Actor {
 
     private void checkWallColision() {
         if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
-            System.out.println(body.getLinearVelocity());
             changeDirection();
-            System.out.println(body.getLinearVelocity());
-            System.out.println();
         }
     }
 

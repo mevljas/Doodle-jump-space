@@ -106,9 +106,13 @@ public class Level1Screen implements Screen {
         }
 
         if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
-            ArrayList<Platform> list = PlatformFactory.generateMorePlatforms(world);
-            for (Platform p: list) {
-                stage.addActor(p);
+            PlatformFactory.generatePlatforms(world);
+            for (Platform p: platforms) {
+                if (p.getStage() == null){{
+                    stage.addActor(p);
+
+                }}
+
             }
         }
     }
