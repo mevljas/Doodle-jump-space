@@ -29,13 +29,17 @@ public class PlatformFactory {
 
 
     public static void generatePlatforms( World world){
-
+        float y;
         minSpacing = Player.HEIGHT * 2;
 
         if (platforms.isEmpty()){
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
+            y = maxJumpHeight / 2;
         }
-        float y = platforms.getLast().sprite.getY() + Platform.PLATFORM_HEIGHT;
+        else {
+            y = platforms.getLast().sprite.getY() + Platform.PLATFORM_HEIGHT;
+        }
+
 
 
         while (y < Constants.HEIGHT * 5) {
