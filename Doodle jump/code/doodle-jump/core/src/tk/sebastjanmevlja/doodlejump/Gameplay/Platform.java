@@ -17,30 +17,37 @@ public class Platform extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    PlatformType type;
+    PlatformColor platformColor;
     public static float PLATFORM_WIDTH = Constants.WIDTH / 3.5f;
     public static float PLATFORM_HEIGHT = Constants.HEIGHT / 22f;
     private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
+    private PlatformType platformType;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
+//    Direction direction = Direction.STILL;
+
+    public static final float VELOCITY = 0.5f;
 
 
-    public Platform(PlatformType type, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+
+    public Platform(PlatformType platformType, PlatformColor color, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
         sprite.setSize(Constants.WIDTH / 3.5f, Constants.HEIGHT / 22f);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
-        this.type = type;
+        this.platformColor = color;
+        this.platformType = platformType;
 
         this.world = world;
 
         // Now create a BodyDefinition.  This defines the physics objects type and position in the simulation
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
         bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
@@ -68,9 +75,12 @@ public class Platform extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
-        if (type == PlatformType.BROWN){
+        if (color == PlatformColor.BROWN){
             runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
             this.stateTime = 0f;
+        }
+        if (platformType == PlatformType.MOVING){
+            body.setLinearVelocity(VELOCITY, 0);
         }
     }
 
@@ -87,7 +97,17 @@ public class Platform extends Actor {
     public void act(float delta) {
         super.act(delta);
         updatePos();
+        checkWallColision();
         updateAnimations();
+    }
+
+    private void checkWallColision() {
+        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
+            System.out.println(body.getLinearVelocity());
+            changeDirection();
+            System.out.println(body.getLinearVelocity());
+            System.out.println();
+        }
     }
 
 
@@ -139,7 +159,7 @@ public class Platform extends Actor {
     }
 
     public void breakPlatform(){
-        if (this.type == PlatformType.BROWN){
+        if (this.platformColor == PlatformColor.BROWN){
             this.broken = true;
 //            this.world.destroyBody(body);
             this.stateTime = 0f;
@@ -149,5 +169,10 @@ public class Platform extends Actor {
 
     public boolean isAlive() {
         return alive;
+    }
+
+
+    public void changeDirection(){
+        body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
     }
 }

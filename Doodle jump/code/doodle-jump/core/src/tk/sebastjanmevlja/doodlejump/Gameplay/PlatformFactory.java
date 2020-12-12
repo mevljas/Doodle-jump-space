@@ -19,7 +19,7 @@ public class PlatformFactory {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = Asset.atlas.findRegion("platform_white");
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
 
-    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 70;
+    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 60;
     public static int InitiaPlatformSize;
 
 
@@ -27,14 +27,14 @@ public class PlatformFactory {
 
 
     public static void generatePlatforms( World world){
-        generatePlatform(PlatformType.GREEN, world, Constants.WIDTH / 2f, 0);
+        generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
 
         float y = Platform.PLATFORM_HEIGHT * 4;
 
         while (y < Constants.HEIGHT * 5) {
             float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
 
-            generatePlatform(randomType(), world, x, y);
+            generatePlatform(randomType(), randomColor(), world, x, y);
 
             y += (maxJumpHeight - 0.5f);
             y -= random.nextFloat() * (maxJumpHeight / 3);
@@ -52,7 +52,7 @@ public class PlatformFactory {
         while (y < Constants.HEIGHT * 5) {
             float x = random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH) + Platform.PLATFORM_WIDTH / 2;
 
-            generatePlatform(randomType(), world, x, y);
+            generatePlatform(randomType(), randomColor(), world, x, y);
             list.add(platforms.getLast());
 
             y += (maxJumpHeight - 0.5f);
@@ -67,9 +67,9 @@ public class PlatformFactory {
     
     
 
-    public static void generatePlatform(PlatformType type, World world, float x, float y) {
+    public static void generatePlatform(PlatformType type, PlatformColor color, World world, float x, float y) {
         TextureAtlas.AtlasRegion atlasRegion;
-        switch (type){
+        switch (color){
             case BROWN:
                 atlasRegion = plaformTextureRegionBrown;
                 break;
@@ -90,7 +90,11 @@ public class PlatformFactory {
                 atlasRegion = plaformTextureRegionGreen;
                 break;
         }
-        platforms.add(new Platform(type, atlasRegion,world, x, y));
+        platforms.add(new Platform(type, color, atlasRegion,world, x, y));
+    }
+
+    private static PlatformColor randomColor(){
+        return PlatformColor.values()[new Random().nextInt(PlatformColor.values().length)];
     }
 
     private static PlatformType randomType(){
@@ -101,14 +105,14 @@ public class PlatformFactory {
     public static void moveWorld(float velocity){
 
         for (Platform p: platforms) {
-            p.body.setLinearVelocity(0f,-velocity * 1.8f);
+            p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity * 1.8f);
         }
     }
 
 
     public static void stopWorld(){
         for (Platform p: platforms) {
-            p.body.setLinearVelocity(0f,0f);
+            p.body.setLinearVelocity(p.body.getLinearVelocity().x,0f);
         }
     }
 
