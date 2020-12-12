@@ -1,9 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.MyGame;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
 import tk.sebastjanmevlja.doodlejump.Level.Screens;
@@ -11,24 +9,24 @@ import tk.sebastjanmevlja.doodlejump.Level.Screens;
 
 public class Game extends com.badlogic.gdx.Game {
 
-    public static AssetManager assetManager;
+
     public static Game main;
 
 
     private SpriteBatch batch;
     private LoadingScreen loadingScreen;
     private Level1Screen level1Screen;
+    public Asset assets;
 
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         main = this;
-        assetManager = new AssetManager();
-        loadAssets();
+        assets = new Asset();
+        assets.loadGame();
 
-        AssetStorage.loadingBackgroundTexture = Game.assetManager.get(AssetDescriptors.backgroundImage);
-        AssetStorage.skin = Game.assetManager.get(AssetDescriptors.skin);
+
 
 
         changeScreen(Screens.LOADINGSCREEN);
@@ -59,25 +57,15 @@ public class Game extends com.badlogic.gdx.Game {
     }
 
 
-    public void loadAssets()
-    {
-        assetManager.load(AssetDescriptors.skin);
-        assetManager.load(AssetDescriptors.backgroundImage);
-
-        assetManager.finishLoading();
-
-
-
-    }
 
 
     @Override
     public void dispose() {
 
         batch.dispose();
-        assetManager.dispose();
-        AssetStorage.loadingBackgroundTexture.dispose();
-        AssetStorage.skin.dispose();
+        assets.dispose();
+        Asset.loadingBackgroundTexture.dispose();
+        Asset.skin.dispose();
     }
 
 

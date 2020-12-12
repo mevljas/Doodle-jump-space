@@ -13,11 +13,11 @@ public class PlatformFactory {
 
     static Random random = new Random();
 
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = AssetStorage.atlas.findRegion("platform_green");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = AssetStorage.atlas.findRegion("brown_platform");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionWhite = AssetStorage.atlas.findRegion("platform_softblue");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = AssetStorage.atlas.findRegion("platform_white");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = AssetStorage.atlas.findRegion("platform__blue");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("platform_green");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("brown_platform");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionWhite = Asset.atlas.findRegion("platform_softblue");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = Asset.atlas.findRegion("platform_white");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
 
     private static final float maxJumpHeight = Player.JUMP_VELOCITY * 70;
     public static int InitiaPlatformSize;

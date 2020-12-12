@@ -40,13 +40,13 @@ public class Level1Screen implements Screen {
 
     public Level1Screen(Game game) {
         this.game = game;
-        background = AssetStorage.atlas.findRegion("background");
+        background = Asset.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
         world = new World(new Vector2(0, -5), true);
 
         PlatformFactory.generatePlatforms(world);
-        player = new Player(AssetStorage.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
+        player = new Player(Asset.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
 //        Generate walls
         new Walls(world);

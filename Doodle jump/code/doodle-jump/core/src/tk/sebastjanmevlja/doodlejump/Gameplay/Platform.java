@@ -69,7 +69,7 @@ public class Platform extends Actor {
         shape.dispose();
 
         if (type == PlatformType.BROWN){
-            runningAnimation = new Animation<TextureRegion>(0.08f, AssetStorage.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
+            runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
             this.stateTime = 0f;
         }
     }

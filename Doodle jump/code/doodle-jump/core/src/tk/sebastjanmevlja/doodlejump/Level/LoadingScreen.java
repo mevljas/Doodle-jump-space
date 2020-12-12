@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetDescriptors;
-import tk.sebastjanmevlja.doodlejump.Gameplay.AssetStorage;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
@@ -28,7 +27,7 @@ public class LoadingScreen implements Screen {
 
 
 
-        progressBar = new ProgressBar(0, 5, 1, false, AssetStorage.skin);
+        progressBar = new ProgressBar(0, 5, 1, false, Asset.skin);
         progressBar.setValue(0);
         progressBar.setWidth(Constants.WIDTH * 0.7f);
         progressBar.getStyle().background.setMinHeight(Constants.HEIGHT * 0.06f);
@@ -41,13 +40,13 @@ public class LoadingScreen implements Screen {
     }
 
     private void addAssets() {
-        Game.assetManager.load(AssetDescriptors.atlas);
+        main.assets.loadAtlas();
 
 
     }
 
     private void getAssets(){
-        AssetStorage.atlas = Game.assetManager.get(AssetDescriptors.atlas);
+        main.assets.getAtlas();
     }
 
     @Override
@@ -61,13 +60,13 @@ public class LoadingScreen implements Screen {
 
         gameBatch.begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(AssetStorage.loadingBackgroundTexture, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Asset.loadingBackgroundTexture, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
 
-        while(!Game.assetManager.update()) {
+        while(!main.assets.update()) {
 
-            float progress = Game.assetManager.getProgress();
+            float progress = main.assets.getProgress();
             progressBar.setValue(progress);
 
             stage.draw();
@@ -101,7 +100,7 @@ public class LoadingScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        AssetStorage.atlas.dispose();
+        Asset.atlas.dispose();
     }
 
 }
