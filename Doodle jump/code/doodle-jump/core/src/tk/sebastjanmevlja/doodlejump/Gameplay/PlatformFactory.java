@@ -31,7 +31,6 @@ public class PlatformFactory {
     public static void generatePlatforms( World world){
 
         minSpacing = Player.HEIGHT * 2;
-        System.out.println(minSpacing);
 
         if (platforms.isEmpty()){
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
