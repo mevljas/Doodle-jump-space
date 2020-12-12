@@ -18,7 +18,7 @@ public class PlatformFactory {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = Asset.atlas.findRegion("platform_white");
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
 
-    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 40 ;
+    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 35 ;
     public static int InitiaPlatformSize;
 
     private static float minSpacing;
@@ -85,7 +85,7 @@ public class PlatformFactory {
     }
 
     private static PlatformType randomType(){
-        return PlatformType.values()[new Random().nextInt(PlatformType.values().length)];
+        return r.nextInt(10) > 7 ? PlatformType.MOVING : PlatformType.STATIC;
     }
 
 
