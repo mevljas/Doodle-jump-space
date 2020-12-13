@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -28,6 +29,8 @@ public class Level1Screen implements Screen {
 
     private final Game game;
     private Stage stage;
+    Group backgroundGroup = new Group();        // Group to be draw first
+    Group foregroundGroup = new Group();        // group to be draw last
     private Viewport viewport;
     private Player player;
     private TextureAtlas.AtlasRegion background;
@@ -75,14 +78,15 @@ public class Level1Screen implements Screen {
 
         Gdx.input.setInputProcessor(Input);
 
-
+        stage.addActor(backgroundGroup);
+        stage.addActor(foregroundGroup);
 
 
 
         for (Platform platform : platforms) {
-            stage.addActor(platform);
+            backgroundGroup.addActor(platform);
         }
-        stage.addActor(player);
+        foregroundGroup.addActor(player);
 
     }
 
@@ -109,11 +113,12 @@ public class Level1Screen implements Screen {
             PlatformFactory.generatePlatforms(world);
             for (Platform p: platforms) {
                 if (p.getStage() == null){{
-                    stage.addActor(p);
+                    backgroundGroup.addActor(p);
 
                 }}
 
             }
+
         }
     }
 

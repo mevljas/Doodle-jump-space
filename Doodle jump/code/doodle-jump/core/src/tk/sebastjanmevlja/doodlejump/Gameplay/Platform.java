@@ -75,6 +75,7 @@ public class Platform extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
+
         if (color == PlatformColor.BROWN){
             runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
             this.stateTime = 0f;
