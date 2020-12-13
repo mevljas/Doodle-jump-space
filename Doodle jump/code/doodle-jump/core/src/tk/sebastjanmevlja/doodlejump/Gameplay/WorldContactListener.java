@@ -37,12 +37,12 @@ public class WorldContactListener implements ContactListener {
             player = (Player) objA;
             platform = (Platform) objB;
 
-            if (player.getBodyPosition().y  < platform.getBodyPosition().y - (platform.sprite.getHeight() / PPM / 2) ) {
+            if (player.getBodyPosition().y  < platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2)  ) {
                 movingOut = true;
                 jump = false;
 
             }
-            else if (player.getBodyPosition().y - (player.sprite.getHeight() / PPM / 2)   > platform.getBodyPosition().y ) {
+            else if (player.getBodyPosition().y  > platform.getBodyPosition().y +  (platform.sprite.getHeight() / PPM / 2)   ) {
                 movingOut = false;
                 jump = true;
 //                Break brown platform
