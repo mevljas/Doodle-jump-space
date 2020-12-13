@@ -21,8 +21,9 @@ public class PlatformFactory {
 
     public static int InitiaPlatformSize;
 
-    private static float minSpacing = Constants.HEIGHT * 0.10f;
-    private static float maxSpacing = Constants.HEIGHT * 0.2f;
+    private static float maxSpacing = Constants.HEIGHT * 0.24f;
+    private static float minSpacing = Constants.HEIGHT * 0.21f;
+
     private static Random r = new Random();
 
 
@@ -31,7 +32,6 @@ public class PlatformFactory {
 
     public static void generatePlatforms( World world){
         float y;
-        minSpacing = Player.HEIGHT * 2.5f;
 
         if (platforms.isEmpty()){
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
