@@ -5,42 +5,73 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
-
-
-
-public class Platform extends Actor {
+public class Monster extends Actor {
 
     Sprite sprite;
     World world;
     Body body;
     PlatformColor platformColor;
-    public static float PLATFORM_WIDTH = Constants.WIDTH / 3.5f;
-    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 22f;
-    private boolean broken = false;
+    public static float WIDTH = Constants.WIDTH / 5f;
+    public static float HEIGHT = Constants.HEIGHT / 8f;
+//    private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
-    private PlatformType platformType;
+    private MonsterType monsterType;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
 //    Direction direction = Direction.STILL;
 
-    public static final float VELOCITY = 0.5f;
+    public static final float VELOCITY = 0.3f;
 
 
 
-    public Platform(PlatformType platformType, PlatformColor color, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+    public Monster(MonsterType monsterType, Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
+        sprite = new Sprite(textures.get(0));
+
+        if (monsterType == MonsterType.BLUE){
+            WIDTH = Constants.WIDTH / 5f;
+            HEIGHT = Constants.HEIGHT / 8f;
+        }
+        else {
+            WIDTH = Constants.WIDTH / 6f;
+            HEIGHT = Constants.HEIGHT / 8f;
+        }
+
+        runningAnimation = new Animation<TextureRegion>(0.08f, textures, Animation.PlayMode.LOOP);
+        this.stateTime = 0f;
+
+
+        init(monsterType, world, x, y);
+
+        body.setLinearVelocity(VELOCITY, 0);
+
+
+    }
+
+
+
+    public Monster(MonsterType monsterType, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
-        sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
+
+        WIDTH = Constants.WIDTH / 8f;
+        HEIGHT = WIDTH;
+
+        init(monsterType, world, x, y);
+    }
+
+
+    private void init(MonsterType monsterType, World world, float x, float y) {
+        sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
-        this.platformColor = color;
-        this.platformType = platformType;
+        this.monsterType = monsterType;
 
         this.world = world;
 
@@ -61,7 +92,7 @@ public class Platform extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight()
+        shape.setAsBox(sprite.getWidth() /2 / PPM, sprite.getHeight()
                 /2 / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
@@ -75,15 +106,11 @@ public class Platform extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
-
-        if (color == PlatformColor.BROWN){
-            runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
-            this.stateTime = 0f;
-        }
-        if (platformType == PlatformType.MOVING){
-            body.setLinearVelocity(VELOCITY, 0);
-        }
     }
+
+
+
+
 
     public void updatePos(){
         // Set the sprite's position from the updated physics body location
@@ -110,28 +137,22 @@ public class Platform extends Actor {
 
 
     private void updateAnimations(){
-        if (this.broken){
+        if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
             this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-            if (this.runningAnimation.isAnimationFinished(this.stateTime)){
-                this.alive = false;
-//              Move platform offscreen.
-//                this.body.setLinearVelocity(0f,-1000);
-            }
         }
 
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
-        if (!broken){
-            sprite.draw(batch);
-        }
-        else if (alive){
-            // Get current frame of animation for the current stateTime
+        if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
-            batch.draw(currentFrame, sprite.getX(), sprite.getY());
+            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 
+
+        }
+        else {
+            sprite.draw(batch);
         }
 
     }
@@ -154,15 +175,6 @@ public class Platform extends Actor {
 
     public Body getBody() {
         return body;
-    }
-
-    public void breakPlatform(){
-        if (this.platformColor == PlatformColor.BROWN){
-            this.broken = true;
-//            this.world.destroyBody(body);
-            this.stateTime = 0f;
-        }
-
     }
 
     public boolean isAlive() {

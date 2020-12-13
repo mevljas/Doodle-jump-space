@@ -21,6 +21,8 @@ import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 import java.util.ArrayList;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.monsters;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.removeMonster;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.platforms;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.removePlatform;
 
@@ -30,6 +32,7 @@ public class Level1Screen implements Screen {
     private final Game game;
     private Stage stage;
     Group backgroundGroup = new Group();        // Group to be draw first
+    Group middleGroup = new Group();
     Group foregroundGroup = new Group();        // group to be draw last
     private Viewport viewport;
     private Player player;
@@ -49,6 +52,7 @@ public class Level1Screen implements Screen {
         world = new World(new Vector2(0, -5), true);
 
         PlatformFactory.generatePlatforms(world);
+        MonsterFactory.generateMonsters(world);
         player = new Player(Asset.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
 //        Generate walls
@@ -64,7 +68,6 @@ public class Level1Screen implements Screen {
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
 
-
     }
 
 
@@ -79,6 +82,7 @@ public class Level1Screen implements Screen {
         Gdx.input.setInputProcessor(Input);
 
         stage.addActor(backgroundGroup);
+        stage.addActor(middleGroup);
         stage.addActor(foregroundGroup);
 
 
@@ -86,7 +90,14 @@ public class Level1Screen implements Screen {
         for (Platform platform : platforms) {
             backgroundGroup.addActor(platform);
         }
+
+        for (Monster monster : monsters) {
+            middleGroup.addActor(monster);
+        }
+
+
         foregroundGroup.addActor(player);
+
 
     }
 
@@ -123,11 +134,43 @@ public class Level1Screen implements Screen {
     }
 
 
+    private void updateMonsters(){
+        ArrayList<Monster> removeMonsters = new ArrayList<>();
+        for(Monster monster : monsters)
+        {
+            Vector3 windowCoordinates = new Vector3(0, monster.getSprite().getY(), 0);
+            camera.project(windowCoordinates);
+            if(windowCoordinates.y + monster.getSprite().getHeight() < 0){
+                removeMonsters.add(monster);
+            }
+
+        }
+        for (Monster m: removeMonsters) {
+            removeMonster(m);
+            m.addAction(Actions.removeActor());
+            world.destroyBody(m.getBody());
+        }
+
+        if (monsters.size() < MonsterFactory.InitiaMonsterSize / 2){
+            MonsterFactory.generateMonsters(world);
+            for (Monster m: monsters) {
+                if (m.getStage() == null){{
+                    middleGroup.addActor(m);
+
+                }}
+
+            }
+
+        }
+    }
+
+
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
         camera.update();
         updatePlatforms();
+        updateMonsters();
 
         // Advance the world, by the amount of time that has elapsed since the  last frame
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics

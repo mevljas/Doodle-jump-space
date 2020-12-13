@@ -50,6 +50,11 @@ public class WorldContactListener implements ContactListener {
 
             }
         }
+        else if (objA instanceof Player){
+            objB = fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData();
+            if (objB instanceof Monster)
+                ignoreCollsion = true;
+        }
 
 
 

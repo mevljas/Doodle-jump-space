@@ -8,8 +8,6 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.moveWorld;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.stopWorld;
 
 
 enum Direction {
@@ -117,7 +115,8 @@ public class Player extends Actor {
             else {
                 body.setLinearVelocity(0f,JUMP_VELOCITY);
             }
-            moveWorld(JUMP_VELOCITY * 0.7f);
+            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.7f);
+            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.7f);
         }
 
     }
@@ -129,7 +128,8 @@ public class Player extends Actor {
         }
         else{
             direction = Direction.DOWN;
-            stopWorld();
+            PlatformFactory.stopWorld();
+            MonsterFactory.stopWorld();
         }
 
 

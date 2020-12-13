@@ -18,10 +18,11 @@ public class PlatformFactory {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = Asset.atlas.findRegion("platform_white");
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
 
-    private static final float maxJumpHeight = Player.JUMP_VELOCITY * 35 ;
+
     public static int InitiaPlatformSize;
 
-    private static float minSpacing;
+    private static float minSpacing = Constants.HEIGHT * 0.10f;
+    private static float maxSpacing = Constants.HEIGHT * 0.2f;
     private static Random r = new Random();
 
 
@@ -30,14 +31,14 @@ public class PlatformFactory {
 
     public static void generatePlatforms( World world){
         float y;
-        minSpacing = Player.HEIGHT * 2;
+        minSpacing = Player.HEIGHT * 2.5f;
 
         if (platforms.isEmpty()){
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
-            y = maxJumpHeight / 2;
+            y = minSpacing;
         }
         else {
-            y = platforms.getLast().sprite.getY() + Platform.PLATFORM_HEIGHT;
+            y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
         }
 
 
@@ -47,7 +48,8 @@ public class PlatformFactory {
 
             generatePlatform(randomType(), randomColor(), world, x, y);
 
-            y += minSpacing + r.nextFloat()  * (maxJumpHeight - minSpacing);
+
+            y += minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
         }
 
 
