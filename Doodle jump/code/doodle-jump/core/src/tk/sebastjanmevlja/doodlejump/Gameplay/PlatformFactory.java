@@ -21,7 +21,7 @@ public class PlatformFactory {
 
     public static int InitiaPlatformSize;
 
-    private static float maxSpacing = Constants.HEIGHT * 0.24f;
+    private static float maxSpacing = Constants.HEIGHT * 0.23f;
     private static float minSpacing = Constants.HEIGHT * 0.21f;
 
     private static Random r = new Random();
