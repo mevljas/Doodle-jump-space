@@ -53,7 +53,7 @@ public class Level1Screen implements Screen {
 
         PlatformFactory.generatePlatforms(world);
         MonsterFactory.generateMonsters(world);
-        player = new Player(Asset.atlas.findRegion("player_right"), world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
+        player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
 
 //        Generate walls
         new Walls(world);

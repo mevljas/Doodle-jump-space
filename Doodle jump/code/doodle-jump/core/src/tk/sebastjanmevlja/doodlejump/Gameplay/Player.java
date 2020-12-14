@@ -10,8 +10,15 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
-enum Direction {
+
+
+enum VerticalDirection {
     UP,DOWN, STILL
+}
+
+
+enum HorizontalDirection {
+    LEFT, RIGHT, STILL
 }
 
 
@@ -21,16 +28,24 @@ public class Player extends Actor {
     World world;
     Body body;
 
-    Direction direction = Direction.STILL;
+    VerticalDirection verticalDirection = VerticalDirection.STILL;
+    HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
     public static final float JUMP_VELOCITY = 4f;
+    public static final float HORIZONTAL_VELOCITY = 8f;
 
     public static float WIDTH = Constants.WIDTH / 3.5f;
     public static float HEIGHT = Constants.HEIGHT / 8f;
 
+    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
+    private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("player_left_jump");
+    private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("player_right_jump");
+    private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
+    private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
 
-    public Player(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
-        sprite = new Sprite(texture);
+
+    public Player( World world, float x, float y) {
+        sprite = new Sprite(up);
         sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
@@ -91,11 +106,35 @@ public class Player extends Actor {
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
     }
 
+    void updateSprite(){
+        if (verticalDirection == VerticalDirection.UP){
+            if (horizontalDirection == HorizontalDirection.LEFT){
+                sprite.setRegion(leftJump);
+            }
+            else if (horizontalDirection == HorizontalDirection.RIGHT){
+                sprite.setRegion(rightJump);
+            }
+            else {
+                sprite.setRegion(up);
+            }
+
+        }
+        else {
+            if (horizontalDirection == HorizontalDirection.LEFT){
+                sprite.setRegion(leftFall);
+            }
+            else if (horizontalDirection == HorizontalDirection.RIGHT){
+                sprite.setRegion(rightFall);
+            }
+        }
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
         updatePos();
         checkState();
+        updateSprite();
 
     }
 
@@ -107,8 +146,8 @@ public class Player extends Actor {
     public void jump(){
 
 
-        if (direction != Direction.UP) {
-            direction = Direction.UP;
+        if (verticalDirection != VerticalDirection.UP) {
+            verticalDirection = VerticalDirection.UP;
             if (sprite.getY() > Constants.HEIGHT * 0.7){
                 body.setLinearVelocity(0f,JUMP_VELOCITY * 0.7f);
             }
@@ -124,15 +163,38 @@ public class Player extends Actor {
 
     void checkState(){
         if (body.getLinearVelocity().y > 0){
-            direction = Direction.UP;
+            verticalDirection = VerticalDirection.UP;
         }
-        else{
-            direction = Direction.DOWN;
+        else if (body.getLinearVelocity().y < 0){
+            verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
         }
+        else {
+            verticalDirection = VerticalDirection.STILL;
+        }
+
+        if (body.getLinearVelocity().x > 0){
+            horizontalDirection = HorizontalDirection.RIGHT;
+        }
+        else if (body.getLinearVelocity().x < 0){
+            horizontalDirection = HorizontalDirection.LEFT;
+        }
+        else {
+            horizontalDirection = HorizontalDirection.STILL;
+        }
 
 
+    }
+
+    public void moveLeft(){
+        body.applyForceToCenter(new Vector2(-HORIZONTAL_VELOCITY, 0), true);
+//        horizontalDirection = HorizontalDirection.LEFT;
+    }
+
+    public void moveRight(){
+        body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
+//        horizontalDirection = HorizontalDirection.RIGHT;
     }
 
 
