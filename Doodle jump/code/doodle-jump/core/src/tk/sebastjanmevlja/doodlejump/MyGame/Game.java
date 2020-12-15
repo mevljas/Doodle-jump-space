@@ -1,10 +1,10 @@
 package tk.sebastjanmevlja.doodlejump.MyGame;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
-import tk.sebastjanmevlja.doodlejump.Level.LoadingScreen;
-import tk.sebastjanmevlja.doodlejump.Level.Screens;
+import tk.sebastjanmevlja.doodlejump.Level.*;
 
 
 public class Game extends com.badlogic.gdx.Game {
@@ -15,7 +15,10 @@ public class Game extends com.badlogic.gdx.Game {
 
     private SpriteBatch batch;
     private LoadingScreen loadingScreen;
+    private PreferencesScreen preferencesScreen;
+    private MenuScreen menuScreen;
     private Level1Screen level1Screen;
+    private AboutScreen aboutScreen;
     public Asset assets;
 
 
@@ -25,7 +28,8 @@ public class Game extends com.badlogic.gdx.Game {
         main = this;
         assets = new Asset();
         assets.loadGame();
-
+//        Gdx.input.setCatchBackKey(true); //back key doesnt the app close - deprecated
+        Gdx.input.setCatchKey(Input.Keys.BACK, true);
 
 
 
@@ -42,10 +46,25 @@ public class Game extends com.badlogic.gdx.Game {
                     loadingScreen = new LoadingScreen(this);
                 setScreen(loadingScreen);
                 break;
+            case MENUSCREEN:
+                if (menuScreen == null)
+                    menuScreen = new MenuScreen(this);
+                setScreen(menuScreen);
+                break;
+            case PREFERENCESSCREEN:
+                if (preferencesScreen == null)
+                    preferencesScreen = new PreferencesScreen(this);
+                setScreen(preferencesScreen);
+                break;
             case LEVEL1SCREEN:
                 if (level1Screen == null)
                     level1Screen = new Level1Screen(this);
                 setScreen(level1Screen);
+                break;
+            case ABOUTSCREEN:
+                if (aboutScreen == null)
+                    aboutScreen = new AboutScreen(this);
+                setScreen(aboutScreen);
                 break;
 
         }

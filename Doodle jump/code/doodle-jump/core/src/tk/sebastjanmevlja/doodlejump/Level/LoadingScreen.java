@@ -33,7 +33,7 @@ public class LoadingScreen implements Screen {
         progressBar.getStyle().background.setMinHeight(Constants.HEIGHT * 0.06f);
         progressBar.getStyle().knobBefore.setMinHeight(Constants.HEIGHT * 0.05f);
 
-        progressBar.setX(Constants.WIDTH / 2 - progressBar.getWidth() / 2);
+        progressBar.setX(Constants.WIDTH / 2f - progressBar.getWidth() / 2);
         progressBar.setY(Constants.HEIGHT * 0.2f);
         stage.addActor(progressBar);
         addAssets();
@@ -74,7 +74,7 @@ public class LoadingScreen implements Screen {
         }
 
         getAssets();
-        main.changeScreen(Screens.LEVEL1SCREEN);
+        main.changeScreen(Screens.MENUSCREEN);
 
 
 
