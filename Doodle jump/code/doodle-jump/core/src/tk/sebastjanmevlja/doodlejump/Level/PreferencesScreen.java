@@ -7,12 +7,15 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class PreferencesScreen implements Screen {
@@ -42,56 +45,56 @@ public class PreferencesScreen implements Screen {
 
         // music volume
         final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
-//        volumeMusicSlider.setValue(Sound.musicVolume);
-//        volumeMusicSlider.getStyle().background.setMinHeight(GameInfo.HEIGHT * 0.03f);
-//        volumeMusicSlider.getStyle().knob.setMinHeight(GameInfo.HEIGHT * 0.04f);
-//        volumeMusicSlider.getStyle().knob.setMinWidth(GameInfo.HEIGHT * 0.04f);
-//        volumeMusicSlider.addListener(new EventListener() {
-//            @Override
-//            public boolean handle(Event event) {
-//                Main.sound.changeMusicVolume(volumeMusicSlider.getValue());
-//                return false;
-//            }
-//        });
+        volumeMusicSlider.setValue(Sound.musicVolume);
+        volumeMusicSlider.getStyle().background.setMinHeight(Constants.HEIGHT * 0.03f);
+        volumeMusicSlider.getStyle().knob.setMinHeight(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.getStyle().knob.setMinWidth(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                Sound.changeMusicVolume(volumeMusicSlider.getValue());
+                return false;
+            }
+        });
 
         // sound volume
         final Slider soundMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
-//        soundMusicSlider.setValue(Sound.soundVolume);
-//        soundMusicSlider.addListener(new EventListener() {
-//            @Override
-//            public boolean handle(Event event) {
-//                Main.sound.changeSoundVolume(soundMusicSlider.getValue());
-//                return false;
-//            }
-//        });
+        soundMusicSlider.setValue(Sound.soundVolume);
+        soundMusicSlider.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                Sound.changeSoundVolume(soundMusicSlider.getValue());
+                return false;
+            }
+        });
 
 
         // music on/off
         final CheckBox musicCheckbox = new CheckBox(null, skin);
-//        musicCheckbox.setChecked(Sound.musicEnabled);
-//        musicCheckbox.getStyle().checkboxOn.setMinWidth(GameInfo.WIDTH * 0.08f);
-//        musicCheckbox.getStyle().checkboxOn.setMinHeight(GameInfo.WIDTH * 0.08f);
-//        musicCheckbox.getStyle().checkboxOff.setMinWidth(GameInfo.WIDTH * 0.08f);
-//        musicCheckbox.getStyle().checkboxOff.setMinHeight(GameInfo.WIDTH * 0.08f);
-//        musicCheckbox.addListener(new EventListener() {
-//            @Override
-//            public boolean handle(Event event) {
-//                Main.sound.setMusicEnabled(musicCheckbox.isChecked());
-//                return false;
-//            }
-//        });
+        musicCheckbox.setChecked(Sound.musicEnabled);
+        musicCheckbox.getStyle().checkboxOn.setMinWidth(Constants.WIDTH * 0.08f);
+        musicCheckbox.getStyle().checkboxOn.setMinHeight(Constants.WIDTH * 0.08f);
+        musicCheckbox.getStyle().checkboxOff.setMinWidth(Constants.WIDTH * 0.08f);
+        musicCheckbox.getStyle().checkboxOff.setMinHeight(Constants.WIDTH * 0.08f);
+        musicCheckbox.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                Sound.setMusicEnabled(musicCheckbox.isChecked());
+                return false;
+            }
+        });
 
 
         // sound on/off
         final CheckBox soundEffectsCheckbox = new CheckBox(null, skin);
-//        soundEffectsCheckbox.setChecked(Sound.soundEnabled);
-//        soundEffectsCheckbox.addListener(new EventListener() {
-//            @Override
-//            public boolean handle(Event event) {
-//                Main.sound.setSoundEnabled(soundEffectsCheckbox.isChecked());
-//                return false;
-//            }
-//        });
+        soundEffectsCheckbox.setChecked(Sound.soundEnabled);
+        soundEffectsCheckbox.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                Sound.setSoundEnabled(soundEffectsCheckbox.isChecked());
+                return false;
+            }
+        });
 
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);

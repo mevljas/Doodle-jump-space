@@ -161,6 +161,7 @@ public class Platform extends Actor {
             this.broken = true;
 //            this.world.destroyBody(body);
             this.stateTime = 0f;
+            Sound.playPlatformBreakingSound();
         }
 
     }

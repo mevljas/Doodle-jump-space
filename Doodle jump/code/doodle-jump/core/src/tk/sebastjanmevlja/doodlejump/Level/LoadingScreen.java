@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class LoadingScreen implements Screen {
@@ -37,6 +38,8 @@ public class LoadingScreen implements Screen {
         progressBar.setY(Constants.HEIGHT * 0.2f);
         stage.addActor(progressBar);
         addAssets();
+
+        Sound.changeMusicState();
     }
 
     private void addAssets() {

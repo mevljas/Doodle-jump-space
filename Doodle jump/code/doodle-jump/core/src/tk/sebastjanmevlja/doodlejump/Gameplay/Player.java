@@ -42,6 +42,7 @@ public class Player extends Actor {
     private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("player_right_jump");
     private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
     private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
+    private boolean alive = true;
 
 
     public Player( World world, float x, float y) {
@@ -104,6 +105,12 @@ public class Player extends Actor {
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+
+        System.out.println(sprite.getY());
+        if (sprite.getY() <= 0 && alive){
+            Sound.playFallingSound();
+            alive = false;
+        }
     }
 
     void updateSprite(){

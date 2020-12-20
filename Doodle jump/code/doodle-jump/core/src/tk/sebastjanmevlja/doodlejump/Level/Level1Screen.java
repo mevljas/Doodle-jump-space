@@ -98,6 +98,8 @@ public class Level1Screen implements Screen {
 
         foregroundGroup.addActor(player);
 
+        Sound.playStartSound();
+
 
     }
 

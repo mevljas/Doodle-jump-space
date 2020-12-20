@@ -47,13 +47,17 @@ public class WorldContactListener implements ContactListener {
                 jump = true;
 //                Break brown platform
                 ((Platform) objB).breakPlatform();
+                Sound.playJumpSound();
 
             }
         }
         else if (objA instanceof Player){
             objB = fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData();
-            if (objB instanceof Monster)
+            if (objB instanceof Monster){
                 ignoreCollsion = true;
+                Sound.playMonsterSound();
+            }
+
         }
 
 

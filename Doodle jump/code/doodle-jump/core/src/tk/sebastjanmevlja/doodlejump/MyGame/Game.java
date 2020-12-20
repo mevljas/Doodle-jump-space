@@ -21,7 +21,6 @@ public class Game extends com.badlogic.gdx.Game {
     private AboutScreen aboutScreen;
     public Asset assets;
 
-
     @Override
     public void create() {
         batch = new SpriteBatch();
