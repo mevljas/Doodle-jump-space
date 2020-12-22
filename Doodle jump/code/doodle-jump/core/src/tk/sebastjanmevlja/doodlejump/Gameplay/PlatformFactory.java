@@ -44,7 +44,7 @@ public class PlatformFactory {
 
 
         while (y < Constants.HEIGHT * 5) {
-            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH);
+            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
 
             generatePlatform(randomType(), randomColor(), world, x, y);
 

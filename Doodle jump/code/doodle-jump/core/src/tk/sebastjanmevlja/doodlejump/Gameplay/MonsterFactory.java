@@ -44,7 +44,7 @@ public class MonsterFactory {
 
 
         while (y < Constants.HEIGHT * 5) {
-            float x = Monster.WIDTH * 3 + random.nextFloat() * (Constants.WIDTH - Monster.WIDTH * 4);
+            float x = Monster.WIDTH * 3 + random.nextFloat() * (Constants.WIDTH - Monster.WIDTH * 6);
 
             generateMonster(randomType(), world, x, y);
 
