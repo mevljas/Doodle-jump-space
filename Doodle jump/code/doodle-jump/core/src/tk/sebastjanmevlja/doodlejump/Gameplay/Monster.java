@@ -30,7 +30,9 @@ public class Monster extends Actor {
 
     public static final float VELOCITY = 0.3f;
 
-
+    public MonsterType getMonsterType() {
+        return monsterType;
+    }
 
     public Monster(MonsterType monsterType, Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
         sprite = new Sprite(textures.get(0));
@@ -60,8 +62,15 @@ public class Monster extends Actor {
     public Monster(MonsterType monsterType, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
 
-        WIDTH = Constants.WIDTH / 8f;
-        HEIGHT = WIDTH;
+        if (monsterType == MonsterType.RED) {
+            WIDTH = Constants.WIDTH / 8f;
+            HEIGHT = WIDTH;
+        }
+        else if (monsterType == MonsterType.UFO) {
+            WIDTH = Constants.WIDTH / 3f;
+            HEIGHT = Constants.HEIGHT / 4f;
+        }
+
 
         init(monsterType, world, x, y);
     }
@@ -124,6 +133,7 @@ public class Monster extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        checkPlayerDistance();
         updatePos();
         checkWallColision();
         updateAnimations();
@@ -133,6 +143,27 @@ public class Monster extends Actor {
         if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
             changeDirection();
         }
+    }
+
+    private void checkPlayerDistance(){
+        if (monsterType != MonsterType.RED && body.getLinearVelocity().y == 0 && getPlayerDistance() < 7){
+            moveTowardsPlayer();
+        }
+    }
+
+    private void moveTowardsPlayer(){
+        Vector2 vectDirection = Player.player.body.getPosition().sub(body.getPosition()).nor().scl(2);
+        body.setLinearVelocity(vectDirection);
+    }
+
+
+    void movePlayerCloser(){
+        Vector2 vectDirection = body.getPosition().sub(Player.player.body.getPosition()).nor().scl(2.5f);
+        Player.player.body.setLinearVelocity(vectDirection);
+    }
+
+    double getPlayerDistance(){
+        return Math.sqrt(Math.pow((body.getPosition().x - Player.player.body.getPosition().x), 2) + Math.pow((body.getPosition().y - Player.player.body.getPosition().y), 2));
     }
 
 

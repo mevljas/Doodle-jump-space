@@ -54,8 +54,13 @@ public class WorldContactListener implements ContactListener {
         else if (objA instanceof Player){
             objB = fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData();
             if (objB instanceof Monster){
+                Monster m = (Monster) objB;
                 ignoreCollsion = true;
                 Sound.playMonsterSound();
+                if (m.getMonsterType() == MonsterType.UFO){
+                    m.sprite.setRegion(MonsterFactory.alienUfoLight);
+                    m.movePlayerCloser();
+                }
             }
 
         }

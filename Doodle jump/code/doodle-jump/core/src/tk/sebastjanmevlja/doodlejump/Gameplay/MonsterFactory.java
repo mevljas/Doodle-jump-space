@@ -15,8 +15,9 @@ public class MonsterFactory {
 
     private  static final Array<TextureAtlas.AtlasRegion> aliensGreen = Asset.atlas.findRegions("aliens1");
     private  static final Array<TextureAtlas.AtlasRegion> aliensBlue = Asset.atlas.findRegions("aliens2");
-
     private  static final TextureAtlas.AtlasRegion alienRed = Asset.atlas.findRegion("monster");
+    private  static final TextureAtlas.AtlasRegion alienUfo = Asset.atlas.findRegion("ufo");
+    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
 
 
     private static final float minSpacing = Constants.HEIGHT ;
@@ -69,6 +70,10 @@ public class MonsterFactory {
 
             case RED:
                 monsters.add(new Monster(type, alienRed,world, x, y));
+                break;
+
+            case UFO:
+                monsters.add(new Monster(type, alienUfo,world, x, y));
                 break;
 
 

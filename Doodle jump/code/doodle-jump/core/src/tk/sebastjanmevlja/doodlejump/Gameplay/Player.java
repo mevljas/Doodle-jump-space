@@ -24,6 +24,8 @@ enum HorizontalDirection {
 
 public class Player extends Actor {
 
+    static Player player;
+
     Sprite sprite;
     World world;
     Body body;
@@ -88,6 +90,7 @@ public class Player extends Actor {
         fixture.setUserData(this);
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
+        player = this;
 
     }
 
@@ -106,7 +109,6 @@ public class Player extends Actor {
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
 
-        System.out.println(sprite.getY());
         if (sprite.getY() <= 0 && alive){
             Sound.playFallingSound();
             alive = false;
@@ -169,39 +171,40 @@ public class Player extends Actor {
 
 
     void checkState(){
-        if (body.getLinearVelocity().y > 0){
-            verticalDirection = VerticalDirection.UP;
-        }
-        else if (body.getLinearVelocity().y < 0){
+//        if (body.getLinearVelocity().y > 0){
+//            verticalDirection = VerticalDirection.UP;
+//        }
+//        else
+            if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y < 0){
             verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
         }
-        else {
-            verticalDirection = VerticalDirection.STILL;
-        }
+//        else {
+//            verticalDirection = VerticalDirection.STILL;
+//        }
 
-        if (body.getLinearVelocity().x > 0){
-            horizontalDirection = HorizontalDirection.RIGHT;
-        }
-        else if (body.getLinearVelocity().x < 0){
-            horizontalDirection = HorizontalDirection.LEFT;
-        }
-        else {
-            horizontalDirection = HorizontalDirection.STILL;
-        }
+//        if (horizontalDirection != HorizontalDirection.RIGHT && body.getLinearVelocity().x > 0){
+//            horizontalDirection = HorizontalDirection.RIGHT;
+//        }
+//        else if ( horizontalDirection != HorizontalDirection.LEFT && body.getLinearVelocity().x < 0){
+//            horizontalDirection = HorizontalDirection.LEFT;
+//        }
+//        else {
+//            horizontalDirection = HorizontalDirection.STILL;
+//        }
 
 
     }
 
     public void moveLeft(){
         body.applyForceToCenter(new Vector2(-HORIZONTAL_VELOCITY, 0), true);
-//        horizontalDirection = HorizontalDirection.LEFT;
+        horizontalDirection = HorizontalDirection.LEFT;
     }
 
     public void moveRight(){
         body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
-//        horizontalDirection = HorizontalDirection.RIGHT;
+        horizontalDirection = HorizontalDirection.RIGHT;
     }
 
 
