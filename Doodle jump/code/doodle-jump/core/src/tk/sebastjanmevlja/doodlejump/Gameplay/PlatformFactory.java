@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class PlatformFactory {
 
-    public static LinkedList<Platform> platforms = new LinkedList<>();
+    public static LinkedList<Platform> platforms;
 
     static Random random = new Random();
 
@@ -21,16 +21,20 @@ public class PlatformFactory {
 
     public static int InitiaPlatformSize;
 
-    private static float maxSpacing = Constants.HEIGHT * 0.23f;
-    private static float minSpacing = Constants.HEIGHT * 0.21f;
+    private static float maxSpacing;
+    private static float minSpacing;
 
-    private static Random r = new Random();
-
-
+    private static Random r;
 
 
+    public PlatformFactory() {
+        platforms = new LinkedList<>();
+        maxSpacing = Constants.HEIGHT * 0.23f;
+        minSpacing = Constants.HEIGHT * 0.21f;
+        r = new Random();
+    }
 
-    public static void generatePlatforms( World world){
+    public static void generatePlatforms(World world){
         float y;
 
         if (platforms.isEmpty()){

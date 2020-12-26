@@ -36,6 +36,8 @@ public class Level1Screen implements Screen {
     Group foregroundGroup = new Group();
     Group hudGroup = new Group();        // group to be draw last
     private Viewport viewport;
+    private PlatformFactory platformFactory;
+    private MonsterFactory monsterFactory;
     private Player player;
     private Hud hud;
     private TextureAtlas.AtlasRegion background;
@@ -52,8 +54,9 @@ public class Level1Screen implements Screen {
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
         world = new World(new Vector2(0, -5), true);
-
+        platformFactory = new PlatformFactory();
         PlatformFactory.generatePlatforms(world);
+        monsterFactory = new MonsterFactory();
         MonsterFactory.generateMonsters(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
         hud = new Hud();
@@ -175,9 +178,11 @@ public class Level1Screen implements Screen {
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
+        checkGameState();
         camera.update();
         updatePlatforms();
         updateMonsters();
+
 
         // Advance the world, by the amount of time that has elapsed since the  last frame
         // Generally in a real game, dont do this in the render loop, as you are  tying the physics
@@ -238,6 +243,12 @@ public class Level1Screen implements Screen {
         stage.dispose();
         world.dispose();
 
+    }
+
+    private void checkGameState(){
+        if (Player.getLives() <= 0){
+            game.changeScreen(Screens.MENUSCREEN);
+        }
     }
 
 

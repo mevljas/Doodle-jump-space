@@ -56,7 +56,11 @@ public class Game extends com.badlogic.gdx.Game {
                 setScreen(preferencesScreen);
                 break;
             case LEVEL1SCREEN:
-                if (level1Screen == null)
+                if (level1Screen != null) {
+                    level1Screen.dispose();
+                    level1Screen = null;
+                }
+
                     level1Screen = new Level1Screen(this);
                 setScreen(level1Screen);
                 break;

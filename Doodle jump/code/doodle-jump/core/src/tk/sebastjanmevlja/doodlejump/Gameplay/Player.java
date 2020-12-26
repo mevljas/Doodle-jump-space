@@ -25,8 +25,8 @@ enum HorizontalDirection {
 public class Player extends Actor {
 
     static Player player;
-    static int lives = 5;
-    static int score = 0;
+    static int lives;
+    static int score;
 
     Sprite sprite;
     World world;
@@ -46,7 +46,6 @@ public class Player extends Actor {
     private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("player_right_jump");
     private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
     private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
-    private boolean alive = true;
 
 
     public Player( World world, float x, float y) {
@@ -93,6 +92,8 @@ public class Player extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
         player = this;
+        lives = 5;
+        score = 0;
 
     }
 
@@ -111,9 +112,9 @@ public class Player extends Actor {
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight() * 0.36f );
 
-        if (sprite.getY() <= 0 && alive){
+        if (sprite.getY() <= 0 && lives > 0){
             Sound.playFallingSound();
-            alive = false;
+            lives = 0;
         }
     }
 
@@ -218,9 +219,13 @@ public class Player extends Actor {
     }
 
 
+    public static int getLives() {
+        return lives;
+    }
 
-
-
+    public static int getScore() {
+        return score;
+    }
 
 
 }

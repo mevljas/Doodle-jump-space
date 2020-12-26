@@ -9,9 +9,8 @@ import java.util.Random;
 
 public class MonsterFactory {
 
-    public static LinkedList<Monster> monsters = new LinkedList<>();
+    public static LinkedList<Monster> monsters;
 
-    static Random random = new Random();
 
     private  static final Array<TextureAtlas.AtlasRegion> aliensGreen = Asset.atlas.findRegions("aliens1");
     private  static final Array<TextureAtlas.AtlasRegion> aliensBlue = Asset.atlas.findRegions("aliens2");
@@ -20,15 +19,19 @@ public class MonsterFactory {
     public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
 
 
-    private static final float minSpacing = Constants.HEIGHT ;
-    private static final float maxSpacing = Constants.HEIGHT * 2f ;
+    private static  float minSpacing;
+    private static  float maxSpacing ;
     public static int InitiaMonsterSize;
 
     private static Random r = new Random();
 
 
-
-
+    public MonsterFactory() {
+        minSpacing = Constants.HEIGHT ;
+        maxSpacing = Constants.HEIGHT * 2f ;
+        monsters = new LinkedList<>();
+        r = new Random();
+    }
 
     public static void generateMonsters(World world){
 
@@ -44,7 +47,7 @@ public class MonsterFactory {
 
 
         while (y < Constants.HEIGHT * 5) {
-            float x = Monster.WIDTH * 3 + random.nextFloat() * (Constants.WIDTH - Monster.WIDTH * 6);
+            float x = Monster.WIDTH * 3 + r.nextFloat() * (Constants.WIDTH - Monster.WIDTH * 6);
 
             generateMonster(randomType(), world, x, y);
 
