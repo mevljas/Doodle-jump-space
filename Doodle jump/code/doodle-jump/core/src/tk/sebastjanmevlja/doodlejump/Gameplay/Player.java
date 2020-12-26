@@ -209,6 +209,14 @@ public class Player extends Actor {
         horizontalDirection = HorizontalDirection.RIGHT;
     }
 
+    public static void incScore(){
+        score++;
+    }
+
+    public static void decLives(){
+        lives--;
+    }
+
 
 
 

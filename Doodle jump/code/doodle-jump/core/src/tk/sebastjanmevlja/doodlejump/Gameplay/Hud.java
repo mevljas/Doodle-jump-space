@@ -28,6 +28,10 @@ public class Hud extends Actor {
         super.draw(batch, parentAlpha);
         score.draw(batch, parentAlpha);
         lives.draw(batch, parentAlpha);
+        for (int i = 1; i <= Player.lives; i++) {
+            batch.draw(playerTexture, Constants.WIDTH * 0.11f + i * Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.965f, Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.04f);
+        }
+
     }
 
     @Override

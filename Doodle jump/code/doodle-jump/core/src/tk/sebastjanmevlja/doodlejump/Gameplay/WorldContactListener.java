@@ -48,6 +48,7 @@ public class WorldContactListener implements ContactListener {
 //                Break brown platform
                 ((Platform) objB).breakPlatform();
                 Sound.playJumpSound();
+                Player.incScore();
 
             }
         }
@@ -56,10 +57,13 @@ public class WorldContactListener implements ContactListener {
             if (objB instanceof Monster){
                 Monster m = (Monster) objB;
                 ignoreCollsion = true;
-                Sound.playMonsterSound();
                 if (m.getMonsterType() == MonsterType.UFO){
                     m.sprite.setRegion(MonsterFactory.alienUfoLight);
                     m.movePlayerCloser();
+                }
+                else {
+                    Player.decLives();
+                    Sound.playMonsterSound();
                 }
             }
 
