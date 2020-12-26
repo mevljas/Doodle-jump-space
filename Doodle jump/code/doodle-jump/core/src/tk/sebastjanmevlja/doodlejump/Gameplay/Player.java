@@ -80,7 +80,7 @@ public class Player extends Actor {
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
         shape.setAsBox(sprite.getWidth() / 4 / PPM, sprite.getHeight()
-                /2 / PPM);
+                * 0.33f / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
@@ -109,7 +109,7 @@ public class Player extends Actor {
         // Set the sprite's position from the updated physics body location
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
                         getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+                (body.getPosition().y * PPM) -sprite.getHeight() * 0.36f );
 
         if (sprite.getY() <= 0 && alive){
             Sound.playFallingSound();
