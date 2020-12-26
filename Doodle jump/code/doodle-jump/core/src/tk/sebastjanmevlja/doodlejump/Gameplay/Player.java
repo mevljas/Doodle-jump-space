@@ -25,6 +25,8 @@ enum HorizontalDirection {
 public class Player extends Actor {
 
     static Player player;
+    static int lives = 5;
+    static int score = 0;
 
     Sprite sprite;
     World world;

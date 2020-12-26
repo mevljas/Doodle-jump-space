@@ -1,0 +1,40 @@
+package tk.sebastjanmevlja.doodlejump.Gameplay;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
+public class Hud extends Actor {
+
+    private static TextureAtlas.AtlasRegion playerTexture = Asset.atlas.findRegion("player_left");
+
+    private Label score;
+    private Label lives;
+
+
+    public Hud() {
+        this.score = new Label("Score: ", Asset.skin);
+        this.lives = new Label("Lives: ", Asset.skin);
+        this.score.setBounds(Constants.WIDTH * 0.78f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.2f, Constants.HEIGHT * 0.2f);
+        this.lives.setBounds(Constants.WIDTH * 0.03f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.8f, Constants.HEIGHT * 0.2f);
+        score.setColor(Color.BLACK);
+        lives.setColor(Color.BLACK);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        score.draw(batch, parentAlpha);
+        lives.draw(batch, parentAlpha);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        score.setText("Score: " +  Player.score);
+    }
+
+
+}

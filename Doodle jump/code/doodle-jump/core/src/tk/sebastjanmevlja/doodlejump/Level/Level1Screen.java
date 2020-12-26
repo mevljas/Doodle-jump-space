@@ -33,9 +33,11 @@ public class Level1Screen implements Screen {
     private Stage stage;
     Group backgroundGroup = new Group();        // Group to be draw first
     Group middleGroup = new Group();
-    Group foregroundGroup = new Group();        // group to be draw last
+    Group foregroundGroup = new Group();
+    Group hudGroup = new Group();        // group to be draw last
     private Viewport viewport;
     private Player player;
+    private Hud hud;
     private TextureAtlas.AtlasRegion background;
     World world;
     private Input Input;
@@ -54,6 +56,7 @@ public class Level1Screen implements Screen {
         PlatformFactory.generatePlatforms(world);
         MonsterFactory.generateMonsters(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
+        hud = new Hud();
 
 //        Generate walls
         new Walls(world);
@@ -84,6 +87,7 @@ public class Level1Screen implements Screen {
         stage.addActor(backgroundGroup);
         stage.addActor(middleGroup);
         stage.addActor(foregroundGroup);
+        stage.addActor(hudGroup);
 
 
 
@@ -97,6 +101,7 @@ public class Level1Screen implements Screen {
 
 
         foregroundGroup.addActor(player);
+        hudGroup.addActor(hud);
 
         Sound.playStartSound();
 
