@@ -101,8 +101,8 @@ public class Monster extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() /2 / PPM, sprite.getHeight()
-                /2 / PPM);
+        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight()
+                * 0.4f / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
