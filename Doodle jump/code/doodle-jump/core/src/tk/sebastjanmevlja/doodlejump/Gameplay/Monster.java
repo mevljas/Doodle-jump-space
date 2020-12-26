@@ -10,6 +10,12 @@ import com.badlogic.gdx.utils.Array;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
+/*
+* TODO: Make a class for every monster type.
+*
+* */
+
+
 public class Monster extends Actor {
 
     Sprite sprite;
