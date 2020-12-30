@@ -19,6 +19,7 @@ public class Game extends com.badlogic.gdx.Game {
     private MenuScreen menuScreen;
     private Level1Screen level1Screen;
     private AboutScreen aboutScreen;
+    private EndScreen endScreen;
     public Asset assets;
 
     @Override
@@ -68,6 +69,11 @@ public class Game extends com.badlogic.gdx.Game {
                 if (aboutScreen == null)
                     aboutScreen = new AboutScreen(this);
                 setScreen(aboutScreen);
+                break;
+            case ENDSCREEN:
+                if (endScreen == null)
+                    endScreen = new EndScreen(this);
+                setScreen(endScreen);
                 break;
 
         }

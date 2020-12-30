@@ -247,7 +247,7 @@ public class Level1Screen implements Screen {
 
     private void checkGameState(){
         if (Player.getLives() <= 0){
-            game.changeScreen(Screens.MENUSCREEN);
+            game.changeScreen(Screens.ENDSCREEN);
         }
     }
 
