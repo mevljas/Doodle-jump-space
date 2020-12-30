@@ -107,16 +107,16 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        titleLabel = new Label("Preferences", skin, "big");
-        titleLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
-        volumeMusicLabel = new Label(" Music Volume", skin, "big");
-        volumeMusicLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
-        volumeSoundLabel = new Label(" Sound Volume", skin, "big");
-        volumeSoundLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
-        musicOnOffLabel = new Label(" Music", skin, "big");
-        musicOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
-        soundOnOffLabel = new Label(" Sound Effect", skin, "big");
-        soundOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        titleLabel = new Label("Preferences", skin, "title");
+//        titleLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        volumeMusicLabel = new Label(" Music Volume", skin, "default");
+//        volumeMusicLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        volumeSoundLabel = new Label(" Sound Volume", skin, "default");
+//        volumeSoundLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        musicOnOffLabel = new Label(" Music", skin, "default");
+//        musicOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        soundOnOffLabel = new Label(" Sound Effect", skin, "default");
+//        soundOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
 
 
         table.defaults().width(Value.percentWidth(.60F, table));

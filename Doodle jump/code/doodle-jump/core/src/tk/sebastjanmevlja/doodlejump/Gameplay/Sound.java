@@ -9,19 +9,19 @@ public class Sound {
 
 
     public static void changeMusicState() {
-        if (musicEnabled) {
-            if (!Asset.backgroundMusic.isPlaying()) {
-                Asset.backgroundMusic.play();
-                Asset.backgroundMusic.setLooping(true);
-                Asset.backgroundMusic.setVolume(musicVolume);
-
-            }
-        } else {
-            if (Asset.backgroundMusic.isPlaying()) {
-                Asset.backgroundMusic.stop();
-                Asset.backgroundMusic.setLooping(false);
-            }
-        }
+//        if (musicEnabled) {
+//            if (!Asset.backgroundMusic.isPlaying()) {
+//                Asset.backgroundMusic.play();
+//                Asset.backgroundMusic.setLooping(true);
+//                Asset.backgroundMusic.setVolume(musicVolume);
+//
+//            }
+//        } else {
+//            if (Asset.backgroundMusic.isPlaying()) {
+//                Asset.backgroundMusic.stop();
+//                Asset.backgroundMusic.setLooping(false);
+//            }
+//        }
     }
 
     public static void setMusicEnabled(boolean enabled) {

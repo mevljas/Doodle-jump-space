@@ -38,7 +38,7 @@ public class AboutScreen implements Screen {
 
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);
-        backButton.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+//        backButton.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -47,12 +47,12 @@ public class AboutScreen implements Screen {
             }
         });
 
-        Label titleLabel = new Label("About", skin, "big");
+        Label titleLabel = new Label("About", skin, "title");
         titleLabel.setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
-        Label versionLable = new Label("Version: 1.1.0", skin, "big");
-        versionLable.setFontScale(Constants.WIDTH / 900f, Constants.HEIGHT/ 900f);
-        Label authorLable = new Label("Author: Sebastjan Mevlja", skin, "big");
-        authorLable.setFontScale(Constants.WIDTH / 900f, Constants.HEIGHT/ 900f);
+        Label versionLable = new Label("Version: 0.5.0", skin, "default");
+//        versionLable.setFontScale(Constants.WIDTH / 900f, Constants.HEIGHT/ 900f);
+        Label authorLable = new Label("Author: Sebastjan Mevlja", skin, "default");
+//        authorLable.setFontScale(Constants.WIDTH / 900f, Constants.HEIGHT/ 900f);
 
 
         table.defaults().width(Value.percentWidth(.90F, table));

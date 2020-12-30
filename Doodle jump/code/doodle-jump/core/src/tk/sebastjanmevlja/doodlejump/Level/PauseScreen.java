@@ -17,13 +17,13 @@ import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
-public class EndScreen implements Screen{
+public class PauseScreen implements Screen{
 
     private Game game;
     private Stage stage;
 
 
-    public EndScreen(final Game game){
+    public PauseScreen(final Game game){
         this.game = game;
 
         /// create stage and set it as input processor
@@ -37,18 +37,16 @@ public class EndScreen implements Screen{
         //table.setDebug(true);
         stage.addActor(table);
 
-        Label titleLabel = new Label("Game over", skin, "title");
-        Label textLabel = new Label("Better luck next time!", skin, "default");
-//        titleLabel.setFontScale(Constants.WIDTH / 500f);
+        Label titleLabel = new Label("Pause", skin, "title");
         Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
 
         // return to main screen button
-        final TextButton retryButton = new TextButton("Retry", skin);
+        final TextButton retryButton = new TextButton("Continue", skin);
         retryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 //                Sound.changeMusicState();
-                EndScreen.this.game.changeScreen(Screens.LEVEL1SCREEN);
+                PauseScreen.this.game.changeScreen(Screens.LEVEL1SCREEN);
 
             }
         });
@@ -58,7 +56,7 @@ public class EndScreen implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 //                Sound.changeMusicState();
-                EndScreen.this.game.changeScreen(Screens.MENUSCREEN);
+                PauseScreen.this.game.changeScreen(Screens.MENUSCREEN);
 
             }
         });
@@ -70,7 +68,6 @@ public class EndScreen implements Screen{
 
         table.add(titleLabel).center().width(Value.percentWidth(.60F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
-        table.add(textLabel).center().width(Value.percentWidth(.60F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
         table.add(scoreLabel).center().width(Value.percentWidth(.25F, table));
         table.row().padTop(Value.percentWidth(.2F, table));

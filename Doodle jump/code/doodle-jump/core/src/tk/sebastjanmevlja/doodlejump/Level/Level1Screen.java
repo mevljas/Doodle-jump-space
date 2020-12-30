@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -46,6 +47,8 @@ public class Level1Screen implements Screen {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
+    public static Sprite pauseIcon;
+    public static Boolean paused;
 
 
     public Level1Screen(Game game) {
@@ -66,26 +69,26 @@ public class Level1Screen implements Screen {
 
         Input = new Input(player);
 
+
 //        Set contact listener
         world.setContactListener(new WorldContactListener(player));
+
 
 
 
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
 
-    }
+        pauseIcon = new Sprite(Asset.pauseTexture);
+        pauseIcon.setPosition(Constants.WIDTH * 0.05f, Constants.HEIGHT * 0.9f);
+        pauseIcon.setSize(Constants.WIDTH * 0.1f, Constants.WIDTH * 0.1f);
 
 
-
-
-    @Override
-    public void show() { //create, setup method
         camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
         stage = new Stage(viewport);
 
-        Gdx.input.setInputProcessor(Input);
+
 
         stage.addActor(backgroundGroup);
         stage.addActor(middleGroup);
@@ -105,10 +108,18 @@ public class Level1Screen implements Screen {
 
         foregroundGroup.addActor(player);
         hudGroup.addActor(hud);
+    }
+
+
+
+
+    @Override
+    public void show() { //create, setup method
+        Gdx.input.setInputProcessor(Input);
 
         Sound.playStartSound();
 
-
+        paused = false;
     }
 
 
@@ -178,16 +189,20 @@ public class Level1Screen implements Screen {
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
-        checkGameState();
-        camera.update();
-        updatePlatforms();
-        updateMonsters();
+        if (!paused){
+            checkGameState();
+            camera.update();
+            updatePlatforms();
+            updateMonsters();
 
 
-        // Advance the world, by the amount of time that has elapsed since the  last frame
-        // Generally in a real game, dont do this in the render loop, as you are  tying the physics
-        // update rate to the frame rate, and vice versa
-        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+            // Advance the world, by the amount of time that has elapsed since the  last frame
+            // Generally in a real game, dont do this in the render loop, as you are  tying the physics
+            // update rate to the frame rate, and vice versa
+            world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+            stage.act(Gdx.graphics.getDeltaTime());
+        }
+
 
 
 
@@ -200,10 +215,11 @@ public class Level1Screen implements Screen {
         debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(PPM,
                 PPM, 0);
 
-        stage.act(Gdx.graphics.getDeltaTime());
+
 
         stage.getBatch().begin();
         stage.getBatch().draw(background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        pauseIcon.draw(stage.getBatch());
         stage.getBatch().end();
 
 
@@ -226,6 +242,7 @@ public class Level1Screen implements Screen {
 
     @Override
     public void pause() {
+        paused = !paused;
 
     }
 

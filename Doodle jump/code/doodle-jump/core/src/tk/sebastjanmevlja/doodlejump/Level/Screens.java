@@ -6,5 +6,6 @@ public enum Screens {
     ABOUTSCREEN,
     MENUSCREEN,
     PREFERENCESSCREEN,
-    ENDSCREEN
+    ENDSCREEN,
+    PAUSESCREEN
 }

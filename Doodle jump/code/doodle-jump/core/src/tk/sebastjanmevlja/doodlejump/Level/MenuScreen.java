@@ -18,6 +18,8 @@ import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 public class MenuScreen implements Screen {
 
+//    TODO: font scaling
+
     private final Game game;
     private Stage stage;
     private Skin skin;
@@ -40,19 +42,19 @@ public class MenuScreen implements Screen {
         stage.addActor(table);
 
         table.defaults().width(Value.percentWidth(.70F, table));
-        table.defaults().height(Value.percentHeight(.15F, table));
+        table.defaults().height(Value.percentHeight(.1F, table));
 
 
         //create buttons
         TextButton newGame = new TextButton("New Game", skin);
-        newGame.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+//        newGame.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
 
         TextButton preferences = new TextButton("Preferences", skin);
-        preferences.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+//        preferences.getLabel().setFontScale(Constants.WIDTH * 0.005f);
         TextButton exit = new TextButton("Exit", skin);
-        exit.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+//        exit.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
         TextButton about = new TextButton("About", skin);
-        about.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+//        about.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
 
         //add buttons to table
         table.add(newGame);

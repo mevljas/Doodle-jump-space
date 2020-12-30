@@ -14,7 +14,8 @@ public class Asset {
     private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_jump.atlas", TextureAtlas.class);
     private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.jpg", Texture.class);
     private final AssetDescriptor<Texture> logoTextureDescriptor = new AssetDescriptor<>("images/logo.png", Texture.class);
-    private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/glassy-ui.json", Skin.class);
+    private final AssetDescriptor<Texture> pauseDescriptor = new AssetDescriptor<>("images/pause.png", Texture.class);
+    private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/flat-earth-ui.json", Skin.class);
 
     private final AssetDescriptor<Music> backgroundMusicDescriptor = new AssetDescriptor<>("sounds/backgroundMusic.mp3", Music.class);
     private final AssetDescriptor<Music> fallingSoundDescriptor = new AssetDescriptor<>("sounds/fallingSound.mp3", Music.class);
@@ -27,6 +28,7 @@ public class Asset {
 //    Assets
     public static Texture loadingBackgroundTexture;
     public static Texture logoTexture;
+    public static Texture pauseTexture;
     public static TextureAtlas atlas;
     public static Skin skin;
 
@@ -56,18 +58,21 @@ public class Asset {
         assetManager.load(monsterSoundDescriptor);
         assetManager.load(platformBreakingSoundDescriptor);
         assetManager.load(startSoundDescriptor);
+        assetManager.load(pauseDescriptor);
 
         assetManager.finishLoading();
 
         loadingBackgroundTexture = assetManager.get(backgroundImageDescriptor);
         logoTexture = assetManager.get(logoTextureDescriptor);
         skin = assetManager.get(skinDescriptor);
+        pauseTexture = assetManager.get(pauseDescriptor);
         backgroundMusic = assetManager.get(backgroundMusicDescriptor);
         fallingSound = assetManager.get(fallingSoundDescriptor);
         jumpSound = assetManager.get(jumpSoundDescriptor);
         monsterSound = assetManager.get(monsterSoundDescriptor);
         platformBreakingSound = assetManager.get(platformBreakingSoundDescriptor);
         startSound = assetManager.get(startSoundDescriptor);
+
     }
 
     public void loadAtlas(){

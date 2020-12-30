@@ -10,7 +10,7 @@ import tk.sebastjanmevlja.doodlejump.Level.*;
 public class Game extends com.badlogic.gdx.Game {
 
 
-    public static Game main;
+    public static Game game;
 
 
     private SpriteBatch batch;
@@ -20,12 +20,13 @@ public class Game extends com.badlogic.gdx.Game {
     private Level1Screen level1Screen;
     private AboutScreen aboutScreen;
     private EndScreen endScreen;
+    private PauseScreen pauseScreen;
     public Asset assets;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        main = this;
+        game = this;
         assets = new Asset();
         assets.loadGame();
 //        Gdx.input.setCatchBackKey(true); //back key doesnt the app close - deprecated
@@ -57,12 +58,15 @@ public class Game extends com.badlogic.gdx.Game {
                 setScreen(preferencesScreen);
                 break;
             case LEVEL1SCREEN:
-                if (level1Screen != null) {
+                if (level1Screen != null && !Level1Screen.paused) {
                     level1Screen.dispose();
                     level1Screen = null;
                 }
-
+                else  if (level1Screen == null){
                     level1Screen = new Level1Screen(this);
+                }
+
+
                 setScreen(level1Screen);
                 break;
             case ABOUTSCREEN:
@@ -74,6 +78,11 @@ public class Game extends com.badlogic.gdx.Game {
                 if (endScreen == null)
                     endScreen = new EndScreen(this);
                 setScreen(endScreen);
+                break;
+            case PAUSESCREEN:
+                if (pauseScreen == null)
+                    pauseScreen = new PauseScreen(this);
+                setScreen(pauseScreen);
                 break;
 
         }

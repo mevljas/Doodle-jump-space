@@ -1,6 +1,11 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.InputProcessor;
+import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
+import tk.sebastjanmevlja.doodlejump.Level.Screens;
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
+
+import static tk.sebastjanmevlja.doodlejump.Level.Level1Screen.pauseIcon;
 
 public class Input implements InputProcessor {
 
@@ -40,7 +45,13 @@ public class Input implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        player.jump();
+//        player.jump();
+        if(pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)){
+            Level1Screen.paused = true;
+            Game.game.changeScreen(Screens.PAUSESCREEN);
+        }
+
+
         return true;
     }
 

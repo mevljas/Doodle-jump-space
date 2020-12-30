@@ -17,6 +17,9 @@ public class WorldContactListener implements ContactListener {
         this.player = player;
     }
 
+//    TODO: implement filters
+//    https://gamefromscratch.com/libgdx-libgdx-tutorial-13-physics-with-box2d-part-4-controlling-collisions-using-filters/
+
     @Override
     public void beginContact(Contact contact) {
         Fixture fixA = contact.getFixtureA();
