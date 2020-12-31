@@ -62,7 +62,7 @@ public class Game extends com.badlogic.gdx.Game {
                     level1Screen.dispose();
                     level1Screen = null;
                 }
-                else  if (level1Screen == null){
+                if (level1Screen == null){
                     level1Screen = new Level1Screen(this);
                 }
 

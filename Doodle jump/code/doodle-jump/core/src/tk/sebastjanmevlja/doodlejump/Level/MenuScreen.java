@@ -76,6 +76,8 @@ public class MenuScreen implements Screen {
         newGame.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                if (Level1Screen.paused != null)
+                    Level1Screen.paused = false;
                 game.changeScreen(Screens.LEVEL1SCREEN);
             }
         });

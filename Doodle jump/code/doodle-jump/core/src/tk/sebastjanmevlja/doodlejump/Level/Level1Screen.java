@@ -219,11 +219,15 @@ public class Level1Screen implements Screen {
 
         stage.getBatch().begin();
         stage.getBatch().draw(background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
-        pauseIcon.draw(stage.getBatch());
         stage.getBatch().end();
 
 
         stage.draw();
+
+
+        stage.getBatch().begin();
+        pauseIcon.draw(stage.getBatch());
+        stage.getBatch().end();
 
 
         // Now render the physics world using our scaled down matrix
