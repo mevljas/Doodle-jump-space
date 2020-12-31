@@ -68,11 +68,11 @@ public class EndScreen implements Screen{
         table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).center().width(Value.percentWidth(.60F, table));
+        table.add(titleLabel).center().width(Value.percentWidth(.55F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
         table.add(textLabel).center().width(Value.percentWidth(.60F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
-        table.add(scoreLabel).center().width(Value.percentWidth(.25F, table));
+        table.add(scoreLabel).center().width(Value.percentWidth(.60F, table));
         table.row().padTop(Value.percentWidth(.2F, table));
         table.add(retryButton).center().width(Value.percentWidth(.50F, table));
         table.row().padTop(Value.percentWidth(.1F, table));

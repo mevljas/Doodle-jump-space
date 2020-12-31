@@ -58,7 +58,7 @@ public class AboutScreen implements Screen {
         table.defaults().width(Value.percentWidth(.90F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).center().width(Value.percentWidth(.40F, table));
+        table.add(titleLabel).center().width(Value.percentWidth(.30F, table));
         table.row().padTop(Value.percentHeight(.1F, table));
         table.add(new Image(Asset.logoTexture)).width(Value.percentWidth(.40F, table)).height(Value.percentWidth(.40F, table)).center();
         table.row().padTop(Value.percentHeight(.1F, table));

@@ -80,7 +80,7 @@ public class Level1Screen implements Screen {
         debugRenderer = new Box2DDebugRenderer();
 
         pauseIcon = new Sprite(Asset.pauseTexture);
-        pauseIcon.setPosition(Constants.WIDTH * 0.05f, Constants.HEIGHT * 0.9f);
+        pauseIcon.setPosition(Constants.WIDTH * 0.02f, Constants.HEIGHT * 0.91f);
         pauseIcon.setSize(Constants.WIDTH * 0.1f, Constants.WIDTH * 0.1f);
 
 
