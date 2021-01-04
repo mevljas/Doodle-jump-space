@@ -47,22 +47,29 @@ public class MenuScreen implements Screen {
 
         //create buttons
         TextButton newGame = new TextButton("New Game", skin);
-//        newGame.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
-
         TextButton preferences = new TextButton("Preferences", skin);
-//        preferences.getLabel().setFontScale(Constants.WIDTH * 0.005f);
         TextButton exit = new TextButton("Exit", skin);
-//        exit.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
         TextButton about = new TextButton("About", skin);
-//        about.getLabel().setFontScale(Constants.WIDTH / 600f, Constants.HEIGHT/ 900f);
+        TextButton.TextButtonStyle textButtonStyle =  newGame.getStyle();
+        textButtonStyle.font = Asset.fontMedium;
+        newGame.setStyle(textButtonStyle);
+
+
+        preferences.setStyle(textButtonStyle);
+
+
+        exit.setStyle(textButtonStyle);
+
+
+        about.setStyle(textButtonStyle);
 
         //add buttons to table
         table.add(newGame);
-        table.row().pad(80, 0, 0, 0);
+        table.row().padTop(Value.percentWidth(.10F, table));
         table.add(preferences);
-        table.row().pad(80, 0, 0, 0);
+        table.row().padTop(Value.percentWidth(.10F, table));
         table.add(about);
-        table.row().pad(80, 0, 0, 0);
+        table.row().padTop(Value.percentWidth(.10F, table));
         table.add(exit);
 
         // create button listeners

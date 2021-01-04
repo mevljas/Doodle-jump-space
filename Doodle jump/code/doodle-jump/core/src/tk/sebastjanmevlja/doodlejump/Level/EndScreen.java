@@ -39,11 +39,21 @@ public class EndScreen implements Screen{
 
         Label titleLabel = new Label("Game over", skin, "title");
         Label textLabel = new Label("Better luck next time!", skin, "default");
-//        titleLabel.setFontScale(Constants.WIDTH / 500f);
         Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
+        Label.LabelStyle labelStyleBig =  titleLabel.getStyle();
+        labelStyleBig.font = Asset.fontBig;
+        titleLabel.setStyle(labelStyleBig);
+
+        Label.LabelStyle labelStyleSmall =  textLabel.getStyle();
+        labelStyleSmall.font = Asset.fontSmall;
+        textLabel.setStyle(labelStyleSmall);
+        scoreLabel.setStyle(labelStyleSmall);
 
         // return to main screen button
         final TextButton retryButton = new TextButton("Retry", skin);
+        TextButton.TextButtonStyle buttonStyle =  retryButton.getStyle();
+        buttonStyle.font = Asset.fontMedium;
+        retryButton.setStyle(buttonStyle);
         retryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -54,6 +64,7 @@ public class EndScreen implements Screen{
         });
 
         final TextButton backButton = new TextButton("Menu", skin);
+        backButton.setStyle(buttonStyle);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -68,11 +79,11 @@ public class EndScreen implements Screen{
         table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).center().width(Value.percentWidth(.55F, table));
+        table.add(titleLabel).center().width(Value.percentWidth(.60F, table));
+        table.row().padTop(Value.percentWidth(.3F, table));
+        table.add(textLabel).center().width(Value.percentWidth(.80F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
-        table.add(textLabel).center().width(Value.percentWidth(.60F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
-        table.add(scoreLabel).center().width(Value.percentWidth(.60F, table));
+        table.add(scoreLabel).center().width(Value.percentWidth(.80F, table));
         table.row().padTop(Value.percentWidth(.2F, table));
         table.add(retryButton).center().width(Value.percentWidth(.50F, table));
         table.row().padTop(Value.percentWidth(.1F, table));

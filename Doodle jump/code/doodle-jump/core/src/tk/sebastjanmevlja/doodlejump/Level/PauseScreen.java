@@ -38,7 +38,14 @@ public class PauseScreen implements Screen{
         stage.addActor(table);
 
         Label titleLabel = new Label("Pause", skin, "title");
+        Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
+        labelStyleTitle.font = Asset.fontBig;
+        titleLabel.setStyle(labelStyleTitle);
+
         Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
+        Label.LabelStyle labelStyleText =  titleLabel.getStyle();
+        labelStyleTitle.font = Asset.fontSmall;
+        scoreLabel.setStyle(labelStyleText);
 
         // return to main screen button
         final TextButton retryButton = new TextButton("Continue", skin);
@@ -61,19 +68,23 @@ public class PauseScreen implements Screen{
             }
         });
 
+        TextButton.TextButtonStyle textButtonStyle =  retryButton.getStyle();
+        textButtonStyle.font = Asset.fontMedium;
+        retryButton.setStyle(textButtonStyle);
+        backButton.setStyle(textButtonStyle);
 
 
         table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
         table.add(titleLabel).center().width(Value.percentWidth(.40F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentWidth(.5F, table));
+
         table.add(scoreLabel).center().width(Value.percentWidth(.25F, table));
         table.row().padTop(Value.percentWidth(.2F, table));
-        table.add(retryButton).center().width(Value.percentWidth(.50F, table));
+        table.add(retryButton).center().width(Value.percentWidth(.70F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
-        table.add(backButton).center().width(Value.percentWidth(.50F, table));
+        table.add(backButton).center().width(Value.percentWidth(.70F, table));
     }
 
     @Override

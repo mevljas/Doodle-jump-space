@@ -98,7 +98,10 @@ public class PreferencesScreen implements Screen {
 
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);
-        backButton.getLabel().setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
+        TextButton.TextButtonStyle textButtonStyle =  backButton.getStyle();
+        textButtonStyle.font = Asset.fontMedium;
+        backButton.setStyle(textButtonStyle);
+
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -108,34 +111,39 @@ public class PreferencesScreen implements Screen {
         });
 
         titleLabel = new Label("Preferences", skin, "title");
-//        titleLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
         volumeMusicLabel = new Label(" Music Volume", skin, "default");
-//        volumeMusicLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
         volumeSoundLabel = new Label(" Sound Volume", skin, "default");
-//        volumeSoundLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
         musicOnOffLabel = new Label(" Music", skin, "default");
-//        musicOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
         soundOnOffLabel = new Label(" Sound Effect", skin, "default");
-//        soundOnOffLabel.setFontScale(Constants.WIDTH / 800f, Constants.HEIGHT/ 900f);
 
+        Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
+        labelStyleTitle.font = Asset.fontBig;
+        titleLabel.setStyle(labelStyleTitle);
 
-        table.defaults().width(Value.percentWidth(.60F, table));
-        table.defaults().height(Value.percentHeight(.10F, table));
+        Label.LabelStyle labelStyleText =  titleLabel.getStyle();
+        labelStyleText.font = Asset.fontSmall;
+        volumeMusicLabel.setStyle(labelStyleText);
+        volumeSoundLabel.setStyle(labelStyleText);
+        musicOnOffLabel.setStyle(labelStyleText);
+        soundOnOffLabel.setStyle(labelStyleText);
 
-        table.add(titleLabel).colspan(2).center();
-        table.row().pad(30, 0, 0, 10);
-        table.add(volumeMusicLabel).padLeft(Value.percentWidth(.05F, table));
-        table.add(volumeMusicSlider).width(Value.percentWidth(.35F, table)).right().padRight(Value.percentWidth(.05F, table));
-        table.row().pad(10, 0, 0, 10);
-        table.add(musicOnOffLabel).left().padLeft(Value.percentWidth(.05F, table));
-        table.add(musicCheckbox).left().width(50);
-        table.row().pad(10, 0, 0, 10);
-        table.add(volumeSoundLabel).left().padLeft(Value.percentWidth(.05F, table));
-        table.add(soundMusicSlider).width(Value.percentWidth(.35F, table)).right().padRight(Value.percentWidth(.05F, table));
-        table.row().pad(10, 0, 0, 10);
-        table.add(soundOnOffLabel).left().padLeft(Value.percentWidth(.05F, table));
-        table.add(soundEffectsCheckbox).left().width(50);
-        table.row().pad(50, 0, 0, 10);
+        table.defaults().width(Value.percentWidth(.5F, table));
+        table.defaults().height(Value.percentHeight(.1F, table));
+
+        table.add(titleLabel).colspan(2).center().padRight(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentWidth(.1F, table));
+        table.add(volumeMusicLabel).left();
+        table.add(volumeMusicSlider).right();
+        table.row().padTop(Value.percentWidth(.01F, table));
+        table.add(musicOnOffLabel).left();
+        table.add(musicCheckbox).right();
+        table.row().padTop(Value.percentWidth(.01F, table));
+        table.add(volumeSoundLabel).left();
+        table.add(soundMusicSlider).right();
+        table.row().padTop(Value.percentWidth(.01F, table));
+        table.add(soundOnOffLabel).left();
+        table.add(soundEffectsCheckbox).right();
+        table.row().padTop(Value.percentWidth(.1F, table));
 
         table.add(backButton).colspan(2);
     }

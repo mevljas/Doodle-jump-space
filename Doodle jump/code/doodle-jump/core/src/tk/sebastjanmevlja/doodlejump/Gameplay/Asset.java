@@ -1,10 +1,13 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class Asset {
@@ -23,6 +26,7 @@ public class Asset {
     private final AssetDescriptor<Music> monsterSoundDescriptor = new AssetDescriptor<>("sounds/monsterSound.mp3", Music.class);
     private final AssetDescriptor<Music> platformBreakingSoundDescriptor = new AssetDescriptor<>("sounds/platformBreakingSound.mp3", Music.class);
     private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
+//    private final AssetDescriptor<FreeType.Bitmap> fontDescriptor= new AssetDescriptor<>("fonts/al-seana.ttf", FreeType.Bitmap.class);
 
 
 //    Assets
@@ -40,6 +44,11 @@ public class Asset {
     public static Music platformBreakingSound;
     public static Music startSound;
 
+//    public static FreeType.Bitmap freeTypeFont;
+
+    public static BitmapFont fontSmall;
+    public static BitmapFont fontMedium;
+    public static BitmapFont fontBig;
 
 
     private final AssetManager assetManager = new AssetManager();
@@ -59,6 +68,7 @@ public class Asset {
         assetManager.load(platformBreakingSoundDescriptor);
         assetManager.load(startSoundDescriptor);
         assetManager.load(pauseDescriptor);
+//        assetManager.load(fontDescriptor);
 
         assetManager.finishLoading();
 
@@ -72,7 +82,26 @@ public class Asset {
         monsterSound = assetManager.get(monsterSoundDescriptor);
         platformBreakingSound = assetManager.get(platformBreakingSoundDescriptor);
         startSound = assetManager.get(startSoundDescriptor);
+//        freeTypeFont = assetManager.get(fontDescriptor);
 
+
+        initFonts();
+    }
+
+    private  void initFonts(){
+//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DoodleJump.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+        parameter.size = (int) (Constants.HEIGHT * 0.05);
+        fontSmall = generator.generateFont(parameter);
+
+        parameter.size = (int) (Constants.HEIGHT * 0.065);
+        fontMedium = generator.generateFont(parameter);
+
+        parameter.size = (int) (Constants.HEIGHT * 0.08);
+        fontBig = generator.generateFont(parameter);
+        generator.dispose();
     }
 
     public void loadAtlas(){
