@@ -166,8 +166,8 @@ public class Player extends Actor {
             else {
                 body.setLinearVelocity(0f,JUMP_VELOCITY);
             }
-            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.8f);
-            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.8f);
+            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.85f);
+            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.85f);
         }
 
     }

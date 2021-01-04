@@ -30,7 +30,7 @@ public class Platform extends Actor {
 
 //    Direction direction = Direction.STILL;
 
-    public static final float VELOCITY = 0.5f;
+    public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
 
 
 
