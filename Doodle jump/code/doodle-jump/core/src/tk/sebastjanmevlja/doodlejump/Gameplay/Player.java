@@ -35,8 +35,8 @@ public class Player extends Actor {
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
-    public static final float JUMP_VELOCITY = 4f;
-    public static final float HORIZONTAL_VELOCITY = 8f;
+    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0035f;
+    public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
 
     public static float WIDTH = Constants.WIDTH / 3.5f;
     public static float HEIGHT = Constants.HEIGHT / 8f;
@@ -161,13 +161,13 @@ public class Player extends Actor {
         if (verticalDirection != VerticalDirection.UP) {
             verticalDirection = VerticalDirection.UP;
             if (sprite.getY() > Constants.HEIGHT * 0.7){
-                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.7f);
+                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.6f);
             }
             else {
                 body.setLinearVelocity(0f,JUMP_VELOCITY);
             }
-            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.7f);
-            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.7f);
+            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.8f);
+            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.8f);
         }
 
     }
@@ -201,13 +201,19 @@ public class Player extends Actor {
     }
 
     public void moveLeft(){
-        body.applyForceToCenter(new Vector2(-HORIZONTAL_VELOCITY, 0), true);
+        body.setLinearVelocity(-HORIZONTAL_VELOCITY, body.getLinearVelocity().y);
         horizontalDirection = HorizontalDirection.LEFT;
     }
 
     public void moveRight(){
         body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
+        body.setLinearVelocity(HORIZONTAL_VELOCITY, body.getLinearVelocity().y);
         horizontalDirection = HorizontalDirection.RIGHT;
+    }
+
+
+    public void stopMovingHorizontally(){
+        body.setLinearVelocity(0, body.getLinearVelocity().y);
     }
 
     public static void incScore(){

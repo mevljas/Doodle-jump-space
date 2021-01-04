@@ -24,6 +24,10 @@ public class Monster extends Actor {
     PlatformColor platformColor;
     public static float WIDTH = Constants.WIDTH / 5f;
     public static float HEIGHT = Constants.HEIGHT / 8f;
+
+    private static float playerMovingScale = Constants.HEIGHT * 0.002f;
+    private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
+    private static float playerDetectingRange = Constants.HEIGHT * 0.006f;
 //    private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
@@ -152,19 +156,19 @@ public class Monster extends Actor {
     }
 
     private void checkPlayerDistance(){
-        if (monsterType != MonsterType.RED && body.getLinearVelocity().y == 0 && getPlayerDistance() < 7){
+        if (monsterType != MonsterType.RED && body.getLinearVelocity().y == 0 && getPlayerDistance() < playerDetectingRange){
             moveTowardsPlayer();
         }
     }
 
     private void moveTowardsPlayer(){
-        Vector2 vectDirection = Player.player.body.getPosition().sub(body.getPosition()).nor().scl(2);
+        Vector2 vectDirection = Player.player.body.getPosition().sub(body.getPosition()).nor().scl(monsterMovingScale);
         body.setLinearVelocity(vectDirection);
     }
 
 
     void movePlayerCloser(){
-        Vector2 vectDirection = body.getPosition().sub(Player.player.body.getPosition()).nor().scl(2.5f);
+        Vector2 vectDirection = body.getPosition().sub(Player.player.body.getPosition()).nor().scl(playerMovingScale);
         Player.player.body.setLinearVelocity(vectDirection);
     }
 

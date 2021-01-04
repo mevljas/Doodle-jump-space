@@ -35,7 +35,17 @@ public class Input implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-        return false;
+        switch (keycode) {
+            case com.badlogic.gdx.Input.Keys.LEFT:
+                player.moveLeft();
+                break;
+
+            case com.badlogic.gdx.Input.Keys.RIGHT:
+                player.moveRight();
+                break;
+
+        }
+        return true;
     }
 
     @Override
