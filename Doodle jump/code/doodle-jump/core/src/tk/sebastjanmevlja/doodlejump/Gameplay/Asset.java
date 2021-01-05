@@ -47,6 +47,7 @@ public class Asset {
 //    public static FreeType.Bitmap freeTypeFont;
 
     public static BitmapFont fontSmall;
+    public static BitmapFont fontHud;
     public static BitmapFont fontMedium;
     public static BitmapFont fontBig;
 
@@ -101,6 +102,9 @@ public class Asset {
 
         parameter.size = (int) (Constants.HEIGHT * 0.08);
         fontBig = generator.generateFont(parameter);
+
+        parameter.size = (int) (Constants.HEIGHT * 0.035);
+        fontHud = generator.generateFont(parameter);
         generator.dispose();
     }
 

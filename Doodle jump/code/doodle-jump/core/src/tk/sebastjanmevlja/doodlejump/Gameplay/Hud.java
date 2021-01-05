@@ -17,10 +17,14 @@ public class Hud extends Actor {
     public Hud() {
         this.score = new Label("Score: ", Asset.skin);
         this.lives = new Label("Lives: ", Asset.skin);
-        this.score.setBounds(Constants.WIDTH * 0.78f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.2f, Constants.HEIGHT * 0.2f);
+        this.score.setBounds(Constants.WIDTH * 0.7f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.2f, Constants.HEIGHT * 0.2f);
         this.lives.setBounds(Constants.WIDTH * 0.03f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.8f, Constants.HEIGHT * 0.2f);
         score.setColor(Color.BLACK);
         lives.setColor(Color.BLACK);
+        Label.LabelStyle labelStyle =  this.score.getStyle();
+        labelStyle.font = Asset.fontHud;
+        this.score.setStyle(labelStyle);
+        this.lives.setStyle(labelStyle);
     }
 
     @Override
@@ -29,7 +33,7 @@ public class Hud extends Actor {
         score.draw(batch, parentAlpha);
         lives.draw(batch, parentAlpha);
         for (int i = 1; i <= Player.lives; i++) {
-            batch.draw(playerTexture, Constants.WIDTH * 0.11f + i * Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.965f, Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.04f);
+            batch.draw(playerTexture, Constants.WIDTH * 0.14f + i * Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.965f, Constants.WIDTH * 0.06f, Constants.HEIGHT * 0.04f);
         }
 
     }
