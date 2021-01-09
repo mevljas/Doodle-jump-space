@@ -1,5 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
+import tk.sebastjanmevlja.doodlejump.MyGame.Game;
+
 public class Sound {
 
     public static boolean musicEnabled = true;
@@ -27,15 +29,18 @@ public class Sound {
     public static void setMusicEnabled(boolean enabled) {
         musicEnabled = enabled;
         changeMusicState();
+        Game.localStorage.setMusicEnabled(musicEnabled);
     }
 
     public static void changeMusicVolume(float volume) {
         musicVolume = volume;
         Asset.backgroundMusic.setVolume(musicVolume);
+        Game.localStorage.setMusicVolume(musicVolume);
     }
 
     public static void setSoundEnabled(boolean enabled) {
         soundEnabled = enabled;
+        Game.localStorage.setSoundEnabled(soundEnabled);
     }
 
     public static void changeSoundVolume(float volume) {
@@ -45,6 +50,7 @@ public class Sound {
         Asset.monsterSound.setVolume(volume);
         Asset.platformBreakingSound.setVolume(volume);
         Asset.startSound.setVolume(volume);
+        Game.localStorage.setSoundVolume(soundVolume);
     }
 
     public static void playFallingSound() {

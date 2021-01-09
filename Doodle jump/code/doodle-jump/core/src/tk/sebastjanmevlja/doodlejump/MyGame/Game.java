@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejump.Helpers.LocalStorage;
 import tk.sebastjanmevlja.doodlejump.Level.*;
 
 
@@ -22,6 +23,7 @@ public class Game extends com.badlogic.gdx.Game {
     private EndScreen endScreen;
     private PauseScreen pauseScreen;
     public Asset assets;
+    public static LocalStorage localStorage;
 
     @Override
     public void create() {
@@ -31,6 +33,7 @@ public class Game extends com.badlogic.gdx.Game {
         assets.loadGame();
 //        Gdx.input.setCatchBackKey(true); //back key doesnt the app close - deprecated
         Gdx.input.setCatchKey(Input.Keys.BACK, true);
+        localStorage = new LocalStorage();
 
 
 

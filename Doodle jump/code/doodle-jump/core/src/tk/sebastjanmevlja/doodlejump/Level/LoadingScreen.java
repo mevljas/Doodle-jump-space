@@ -39,6 +39,10 @@ public class LoadingScreen implements Screen {
         stage.addActor(progressBar);
         addAssets();
 
+        Sound.setMusicEnabled(Game.localStorage.getMusicEnabled());
+        Sound.setSoundEnabled(Game.localStorage.getSoundEnabled());
+        Sound.changeMusicVolume(Game.localStorage.getMusicVolume());
+        Sound.changeSoundVolume(Game.localStorage.getSoundVolume());
         Sound.changeMusicState();
     }
 

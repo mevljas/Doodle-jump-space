@@ -51,6 +51,7 @@ public class Level1Screen implements Screen {
     public static Boolean paused;
 
 
+
     public Level1Screen(Game game) {
         this.game = game;
         background = Asset.atlas.findRegion("background");
@@ -108,6 +109,7 @@ public class Level1Screen implements Screen {
 
         foregroundGroup.addActor(player);
         hudGroup.addActor(hud);
+
     }
 
 
@@ -268,6 +270,8 @@ public class Level1Screen implements Screen {
 
     private void checkGameState(){
         if (Player.getLives() <= 0){
+            if (Player.getScore() > Game.localStorage.getHighScore())
+                Game.localStorage.setHighScore(Player.getScore());
             game.changeScreen(Screens.ENDSCREEN);
         }
     }

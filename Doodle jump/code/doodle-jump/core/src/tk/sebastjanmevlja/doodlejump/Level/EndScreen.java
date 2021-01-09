@@ -21,6 +21,10 @@ public class EndScreen implements Screen{
 
     private Game game;
     private Stage stage;
+    private Label titleLabel;
+    private Label textLabel;
+    private Label scoreLabel;
+    private Label highScoreLabel;
 
 
     public EndScreen(final Game game){
@@ -37,9 +41,10 @@ public class EndScreen implements Screen{
         //table.setDebug(true);
         stage.addActor(table);
 
-        Label titleLabel = new Label("Game over", skin, "title");
-        Label textLabel = new Label("Better luck next time!", skin, "default");
-        Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
+        titleLabel = new Label("Game over", skin, "title");
+        textLabel = new Label("Better luck next time!", skin, "default");
+        scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
+        highScoreLabel = new Label("High score: " + Game.localStorage.getHighScore(), skin, "default");
         Label.LabelStyle labelStyleBig =  titleLabel.getStyle();
         labelStyleBig.font = Asset.fontBig;
         titleLabel.setStyle(labelStyleBig);
@@ -48,6 +53,7 @@ public class EndScreen implements Screen{
         labelStyleSmall.font = Asset.fontSmall;
         textLabel.setStyle(labelStyleSmall);
         scoreLabel.setStyle(labelStyleSmall);
+        highScoreLabel.setStyle(labelStyleSmall);
 
         // return to main screen button
         final TextButton retryButton = new TextButton("Retry", skin);
@@ -82,9 +88,11 @@ public class EndScreen implements Screen{
         table.add(titleLabel).center().width(Value.percentWidth(.60F, table));
         table.row().padTop(Value.percentWidth(.3F, table));
         table.add(textLabel).center().width(Value.percentWidth(.80F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentWidth(.05F, table));
         table.add(scoreLabel).center().width(Value.percentWidth(.80F, table));
-        table.row().padTop(Value.percentWidth(.2F, table));
+        table.row().padTop(Value.percentWidth(.025F, table));
+        table.add(highScoreLabel).center().width(Value.percentWidth(.80F, table));
+        table.row().padTop(Value.percentWidth(.15F, table));
         table.add(retryButton).center().width(Value.percentWidth(.50F, table));
         table.row().padTop(Value.percentWidth(.1F, table));
         table.add(backButton).center().width(Value.percentWidth(.50F, table));
@@ -93,6 +101,8 @@ public class EndScreen implements Screen{
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        scoreLabel.setText("Score: " + Player.getScore());
+        highScoreLabel.setText("High score: " + Game.localStorage.getHighScore());
     }
 
     @Override
