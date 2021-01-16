@@ -57,7 +57,7 @@ public class Level1Screen implements Screen {
         background = Asset.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
-        world = new World(new Vector2(0, -5), true);
+        world = new World(new Vector2(0, - Constants.HEIGHT * 0.0036f), true);
         platformFactory = new PlatformFactory();
         PlatformFactory.generatePlatforms(world);
         monsterFactory = new MonsterFactory();
