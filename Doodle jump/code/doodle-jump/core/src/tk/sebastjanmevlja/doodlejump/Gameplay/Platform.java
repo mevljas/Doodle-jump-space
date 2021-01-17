@@ -91,7 +91,7 @@ public class Platform extends Actor {
         }
         r = new Random();
 
-        if (r.nextInt(10) > 3){
+        if (r.nextInt(15) > 13){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
         }
 

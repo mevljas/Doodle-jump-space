@@ -119,7 +119,7 @@ public class Monster extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.MONSTER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.WALLS_BIT;
+        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT |  Constants.WALLS_BIT ;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -145,10 +145,13 @@ public class Monster extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        checkPlayerDistance();
-        updatePos();
-        checkWallColision();
-        updateAnimations();
+        if (this.alive){
+            checkPlayerDistance();
+            updatePos();
+            checkWallColision();
+            updateAnimations();
+        }
+
     }
 
     private void checkWallColision() {
@@ -188,15 +191,18 @@ public class Monster extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
-            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
-            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        if (this.alive){
+            if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
+                TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+                batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 
 
+            }
+            else {
+                sprite.draw(batch);
+            }
         }
-        else {
-            sprite.draw(batch);
-        }
+
 
     }
 
@@ -227,5 +233,9 @@ public class Monster extends Actor {
 
     public void changeDirection(){
         body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+    }
+
+    public void kill() {
+        this.alive = false;
     }
 }

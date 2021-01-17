@@ -60,6 +60,9 @@ public class Input implements InputProcessor {
             Level1Screen.paused = true;
             Game.game.changeScreen(Screens.PAUSESCREEN);
         }
+        else {
+            player.createBullet(screenX, screenY);
+        }
 
 
         return true;

@@ -169,7 +169,7 @@ public class Level1Screen implements Screen {
         {
             Vector3 windowCoordinates = new Vector3(0, monster.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + monster.getSprite().getHeight() < 0){
+            if(windowCoordinates.y + monster.getSprite().getHeight() < 0 || !monster.isAlive()){
                 removeMonsters.add(monster);
             }
 
@@ -193,6 +193,21 @@ public class Level1Screen implements Screen {
         }
     }
 
+    private void updateBullets(){
+        ArrayList<Bullet> removedBullets = new ArrayList<>();
+        for (Bullet b: Player.bullets) {
+            if (!b.alive){
+                removedBullets.add(b);
+            }
+        }
+
+        for (Bullet b: removedBullets) {
+            player.removeBullet(b);
+            b.addAction(Actions.removeActor());
+            world.destroyBody(b.getBody());
+        }
+    }
+
 
 
     @Override
@@ -202,6 +217,7 @@ public class Level1Screen implements Screen {
             camera.update();
             updatePlatforms();
             updateMonsters();
+            updateBullets();
 
 
             // Advance the world, by the amount of time that has elapsed since the  last frame

@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.ArrayList;
+
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
@@ -48,6 +50,7 @@ public class Player extends Actor {
     private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
     private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
     private boolean rotating = false;
+    public static ArrayList<Bullet> bullets;
 
 
     public Player( World world, float x, float y) {
@@ -99,6 +102,8 @@ public class Player extends Actor {
         lives = 5;
         score = 0;
 
+        bullets = new ArrayList<>();
+
     }
 
     public Vector2 getBodyPosition(){
@@ -121,6 +126,8 @@ public class Player extends Actor {
             lives = 0;
         }
     }
+
+
 
     void updateSprite(){
         if (verticalDirection == VerticalDirection.UP){
@@ -152,7 +159,21 @@ public class Player extends Actor {
         checkState();
         updateSprite();
         rotate();
+        updateBullets(delta);
 
+    }
+
+
+    private void updateBullets(float delta){
+        for (Bullet b: bullets) {
+            b.updatePos();
+        }
+    }
+
+    private void drawBullets(Batch batch, float parentAlpha){
+        for (Bullet b: bullets) {
+            b.draw(batch, parentAlpha);
+        }
     }
 
     private void rotate(){
@@ -167,6 +188,7 @@ public class Player extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
+        drawBullets(batch, parentAlpha);
     }
 
     public void jump(){
@@ -182,6 +204,7 @@ public class Player extends Actor {
             }
             PlatformFactory.moveWorld(JUMP_VELOCITY * 0.85f);
             MonsterFactory.moveWorld(JUMP_VELOCITY * 0.85f);
+            moveWorld(JUMP_VELOCITY * 0.85f);
         }
 
     }
@@ -197,9 +220,19 @@ public class Player extends Actor {
             }
             PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
             MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
+            moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
             this.rotating = true;
         }
     }
+
+    public static void moveWorld(float velocity){
+
+        for (Bullet b: bullets) {
+            b.body.setLinearVelocity(b.body.getLinearVelocity().x,-velocity * 1.8f);
+        }
+    }
+
+
 
 
     void checkState(){
@@ -260,6 +293,14 @@ public class Player extends Actor {
 
     public static int getScore() {
         return score;
+    }
+
+    public void createBullet(int xt, int yt){
+        bullets.add(new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt));
+    }
+
+    public void removeBullet(Bullet bullet){
+        bullets.remove(bullet);
     }
 
 

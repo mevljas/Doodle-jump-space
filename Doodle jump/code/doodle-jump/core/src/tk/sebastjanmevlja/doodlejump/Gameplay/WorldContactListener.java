@@ -11,6 +11,7 @@ public class WorldContactListener implements ContactListener {
     private Player player;
     private Platform platform;
     private Monster monster;
+    private Bullet bullet;
     private Trampoline trampoline;
     private boolean ignoreCollsion = true;
 
@@ -18,18 +19,16 @@ public class WorldContactListener implements ContactListener {
         this.player = player;
     }
 
-//    TODO: implement filters
-//    https://gamefromscratch.com/libgdx-libgdx-tutorial-13-physics-with-box2d-part-4-controlling-collisions-using-filters/
 
     @Override
     public void beginContact(Contact contact) {
+;
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
         jump = false;
         ignoreCollsion = false;
         jumpTrampoline = false;
-
 
 
         if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Platform) ||
@@ -81,6 +80,20 @@ public class WorldContactListener implements ContactListener {
             }
 
         }
+
+        else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof  Monster) ||
+                (fixA.getUserData() instanceof Monster && fixB.getUserData() instanceof  Bullet)){
+            bullet = (Bullet) (fixA.getUserData() instanceof Bullet ? fixA.getUserData() : fixB.getUserData());
+            monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
+            monster.kill();
+            bullet.deactivate();
+
+        }
+
+
+
+
+
 
 
 
