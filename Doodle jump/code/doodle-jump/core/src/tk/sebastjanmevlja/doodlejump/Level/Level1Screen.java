@@ -132,7 +132,7 @@ public class Level1Screen implements Screen {
         {
             Vector3 windowCoordinates = new Vector3(0, platform.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + platform.getSprite().getHeight() < 0){
+            if(windowCoordinates.y + platform.getSprite().getHeight() < 0 || !platform.isAlive()){
                 removePlatforms.add(platform);
             }
 

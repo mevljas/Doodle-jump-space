@@ -116,7 +116,7 @@ public class PlatformFactory {
 
 
     public static void removePlatform(Platform p){
-        platforms.removeFirst();
+        platforms.remove(p);
     }
 
 

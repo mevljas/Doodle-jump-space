@@ -6,11 +6,10 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 public class WorldContactListener implements ContactListener {
 
-    private boolean movingOut;
     private boolean jump;
     private Player player;
     private Platform platform;
-    private static int test = 0;
+    private Monster monster;
     private boolean ignoreCollsion = true;
 
     public WorldContactListener(Player player) {
@@ -25,49 +24,41 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        movingOut = false;
         jump = false;
         ignoreCollsion = false;
 
-        Object objA = fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData();
-        Object objB = fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData();
 
 
-        if (objA instanceof Player && objB instanceof Platform){
-            if (!((Platform) objB).isAlive()){
+        if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Platform) ||
+                (fixA.getUserData() instanceof Platform && fixB.getUserData() instanceof  Player)){
+            player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+            platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
+
+            if ((player.getBodyPosition().y + (player.sprite.getHeight() / PPM / 2 ) )  < platform.getBodyPosition().y  ) {
                 ignoreCollsion = true;
-            }
-            player = (Player) objA;
-            platform = (Platform) objB;
-
-            if (player.getBodyPosition().y  < platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2)  ) {
-                movingOut = true;
-                jump = false;
 
             }
-            else if (player.getBodyPosition().y  > platform.getBodyPosition().y +  (platform.sprite.getHeight() / PPM / 2)   ) {
-                movingOut = false;
+            else if (player.getBodyPosition().y   > platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2 ) ) {
                 jump = true;
 //                Break brown platform
-                ((Platform) objB).breakPlatform();
+                platform.breakPlatform();
                 Sound.playJumpSound();
                 Player.incScore();
 
             }
         }
-        else if (objA instanceof Player){
-            objB = fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData();
-            if (objB instanceof Monster){
-                Monster m = (Monster) objB;
-                ignoreCollsion = true;
-                if (m.getMonsterType() == MonsterType.UFO){
-                    m.sprite.setRegion(MonsterFactory.alienUfoLight);
-                    m.movePlayerCloser();
-                }
-                else {
-                    Player.decLives();
-                    Sound.playMonsterSound();
-                }
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Monster) ||
+                (fixA.getUserData() instanceof Monster && fixB.getUserData() instanceof  Player)){
+            player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+            monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
+            ignoreCollsion = true;
+            if (monster.getMonsterType() == MonsterType.UFO){
+                monster.sprite.setRegion(MonsterFactory.alienUfoLight);
+                monster.movePlayerCloser();
+            }
+            else {
+                Player.decLives();
+                Sound.playMonsterSound();
             }
 
         }
@@ -85,7 +76,7 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
-        if (movingOut || ignoreCollsion){
+        if (ignoreCollsion){
             contact.setEnabled(false);
         }
         else if (jump){

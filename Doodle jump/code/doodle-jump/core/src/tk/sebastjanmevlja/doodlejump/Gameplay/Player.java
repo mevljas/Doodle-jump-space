@@ -85,6 +85,8 @@ public class Player extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);

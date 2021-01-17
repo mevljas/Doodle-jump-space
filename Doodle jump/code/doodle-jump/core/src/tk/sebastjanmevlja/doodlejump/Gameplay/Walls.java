@@ -27,6 +27,9 @@ public class Walls {
         Body bodyEdgeScreen = world.createBody(bodyDef);
         Fixture f = bodyEdgeScreen.createFixture(fixtureDef);
         f.setUserData(this);
+        fixtureDef.filter.categoryBits = Constants.WALLS_BIT;
+        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.MONSTER_BIT | Constants.PLATFORM_BIT;
+        fixtureDef.isSensor = true;
 
 
         //        Right wall
@@ -43,6 +46,9 @@ public class Walls {
         bodyEdgeScreen = world.createBody(bodyDef);
         f = bodyEdgeScreen.createFixture(fixtureDef);
         f.setUserData(this);
+        fixtureDef.filter.categoryBits = Constants.WALLS_BIT;
+        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.MONSTER_BIT | Constants.PLATFORM_BIT;
+        fixtureDef.isSensor = true;
 
         //        Bottom wall - sensor
 
@@ -55,11 +61,14 @@ public class Walls {
         edgeShape.set(0,0,width,0);
         fixtureDef.shape = edgeShape;
 //         object will no longer cause a reaction when collided with, except whatever you provide in code.
-        fixtureDef.isSensor = true;
+
 
         bodyEdgeScreen = world.createBody(bodyDef);
         f = bodyEdgeScreen.createFixture(fixtureDef);
         f.setUserData(this);
+//        fixtureDef.filter.categoryBits = Constants.WALLS_BIT;
+//        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.MONSTER_BIT;
+//        fixtureDef.isSensor = true;
 
 
 
