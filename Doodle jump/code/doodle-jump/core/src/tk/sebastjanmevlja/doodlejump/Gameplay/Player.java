@@ -47,6 +47,7 @@ public class Player extends Actor {
     private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("player_right_jump");
     private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
     private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
+    private boolean rotating = false;
 
 
     public Player( World world, float x, float y) {
@@ -150,7 +151,17 @@ public class Player extends Actor {
         updatePos();
         checkState();
         updateSprite();
+        rotate();
 
+    }
+
+    private void rotate(){
+        if (this.rotating){
+            sprite.setRotation((sprite.getRotation() + 5) % 360);
+            if (sprite.getRotation() == 0){
+                this.rotating = false;
+            }
+        }
     }
 
     @Override
@@ -186,6 +197,7 @@ public class Player extends Actor {
             }
             PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
             MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
+            this.rotating = true;
         }
     }
 

@@ -91,11 +91,9 @@ public class Trampoline extends Actor {
 
     private void updateAnimations(){
         if (this.playerJumping){
-            System.out.println("jumping");
             this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
             if (this.runningAnimation.isAnimationFinished(this.stateTime)){
                 this.playerJumping = false;
-                System.out.println("finished");
             }
         }
 
