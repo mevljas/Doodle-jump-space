@@ -141,6 +141,12 @@ public class Level1Screen implements Screen {
             removePlatform(p);
             p.addAction(Actions.removeActor());
             world.destroyBody(p.getBody());
+
+            Trampoline t = p.getTrampoline();
+            if (t != null) {
+                world.destroyBody(t.getBody());
+            }
+
         }
 
         if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){

@@ -12,6 +12,7 @@ public class Constants {
     public static final short PLAYER_BIT = 0x0002;
     public static final short MONSTER_BIT = 0x0004;
     public static final short WALLS_BIT = 0x0008;
+    public static final short TRAMPOLINE_BIT = 0x0010;
 
 
 }

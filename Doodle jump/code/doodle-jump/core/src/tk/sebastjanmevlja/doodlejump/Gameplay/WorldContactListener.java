@@ -7,9 +7,11 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 public class WorldContactListener implements ContactListener {
 
     private boolean jump;
+    private boolean jumpTrampoline;
     private Player player;
     private Platform platform;
     private Monster monster;
+    private Trampoline trampoline;
     private boolean ignoreCollsion = true;
 
     public WorldContactListener(Player player) {
@@ -26,6 +28,7 @@ public class WorldContactListener implements ContactListener {
 
         jump = false;
         ignoreCollsion = false;
+        jumpTrampoline = false;
 
 
 
@@ -34,7 +37,7 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
 
-            if ((player.getBodyPosition().y + (player.sprite.getHeight() / PPM / 2 ) )  < platform.getBodyPosition().y  ) {
+            if (player.getBodyPosition().y  < platform.getBodyPosition().y  ) {
                 ignoreCollsion = true;
 
             }
@@ -42,6 +45,22 @@ public class WorldContactListener implements ContactListener {
                 jump = true;
 //                Break brown platform
                 platform.breakPlatform();
+                Sound.playJumpSound();
+                Player.incScore();
+
+            }
+        }
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Trampoline) ||
+                (fixA.getUserData() instanceof Trampoline && fixB.getUserData() instanceof  Player)){
+            player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+            trampoline = (Trampoline) (fixA.getUserData() instanceof Trampoline ? fixA.getUserData() : fixB.getUserData());
+
+            if (player.getBodyPosition().y   < trampoline.getBodyPosition().y  ) {
+                ignoreCollsion = true;
+
+            }
+            else if (player.getBodyPosition().y   > trampoline.getBodyPosition().y + (trampoline.sprite.getHeight() / PPM / 2 ) ) {
+                jumpTrampoline = true;
                 Sound.playJumpSound();
                 Player.incScore();
 
@@ -81,6 +100,10 @@ public class WorldContactListener implements ContactListener {
         }
         else if (jump){
             player.jump();
+        }
+        else if (jumpTrampoline){
+            trampoline.playerJump();
+            player.jumpTrampoline();
         }
     }
 

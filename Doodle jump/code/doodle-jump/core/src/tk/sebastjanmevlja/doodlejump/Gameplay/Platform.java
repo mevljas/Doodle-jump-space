@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import java.util.Random;
+
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
@@ -24,6 +26,7 @@ public class Platform extends Actor {
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
     private PlatformType platformType;
+    private static Random r;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;
@@ -31,6 +34,7 @@ public class Platform extends Actor {
 //    Direction direction = Direction.STILL;
 
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
+    Trampoline trampoline;
 
 
 
@@ -69,7 +73,7 @@ public class Platform extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLATFORM_BIT;
-        fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
+        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.WALLS_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -85,6 +89,13 @@ public class Platform extends Actor {
         if (platformType == PlatformType.MOVING){
             body.setLinearVelocity(VELOCITY, 0);
         }
+        r = new Random();
+
+        if (r.nextInt(10) > 3){
+            this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
+        }
+
+
     }
 
     public void updatePos(){
@@ -92,6 +103,19 @@ public class Platform extends Actor {
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+
+        if (trampoline != null){
+            trampoline.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
+        }
+
+    }
+
+    float calculateTrampolinePositionX(){
+        return sprite.getX() + PLATFORM_WIDTH / 2 -  Trampoline.TRAMPOLINE_WIDTH / 2;
+    }
+
+    float calculateTrampolinePositionY(){
+        return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
     }
 
 
@@ -128,6 +152,10 @@ public class Platform extends Actor {
 
         if (!broken){
             sprite.draw(batch);
+            if (trampoline != null){
+                trampoline.draw(batch, parentAlpha);
+            }
+
         }
         else if (alive){
             // Get current frame of animation for the current stateTime
@@ -175,5 +203,9 @@ public class Platform extends Actor {
 
     public void changeDirection(){
         body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+    }
+
+    public Trampoline getTrampoline() {
+        return trampoline;
     }
 }

@@ -36,6 +36,7 @@ public class Player extends Actor {
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
     public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0035f;
+    public static final float JUMP_VELOCITY_TRAMPOLINE = Constants.HEIGHT * 0.004f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
 
     public static float WIDTH = Constants.WIDTH / 3.5f;
@@ -86,7 +87,7 @@ public class Player extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.WALLS_BIT | Constants.TRAMPOLINE_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -174,6 +175,20 @@ public class Player extends Actor {
 
     }
 
+    public void jumpTrampoline() {
+        if (verticalDirection != VerticalDirection.UP) {
+            verticalDirection = VerticalDirection.UP;
+            if (sprite.getY() > Constants.HEIGHT * 0.7){
+                body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE * 0.6f);
+            }
+            else {
+                body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE);
+            }
+            PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
+            MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.85f);
+        }
+    }
+
 
     void checkState(){
 //        if (body.getLinearVelocity().y > 0){
@@ -234,6 +249,7 @@ public class Player extends Actor {
     public static int getScore() {
         return score;
     }
+
 
 
 }
