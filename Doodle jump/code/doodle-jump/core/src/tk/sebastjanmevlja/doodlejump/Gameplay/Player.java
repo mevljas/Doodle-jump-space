@@ -1,5 +1,6 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -43,6 +44,7 @@ public class Player extends Actor {
 
     public static float WIDTH = Constants.WIDTH / 3.5f;
     public static float HEIGHT = Constants.HEIGHT / 8f;
+    private static float accelerometerSensitivity = 0.8f;
 
     private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
     private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("player_left_jump");
@@ -127,6 +129,17 @@ public class Player extends Actor {
         }
     }
 
+    private void checkAccelerometer(){
+        float accelX = Gdx.input.getAccelerometerX();
+        System.out.println(accelX);
+        if (accelX > accelerometerSensitivity){
+            this.moveLeft();
+        }
+        else if (accelX < -accelerometerSensitivity){
+            this.moveRight();
+        }
+    }
+
 
 
     void updateSprite(){
@@ -155,6 +168,7 @@ public class Player extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        checkAccelerometer();
         updatePos();
         checkState();
         updateSprite();

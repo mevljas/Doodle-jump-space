@@ -12,6 +12,7 @@ public class AndroidLauncher extends AndroidApplication {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 		config.useWakelock = true; //screen stays on
+		config.useAccelerometer = true;
 		initialize(new Game(), config);
 	}
 }
