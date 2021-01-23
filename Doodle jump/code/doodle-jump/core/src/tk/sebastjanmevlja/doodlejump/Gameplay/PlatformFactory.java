@@ -29,8 +29,8 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacing = Constants.HEIGHT * 0.22f;
-        minSpacing = Constants.HEIGHT * 0.22f;
+        maxSpacing = Constants.HEIGHT * 0.3f;
+        minSpacing = Constants.HEIGHT * 0.2f;
         r = new Random();
     }
 

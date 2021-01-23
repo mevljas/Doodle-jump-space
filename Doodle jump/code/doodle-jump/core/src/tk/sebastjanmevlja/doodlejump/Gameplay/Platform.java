@@ -35,6 +35,7 @@ public class Platform extends Actor {
 
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
     Trampoline trampoline;
+    Shield shield;
 
 
 
@@ -94,6 +95,9 @@ public class Platform extends Actor {
         if (r.nextInt(15) > 13){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
         }
+        else if (r.nextInt(15) > 10){
+            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
+        }
 
 
     }
@@ -108,6 +112,10 @@ public class Platform extends Actor {
             trampoline.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
         }
 
+        if (shield != null){
+            shield.updatePos(calculateShieldPositionX(),calculateShieldPositionY());
+        }
+
     }
 
     float calculateTrampolinePositionX(){
@@ -115,6 +123,14 @@ public class Platform extends Actor {
     }
 
     float calculateTrampolinePositionY(){
+        return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
+    }
+
+    float calculateShieldPositionX(){
+        return sprite.getX() + PLATFORM_WIDTH / 2 -  Shield.SHIELD_WIDTH / 2;
+    }
+
+    float calculateShieldPositionY(){
         return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
     }
 
@@ -154,6 +170,9 @@ public class Platform extends Actor {
             sprite.draw(batch);
             if (trampoline != null){
                 trampoline.draw(batch, parentAlpha);
+            }
+            if (shield != null){
+                shield.draw(batch, parentAlpha);
             }
 
         }
@@ -207,5 +226,13 @@ public class Platform extends Actor {
 
     public Trampoline getTrampoline() {
         return trampoline;
+    }
+    public Shield getShield() {
+        return shield;
+    }
+
+
+    public void removeShield(){
+        this.shield = null;
     }
 }

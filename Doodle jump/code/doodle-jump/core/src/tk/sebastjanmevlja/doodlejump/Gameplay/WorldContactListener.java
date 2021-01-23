@@ -13,6 +13,7 @@ public class WorldContactListener implements ContactListener {
     private Monster monster;
     private Bullet bullet;
     private Trampoline trampoline;
+    private Shield shield;
     private boolean ignoreCollsion = true;
 
     public WorldContactListener(Player player) {
@@ -70,6 +71,9 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
             ignoreCollsion = true;
+            if (player.isImunity()){
+                return;
+            }
             if (monster.getMonsterType() == MonsterType.UFO){
                 monster.sprite.setRegion(MonsterFactory.alienUfoLight);
                 monster.movePlayerCloser();
@@ -87,6 +91,20 @@ public class WorldContactListener implements ContactListener {
             monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
             monster.kill();
             bullet.deactivate();
+
+        }
+
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Shield) ||
+                (fixA.getUserData() instanceof Shield && fixB.getUserData() instanceof  Player)){
+            ignoreCollsion = true;
+            shield = (Shield) (fixA.getUserData() instanceof Shield ? fixA.getUserData() : fixB.getUserData());
+            player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+            if (shield == player.getshield()){
+                return;
+            }
+            player.removeShield();
+            player.equipShield(shield);
+            shield.parentPlatform.removeShield();
 
         }
 

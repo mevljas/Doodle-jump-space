@@ -14,6 +14,7 @@ public class Constants {
     public static final short WALLS_BIT = 8;
     public static final short TRAMPOLINE_BIT = 16;
     public static final short BULLET_BIT = 32;
+    public static final short SHIELD_BIT = 64;
 
 
 }

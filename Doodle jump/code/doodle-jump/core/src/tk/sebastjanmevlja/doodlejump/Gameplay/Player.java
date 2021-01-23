@@ -30,6 +30,7 @@ public class Player extends Actor {
     static Player player;
     static int lives;
     static int score;
+    public static ArrayList<Shield> removedShields = new ArrayList<>();
 
     Sprite sprite;
     World world;
@@ -53,6 +54,8 @@ public class Player extends Actor {
     private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
     private boolean rotating = false;
     public static ArrayList<Bullet> bullets;
+    private Shield shield;
+    private boolean imunity = false;
 
 
     public Player( World world, float x, float y) {
@@ -93,7 +96,7 @@ public class Player extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.WALLS_BIT | Constants.TRAMPOLINE_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.WALLS_BIT | Constants.TRAMPOLINE_BIT | Constants.SHIELD_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -127,11 +130,14 @@ public class Player extends Actor {
             Sound.playFallingSound();
             lives = 0;
         }
+
+        if (shield != null){
+            shield.updatePos(calculateShieldPositionX(shield),calculateShieldPositionY(shield));
+        }
     }
 
     private void checkAccelerometer(){
         float accelX = Gdx.input.getAccelerometerX();
-        System.out.println(accelX);
         if (accelX > accelerometerSensitivity){
             this.moveLeft();
         }
@@ -139,6 +145,15 @@ public class Player extends Actor {
             this.moveRight();
         }
     }
+
+    float calculateShieldPositionX(Shield shield){
+        return sprite.getX() + sprite.getWidth() / 2 -  shield.sprite.getWidth() / 2;
+    }
+
+    float calculateShieldPositionY(Shield shield){
+        return sprite.getY() + HEIGHT / 2 -  shield.sprite.getHeight() * 0.6f;
+    }
+
 
 
 
@@ -203,6 +218,9 @@ public class Player extends Actor {
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
         drawBullets(batch, parentAlpha);
+        if (shield != null){
+            shield.draw(batch, parentAlpha);
+        }
     }
 
     public void jump(){
@@ -317,6 +335,37 @@ public class Player extends Actor {
         bullets.remove(bullet);
     }
 
+    public void equipShield( Shield shield){
+        this.shield = shield;
+        shield.sprite.setSize(shield.sprite.getWidth() * 2f, shield.sprite.getHeight() * 2f);
+        this.imunity = true;
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        removeShield();
+                    }
+                },
+                2000
+        );
+    }
+
+    public void removeShield(){
+        if (this.shield != null){
+            removedShields.add(shield);
+            this.shield = null;
+            this.imunity = false;
+        }
+
+    }
 
 
+    public Shield getshield() {
+        return this.shield;
+    }
+
+    public boolean isImunity() {
+        return imunity;
+    }
 }

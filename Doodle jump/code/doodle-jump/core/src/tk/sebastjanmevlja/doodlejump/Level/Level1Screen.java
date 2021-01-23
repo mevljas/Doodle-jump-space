@@ -147,6 +147,11 @@ public class Level1Screen implements Screen {
                 world.destroyBody(t.getBody());
             }
 
+            Shield s = p.getShield();
+            if (s != null) {
+                world.destroyBody(s.getBody());
+            }
+
         }
 
         if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
@@ -208,6 +213,14 @@ public class Level1Screen implements Screen {
         }
     }
 
+    private void removeShields(){
+        for (Shield s: Player.removedShields) {
+            s.addAction(Actions.removeActor());
+            world.destroyBody(s.getBody());
+        }
+        Player.removedShields.clear();
+    }
+
 
 
     @Override
@@ -218,6 +231,7 @@ public class Level1Screen implements Screen {
             updatePlatforms();
             updateMonsters();
             updateBullets();
+            removeShields();
 
 
             // Advance the world, by the amount of time that has elapsed since the  last frame
