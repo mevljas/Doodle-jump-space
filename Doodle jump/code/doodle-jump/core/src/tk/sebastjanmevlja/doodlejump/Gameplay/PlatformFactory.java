@@ -29,7 +29,7 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacing = Constants.HEIGHT * 0.3f;
+        maxSpacing = Constants.HEIGHT * 0.26f;
         minSpacing = Constants.HEIGHT * 0.2f;
         r = new Random();
     }
@@ -42,7 +42,7 @@ public class PlatformFactory {
             y = minSpacing;
         }
         else {
-            y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
+            y = platforms.getLast().sprite.getY() + minSpacing  + r.nextFloat()  * (maxSpacing - minSpacing);
         }
 
 

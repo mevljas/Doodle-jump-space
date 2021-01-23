@@ -21,7 +21,9 @@ public class Monster extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    PlatformColor platformColor;
+
+    //    TODO: Monster all different sizes so these variables keep changing.
+//    TODO: Make seperate clases for seperate mosnters.
     public static float WIDTH = Constants.WIDTH / 5f;
     public static float HEIGHT = Constants.HEIGHT / 8f;
 
