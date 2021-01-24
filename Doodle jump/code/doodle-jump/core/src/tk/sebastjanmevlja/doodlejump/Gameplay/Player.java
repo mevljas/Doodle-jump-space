@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.ArrayList;
 
@@ -190,22 +192,24 @@ public class Player extends Actor {
         checkState();
         updateSprite();
         rotate();
-        updateBullets(delta);
+//        updateBullets(delta);
+        Culling.incrementDrawnObjectsCounter();
 
     }
 
 
-    private void updateBullets(float delta){
-        for (Bullet b: bullets) {
-            b.updatePos();
-        }
-    }
-
-    private void drawBullets(Batch batch, float parentAlpha){
-        for (Bullet b: bullets) {
-            b.draw(batch, parentAlpha);
-        }
-    }
+//    private void updateBullets(float delta){
+//        for (Bullet b: bullets) {
+//            b.updatePos();
+////            b.act(delta);
+//        }
+//    }
+//
+//    private void drawBullets(Batch batch, float parentAlpha){
+//        for (Bullet b: bullets) {
+//            b.draw(batch, parentAlpha);
+//        }
+//    }
 
     private void rotate(){
         if (this.rotating){
@@ -219,7 +223,7 @@ public class Player extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
-        drawBullets(batch, parentAlpha);
+//        drawBullets(batch, parentAlpha);
         if (shield != null){
             shield.draw(batch, parentAlpha);
         }
@@ -330,7 +334,9 @@ public class Player extends Actor {
     }
 
     public void createBullet(int xt, int yt){
-        bullets.add(new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt));
+        Bullet b = new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt);
+        Level1Screen.getStage().addActor(b);
+        bullets.add(b);
     }
 
     public void removeBullet(Bullet bullet){
@@ -356,6 +362,7 @@ public class Player extends Actor {
     public void removeShield(){
         if (this.shield != null){
             removedShields.add(shield);
+            this.shield.addAction(Actions.removeActor());
             this.shield = null;
             this.imunity = false;
         }
@@ -369,5 +376,38 @@ public class Player extends Actor {
 
     public boolean isImunity() {
         return imunity;
+    }
+
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
+
+    @Override
+    public float getX() {
+        return sprite.getX();
+    }
+
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+    public void incrementGlobalObjectCounter() {
+        Culling.incrementObjectsCounter();
+        if (shield != null) {
+            shield.incrementGlobalObjectCounter();
+        }
+
+        for (Bullet b : bullets) {
+            b.incrementGlobalObjectCounter();
+
+        }
+
     }
 }

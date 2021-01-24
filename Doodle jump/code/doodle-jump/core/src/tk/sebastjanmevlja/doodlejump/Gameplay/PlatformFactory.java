@@ -26,6 +26,8 @@ public class PlatformFactory {
 
     private static Random r;
 
+    private static float y;
+
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
@@ -35,7 +37,6 @@ public class PlatformFactory {
     }
 
     public static void generatePlatforms(World world){
-        float y;
 
         if (platforms.isEmpty()){
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
@@ -119,8 +120,7 @@ public class PlatformFactory {
         platforms.remove(p);
     }
 
-
-
-
-
+    public static float getY() {
+        return y;
+    }
 }

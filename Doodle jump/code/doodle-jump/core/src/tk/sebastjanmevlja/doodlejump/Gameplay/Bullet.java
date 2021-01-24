@@ -89,7 +89,9 @@ public class Bullet extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        System.out.println("BULLET");
+        Culling.incrementDrawnObjectsCounter();
+        updatePos();
     }
 
 
@@ -124,5 +126,30 @@ public class Bullet extends Actor {
 
     public void deactivate() {
         this.alive = false;
+    }
+
+
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
+
+    @Override
+    public float getX() {
+        return sprite.getX();
+    }
+
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+    public void incrementGlobalObjectCounter(){
+        Culling.incrementObjectsCounter();
     }
 }

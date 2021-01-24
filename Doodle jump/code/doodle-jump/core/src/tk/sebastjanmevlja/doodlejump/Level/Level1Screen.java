@@ -30,8 +30,8 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.removePlatf
 
 public class Level1Screen implements Screen {
 
+    private static Stage stage;
     private final Game game;
-    private Stage stage;
     Group backgroundGroup = new Group();        // Group to be draw first
     Group middleGroup = new Group();
     Group foregroundGroup = new Group();
@@ -54,6 +54,12 @@ public class Level1Screen implements Screen {
 
     public Level1Screen(Game game) {
         this.game = game;
+
+
+        camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
+        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
+        stage = new Stage(viewport);
+
         background = Asset.atlas.findRegion("background");
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
@@ -85,9 +91,7 @@ public class Level1Screen implements Screen {
         pauseIcon.setSize(Constants.WIDTH * 0.1f, Constants.WIDTH * 0.1f);
 
 
-        camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
-        stage = new Stage(viewport);
+
 
 
 
@@ -144,11 +148,13 @@ public class Level1Screen implements Screen {
 
             Trampoline t = p.getTrampoline();
             if (t != null) {
+                t.addAction(Actions.removeActor());
                 world.destroyBody(t.getBody());
             }
 
             Shield s = p.getShield();
             if (s != null) {
+                s.addAction(Actions.removeActor());
                 world.destroyBody(s.getBody());
             }
 
@@ -226,6 +232,7 @@ public class Level1Screen implements Screen {
     @Override
     public void render(float delta) {   //draw, loop called every frame
         if (!paused){
+            Culling.setAllObjectsCounter();
             checkGameState();
             camera.update();
             updatePlatforms();
@@ -267,6 +274,9 @@ public class Level1Screen implements Screen {
         pauseIcon.draw(stage.getBatch());
         stage.getBatch().end();
 
+//        Display number of drawn objects.
+        printCullingStatus();
+
 
         // Now render the physics world using our scaled down matrix
         // Note, this is strictly optional and is, as the name suggests, just  for debugging purposes
@@ -274,6 +284,11 @@ public class Level1Screen implements Screen {
 
 
 
+    }
+
+
+    private void printCullingStatus(){
+        System.out.println("Object drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
     }
 
 
@@ -312,6 +327,7 @@ public class Level1Screen implements Screen {
         }
     }
 
-
-
+    public static Stage getStage() {
+        return stage;
+    }
 }

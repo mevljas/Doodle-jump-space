@@ -84,7 +84,7 @@ public class Trampoline extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        Culling.incrementDrawnObjectsCounter();
     }
 
 
@@ -138,6 +138,10 @@ public class Trampoline extends Actor {
         this.playerJumping = true;
         this.stateTime = 0f;
 
+    }
+
+    public void incrementGlobalObjectCounter(){
+        Culling.incrementObjectsCounter();
     }
 
 

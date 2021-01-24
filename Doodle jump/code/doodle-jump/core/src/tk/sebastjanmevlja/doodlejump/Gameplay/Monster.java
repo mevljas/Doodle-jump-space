@@ -153,6 +153,7 @@ public class Monster extends Actor {
             updatePos();
             checkWallColision();
             updateAnimations();
+            Culling.incrementDrawnObjectsCounter();
         }
 
     }
@@ -240,5 +241,29 @@ public class Monster extends Actor {
 
     public void kill() {
         this.alive = false;
+    }
+
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
+
+    @Override
+    public float getX() {
+        return sprite.getX();
+    }
+
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+    public void incrementGlobalObjectCounter(){
+        Culling.incrementObjectsCounter();
     }
 }

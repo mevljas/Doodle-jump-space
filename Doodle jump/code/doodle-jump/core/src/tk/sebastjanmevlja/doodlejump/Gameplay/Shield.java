@@ -79,7 +79,7 @@ public class Shield extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-
+        Culling.incrementDrawnObjectsCounter();
     }
 
 
@@ -114,7 +114,30 @@ public class Shield extends Actor {
 
 
 
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
 
+    @Override
+    public float getX() {
+        return sprite.getX();
+    }
+
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+
+    public void incrementGlobalObjectCounter(){
+        Culling.incrementObjectsCounter();
+    }
 
 
 

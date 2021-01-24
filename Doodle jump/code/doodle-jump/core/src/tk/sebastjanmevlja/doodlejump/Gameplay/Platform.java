@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
 
@@ -94,9 +95,11 @@ public class Platform extends Actor {
 
         if (r.nextInt(15) > 13){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
+            Level1Screen.getStage().addActor(this.trampoline);
         }
         else if (r.nextInt(15) > 10){
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
+            Level1Screen.getStage().addActor(this.shield);
         }
 
 
@@ -142,6 +145,17 @@ public class Platform extends Actor {
         updatePos();
         checkWallColision();
         updateAnimations();
+
+
+//        if (trampoline != null){
+//            trampoline.act(delta);
+//        }
+//
+//        if (shield != null){
+//            shield.act(delta);
+//        }
+
+        Culling.incrementDrawnObjectsCounter();
     }
 
     private void checkWallColision() {
@@ -234,5 +248,40 @@ public class Platform extends Actor {
 
     public void removeShield(){
         this.shield = null;
+    }
+
+    @Override
+    public float getY() {
+        return sprite.getY();
+    }
+
+    @Override
+    public float getX() {
+        return sprite.getX();
+    }
+
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+    public void incrementGlobalObjectCounter(){
+        Culling.incrementObjectsCounter();
+        if (shield != null){
+            shield.incrementGlobalObjectCounter();
+        }
+
+        if (trampoline != null){
+            trampoline.incrementGlobalObjectCounter();
+        }
+
+        if (shield != null){
+            shield.incrementGlobalObjectCounter();
+        }
     }
 }
