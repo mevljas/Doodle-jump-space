@@ -353,16 +353,13 @@ public class Level1Screen implements Screen {
         if (Player.getScore() == 0 || Player.getLives() <= 0){
             return;
         }
-        System.out.println("SAVE OBJECTS");
         Game.localStorage.setScore(Player.getScore());
         Game.localStorage.setLives(Player.getLives());
         Game.localStorage.setSavedData(true);
     }
 
     private void loadObjects(){
-        System.out.println("LOAD OBJECTS");
         if ( Game.localStorage.getSavedData()){
-            System.out.println("LOAD OBJECTS 2");
             Player.score = Game.localStorage.getScore();
             Player.lives = Game.localStorage.getLives();
             Game.localStorage.setScore(0);
