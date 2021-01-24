@@ -121,7 +121,8 @@ public class Level1Screen implements Screen {
 
     @Override
     public void show() { //create, setup method
-        Gdx.input.setInputProcessor(Input);
+
+        Gdx.input.setInputProcessor(tk.sebastjanmevlja.doodlejump.Gameplay.Input.im);
 
         Sound.playStartSound();
 
@@ -288,7 +289,7 @@ public class Level1Screen implements Screen {
 
 
     private void printCullingStatus(){
-        System.out.println("Object drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
+//        System.out.println("Object drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
     }
 
 

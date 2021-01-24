@@ -89,7 +89,6 @@ public class Bullet extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        System.out.println("BULLET");
         Culling.incrementDrawnObjectsCounter();
         updatePos();
     }
