@@ -14,8 +14,8 @@ public class Trampoline extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    public static float TRAMPOLINE_WIDTH = Constants.WIDTH * 0.15f;
-    public static float TRAMPOLINE_HEIGHT = Constants.HEIGHT * 0.05f;
+    public static float TRAMPOLINE_WIDTH = Constants.WIDTH * 0.16f;
+    public static float TRAMPOLINE_HEIGHT = Constants.HEIGHT * 0.06f;
     public Animation<TextureRegion> runningAnimation;
 
 
@@ -66,7 +66,7 @@ public class Trampoline extends Actor {
         shape.dispose();
 
 
-        runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("trampoline"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("trampoline"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
     }
 

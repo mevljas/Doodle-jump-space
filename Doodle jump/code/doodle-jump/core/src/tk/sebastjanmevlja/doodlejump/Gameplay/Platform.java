@@ -93,7 +93,7 @@ public class Platform extends Actor {
         }
         r = new Random();
 
-        if (r.nextInt(15) > 11){
+        if (r.nextInt(15) > 12){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
             Level1Screen.getStage().addActor(this.trampoline);
         }
