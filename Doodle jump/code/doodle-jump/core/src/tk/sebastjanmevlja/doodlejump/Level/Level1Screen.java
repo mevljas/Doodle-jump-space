@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -32,10 +33,10 @@ public class Level1Screen implements Screen {
 
     private static Stage stage;
     private final Game game;
-    Group backgroundGroup = new Group();        // Group to be draw first
-    Group middleGroup = new Group();
-    Group foregroundGroup = new Group();
-    Group hudGroup = new Group();        // group to be draw last
+    Group backgroundGroup;        // Group to be draw first
+    Group middleGroup;
+    Group foregroundGroup;
+    Group hudGroup;        // group to be draw last
     private Viewport viewport;
     private PlatformFactory platformFactory;
     private MonsterFactory monsterFactory;
@@ -54,6 +55,11 @@ public class Level1Screen implements Screen {
 
     public Level1Screen(Game game) {
         this.game = game;
+
+         backgroundGroup = new Group();        // Group to be draw first
+         middleGroup = new Group();
+         foregroundGroup = new Group();
+         hudGroup = new Group();
 
 
         camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
@@ -113,6 +119,8 @@ public class Level1Screen implements Screen {
 
         foregroundGroup.addActor(player);
         hudGroup.addActor(hud);
+
+        loadObjects();
 
     }
 
@@ -223,7 +231,8 @@ public class Level1Screen implements Screen {
     private void removeShields(){
         for (Shield s: Player.removedShields) {
             s.addAction(Actions.removeActor());
-            world.destroyBody(s.getBody());
+            Body b = s.getBody();
+            world.destroyBody(b);
         }
         Player.removedShields.clear();
     }
@@ -300,21 +309,27 @@ public class Level1Screen implements Screen {
 
     @Override
     public void pause() {
+        saveObjects();
         paused = !paused;
 
     }
 
+
     @Override
     public void resume() {
-
+        paused = false;
+        loadObjects();
     }
 
     @Override
     public void hide() {
+        paused = true;
+        saveObjects();
     }
 
     @Override
     public void dispose() {
+//        saveObjects();
         stage.dispose();
         world.dispose();
 
@@ -324,6 +339,7 @@ public class Level1Screen implements Screen {
         if (Player.getLives() <= 0){
             if (Player.getScore() > Game.localStorage.getHighScore())
                 Game.localStorage.setHighScore(Player.getScore());
+            Game.localStorage.setSavedData(false);
             game.changeScreen(Screens.ENDSCREEN);
         }
     }
@@ -331,4 +347,31 @@ public class Level1Screen implements Screen {
     public static Stage getStage() {
         return stage;
     }
+
+
+    private void saveObjects(){
+        if (Player.getScore() == 0 || Player.getLives() <= 0){
+            return;
+        }
+        System.out.println("SAVE OBJECTS");
+        Game.localStorage.setScore(Player.getScore());
+        Game.localStorage.setLives(Player.getLives());
+        Game.localStorage.setSavedData(true);
+    }
+
+    private void loadObjects(){
+        System.out.println("LOAD OBJECTS");
+        if ( Game.localStorage.getSavedData()){
+            System.out.println("LOAD OBJECTS 2");
+            Player.score = Game.localStorage.getScore();
+            Player.lives = Game.localStorage.getLives();
+            Game.localStorage.setScore(0);
+            Game.localStorage.setLives(5);
+            Game.localStorage.setSavedData(false);
+        }
+
+    }
+
+
+
 }

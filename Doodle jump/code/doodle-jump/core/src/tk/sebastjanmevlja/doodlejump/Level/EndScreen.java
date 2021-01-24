@@ -103,6 +103,7 @@ public class EndScreen implements Screen{
         Gdx.input.setInputProcessor(stage);
         scoreLabel.setText("Score: " + Player.getScore());
         highScoreLabel.setText("High score: " + Game.localStorage.getHighScore());
+        Level1Screen.paused = false;
     }
 
     @Override

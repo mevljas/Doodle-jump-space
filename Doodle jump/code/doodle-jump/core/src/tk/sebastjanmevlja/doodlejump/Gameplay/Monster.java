@@ -241,6 +241,8 @@ public class Monster extends Actor {
 
     public void kill() {
         this.alive = false;
+        Player.incScore();
+        Sound.playMonsterSound();
     }
 
     @Override

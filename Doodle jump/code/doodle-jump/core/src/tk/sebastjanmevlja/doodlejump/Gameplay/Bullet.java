@@ -16,7 +16,7 @@ public class Bullet extends Actor {
     Body body;
     public static float BULLET_WIDTH = Constants.WIDTH * 0.1f;
     public static float BULLET_HEIGHT = BULLET_WIDTH;
-    private static float bulletMovingScale = Constants.HEIGHT * 0.002f;
+    private static float bulletMovingScale = Constants.HEIGHT * 0.008f;
     public boolean alive;
 
 

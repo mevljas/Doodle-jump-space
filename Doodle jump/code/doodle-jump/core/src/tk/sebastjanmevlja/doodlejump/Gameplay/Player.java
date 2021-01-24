@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.ArrayList;
@@ -27,12 +26,12 @@ enum HorizontalDirection {
 }
 
 
-public class Player extends Actor {
+public class Player extends Actor  {
 
     static Player player;
-    static int lives;
-    static int score;
-    public static ArrayList<Shield> removedShields = new ArrayList<>();
+    public static int lives;
+    public static int score;
+    public static ArrayList<Shield> removedShields;
 
     Sprite sprite;
     World world;
@@ -112,6 +111,7 @@ public class Player extends Actor {
         score = 0;
 
         bullets = new ArrayList<>();
+        removedShields = new ArrayList<>();
 
     }
 
@@ -242,7 +242,7 @@ public class Player extends Actor {
             }
             PlatformFactory.moveWorld(JUMP_VELOCITY * 0.88f);
             MonsterFactory.moveWorld(JUMP_VELOCITY * 0.88f);
-            moveWorld(JUMP_VELOCITY * 0.88f);
+//            moveWorld(JUMP_VELOCITY * 0.88f);
         }
 
     }
@@ -258,7 +258,7 @@ public class Player extends Actor {
             }
             PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
             MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
-            moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
+//            moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
             this.rotating = true;
         }
     }
@@ -362,7 +362,7 @@ public class Player extends Actor {
     public void removeShield(){
         if (this.shield != null){
             removedShields.add(shield);
-            this.shield.addAction(Actions.removeActor());
+//            this.shield.addAction(Actions.removeActor());
             this.shield = null;
             this.imunity = false;
         }

@@ -18,7 +18,7 @@ public class Game extends com.badlogic.gdx.Game {
     private LoadingScreen loadingScreen;
     private PreferencesScreen preferencesScreen;
     private MenuScreen menuScreen;
-    private Level1Screen level1Screen;
+    public Level1Screen level1Screen;
     private AboutScreen aboutScreen;
     private EndScreen endScreen;
     private PauseScreen pauseScreen;

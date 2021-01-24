@@ -7,6 +7,7 @@ public class LocalStorage {
     private Preferences preferences;
     private boolean musicEnabled;
     private boolean soundEnabled;
+    private boolean savedData;
     private float musicVolume;
     private float soundVolume;
     private int highScore;
@@ -17,7 +18,8 @@ public class LocalStorage {
         soundEnabled = preferences.getBoolean("soundEnabled",true);
         musicVolume = preferences.getFloat("musicVolume",0.5f);
         soundVolume = preferences.getFloat("soundVolume",1.0f);
-        highScore = preferences.getInteger("score",0);
+        highScore = preferences.getInteger("HighScore",0);
+        savedData = preferences.getBoolean("savedData",false);
 
 
     }
@@ -64,12 +66,40 @@ public class LocalStorage {
 
     public void setHighScore(int highScore){
         this.highScore = highScore;
-        preferences.putInteger("score", highScore);
+        preferences.putInteger("HighScore", highScore);
         preferences.flush();
     }
 
     public int getHighScore(){
         return highScore;
+    }
+
+    public void setScore(int score){
+        preferences.putInteger("score", score);
+        preferences.flush();
+    }
+
+    public int getScore(){
+        return preferences.getInteger("score",0);
+    }
+
+    public void setLives(int lives){
+        preferences.putInteger("lives", lives);
+        preferences.flush();
+    }
+
+    public int getLives(){
+        return preferences.getInteger("lives",5);
+    }
+
+    public void setSavedData(boolean value){
+        this.savedData = value;
+        preferences.putBoolean("savedData", value);
+        preferences.flush();
+    }
+
+    public boolean getSavedData(){
+        return this.savedData;
     }
 
 }
