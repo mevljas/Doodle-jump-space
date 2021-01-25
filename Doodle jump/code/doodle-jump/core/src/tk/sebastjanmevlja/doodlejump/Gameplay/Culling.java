@@ -1,6 +1,8 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 
+import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
+
 //Store number of drawn objects.
 public class Culling {
 
@@ -12,9 +14,7 @@ public class Culling {
         allObjectsCounter++;
     }
 
-    static void incrementDrawnObjectsCounter(){
-        drawnObjectsCounter++;
-    }
+
 
     public static void resetCounter(){
         allObjectsCounter = 0;
@@ -26,7 +26,6 @@ public class Culling {
     }
 
     public static void setAllObjectsCounter() {
-        resetCounter();
         Player.player.incrementGlobalObjectCounter();
         for (Monster m: MonsterFactory.monsters) {
             m.incrementGlobalObjectCounter();
@@ -35,6 +34,16 @@ public class Culling {
         for (Platform p: PlatformFactory.platforms) {
             p.incrementGlobalObjectCounter();
         }
+    }
+
+    public static void setDrawnObjectsCounter() {
+        drawnObjectsCounter = Level1Screen.getStage().getActors().size;
+    }
+
+    public static void countObjects(){
+        resetCounter();
+        setDrawnObjectsCounter();
+        setAllObjectsCounter();
     }
 
     public static int getDrawnObjectsCounter() {

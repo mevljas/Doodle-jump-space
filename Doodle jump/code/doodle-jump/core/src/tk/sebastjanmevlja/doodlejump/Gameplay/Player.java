@@ -193,7 +193,7 @@ public class Player extends Actor  {
         updateSprite();
         rotate();
 //        updateBullets(delta);
-        Culling.incrementDrawnObjectsCounter();
+
 
     }
 
@@ -335,7 +335,7 @@ public class Player extends Actor  {
 
     public void createBullet(int xt, int yt){
         Bullet b = new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt);
-        Level1Screen.getStage().addActor(b);
+        Level1Screen.middleGroup.addActor(b);
         bullets.add(b);
     }
 

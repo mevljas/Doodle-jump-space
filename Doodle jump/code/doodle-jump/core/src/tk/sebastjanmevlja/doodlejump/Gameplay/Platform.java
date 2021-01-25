@@ -95,11 +95,11 @@ public class Platform extends Actor {
 
         if (r.nextInt(15) > 12){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-            Level1Screen.getStage().addActor(this.trampoline);
+            Level1Screen.backgroundGroup.addActor(this.trampoline);
         }
         else if (r.nextInt(15) > 12){
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
-            Level1Screen.getStage().addActor(this.shield);
+            Level1Screen.backgroundGroup.addActor(this.shield);
         }
 
 
@@ -155,7 +155,7 @@ public class Platform extends Actor {
 //            shield.act(delta);
 //        }
 
-        Culling.incrementDrawnObjectsCounter();
+
     }
 
     private void checkWallColision() {

@@ -89,7 +89,6 @@ public class Bullet extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        Culling.incrementDrawnObjectsCounter();
         updatePos();
     }
 
@@ -97,8 +96,10 @@ public class Bullet extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (alive)
+        if (alive){
             sprite.draw(batch);
+        }
+
 
     }
 

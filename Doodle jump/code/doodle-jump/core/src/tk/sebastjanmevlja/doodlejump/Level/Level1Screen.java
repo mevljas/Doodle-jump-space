@@ -33,8 +33,8 @@ public class Level1Screen implements Screen {
 
     private static Stage stage;
     private final Game game;
-    Group backgroundGroup;        // Group to be draw first
-    Group middleGroup;
+    public static Group backgroundGroup;        // Group to be draw first
+    public static Group middleGroup;
     Group foregroundGroup;
     Group hudGroup;        // group to be draw last
     private Viewport viewport;
@@ -242,7 +242,7 @@ public class Level1Screen implements Screen {
     @Override
     public void render(float delta) {   //draw, loop called every frame
         if (!paused){
-            Culling.setAllObjectsCounter();
+//            Culling.countObjects();
             checkGameState();
             camera.update();
             updatePlatforms();
@@ -285,7 +285,7 @@ public class Level1Screen implements Screen {
         stage.getBatch().end();
 
 //        Display number of drawn objects.
-        printCullingStatus();
+//        printCullingStatus();
 
 
         // Now render the physics world using our scaled down matrix
@@ -298,7 +298,7 @@ public class Level1Screen implements Screen {
 
 
     private void printCullingStatus(){
-//        System.out.println("Object drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
+        System.out.println("Objects drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
     }
 
 

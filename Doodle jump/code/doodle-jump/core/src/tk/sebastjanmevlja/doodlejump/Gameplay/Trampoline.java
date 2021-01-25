@@ -84,7 +84,6 @@ public class Trampoline extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        Culling.incrementDrawnObjectsCounter();
     }
 
 
@@ -101,7 +100,6 @@ public class Trampoline extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
         if (!playerJumping){
             sprite.draw(batch);
         }

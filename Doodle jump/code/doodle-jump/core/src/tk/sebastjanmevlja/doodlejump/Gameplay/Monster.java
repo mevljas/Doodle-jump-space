@@ -29,7 +29,7 @@ public class Monster extends Actor {
 
     private static float playerMovingScale = Constants.HEIGHT * 0.002f;
     private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
-    private static float playerDetectingRange = Constants.HEIGHT * 0.006f;
+    private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 //    private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
@@ -40,7 +40,7 @@ public class Monster extends Actor {
 
 //    Direction direction = Direction.STILL;
 
-    public static final float VELOCITY = 0.3f;
+    public static final float VELOCITY = Constants.HEIGHT * 0.0015f;
 
     public MonsterType getMonsterType() {
         return monsterType;
@@ -153,7 +153,7 @@ public class Monster extends Actor {
             updatePos();
             checkWallColision();
             updateAnimations();
-            Culling.incrementDrawnObjectsCounter();
+
         }
 
     }
