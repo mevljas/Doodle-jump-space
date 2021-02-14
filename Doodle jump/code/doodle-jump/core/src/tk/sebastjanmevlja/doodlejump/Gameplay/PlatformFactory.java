@@ -31,30 +31,33 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacing = Constants.HEIGHT * 0.21f;
-        minSpacing = Constants.HEIGHT * 0.2f;
+        maxSpacing = Constants.HEIGHT * 0.5f;
+        minSpacing = Constants.HEIGHT * 0.21f;
         r = new Random();
     }
 
     public static void generatePlatforms(World world){
 
-        if (platforms.isEmpty()){
+        if (platforms.isEmpty()) {
             generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
-            y = minSpacing;
+            y = 0;
         }
         else {
-            y = platforms.getLast().sprite.getY() + minSpacing  + r.nextFloat()  * (maxSpacing - minSpacing);
+            y = platforms.getLast().sprite.getY() + r.nextFloat()  * (maxSpacing - minSpacing);
+            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
+
+            generatePlatform(randomType(), randomColor(), world, x, y);
         }
 
 
 
         while (y < Constants.HEIGHT * 5) {
             float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
+            y += minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
 
             generatePlatform(randomType(), randomColor(), world, x, y);
 
 
-            y += minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
         }
 
 
@@ -91,7 +94,7 @@ public class PlatformFactory {
     }
 
     private static PlatformColor randomColor(){
-        return PlatformColor.values()[new Random().nextInt(PlatformColor.values().length)];
+        return PlatformColor.values()[new Random().nextInt(PlatformColor.values().length - 1)];
     }
 
     private static PlatformType randomType(){

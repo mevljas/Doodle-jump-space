@@ -40,8 +40,8 @@ public class Player extends Actor  {
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
-    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0036f;
-    public static final float JUMP_VELOCITY_TRAMPOLINE = Constants.HEIGHT * 0.004f;
+    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0034f;
+    public static final float JUMP_VELOCITY_TRAMPOLINE = Constants.HEIGHT * 0.005f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
 
 
@@ -235,14 +235,14 @@ public class Player extends Actor  {
         if (verticalDirection != VerticalDirection.UP) {
             verticalDirection = VerticalDirection.UP;
             if (sprite.getY() > Constants.HEIGHT * 0.7){
-                body.setLinearVelocity(0f,JUMP_VELOCITY * 0.6f);
+                PlatformFactory.moveWorld(JUMP_VELOCITY * 1.5f );
+                MonsterFactory.moveWorld(JUMP_VELOCITY * 1.5f);
             }
             else {
-                body.setLinearVelocity(0f,JUMP_VELOCITY);
+                PlatformFactory.moveWorld(JUMP_VELOCITY * 0.8f);
+                MonsterFactory.moveWorld(JUMP_VELOCITY * 0.8f);
             }
-            PlatformFactory.moveWorld(JUMP_VELOCITY * 0.88f);
-            MonsterFactory.moveWorld(JUMP_VELOCITY * 0.88f);
-//            moveWorld(JUMP_VELOCITY * 0.88f);
+            body.setLinearVelocity(0f,JUMP_VELOCITY);
         }
 
     }
@@ -251,14 +251,14 @@ public class Player extends Actor  {
         if (verticalDirection != VerticalDirection.UP) {
             verticalDirection = VerticalDirection.UP;
             if (sprite.getY() > Constants.HEIGHT * 0.7){
-                body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE * 0.6f);
+                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 1.5f ) ;
+                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 1.5f );
             }
             else {
-                body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE);
+                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.8f);
+                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.8f) ;
             }
-            PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
-            MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
-//            moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.88f);
+            body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE);
             this.rotating = true;
         }
     }
@@ -274,28 +274,13 @@ public class Player extends Actor  {
 
 
     void checkState(){
-//        if (body.getLinearVelocity().y > 0){
-//            verticalDirection = VerticalDirection.UP;
-//        }
-//        else
-            if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y < 0){
+
+        if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y < 0){
             verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
         }
-//        else {
-//            verticalDirection = VerticalDirection.STILL;
-//        }
 
-//        if (horizontalDirection != HorizontalDirection.RIGHT && body.getLinearVelocity().x > 0){
-//            horizontalDirection = HorizontalDirection.RIGHT;
-//        }
-//        else if ( horizontalDirection != HorizontalDirection.LEFT && body.getLinearVelocity().x < 0){
-//            horizontalDirection = HorizontalDirection.LEFT;
-//        }
-//        else {
-//            horizontalDirection = HorizontalDirection.STILL;
-//        }
 
 
     }
