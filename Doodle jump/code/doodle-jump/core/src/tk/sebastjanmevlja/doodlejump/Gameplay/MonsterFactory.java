@@ -94,7 +94,7 @@ public class MonsterFactory {
     public static void moveWorld(float velocity){
 
         for (Monster m: monsters) {
-            m.body.setLinearVelocity(m.body.getLinearVelocity().x,-velocity * 1.8f);
+            m.body.setLinearVelocity(m.body.getLinearVelocity().x,-velocity );
         }
     }
 

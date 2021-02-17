@@ -31,7 +31,7 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacing = Constants.HEIGHT * 0.5f;
+        maxSpacing = Constants.HEIGHT * 0.35f;
         minSpacing = Constants.HEIGHT * 0.21f;
         r = new Random();
     }
@@ -105,7 +105,7 @@ public class PlatformFactory {
     public static void moveWorld(float velocity){
 
         for (Platform p: platforms) {
-            p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity * 1.8f);
+            p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity );
         }
     }
 
