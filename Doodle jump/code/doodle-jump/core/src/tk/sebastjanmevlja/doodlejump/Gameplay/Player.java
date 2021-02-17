@@ -40,9 +40,11 @@ public class Player extends Actor  {
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
-    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0034f;
-    public static final float JUMP_VELOCITY_TRAMPOLINE = Constants.HEIGHT * 0.005f;
+    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.004f;
+    public static final float JUMP_VELOCITY_TRAMPOLINE = JUMP_VELOCITY * 1.3f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
+    public static final float WORLD_VELOCITY_SCALE = 0.36f;
+    public static final float WORLD_VELOCITY_STRONGER_SCALE = 0.5f;
 
 
 
@@ -234,13 +236,13 @@ public class Player extends Actor  {
 
         if (verticalDirection != VerticalDirection.UP) {
             verticalDirection = VerticalDirection.UP;
-            if (sprite.getY() > Constants.HEIGHT * 0.7){
-                PlatformFactory.moveWorld(JUMP_VELOCITY * 1.5f );
-                MonsterFactory.moveWorld(JUMP_VELOCITY * 1.5f);
+            if (sprite.getY() > Constants.HEIGHT * 0.5){
+                PlatformFactory.moveWorld(JUMP_VELOCITY * WORLD_VELOCITY_STRONGER_SCALE);
+                MonsterFactory.moveWorld(JUMP_VELOCITY * WORLD_VELOCITY_STRONGER_SCALE);
             }
             else {
-                PlatformFactory.moveWorld(JUMP_VELOCITY * 0.8f);
-                MonsterFactory.moveWorld(JUMP_VELOCITY * 0.8f);
+                PlatformFactory.moveWorld(JUMP_VELOCITY * WORLD_VELOCITY_SCALE);
+                MonsterFactory.moveWorld(JUMP_VELOCITY * WORLD_VELOCITY_SCALE);
             }
             body.setLinearVelocity(0f,JUMP_VELOCITY);
         }
@@ -250,13 +252,13 @@ public class Player extends Actor  {
     public void jumpTrampoline() {
         if (verticalDirection != VerticalDirection.UP) {
             verticalDirection = VerticalDirection.UP;
-            if (sprite.getY() > Constants.HEIGHT * 0.7){
-                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 1.5f ) ;
-                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 1.5f );
+            if (sprite.getY() > Constants.HEIGHT * 0.5){
+                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * WORLD_VELOCITY_STRONGER_SCALE ) ;
+                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * WORLD_VELOCITY_STRONGER_SCALE );
             }
             else {
-                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.8f);
-                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * 0.8f) ;
+                PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * WORLD_VELOCITY_SCALE);
+                MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE * WORLD_VELOCITY_SCALE) ;
             }
             body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE);
             this.rotating = true;
