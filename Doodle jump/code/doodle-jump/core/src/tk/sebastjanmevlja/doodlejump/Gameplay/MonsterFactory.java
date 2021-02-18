@@ -19,16 +19,20 @@ public class MonsterFactory {
     public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
 
 
-    private static  float minSpacing;
-    private static  float maxSpacing ;
+    private static  float minSpacingWidth;
+    private static  float maxSpacingWidth;
+    private static  float minSpacingHeight;
+    private static  float maxSpacingHeight;
     public static int InitiaMonsterSize;
 
     private static Random r = new Random();
 
 
     public MonsterFactory() {
-        minSpacing = Constants.HEIGHT ;
-        maxSpacing = Constants.HEIGHT * 2f ;
+        minSpacingHeight = Constants.HEIGHT * 0.8f ;
+        maxSpacingHeight = Constants.HEIGHT * 2f;
+        minSpacingWidth = Constants.WIDTH * 0.2f;
+        maxSpacingWidth = Constants.WIDTH * 0.6f;
         monsters = new LinkedList<>();
         r = new Random();
     }
@@ -38,20 +42,21 @@ public class MonsterFactory {
         float y;
 
         if (monsters.isEmpty()){
-            y = maxSpacing;
+            y = maxSpacingHeight;
         }
         else {
-            y = monsters.getLast().sprite.getY() + Monster.HEIGHT;
+            y = monsters.getLast().sprite.getY();
         }
-
 
 
         while (y < Constants.HEIGHT * 5) {
-            float x = Constants.WIDTH * 0.2f + r.nextFloat() * (Constants.WIDTH - Constants.WIDTH * 0.2f);
+            float x = minSpacingWidth + r.nextFloat() * (maxSpacingWidth - minSpacingWidth);
 
+
+            y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
             generateMonster(randomType(), world, x, y);
 
-            y += minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
+
         }
 
 
