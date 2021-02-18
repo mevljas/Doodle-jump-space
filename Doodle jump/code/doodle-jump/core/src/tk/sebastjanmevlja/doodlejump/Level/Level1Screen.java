@@ -25,8 +25,7 @@ import java.util.ArrayList;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.monsters;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.removeMonster;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.platforms;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.removePlatform;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.*;
 
 
 public class Level1Screen implements Screen {
@@ -151,35 +150,37 @@ public class Level1Screen implements Screen {
 
         }
         for (Platform p: removePlatforms) {
-            removePlatform(p);
-            p.addAction(Actions.removeActor());
-            world.destroyBody(p.getBody());
+            recyclePlatform(p);
+//            p.addAction(Actions.removeActor());
+//            world.destroyBody(p.getBody());
 
-            Trampoline t = p.getTrampoline();
-            if (t != null) {
-                t.addAction(Actions.removeActor());
-                world.destroyBody(t.getBody());
-            }
-
-            Shield s = p.getShield();
-            if (s != null) {
-                s.addAction(Actions.removeActor());
-                world.destroyBody(s.getBody());
-            }
-
-        }
-
-        if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
-            PlatformFactory.generatePlatforms(world);
-            for (Platform p: platforms) {
-                if (p.getStage() == null){{
-                    backgroundGroup.addActor(p);
-
-                }}
-
-            }
+//            Trampoline t = p.getTrampoline();
+//            if (t != null) {
+//                t.addAction(Actions.removeActor());
+//                world.destroyBody(t.getBody());
+//            }
+//
+//            Shield s = p.getShield();
+//            if (s != null) {
+//                s.addAction(Actions.removeActor());
+//                world.destroyBody(s.getBody());
+//            }
 
         }
+
+//
+//        if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
+//            PlatformFactory.generatePlatforms(world);
+//            for (Platform p: platforms) {
+//                if (p.getStage() == null){
+//                    backgroundGroup.addActor(p);
+//
+//                }
+//
+//            }
+//
+//        }
+
     }
 
 
@@ -290,7 +291,7 @@ public class Level1Screen implements Screen {
 
         // Now render the physics world using our scaled down matrix
         // Note, this is strictly optional and is, as the name suggests, just  for debugging purposes
-//        debugRenderer.render(world, debugMatrix);
+        debugRenderer.render(world, debugMatrix);
 
 
 

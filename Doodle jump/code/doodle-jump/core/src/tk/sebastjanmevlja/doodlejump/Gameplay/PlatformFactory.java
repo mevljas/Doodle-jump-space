@@ -43,7 +43,7 @@ public class PlatformFactory {
             y = 0;
         }
         else {
-            y = platforms.getLast().sprite.getY() + r.nextFloat()  * (maxSpacing - minSpacing);
+            y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
             float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
 
             generatePlatform(randomType(), randomColor(), world, x, y);
@@ -93,6 +93,38 @@ public class PlatformFactory {
         platforms.add(new Platform(type, color, atlasRegion,world, x, y));
     }
 
+    public static void recyclePlatform(PlatformType type, PlatformColor color, Platform platform, float x, float y) {
+        TextureAtlas.AtlasRegion atlasRegion;
+        switch (color){
+            case BROWN:
+                atlasRegion = plaformTextureRegionBrown;
+                break;
+
+            case WHITE:
+                atlasRegion = plaformTextureRegionWhite;
+                break;
+
+            case DARK_BLUE:
+                atlasRegion = plaformTextureRegionDarkBlue;
+                break;
+
+            case LIGHT_BLUE:
+                atlasRegion = plaformTextureRegionLightBlue;
+                break;
+
+            default:
+                atlasRegion = plaformTextureRegionGreen;
+                break;
+        }
+        platform.changeType(type);
+        platform.changeColor(color);
+        platform.changeTexture(atlasRegion);
+        platform.changePosition(x,y);
+        platform.resetItems();
+        platforms.remove(platform);
+        platforms.addLast(platform);
+    }
+
     private static PlatformColor randomColor(){
         return PlatformColor.values()[new Random().nextInt(PlatformColor.values().length - 1)];
     }
@@ -121,6 +153,13 @@ public class PlatformFactory {
 
     public static void removePlatform(Platform p){
         platforms.remove(p);
+    }
+
+    public static void recyclePlatform(Platform p){
+        System.out.println("recycle platform: " + p + ", x: " + p.sprite.getX() + ", y: " + p.sprite.getY());
+        float y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
+        float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
+        recyclePlatform(randomType(), PlatformColor.LIGHT_BLUE, p, x, y );
     }
 
     public static float getY() {

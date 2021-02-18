@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
@@ -284,4 +285,63 @@ public class Platform extends Actor {
             shield.incrementGlobalObjectCounter();
         }
     }
+
+    public void changeType(PlatformType type) {
+
+    }
+
+    public void changeColor(PlatformColor color) {
+        this.platformColor = color;
+
+        if (color == PlatformColor.BROWN){
+            runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
+            this.stateTime = 0f;
+        }
+        else {
+            runningAnimation = null;
+        }
+    }
+
+    public void changeTexture(TextureAtlas.AtlasRegion atlasRegion) {
+        sprite = new Sprite(atlasRegion);
+    }
+
+    public void changePosition(float x, float y) {
+        sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
+        sprite.setPosition(x,y);
+        sprite.setCenterX(x);
+        body.setTransform((sprite.getX() + sprite.getWidth()/2) /
+                        PPM,
+                (sprite.getY() + sprite.getHeight()/2) / PPM,0);
+    }
+
+    public void resetItems() {
+        this.broken = false;
+        this.alive = true;
+
+        Trampoline t = this.getTrampoline();
+        if (t != null) {
+            t.addAction(Actions.removeActor());
+            world.destroyBody(t.getBody());
+            this.trampoline = null;
+        }
+
+        Shield s = this.getShield();
+        if (s != null) {
+            s.addAction(Actions.removeActor());
+            world.destroyBody(s.getBody());
+            this.shield = null;
+        }
+
+        if (r.nextInt(15) > 12){
+            this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
+            Level1Screen.backgroundGroup.addActor(this.trampoline);
+        }
+        else if (r.nextInt(15) > 12){
+            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
+            Level1Screen.backgroundGroup.addActor(this.shield);
+        }
+    }
+
+
 }
