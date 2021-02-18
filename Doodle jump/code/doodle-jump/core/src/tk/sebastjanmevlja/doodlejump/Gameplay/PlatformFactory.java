@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import java.util.LinkedList;
 import java.util.Random;
 
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PLATFORM_WIDTH;
+
 public class PlatformFactory {
 
     public static LinkedList<Platform> platforms;
@@ -21,8 +23,10 @@ public class PlatformFactory {
 
     public static int InitiaPlatformSize;
 
-    private static float maxSpacing;
-    private static float minSpacing;
+    private static float maxSpacingHeight;
+    private static float minSpacingHeight;
+    private static float maxSpacingWidth;
+    private static float minSpacingWidth;
 
     private static Random r;
 
@@ -31,29 +35,24 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacing = Constants.HEIGHT * 0.35f;
-        minSpacing = Constants.HEIGHT * 0.21f;
+        maxSpacingHeight = Constants.HEIGHT * 0.35f;
+        minSpacingHeight = Constants.HEIGHT * 0.21f;
+        maxSpacingWidth = PLATFORM_WIDTH * 2.2f;
+        minSpacingWidth = PLATFORM_WIDTH * 0.1f;
         r = new Random();
     }
 
     public static void generatePlatforms(World world){
 
-        if (platforms.isEmpty()) {
-            generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
-            y = 0;
-        }
-        else {
-            y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
-            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
-
-            generatePlatform(randomType(), randomColor(), world, x, y);
-        }
+        generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
+        y = 0;
 
 
 
         while (y < Constants.HEIGHT * 5) {
-            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
-            y += minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
+//            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
+            float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
+            y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
 
             generatePlatform(randomType(), randomColor(), world, x, y);
 
@@ -156,10 +155,9 @@ public class PlatformFactory {
     }
 
     public static void recyclePlatform(Platform p){
-        System.out.println("recycle platform: " + p + ", x: " + p.sprite.getX() + ", y: " + p.sprite.getY());
-        float y = platforms.getLast().sprite.getY() + minSpacing + r.nextFloat()  * (maxSpacing - minSpacing);
-        float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
-        recyclePlatform(randomType(), PlatformColor.LIGHT_BLUE, p, x, y );
+        float y = platforms.getLast().sprite.getY() + minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+        float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
+        recyclePlatform(randomType(), randomColor(), p, x, y );
     }
 
     public static float getY() {

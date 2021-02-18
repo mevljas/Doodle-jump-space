@@ -45,7 +45,6 @@ public class Platform extends Actor {
         sprite = new Sprite(texture);
         sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
         sprite.setPosition(x,y);
-        sprite.setCenterX(x);
         this.platformColor = color;
         this.platformType = platformType;
 
@@ -309,7 +308,6 @@ public class Platform extends Actor {
     public void changePosition(float x, float y) {
         sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
         sprite.setPosition(x,y);
-        sprite.setCenterX(x);
         body.setTransform((sprite.getX() + sprite.getWidth()/2) /
                         PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM,0);
