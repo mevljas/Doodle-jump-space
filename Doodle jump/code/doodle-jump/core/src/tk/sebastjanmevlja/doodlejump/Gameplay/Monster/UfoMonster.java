@@ -1,68 +1,37 @@
-package tk.sebastjanmevlja.doodlejump.Gameplay;
+package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
-/*
-* TODO: Make a class for every monster type.
-*
-* */
+public class UfoMonster extends Monster {
 
 
-public class Monster extends Actor {
-
-    Sprite sprite;
-    World world;
-    Body body;
-
-    //    TODO: Monster all different sizes so these variables keep changing.
-//    TODO: Make seperate clases for seperate mosnters.
-    public static float WIDTH = Constants.WIDTH / 5f;
-    public static float HEIGHT = Constants.HEIGHT / 8f;
 
     private static float playerMovingScale = Constants.HEIGHT * 0.002f;
     private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
-//    private boolean broken = false;
-    public Animation<TextureRegion> runningAnimation;
-    private boolean alive = true;
-    private MonsterType monsterType;
-
-    // A variable for tracking elapsed time for the animation
-    float stateTime;
-
-//    Direction direction = Direction.STILL;
-
-    public static final float VELOCITY = Constants.HEIGHT * 0.0015f;
-
-    public MonsterType getMonsterType() {
-        return monsterType;
-    }
-
-    public Monster(MonsterType monsterType, Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
-        sprite = new Sprite(textures.get(0));
-
-        if (monsterType == MonsterType.BLUE){
-            WIDTH = Constants.WIDTH / 5f;
-            HEIGHT = Constants.HEIGHT / 8f;
-        }
-        else {
-            WIDTH = Constants.WIDTH / 6f;
-            HEIGHT = Constants.HEIGHT / 8f;
-        }
-
-        runningAnimation = new Animation<TextureRegion>(0.08f, textures, Animation.PlayMode.LOOP);
-        this.stateTime = 0f;
 
 
-        init(monsterType, world, x, y);
+
+
+
+    public UfoMonster(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
+        super(textures,  world,  x,  y);
+
+        WIDTH = Constants.WIDTH / 6f;
+        HEIGHT = Constants.HEIGHT / 8f;
+
+
+        init(world, x, y);
 
         body.setLinearVelocity(VELOCITY, 0);
 
@@ -71,28 +40,21 @@ public class Monster extends Actor {
 
 
 
-    public Monster(MonsterType monsterType, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
-        sprite = new Sprite(texture);
-
-        if (monsterType == MonsterType.RED) {
-            WIDTH = Constants.WIDTH / 8f;
-            HEIGHT = WIDTH;
-        }
-        else if (monsterType == MonsterType.UFO) {
-            WIDTH = Constants.WIDTH / 3f;
-            HEIGHT = Constants.HEIGHT / 4f;
-        }
+    public UfoMonster(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+        super(texture, world, x, y);
+        WIDTH = Constants.WIDTH / 3f;
+        HEIGHT = Constants.HEIGHT / 4f;
 
 
-        init(monsterType, world, x, y);
+
+        init( world, x, y);
     }
 
 
-    private void init(MonsterType monsterType, World world, float x, float y) {
+    private void init( World world, float x, float y) {
         sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
-        this.monsterType = monsterType;
 
         this.world = world;
 
@@ -152,7 +114,6 @@ public class Monster extends Actor {
             checkPlayerDistance();
             updatePos();
             checkWallColision();
-            updateAnimations();
 
         }
 
@@ -165,7 +126,7 @@ public class Monster extends Actor {
     }
 
     private void checkPlayerDistance(){
-        if (monsterType != MonsterType.RED && body.getLinearVelocity().y == 0 && getPlayerDistance() < playerDetectingRange){
+        if (body.getLinearVelocity().y == 0 && getPlayerDistance() < playerDetectingRange){
             moveTowardsPlayer();
         }
     }
@@ -176,7 +137,7 @@ public class Monster extends Actor {
     }
 
 
-    void movePlayerCloser(){
+    public void movePlayerCloser(){
         Vector2 vectDirection = body.getPosition().sub(Player.player.body.getPosition()).nor().scl(playerMovingScale);
         Player.player.body.setLinearVelocity(vectDirection);
     }
@@ -186,25 +147,12 @@ public class Monster extends Actor {
     }
 
 
-    private void updateAnimations(){
-        if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
-            this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-        }
 
-    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (this.alive){
-            if (monsterType == MonsterType.GREEN || monsterType == MonsterType.BLUE){
-                TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
-                batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
-
-
-            }
-            else {
-                sprite.draw(batch);
-            }
+            sprite.draw(batch);
         }
 
 

@@ -1,6 +1,10 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 //Store number of drawn objects.

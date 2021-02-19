@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejump.Gameplay;
+package tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
@@ -18,7 +19,7 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 public class Platform extends Actor {
 
-    Sprite sprite;
+    public Sprite sprite;
     World world;
     Body body;
     PlatformColor platformColor;

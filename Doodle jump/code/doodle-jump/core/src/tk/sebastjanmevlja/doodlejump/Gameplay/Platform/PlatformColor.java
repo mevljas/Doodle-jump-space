@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejump.Gameplay;
+package tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 
 public enum PlatformColor {
     BROWN,

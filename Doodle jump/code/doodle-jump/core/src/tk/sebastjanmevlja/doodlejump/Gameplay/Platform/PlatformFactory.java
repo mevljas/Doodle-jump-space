@@ -1,12 +1,14 @@
-package tk.sebastjanmevlja.doodlejump.Gameplay;
+package tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PLATFORM_WIDTH;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform.PLATFORM_WIDTH;
 
 public class PlatformFactory {
 

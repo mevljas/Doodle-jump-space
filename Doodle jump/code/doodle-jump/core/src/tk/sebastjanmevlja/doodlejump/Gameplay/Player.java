@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.ArrayList;
@@ -29,14 +31,14 @@ enum HorizontalDirection {
 public class Player extends Actor  {
 
 
-    static Player player;
+    public static Player player;
     public static int lives;
     public static int score;
     public static ArrayList<Shield> removedShields;
 
     Sprite sprite;
     World world;
-    Body body;
+    public Body body;
 
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;

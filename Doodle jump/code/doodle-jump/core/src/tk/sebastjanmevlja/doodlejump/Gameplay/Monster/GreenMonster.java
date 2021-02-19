@@ -1,33 +1,45 @@
-package tk.sebastjanmevlja.doodlejump.Gameplay;
+package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
+import com.badlogic.gdx.utils.Array;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 
-public class Shield extends Actor {
+public class GreenMonster extends Monster {
 
-    Sprite sprite;
-    World world;
-    Body body;
-    public static float SHIELD_WIDTH = Constants.WIDTH * 0.12f;
-    public static float SHIELD_HEIGHT = SHIELD_WIDTH;
-    public Platform parentPlatform;
+    public GreenMonster(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
+        super(textures, world, x, y);
+        WIDTH = Constants.WIDTH / 6f;
+        HEIGHT = Constants.HEIGHT / 8f;
+
+        runningAnimation = new Animation<TextureRegion>(0.08f, textures, Animation.PlayMode.LOOP);
+        this.stateTime = 0f;
+
+
+        init( world, x, y);
+
+        body.setLinearVelocity(VELOCITY, 0);
+
+
+    }
 
 
 
 
-    public Shield(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("shield"));
-        sprite.setSize(SHIELD_WIDTH, SHIELD_HEIGHT);
+
+
+    private void init( World world, float x, float y) {
+        sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
-        this.parentPlatform = platform;
 
         this.world = world;
 
@@ -48,31 +60,34 @@ public class Shield extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight() * 0.3f / PPM);
+        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight()
+                * 0.4f / PPM);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.SHIELD_BIT;
-        fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
+        fixtureDef.filter.categoryBits = Constants.MONSTER_BIT;
+        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT |  Constants.WALLS_BIT ;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         fixtureDef.isSensor = true;
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData(this);
-
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
     }
 
-    public void updatePos(float x, float y){
-        // Set the sprite's position from the updated physics body location
-        sprite.setPosition(x,y);
-        this.body.setTransform((sprite.getX() + sprite.getWidth()/2) /PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM, 0 );
 
+
+
+
+    public void updatePos(){
+        // Set the sprite's position from the updated physics body location
+        sprite.setPosition((body.getPosition().x * PPM) - sprite.
+                        getWidth()/2 ,
+                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
     }
 
 
@@ -80,15 +95,37 @@ public class Shield extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (this.alive){
+            updatePos();
+            checkWallColision();
+            updateAnimations();
+
+        }
+
+    }
+
+    private void checkWallColision() {
+        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
+            changeDirection();
+        }
     }
 
 
 
 
+
+    private void updateAnimations(){
+        this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+    }
+
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        if (this.alive){
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        }
 
-        sprite.draw(batch);
 
     }
 
@@ -112,7 +149,20 @@ public class Shield extends Actor {
         return body;
     }
 
+    public boolean isAlive() {
+        return alive;
+    }
 
+
+    public void changeDirection(){
+        body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+    }
+
+    public void kill() {
+        this.alive = false;
+        Player.incScore();
+        Sound.playMonsterSound();
+    }
 
     @Override
     public float getY() {
@@ -134,11 +184,7 @@ public class Shield extends Actor {
         return sprite.getHeight();
     }
 
-
     public void incrementGlobalObjectCounter(){
         Culling.incrementObjectsCounter();
     }
-
-
-
 }

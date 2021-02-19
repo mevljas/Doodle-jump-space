@@ -18,14 +18,18 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejump.MyGame.Game;
 
 import java.util.ArrayList;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.monsters;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.MonsterFactory.removeMonster;
-import static tk.sebastjanmevlja.doodlejump.Gameplay.PlatformFactory.*;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory.monsters;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory.removeMonster;
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PlatformFactory.*;
 
 
 public class Level1Screen implements Screen {

@@ -1,6 +1,10 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.physics.box2d.*;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.UfoMonster;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
@@ -74,9 +78,9 @@ public class WorldContactListener implements ContactListener {
             if (player.isImunity()){
                 return;
             }
-            if (monster.getMonsterType() == MonsterType.UFO){
+            if (monster instanceof UfoMonster){
                 monster.sprite.setRegion(MonsterFactory.alienUfoLight);
-                monster.movePlayerCloser();
+                ((UfoMonster) monster).movePlayerCloser();
             }
             else {
                 Player.decLives();
