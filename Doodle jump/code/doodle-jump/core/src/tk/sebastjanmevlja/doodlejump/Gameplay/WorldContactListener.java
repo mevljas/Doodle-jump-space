@@ -6,8 +6,6 @@ import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.UfoMonster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
 
-import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
-
 public class WorldContactListener implements ContactListener {
 
     private boolean jump;
@@ -27,7 +25,6 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-;
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
@@ -41,12 +38,14 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getBodyPosition().y  < platform.getBodyPosition().y  ) {
+            if (player.getBodyPosition().y - player.getBodyHeight() < platform.getBodyPosition().y  ) {
                 ignoreCollsion = true;
 
             }
-            else if (player.getBodyPosition().y   > platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2 ) ) {
+//            else if (player.getBodyPosition().y > platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2 ) ) {
+            else {
                 jump = true;
+
 //                Break brown platform
                 platform.breakPlatform();
                 Sound.playJumpSound();
@@ -59,11 +58,12 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             trampoline = (Trampoline) (fixA.getUserData() instanceof Trampoline ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getBodyPosition().y   < trampoline.getBodyPosition().y  ) {
+            if (player.getBodyPosition().y - player.getBodyHeight()   < trampoline.getBodyPosition().y  ) {
                 ignoreCollsion = true;
 
             }
-            else if (player.getBodyPosition().y   > trampoline.getBodyPosition().y + (trampoline.sprite.getHeight() / PPM / 2 ) ) {
+//            else if (player.getBodyPosition().y   > trampoline.getBodyPosition().y + (trampoline.sprite.getHeight() / PPM / 2 ) ) {
+            else {
                 jumpTrampoline = true;
                 Sound.playJumpSound();
                 Player.incScore();
@@ -111,6 +111,11 @@ public class WorldContactListener implements ContactListener {
             shield.parentPlatform.removeShield();
 
         }
+
+
+
+
+
 
 
 

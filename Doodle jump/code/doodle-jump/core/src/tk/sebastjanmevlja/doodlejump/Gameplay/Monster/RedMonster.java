@@ -1,13 +1,10 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Culling;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Sound;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
@@ -75,7 +72,7 @@ public class RedMonster extends Monster {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.MONSTER_BIT;
-        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT |  Constants.WALLS_BIT ;
+        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         fixtureDef.isSensor = true;
@@ -90,30 +87,10 @@ public class RedMonster extends Monster {
 
 
 
-    public void updatePos(){
-        // Set the sprite's position from the updated physics body location
-        sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
-    }
-
-
-
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (alive){
-            updatePos();
-            checkWallColision();
 
-        }
-
-    }
-
-    private void checkWallColision() {
-        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
-            changeDirection();
-        }
     }
 
 
@@ -127,62 +104,5 @@ public class RedMonster extends Monster {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
 
-    public float spriteWidth(){
-        return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition(){
-        return body.getPosition();
-    }
-
-    public Sprite getSprite() {
-        return sprite;
-    }
-
-    public Body getBody() {
-        return body;
-    }
-
-    public boolean isAlive() {
-        return alive;
-    }
-
-
-    public void changeDirection(){
-        body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
-    }
-
-    public void kill() {
-        this.alive = false;
-        Player.incScore();
-        Sound.playMonsterSound();
-    }
-
-    @Override
-    public float getY() {
-        return sprite.getY();
-    }
-
-    @Override
-    public float getX() {
-        return sprite.getX();
-    }
-
-    @Override
-    public float getWidth() {
-        return sprite.getWidth();
-    }
-
-    @Override
-    public float getHeight() {
-        return sprite.getHeight();
-    }
-
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
 }

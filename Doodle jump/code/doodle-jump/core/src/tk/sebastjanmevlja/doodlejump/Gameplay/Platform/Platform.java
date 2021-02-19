@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
+import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
@@ -30,6 +31,7 @@ public class Platform extends Actor {
     private boolean alive = true;
     private PlatformType platformType;
     private static Random r;
+    private HorizontalDirection direction = HorizontalDirection.STILL;
 
     // A variable for tracking elapsed time for the animation
     float stateTime;
@@ -76,7 +78,7 @@ public class Platform extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLATFORM_BIT;
-        fixtureDef.filter.maskBits = Constants.PLAYER_BIT | Constants.WALLS_BIT;
+        fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -91,6 +93,9 @@ public class Platform extends Actor {
         }
         if (platformType == PlatformType.MOVING){
             body.setLinearVelocity(VELOCITY, 0);
+            this.direction = HorizontalDirection.RIGHT;
+
+
         }
         r = new Random();
 
@@ -160,7 +165,10 @@ public class Platform extends Actor {
     }
 
     private void checkWallColision() {
-        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH ) {
+            changeDirection();
+        }
+        else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0){
             changeDirection();
         }
     }
@@ -236,7 +244,15 @@ public class Platform extends Actor {
 
 
     public void changeDirection(){
-        body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+        if (direction == HorizontalDirection.RIGHT) {
+            body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
+            direction = HorizontalDirection.LEFT;
+        }
+        else if (direction == HorizontalDirection.LEFT){
+            body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
+            direction = HorizontalDirection.RIGHT;
+        }
+
     }
 
     public Trampoline getTrampoline() {

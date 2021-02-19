@@ -9,23 +9,13 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.PlatformFactory;
+import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
+import tk.sebastjanmevlja.doodlejump.Helpers.VerticalDirection;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.ArrayList;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
-
-
-
-
-enum VerticalDirection {
-    UP,DOWN, STILL
-}
-
-
-enum HorizontalDirection {
-    LEFT, RIGHT, STILL
-}
 
 
 public class Player extends Actor  {
@@ -62,6 +52,8 @@ public class Player extends Actor  {
     public static ArrayList<Bullet> bullets;
     private Shield shield;
     private boolean imunity = false;
+    private float bodyHeight = 0;
+    private float bodyWidth = 0;
 
 
     public Player( World world, float x, float y) {
@@ -94,15 +86,16 @@ public class Player extends Actor  {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() / 4 / PPM, sprite.getHeight()
-                * 0.33f / PPM);
+        bodyWidth = sprite.getWidth() / 4 / PPM;
+        bodyHeight = sprite.getHeight() * 0.33f / PPM;
+        shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.WALLS_BIT | Constants.TRAMPOLINE_BIT | Constants.SHIELD_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.TRAMPOLINE_BIT | Constants.SHIELD_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -267,7 +260,7 @@ public class Player extends Actor  {
     }
 
     public void moveRight(){
-        body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
+//        body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
         body.setLinearVelocity(HORIZONTAL_VELOCITY, body.getLinearVelocity().y);
         horizontalDirection = HorizontalDirection.RIGHT;
     }
@@ -370,5 +363,13 @@ public class Player extends Actor  {
 
         }
 
+    }
+
+    public float getBodyHeight() {
+        return this.bodyHeight;
+    }
+
+    public float getBodyWidth() {
+        return this.bodyWidth;
     }
 }

@@ -1,11 +1,13 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import tk.sebastjanmevlja.doodlejump.Gameplay.*;
+import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
@@ -34,7 +36,7 @@ public class Monster extends Actor {
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-//    Direction direction = Direction.STILL;
+    HorizontalDirection direction = HorizontalDirection.STILL;
 
 
     public Monster( Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
@@ -43,7 +45,6 @@ public class Monster extends Actor {
 
         init(world, x, y);
 
-        body.setLinearVelocity(VELOCITY, 0);
 
 
     }
@@ -92,7 +93,7 @@ public class Monster extends Actor {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.MONSTER_BIT;
-        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT |  Constants.WALLS_BIT ;
+        fixtureDef.filter.maskBits = Constants.BULLET_BIT | Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         fixtureDef.isSensor = true;
@@ -116,6 +117,13 @@ public class Monster extends Actor {
 
 
 
+    void updateAnimations(){
+        this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+    }
+
+
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -127,8 +135,8 @@ public class Monster extends Actor {
 
     }
 
-    private void checkWallColision() {
-        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() < 0) {
+    void checkWallColision() {
+        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() <= 0) {
             changeDirection();
         }
     }

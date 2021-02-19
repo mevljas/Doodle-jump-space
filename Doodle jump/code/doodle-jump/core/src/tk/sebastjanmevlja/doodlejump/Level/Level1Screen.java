@@ -79,9 +79,7 @@ public class Level1Screen implements Screen {
         MonsterFactory.generateMonsters(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
         hud = new Hud();
-
-//        Generate walls
-        new Walls(world);
+        
 
         Input = new Input(player);
 
