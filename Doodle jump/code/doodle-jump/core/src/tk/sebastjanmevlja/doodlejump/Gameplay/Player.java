@@ -63,6 +63,7 @@ public class Player extends Actor  {
         sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
+        sprite.setOriginCenter();
 
 
         this.world = world;
@@ -216,8 +217,10 @@ public class Player extends Actor  {
     private void rotate(){
         if (this.rotating){
             sprite.setRotation((sprite.getRotation() + 5) % 360);
+            body.setTransform( body.getPosition(),body.getAngle() + (float) Math.toRadians(5) );
             if (sprite.getRotation() == 0){
                 this.rotating = false;
+                body.setTransform( body.getPosition(), 0);
             }
         }
     }
