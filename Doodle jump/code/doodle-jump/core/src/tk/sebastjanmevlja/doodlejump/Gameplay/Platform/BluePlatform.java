@@ -49,7 +49,6 @@ public class BluePlatform extends Platform {
     @Override
     public void act(float delta) {
         super.act(delta);
-        updatePos();
         checkWallColision();
 
 

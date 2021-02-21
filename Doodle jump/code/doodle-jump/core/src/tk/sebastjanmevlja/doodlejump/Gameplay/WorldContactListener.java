@@ -45,13 +45,17 @@ public class WorldContactListener implements ContactListener {
             }
 //            else if (player.getBodyPosition().y > platform.getBodyPosition().y + (platform.sprite.getHeight() / PPM / 2 ) ) {
             else {
-                jump = true;
-
 //                Break brown platform
-                if (platform instanceof  BrownPlatform)
+                if (platform instanceof  BrownPlatform){
                     ( (BrownPlatform) platform).breakPlatform();
-                Sound.playJumpSound();
-                Player.incScore();
+                    ignoreCollsion = true;
+                }
+                else {
+                    jump = true;
+                    Sound.playJumpSound();
+                    Player.incScore();
+                }
+
 
             }
         }

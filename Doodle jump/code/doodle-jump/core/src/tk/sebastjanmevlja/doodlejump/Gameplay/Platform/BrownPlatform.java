@@ -14,6 +14,7 @@ import tk.sebastjanmevlja.doodlejump.Gameplay.Trampoline;
 
 public class BrownPlatform extends Platform {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("brown_platform");
+    private static final float FALLING_VELOCITY = VELOCITY * -3f;
     public Animation<TextureRegion> runningAnimation;
     // A variable for tracking elapsed time for the animation
     float stateTime;
@@ -23,7 +24,7 @@ public class BrownPlatform extends Platform {
 
 
 
-        runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
 
 
@@ -95,9 +96,9 @@ public class BrownPlatform extends Platform {
 
     public void breakPlatform(){
         this.broken = true;
-//            this.world.destroyBody(body);
         this.stateTime = 0f;
         Sound.playPlatformBreakingSound();
+        this.body.setLinearVelocity(0, FALLING_VELOCITY);
 
     }
 

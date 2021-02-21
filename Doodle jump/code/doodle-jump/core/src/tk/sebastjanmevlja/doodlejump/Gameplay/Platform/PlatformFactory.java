@@ -92,14 +92,16 @@ public class PlatformFactory {
     public static void moveWorld(float velocity){
 
         for (Platform p: platforms) {
-            p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity );
+            if (!p.broken)
+                p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity );
         }
     }
 
 
     public static void stopWorld(){
         for (Platform p: platforms) {
-            p.body.setLinearVelocity(p.body.getLinearVelocity().x,0f);
+            if (!p.broken)
+                p.body.setLinearVelocity(p.body.getLinearVelocity().x,0f);
         }
     }
 
