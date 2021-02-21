@@ -21,8 +21,8 @@ public class Monster extends Actor {
     public Body body;
 
 
-    public static float WIDTH = Constants.WIDTH / 5f;
-    public static float HEIGHT = Constants.HEIGHT / 8f;
+    public static float WIDTH;
+    public static float HEIGHT;
 
 
     boolean alive = true;
@@ -41,8 +41,6 @@ public class Monster extends Actor {
 
     public Monster( Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
         sprite = new Sprite(textures.get(0));
-
-
         init(world, x, y);
 
 
@@ -53,14 +51,11 @@ public class Monster extends Actor {
 
     public Monster( TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
-
-
-
         init(world, x, y);
     }
 
 
-    private void init( World world, float x, float y) {
+    void init(World world, float x, float y) {
         sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
