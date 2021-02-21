@@ -39,8 +39,9 @@ public class Player extends Actor  {
 
 
 
-    public static float WIDTH = Constants.WIDTH / 3.5f;
-    public static float HEIGHT = Constants.HEIGHT / 8f;
+//    public static float WIDTH = Constants.WIDTH / 5.3f;
+    public static float HEIGHT = Constants.HEIGHT / 11.8f;
+    public static float WIDTH = HEIGHT;
     private static float accelerometerSensitivity = 0.8f;
 
     private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");

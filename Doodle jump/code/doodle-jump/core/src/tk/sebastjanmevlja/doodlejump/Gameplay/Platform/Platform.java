@@ -24,8 +24,8 @@ public class Platform extends Actor {
     World world;
     Body body;
     PlatformColor platformColor;
-    public static float PLATFORM_WIDTH = Constants.WIDTH / 6f;
-    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 40f;
+    public static float PLATFORM_WIDTH = Constants.WIDTH / 5f;
+    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 33f;
     private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
