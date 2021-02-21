@@ -37,6 +37,7 @@ public class Player extends Actor  {
     public static final float JUMP_VELOCITY_TRAMPOLINE = JUMP_VELOCITY * 1.3f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
     public static final float WORLD_VELOCITY = Constants.HEIGHT * 0.003f;
+    public static final float WORLD_FALL_VELOCITY = -WORLD_VELOCITY * 4;
 
 
 
@@ -56,6 +57,8 @@ public class Player extends Actor  {
     private boolean imunity = false;
     private float bodyHeight = 0;
     private float bodyWidth = 0;
+    private boolean falling = false;
+    private Sprite fallingSprite;
 
 
     public Player( World world, float x, float y) {
@@ -111,6 +114,7 @@ public class Player extends Actor  {
 
         bullets = new ArrayList<>();
         removedShields = new ArrayList<>();
+        falling = false;
 
     }
 
@@ -129,9 +133,20 @@ public class Player extends Actor  {
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight() * 0.36f );
 
-        if (sprite.getY() <= 0 && lives > 0){
-            Sound.playFallingSound();
+
+        if (sprite.getY() <= - Constants.HEIGHT){
             lives = 0;
+        }
+        else if (sprite.getY() <= 0 && !falling){
+            PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
+            MonsterFactory.moveWorld(WORLD_FALL_VELOCITY);
+            Sound.playFallingSound();
+            falling = true;
+            fallingSprite = new Sprite(up);
+            fallingSprite.setSize(WIDTH, HEIGHT);
+            fallingSprite.setPosition(sprite.getX(), sprite.getY());
+            fallingSprite.setCenterX(sprite.getX());
+            fallingSprite.setOriginCenter();
         }
 
         if (shield != null){
@@ -188,10 +203,13 @@ public class Player extends Actor  {
         super.act(delta);
         checkAccelerometer();
         updatePos();
-        checkState();
         updateSprite();
-        rotate();
         checkBorderCollision();
+        if (!falling){
+            checkState();
+            rotate();
+        }
+
 
 
     }
@@ -228,6 +246,9 @@ public class Player extends Actor  {
 //        drawBullets(batch, parentAlpha);
         if (shield != null){
             shield.draw(batch, parentAlpha);
+        }
+        if (falling){
+            fallingSprite.draw(batch);
         }
     }
 
@@ -268,7 +289,7 @@ public class Player extends Actor  {
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
         }
-        else {
+        else{
             PlatformFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
             MonsterFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
         }
