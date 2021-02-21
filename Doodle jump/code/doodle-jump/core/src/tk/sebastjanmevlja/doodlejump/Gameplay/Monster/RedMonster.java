@@ -3,39 +3,29 @@ package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 
 
 public class RedMonster extends Monster {
 
-
-    public RedMonster(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
-        super(textures, world, x, y);
-
-
-        HEIGHT = Constants.HEIGHT / 10f;
-        WIDTH = HEIGHT;
-
-
-        init( world, x, y);
-
-        body.setLinearVelocity(VELOCITY, 0);
-
-
-    }
+    private float leftLocation;
+    private float rightLocation;
+    private float VELOCITY = Constants.WIDTH * 0.003f;
 
 
 
     public RedMonster( TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         super(texture, world, x, y);
 
-
         WIDTH = Constants.WIDTH / 8f;
         HEIGHT = WIDTH;
-
-
         init(world, x, y);
+
+        rightLocation = x + WIDTH * 0.8f;
+        leftLocation = x - WIDTH * 0.8f;
+        direction = HorizontalDirection.RIGHT;
+        body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
     }
 
 
@@ -47,7 +37,20 @@ public class RedMonster extends Monster {
     @Override
     public void act(float delta) {
         super.act(delta);
+        changeDirection();
+    }
 
+    public void changeDirection(){
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= rightLocation){
+            direction = HorizontalDirection.LEFT;
+            body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
+
+        }
+        else if (direction == HorizontalDirection.LEFT && sprite.getX() <= leftLocation){
+            direction = HorizontalDirection.RIGHT;
+            body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
+
+        }
     }
 
 
