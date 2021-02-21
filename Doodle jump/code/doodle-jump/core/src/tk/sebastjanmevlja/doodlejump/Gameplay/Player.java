@@ -33,9 +33,10 @@ public class Player extends Actor  {
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
-    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0029f;
+    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0038f;
     public static final float JUMP_VELOCITY_TRAMPOLINE = JUMP_VELOCITY * 1.3f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
+    public static final float WORLD_VELOCITY = Constants.HEIGHT * 0.003f;
 
 
 
@@ -219,16 +220,16 @@ public class Player extends Actor  {
 
 
         verticalDirection = VerticalDirection.UP;
-        PlatformFactory.moveWorld(JUMP_VELOCITY);
-        MonsterFactory.moveWorld(JUMP_VELOCITY);
+//        PlatformFactory.moveWorld(JUMP_VELOCITY);
+//        MonsterFactory.moveWorld(JUMP_VELOCITY);
         body.setLinearVelocity(0f,JUMP_VELOCITY);
 
     }
 
     public void jumpTrampoline() {
         verticalDirection = VerticalDirection.UP;
-        PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE);
-        MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE) ;
+//        PlatformFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE);
+//        MonsterFactory.moveWorld(JUMP_VELOCITY_TRAMPOLINE) ;
         body.setLinearVelocity(0f,JUMP_VELOCITY_TRAMPOLINE);
         this.rotating = true;
     }
@@ -245,10 +246,16 @@ public class Player extends Actor  {
 
     void checkState(){
 
-        if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y < 0 && sprite.getY() <= Constants.HEIGHT * 0.5f){
+        if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y < 0){
             verticalDirection = VerticalDirection.DOWN;
+        }
+        if (sprite.getY() <= Constants.HEIGHT * 0.5f){
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
+        }
+        else {
+            PlatformFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
+            MonsterFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
         }
 
 
