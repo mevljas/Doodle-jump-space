@@ -190,10 +190,25 @@ public class Player extends Actor  {
         checkState();
         updateSprite();
         rotate();
-//        updateBullets(delta);
+        checkBorderCollision();
 
 
     }
+
+    void checkBorderCollision() {
+        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH ) {
+            resolveBorderCollision();
+        }
+        else if (horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0){
+            resolveBorderCollision();
+        }
+    }
+
+    void resolveBorderCollision(){
+        body.setLinearVelocity(0, body.getLinearVelocity().y);
+    }
+
+
 
 
 
