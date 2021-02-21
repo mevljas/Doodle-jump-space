@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
 
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
@@ -14,8 +15,8 @@ public class Trampoline extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    public static float TRAMPOLINE_WIDTH = Constants.WIDTH * 0.16f;
-    public static float TRAMPOLINE_HEIGHT = Constants.HEIGHT * 0.06f;
+    public static float TRAMPOLINE_WIDTH = Platform.PLATFORM_WIDTH * 0.7f;
+    public static float TRAMPOLINE_HEIGHT = Platform.PLATFORM_HEIGHT * 1.3f;
     public Animation<TextureRegion> runningAnimation;
 
 
