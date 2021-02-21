@@ -53,7 +53,7 @@ public class UfoMonster extends Monster {
         super.act(delta);
         if (this.alive){
             checkPlayerDistance();
-
+            checkWallColision();
         }
 
     }

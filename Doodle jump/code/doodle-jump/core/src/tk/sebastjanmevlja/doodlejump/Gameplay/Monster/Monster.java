@@ -124,17 +124,10 @@ public class Monster extends Actor {
         super.act(delta);
         if (this.alive){
             updatePos();
-            checkWallColision();
-
         }
 
     }
 
-    void checkWallColision() {
-        if (sprite.getX() + spriteWidth() >= Constants.WIDTH || sprite.getX() <= 0) {
-            changeDirection();
-        }
-    }
 
 
 
@@ -144,6 +137,31 @@ public class Monster extends Actor {
             sprite.draw(batch);
         }
 
+
+    }
+
+    void checkWallColision() {
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH ) {
+            changeDirection();
+        }
+        else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0){
+            changeDirection();
+        }
+    }
+
+
+
+
+
+    public void changeDirection(){
+        if (direction == HorizontalDirection.RIGHT) {
+            body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
+            direction = HorizontalDirection.LEFT;
+        }
+        else if (direction == HorizontalDirection.LEFT){
+            body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
+            direction = HorizontalDirection.RIGHT;
+        }
 
     }
 
@@ -171,10 +189,6 @@ public class Monster extends Actor {
         return alive;
     }
 
-
-    public void changeDirection(){
-        body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
-    }
 
     public void kill() {
         this.alive = false;

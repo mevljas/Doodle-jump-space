@@ -37,6 +37,7 @@ public class GreenMonster extends Monster {
     public void act(float delta) {
         super.act(delta);
         if (this.alive){
+            checkWallColision();
             updateAnimations();
 
         }
