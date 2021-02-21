@@ -28,9 +28,9 @@ public class Input implements InputProcessor, GestureDetector.GestureListener {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-            case com.badlogic.gdx.Input.Keys.UP:
-                player.jump();
-                break;
+//            case com.badlogic.gdx.Input.Keys.UP:
+//                player.jump();
+//                break;
 
             case com.badlogic.gdx.Input.Keys.LEFT:
                 player.moveLeft();
