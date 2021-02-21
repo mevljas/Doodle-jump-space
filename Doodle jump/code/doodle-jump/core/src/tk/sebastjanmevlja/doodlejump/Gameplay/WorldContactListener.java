@@ -4,6 +4,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.UfoMonster;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.BrownPlatform;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
 
 public class WorldContactListener implements ContactListener {
@@ -47,7 +48,8 @@ public class WorldContactListener implements ContactListener {
                 jump = true;
 
 //                Break brown platform
-                platform.breakPlatform();
+                if (platform instanceof  BrownPlatform)
+                    ( (BrownPlatform) platform).breakPlatform();
                 Sound.playJumpSound();
                 Player.incScore();
 

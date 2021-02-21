@@ -46,9 +46,8 @@ public class PlatformFactory {
     }
 
     public static void generatePlatforms(World world){
-
-        generatePlatform(PlatformType.STATIC, PlatformColor.GREEN, world, Constants.WIDTH / 2f, 0);
         y = 0;
+        platforms.add(new GreenPlatform(world, Constants.WIDTH / 2f, y));
 
 
 
@@ -56,7 +55,7 @@ public class PlatformFactory {
             float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
             y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
 
-            generatePlatform(randomType(), randomColor(), world, x, y);
+            generateRandomPlatform(world, x, y);
 
 
         }
@@ -68,70 +67,25 @@ public class PlatformFactory {
     
     
 
-    public static void generatePlatform(PlatformType type, PlatformColor color, World world, float x, float y) {
-        TextureAtlas.AtlasRegion atlasRegion;
-        switch (color){
-            case BROWN:
-                atlasRegion = plaformTextureRegionBrown;
-                break;
 
-            case WHITE:
-                atlasRegion = plaformTextureRegionWhite;
-                break;
-
-            case DARK_BLUE:
-                atlasRegion = plaformTextureRegionDarkBlue;
-                break;
-
-            case LIGHT_BLUE:
-                atlasRegion = plaformTextureRegionLightBlue;
-                break;
-
-            default:
-                atlasRegion = plaformTextureRegionGreen;
-                break;
-        }
-        platforms.add(new Platform(type, color, atlasRegion,world, x, y));
-    }
-
-    public static void recyclePlatform(PlatformType type, PlatformColor color, Platform platform, float x, float y) {
-        TextureAtlas.AtlasRegion atlasRegion;
-        switch (color){
-            case BROWN:
-                atlasRegion = plaformTextureRegionBrown;
-                break;
-
-            case WHITE:
-                atlasRegion = plaformTextureRegionWhite;
-                break;
-
-            case DARK_BLUE:
-                atlasRegion = plaformTextureRegionDarkBlue;
-                break;
-
-            case LIGHT_BLUE:
-                atlasRegion = plaformTextureRegionLightBlue;
-                break;
-
-            default:
-                atlasRegion = plaformTextureRegionGreen;
-                break;
-        }
-        platform.changeType(type);
-        platform.changeColor(color);
-        platform.changeTexture(atlasRegion);
+    public static void recyclePlatform( Platform platform, float x, float y) {
         platform.changePosition(x,y);
         platform.resetItems();
         platforms.remove(platform);
         platforms.addLast(platform);
     }
 
-    private static PlatformColor randomColor(){
-        return PlatformColor.values()[new Random().nextInt(PlatformColor.values().length - 1)];
-    }
-
-    private static PlatformType randomType(){
-        return r.nextInt(10) > 7 ? PlatformType.MOVING : PlatformType.STATIC;
+    private static void generateRandomPlatform(World world, float x, float y){
+        int value = r.nextInt(100);
+        if (value > 25){
+            platforms.add(new GreenPlatform(world, x, y));
+        }
+        else if (value < 10){
+            platforms.add(new BrownPlatform(world, x, y));
+        }
+        else{
+            platforms.add(new BluePlatform(world, x, y));
+        }
     }
 
 
@@ -159,7 +113,7 @@ public class PlatformFactory {
     public static void recyclePlatform(Platform p){
         float y = platforms.getLast().sprite.getY() + minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
         float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
-        recyclePlatform(randomType(), randomColor(), p, x, y );
+        recyclePlatform(p, x, y );
     }
 
     public static float getY() {

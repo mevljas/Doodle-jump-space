@@ -1,13 +1,16 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import tk.sebastjanmevlja.doodlejump.Gameplay.*;
-import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Shield;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Trampoline;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
@@ -23,20 +26,11 @@ public class Platform extends Actor {
     public Sprite sprite;
     World world;
     Body body;
-    PlatformColor platformColor;
     public static float PLATFORM_WIDTH = Constants.WIDTH / 5f;
     public static float PLATFORM_HEIGHT = Constants.HEIGHT / 33f;
-    private boolean broken = false;
-    public Animation<TextureRegion> runningAnimation;
-    private boolean alive = true;
-    private PlatformType platformType;
-    private static Random r;
-    private HorizontalDirection direction = HorizontalDirection.STILL;
-
-    // A variable for tracking elapsed time for the animation
-    float stateTime;
-
-//    Direction direction = Direction.STILL;
+    boolean broken = false;
+    boolean alive = true;
+    static Random r = new Random();
 
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
     Trampoline trampoline;
@@ -44,12 +38,10 @@ public class Platform extends Actor {
 
 
 
-    public Platform(PlatformType platformType, PlatformColor color, TextureAtlas.AtlasRegion texture, World world, float x, float y) {
-        sprite = new Sprite(texture);
-        sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
-        sprite.setPosition(x,y);
-        this.platformColor = color;
-        this.platformType = platformType;
+    public Platform(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+        this.sprite = new Sprite(texture);
+        this.sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
+        this.sprite.setPosition(x,y);
 
         this.world = world;
 
@@ -87,45 +79,10 @@ public class Platform extends Actor {
         shape.dispose();
 
 
-        if (color == PlatformColor.BROWN){
-            runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
-            this.stateTime = 0f;
-        }
-        if (platformType == PlatformType.MOVING){
-            body.setLinearVelocity(VELOCITY, 0);
-            this.direction = HorizontalDirection.RIGHT;
-
-
-        }
-        r = new Random();
-
-        if (r.nextInt(15) > 12){
-            this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-            Level1Screen.backgroundGroup.addActor(this.trampoline);
-        }
-        else if (r.nextInt(15) > 12){
-            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
-            Level1Screen.backgroundGroup.addActor(this.shield);
-        }
-
 
     }
 
-    public void updatePos(){
-        // Set the sprite's position from the updated physics body location
-        sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
 
-        if (trampoline != null){
-            trampoline.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
-        }
-
-        if (shield != null){
-            shield.updatePos(calculateShieldPositionX(),calculateShieldPositionY());
-        }
-
-    }
 
     float calculateTrampolinePositionX(){
         return sprite.getX() + PLATFORM_WIDTH / 2 -  Trampoline.TRAMPOLINE_WIDTH / 2;
@@ -149,61 +106,28 @@ public class Platform extends Actor {
     public void act(float delta) {
         super.act(delta);
         updatePos();
-        checkWallColision();
-        updateAnimations();
-
-
-//        if (trampoline != null){
-//            trampoline.act(delta);
-//        }
-//
-//        if (shield != null){
-//            shield.act(delta);
-//        }
-
-
-    }
-
-    private void checkWallColision() {
-        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH ) {
-            changeDirection();
-        }
-        else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0){
-            changeDirection();
-        }
     }
 
 
-    private void updateAnimations(){
-        if (this.broken){
-            this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-            if (this.runningAnimation.isAnimationFinished(this.stateTime)){
-                this.alive = false;
-//              Move platform offscreen.
-//                this.body.setLinearVelocity(0f,-1000);
-            }
-        }
 
-    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch,parentAlpha);
+    }
 
-        if (!broken){
-            sprite.draw(batch);
-            if (trampoline != null){
-                trampoline.draw(batch, parentAlpha);
-            }
-            if (shield != null){
-                shield.draw(batch, parentAlpha);
-            }
+    public void updatePos(){
+        // Set the sprite's position from the updated physics body location
+        sprite.setPosition((body.getPosition().x * PPM) - sprite.
+                        getWidth()/2 ,
+                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
 
+        if (trampoline != null){
+            trampoline.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
         }
-        else if (alive){
-            // Get current frame of animation for the current stateTime
-            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
-            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 
+        if (shield != null){
+            shield.updatePos(calculateShieldPositionX(),calculateShieldPositionY());
         }
 
     }
@@ -228,32 +152,13 @@ public class Platform extends Actor {
         return body;
     }
 
-    public void breakPlatform(){
-        if (this.platformColor == PlatformColor.BROWN){
-            this.broken = true;
-//            this.world.destroyBody(body);
-            this.stateTime = 0f;
-            Sound.playPlatformBreakingSound();
-        }
 
-    }
 
     public boolean isAlive() {
         return alive;
     }
 
 
-    public void changeDirection(){
-        if (direction == HorizontalDirection.RIGHT) {
-            body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
-            direction = HorizontalDirection.LEFT;
-        }
-        else if (direction == HorizontalDirection.LEFT){
-            body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
-            direction = HorizontalDirection.RIGHT;
-        }
-
-    }
 
     public Trampoline getTrampoline() {
         return trampoline;
@@ -302,21 +207,7 @@ public class Platform extends Actor {
         }
     }
 
-    public void changeType(PlatformType type) {
 
-    }
-
-    public void changeColor(PlatformColor color) {
-        this.platformColor = color;
-
-        if (color == PlatformColor.BROWN){
-            runningAnimation = new Animation<TextureRegion>(0.08f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
-            this.stateTime = 0f;
-        }
-        else {
-            runningAnimation = null;
-        }
-    }
 
     public void changeTexture(TextureAtlas.AtlasRegion atlasRegion) {
         sprite = new Sprite(atlasRegion);
