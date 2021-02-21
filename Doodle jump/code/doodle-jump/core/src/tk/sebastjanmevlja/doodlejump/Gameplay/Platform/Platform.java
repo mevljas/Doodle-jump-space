@@ -24,8 +24,8 @@ public class Platform extends Actor {
     World world;
     Body body;
     PlatformColor platformColor;
-    public static float PLATFORM_WIDTH = Constants.WIDTH / 3.5f;
-    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 22f;
+    public static float PLATFORM_WIDTH = Constants.WIDTH / 6f;
+    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 45f;
     private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
     private boolean alive = true;
@@ -202,7 +202,7 @@ public class Platform extends Actor {
         else if (alive){
             // Get current frame of animation for the current stateTime
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
-            batch.draw(currentFrame, sprite.getX(), sprite.getY());
+            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
 
         }
 

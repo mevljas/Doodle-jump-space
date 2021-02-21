@@ -8,6 +8,7 @@ import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import java.util.LinkedList;
 import java.util.Random;
 
+import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform.PLATFORM_HEIGHT;
 import static tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform.PLATFORM_WIDTH;
 
 public class PlatformFactory {
@@ -37,9 +38,9 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacingHeight = Constants.HEIGHT * 0.35f;
-        minSpacingHeight = Constants.HEIGHT * 0.21f;
-        maxSpacingWidth = PLATFORM_WIDTH * 2.2f;
+        maxSpacingHeight = PLATFORM_HEIGHT * 4f;
+        minSpacingHeight = PLATFORM_HEIGHT * 2f;
+        maxSpacingWidth = Constants.WIDTH - PLATFORM_WIDTH;
         minSpacingWidth = PLATFORM_WIDTH * 0.1f;
         r = new Random();
     }
@@ -52,7 +53,6 @@ public class PlatformFactory {
 
 
         while (y < Constants.HEIGHT * 5) {
-//            float x = Platform.PLATFORM_WIDTH / 2 + random.nextFloat() * (Constants.WIDTH - Platform.PLATFORM_WIDTH * 1.3f);
             float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
             y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
 
