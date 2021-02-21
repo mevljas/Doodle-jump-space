@@ -197,10 +197,7 @@ public class Player extends Actor  {
     }
 
     void checkBorderCollision() {
-        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH ) {
-            resolveBorderCollision();
-        }
-        else if (horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0){
+        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH  || horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0){
             resolveBorderCollision();
         }
     }
