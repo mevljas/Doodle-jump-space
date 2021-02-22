@@ -12,6 +12,8 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 public class Trampoline extends Actor {
 
+    private float bodyWidth = 0;
+    private float bodyHeight = 0;
     Sprite sprite;
     World world;
     Body body;
@@ -51,7 +53,9 @@ public class Trampoline extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight() * 0.3f / PPM);
+        bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        bodyHeight = sprite.getHeight() * 0.3f / PPM;
+        shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
@@ -144,7 +148,7 @@ public class Trampoline extends Actor {
     }
 
 
-
-
-
+    public float getBodyHeight() {
+        return bodyHeight;
+    }
 }

@@ -1,8 +1,6 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay.Platform;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 
 import java.util.LinkedList;
@@ -16,12 +14,6 @@ public class PlatformFactory {
     public static LinkedList<Platform> platforms;
 
     static Random random = new Random();
-
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("platform_green");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("brown_platform");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionWhite = Asset.atlas.findRegion("platform_softblue");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionDarkBlue = Asset.atlas.findRegion("platform_white");
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
 
 
     public static int InitiaPlatformSize;
@@ -39,7 +31,7 @@ public class PlatformFactory {
     public PlatformFactory() {
         platforms = new LinkedList<>();
         maxSpacingHeight = PLATFORM_HEIGHT * 4f;
-        minSpacingHeight = PLATFORM_HEIGHT * 2f;
+        minSpacingHeight = PLATFORM_HEIGHT;
         maxSpacingWidth = Constants.WIDTH - PLATFORM_WIDTH;
         minSpacingWidth = PLATFORM_WIDTH * 0.1f;
         r = new Random();
