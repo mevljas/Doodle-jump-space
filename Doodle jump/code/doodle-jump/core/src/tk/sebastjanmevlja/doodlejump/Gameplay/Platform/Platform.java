@@ -225,10 +225,13 @@ public class Platform extends Actor {
                 (sprite.getY() + sprite.getHeight()/2) / PPM,0);
     }
 
-    public void resetItems() {
+
+    public void reEnable(){
         this.broken = false;
         this.alive = true;
+    }
 
+    public void resetItems() {
         Trampoline t = this.getTrampoline();
         if (t != null) {
             t.addAction(Actions.removeActor());
@@ -243,11 +246,15 @@ public class Platform extends Actor {
             this.shield = null;
         }
 
-        if (r.nextInt(15) > 12){
+        generateItems();
+    }
+
+    void generateItems(){
+        if (r.nextInt(40) == 1){
             this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
             Level1Screen.backgroundGroup.addActor(this.trampoline);
         }
-        else if (r.nextInt(15) > 12){
+        else if (r.nextInt(40) == 20){
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
             Level1Screen.backgroundGroup.addActor(this.shield);
         }

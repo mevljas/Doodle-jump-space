@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Shield;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Trampoline;
 import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
-import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 
 public class BluePlatform extends Platform {
@@ -26,16 +23,6 @@ public class BluePlatform extends Platform {
 
         body.setLinearVelocity(VELOCITY, 0);
         this.direction = HorizontalDirection.RIGHT;
-
-
-        if (r.nextInt(15) > 12){
-            this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-            Level1Screen.backgroundGroup.addActor(this.trampoline);
-        }
-        else if (r.nextInt(15) > 12){
-            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
-            Level1Screen.backgroundGroup.addActor(this.shield);
-        }
 
 
     }
