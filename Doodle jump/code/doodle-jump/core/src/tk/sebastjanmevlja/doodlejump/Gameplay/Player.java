@@ -33,7 +33,7 @@ public class Player extends Actor  {
     VerticalDirection verticalDirection = VerticalDirection.STILL;
     HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
 
-    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0038f;
+    public static final float JUMP_VELOCITY = Constants.HEIGHT * 0.0042f;
     public static final float JUMP_VELOCITY_TRAMPOLINE = JUMP_VELOCITY * 1.3f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
     public static final float WORLD_VELOCITY = Constants.HEIGHT * 0.003f;
