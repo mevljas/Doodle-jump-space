@@ -31,7 +31,7 @@ public class PlatformFactory {
     public PlatformFactory() {
         platforms = new LinkedList<>();
         maxSpacingHeight = PLATFORM_HEIGHT * 4f;
-        minSpacingHeight = PLATFORM_HEIGHT;
+        minSpacingHeight = PLATFORM_HEIGHT * 2f;
         maxSpacingWidth = Constants.WIDTH - PLATFORM_WIDTH;
         minSpacingWidth = PLATFORM_WIDTH * 0.1f;
         r = new Random();
