@@ -420,4 +420,8 @@ public class Player extends Actor  {
     public float getBodyWidth() {
         return this.bodyWidth;
     }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 }

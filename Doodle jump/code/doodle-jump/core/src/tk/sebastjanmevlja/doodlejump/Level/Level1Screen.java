@@ -340,11 +340,15 @@ public class Level1Screen implements Screen {
 
     private void checkGameState(){
         if (Player.getLives() <= 0){
-            if (Player.getScore() > Game.localStorage.getHighScore())
-                Game.localStorage.setHighScore(Player.getScore());
-            Game.localStorage.setSavedData(false);
-            game.changeScreen(Screens.ENDSCREEN);
+            gameOver();
         }
+    }
+
+    public static void gameOver(){
+        if (Player.getScore() > Game.localStorage.getHighScore())
+            Game.localStorage.setHighScore(Player.getScore());
+        Game.localStorage.setSavedData(false);
+        Game.game.changeScreen(Screens.ENDSCREEN);
     }
 
     public static Stage getStage() {

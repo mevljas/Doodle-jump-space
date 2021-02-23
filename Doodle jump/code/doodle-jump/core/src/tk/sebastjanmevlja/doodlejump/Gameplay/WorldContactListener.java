@@ -1,6 +1,7 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.physics.box2d.*;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.BlackHoleMonster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.UfoMonster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.BrownPlatform;
@@ -14,6 +15,7 @@ public class WorldContactListener implements ContactListener {
     private Bullet bullet;
     private Trampoline trampoline;
     private Shield shield;
+    private boolean blackHoleMonster = false;
 
     public WorldContactListener(Player player) {
         this.player = player;
@@ -69,6 +71,9 @@ public class WorldContactListener implements ContactListener {
                 ((UfoMonster) monster).showLight();
                 ((UfoMonster) monster).movePlayerCloser();
             }
+            else if (monster instanceof BlackHoleMonster){
+                blackHoleMonster = true;
+            }
             else {
                 Player.decLives();
                 Sound.playMonsterSound();
@@ -113,6 +118,10 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
         contact.setEnabled(false);
+        if (blackHoleMonster){
+            ((BlackHoleMonster) monster).movePlayerCloser();
+        }
+
     }
 
 

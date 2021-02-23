@@ -19,6 +19,8 @@ public class Monster extends Actor {
     public Sprite sprite;
     World world;
     public Body body;
+    float bodyWidth = 0;
+    float bodyHeight = 0;
 
 
     public static float WIDTH;
@@ -80,8 +82,10 @@ public class Monster extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        shape.setAsBox(sprite.getWidth() * 0.4f / PPM, sprite.getHeight()
-                * 0.4f / PPM);
+        bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        bodyHeight = sprite.getHeight()
+                * 0.4f / PPM;
+        shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
         // you also define it's properties like density, restitution and others
@@ -218,5 +222,12 @@ public class Monster extends Actor {
 
     public void incrementGlobalObjectCounter(){
         Culling.incrementObjectsCounter();
+    }
+    public float getBodyHeight() {
+        return this.bodyHeight;
+    }
+
+    public float getBodyWidth() {
+        return this.bodyWidth;
     }
 }

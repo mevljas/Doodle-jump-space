@@ -23,7 +23,7 @@ import static tk.sebastjanmevlja.doodlejump.Gameplay.Constants.PPM;
 
 public class Platform extends Actor {
 
-    private final float bodyWidth;
+    private final float bodyWidth, bodyHeight;
     public Sprite sprite;
     World world;
     Body body;
@@ -36,7 +36,6 @@ public class Platform extends Actor {
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
     Trampoline trampoline;
     Shield shield;
-    private float bodyHeight = 0;
 
 
 
