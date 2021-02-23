@@ -54,11 +54,13 @@ public class Player extends Actor  {
     private boolean rotating = false;
     public static ArrayList<Bullet> bullets;
     private Shield shield;
+    private int numberOfshields = 0;
     private boolean imunity = false;
     private float bodyHeight = 0;
     private float bodyWidth = 0;
     private boolean falling = false;
     private Sprite fallingSprite;
+    private long shieldExpirationTime = 3000;
 
 
     public Player( World world, float x, float y) {
@@ -349,15 +351,18 @@ public class Player extends Actor  {
         this.shield = shield;
         shield.sprite.setSize(shield.sprite.getWidth() * 2f, shield.sprite.getHeight() * 2f);
         this.imunity = true;
+        numberOfshields++;
 
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        removeShield();
+                        numberOfshields--;
+                        if (numberOfshields == 0)
+                            removeShield();
                     }
                 },
-                2000
+                shieldExpirationTime
         );
     }
 
