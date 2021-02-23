@@ -94,10 +94,6 @@ public class BlackHoleMonster extends Monster {
             Player.player.setLives(0);
             Sound.playFallingSound();
             Level1Screen.gameOver();
-            System.out.println("DEAD");
-        }
-        else {
-            System.out.println("not dead");
         }
         Vector2 vectDirection = (body.getPosition()).sub(Player.player.body.getPosition()).nor().scl(playerMovingScale);
         Player.player.body.setLinearVelocity(vectDirection);
