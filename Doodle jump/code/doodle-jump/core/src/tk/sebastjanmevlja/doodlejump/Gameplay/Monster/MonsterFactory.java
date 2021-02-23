@@ -65,25 +65,30 @@ public class MonsterFactory {
     
 
     public static void generateMonster(MonsterType type, World world, float x, float y) {
-        switch (type){
-            case BLUE:
-                monsters.add(new BlueMonster( world, x, y));
-                break;
-
-            case GREEN:
-                monsters.add(new GreenMonster( world, x, y));
-                break;
-
-            case RED:
-                monsters.add(new RedMonster( world, x, y));
-                break;
-
-            case UFO:
-                monsters.add(new UfoMonster( world, x, y));
-                break;
-
-
-        }
+//        switch (type){
+//            case BLUE:
+//                monsters.add(new BlueMonster( world, x, y));
+//                break;
+//
+//            case GREEN:
+//                monsters.add(new GreenMonster( world, x, y));
+//                break;
+//
+//            case RED:
+//                monsters.add(new RedMonster( world, x, y));
+//                break;
+//
+//            case UFO:
+//                monsters.add(new UfoMonster( world, x, y));
+//                break;
+//
+//            case BLACKHOLE:
+//                monsters.add(new BlackHoleMonster( world, x, y));
+//                break;
+//
+//
+//        }
+        monsters.add(new BlackHoleMonster( world, x, y));
 
     }
 
