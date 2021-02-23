@@ -26,7 +26,7 @@ public class BlackHoleMonster extends Monster {
 
     public BlackHoleMonster( World world, float x, float y) {
         super(texture, world, x, y);
-        HEIGHT = Constants.HEIGHT * 0.2f;
+        HEIGHT = Constants.HEIGHT * 0.1f;
         WIDTH = HEIGHT;
         init( world, x, y);
     }
