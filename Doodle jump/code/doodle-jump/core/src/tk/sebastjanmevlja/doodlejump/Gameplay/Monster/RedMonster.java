@@ -3,6 +3,7 @@ package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 
@@ -12,10 +13,11 @@ public class RedMonster extends Monster {
     private float leftLocation;
     private float rightLocation;
     private float VELOCITY = Constants.WIDTH * 0.003f;
+    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("monster");
 
 
 
-    public RedMonster( TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+    public RedMonster(World world, float x, float y) {
         super(texture, world, x, y);
 
         WIDTH = Constants.WIDTH / 8f;

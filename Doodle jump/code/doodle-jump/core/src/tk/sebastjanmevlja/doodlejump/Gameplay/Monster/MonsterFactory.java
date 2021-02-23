@@ -1,9 +1,6 @@
 package tk.sebastjanmevlja.doodlejump.Gameplay.Monster;
 
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 
 import java.util.LinkedList;
@@ -14,11 +11,10 @@ public class MonsterFactory {
     public static LinkedList<Monster> monsters;
 
 
-    private  static final Array<TextureAtlas.AtlasRegion> aliensGreen = Asset.atlas.findRegions("aliens1");
-    private  static final Array<TextureAtlas.AtlasRegion> aliensBlue = Asset.atlas.findRegions("aliens2");
-    private  static final TextureAtlas.AtlasRegion alienRed = Asset.atlas.findRegion("monster");
-    private  static final TextureAtlas.AtlasRegion alienUfo = Asset.atlas.findRegion("ufo");
-    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
+
+
+
+
 
 
     private static  float minSpacingWidth;
@@ -71,19 +67,19 @@ public class MonsterFactory {
     public static void generateMonster(MonsterType type, World world, float x, float y) {
         switch (type){
             case BLUE:
-                monsters.add(new BlueMonster( aliensBlue,world, x, y));
+                monsters.add(new BlueMonster( world, x, y));
                 break;
 
             case GREEN:
-                monsters.add(new GreenMonster( aliensGreen,world, x, y));
+                monsters.add(new GreenMonster( world, x, y));
                 break;
 
             case RED:
-                monsters.add(new RedMonster( alienRed,world, x, y));
+                monsters.add(new RedMonster( world, x, y));
                 break;
 
             case UFO:
-                monsters.add(new UfoMonster( alienUfo,world, x, y));
+                monsters.add(new UfoMonster( world, x, y));
                 break;
 
 

@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Player;
-import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 
 
 public class UfoMonster extends Monster {
@@ -18,25 +17,12 @@ public class UfoMonster extends Monster {
     private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 
+    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("ufo");
+    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
 
 
 
-
-    public UfoMonster(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
-        super(textures,  world,  x,  y);
-
-        WIDTH = Constants.WIDTH / 9f;
-        HEIGHT = Constants.HEIGHT / 12f;
-        init(world, x, y);
-        body.setLinearVelocity(VELOCITY, 0);
-        direction = HorizontalDirection.RIGHT;
-
-
-    }
-
-
-
-    public UfoMonster(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+    public UfoMonster( World world, float x, float y) {
         super(texture, world, x, y);
         WIDTH = Constants.WIDTH / 3f;
         HEIGHT = Constants.HEIGHT / 4f;
@@ -90,6 +76,10 @@ public class UfoMonster extends Monster {
         }
 
 
+    }
+
+    public void showLight(){
+        sprite.setRegion(alienUfoLight);
     }
 
 

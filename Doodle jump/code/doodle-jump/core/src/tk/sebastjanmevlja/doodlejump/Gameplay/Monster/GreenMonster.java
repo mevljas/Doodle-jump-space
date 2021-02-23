@@ -6,13 +6,16 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import tk.sebastjanmevlja.doodlejump.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejump.Helpers.HorizontalDirection;
 
 
 public class GreenMonster extends Monster {
 
-    public GreenMonster(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
+    private  static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("aliens1");
+
+    public GreenMonster( World world, float x, float y) {
         super(textures, world, x, y);
         WIDTH = Constants.WIDTH / 8f;
         HEIGHT = Constants.HEIGHT / 10f;

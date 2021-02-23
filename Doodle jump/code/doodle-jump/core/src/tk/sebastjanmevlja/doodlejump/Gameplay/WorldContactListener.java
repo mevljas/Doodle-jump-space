@@ -2,7 +2,6 @@ package tk.sebastjanmevlja.doodlejump.Gameplay;
 
 import com.badlogic.gdx.physics.box2d.*;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.Monster;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Monster.UfoMonster;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.BrownPlatform;
 import tk.sebastjanmevlja.doodlejump.Gameplay.Platform.Platform;
@@ -67,7 +66,7 @@ public class WorldContactListener implements ContactListener {
                 return;
             }
             if (monster instanceof UfoMonster){
-                monster.sprite.setRegion(MonsterFactory.alienUfoLight);
+                ((UfoMonster) monster).showLight();
                 ((UfoMonster) monster).movePlayerCloser();
             }
             else {
