@@ -30,7 +30,7 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacingHeight = PLATFORM_HEIGHT * 3.5f;
+        maxSpacingHeight = PLATFORM_HEIGHT * 4f;
         minSpacingHeight = PLATFORM_HEIGHT * 1.9f;
         maxSpacingWidth = Constants.WIDTH - PLATFORM_WIDTH;
         minSpacingWidth = PLATFORM_WIDTH * 0.1f;
@@ -71,15 +71,21 @@ public class PlatformFactory {
 
     private static void generateRandomPlatform(World world, float x, float y){
         int value = r.nextInt(10);
-        if (value < 8){
-            platforms.add(new GreenPlatform(world, x, y));
+        if (value < 2){
+
+            if (platforms.getLast() instanceof BrownPlatform){
+                platforms.add(new GreenPlatform(world, x, y));
+            }
+            else {
+                platforms.add(new BrownPlatform(world, x, y));
+            }
         }
-        else if (value < 9){
+        else if (value < 4){
             platforms.add(new BluePlatform(world, x, y));
 
         }
         else{
-            platforms.add(new BrownPlatform(world, x, y));
+            platforms.add(new GreenPlatform(world, x, y));
         }
     }
 
