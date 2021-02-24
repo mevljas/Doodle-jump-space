@@ -241,6 +241,16 @@ public class Level1Screen implements Screen {
     }
 
 
+    private void removeJetpacks(){
+        for (Jetpack j: Player.removedJetpacks) {
+            j.addAction(Actions.removeActor());
+            Body b = j.getBody();
+            world.destroyBody(b);
+        }
+        Player.removedJetpacks.clear();
+    }
+
+
 
     @Override
     public void render(float delta) {   //draw, loop called every frame
@@ -252,6 +262,7 @@ public class Level1Screen implements Screen {
             updateMonsters();
             updateBullets();
             removeShields();
+            removeJetpacks();
 
 
             // Advance the world, by the amount of time that has elapsed since the  last frame

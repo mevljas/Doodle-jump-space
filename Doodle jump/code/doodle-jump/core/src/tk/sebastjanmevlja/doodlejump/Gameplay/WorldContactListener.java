@@ -15,6 +15,7 @@ public class WorldContactListener implements ContactListener {
     private Bullet bullet;
     private Trampoline trampoline;
     private Shield shield;
+    private Jetpack jetpack;
     private boolean blackHoleMonster = false;
 
     public WorldContactListener(Player player) {
@@ -34,6 +35,10 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
 
+            if (player.getJetpack() != null){
+                return;
+            }
+
             if (player.getBodyPosition().y  > platform.getBodyPosition().y  + platform.getBodyHeight()) {
 //                Break brown platform
                 if (platform instanceof  BrownPlatform){
@@ -42,8 +47,6 @@ public class WorldContactListener implements ContactListener {
                 else {
 //              Jump off a platform
                     player.jump();
-                    Sound.playJumpSound();
-                    Player.incScore();
                 }
 
             }
@@ -54,6 +57,10 @@ public class WorldContactListener implements ContactListener {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             trampoline = (Trampoline) (fixA.getUserData() instanceof Trampoline ? fixA.getUserData() : fixB.getUserData());
 
+            if (player.getJetpack() != null){
+                return;
+            }
+
             if (player.getBodyPosition().y  >= trampoline.getBodyPosition().y + trampoline.getBodyHeight()   ) {
                 jumpOffTrampoline();
 
@@ -63,6 +70,10 @@ public class WorldContactListener implements ContactListener {
                 (fixA.getUserData() instanceof Monster && fixB.getUserData() instanceof  Player)){
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
+
+            if (player.getJetpack() != null){
+                return;
+            }
 
             if (player.isImunity()){
                 return;
@@ -93,14 +104,36 @@ public class WorldContactListener implements ContactListener {
         else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Shield) ||
                 (fixA.getUserData() instanceof Shield && fixB.getUserData() instanceof  Player)){
 
+
             shield = (Shield) (fixA.getUserData() instanceof Shield ? fixA.getUserData() : fixB.getUserData());
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+
+            if (player.getJetpack() != null){
+                return;
+            }
+
             if (shield == player.getshield()){
                 return;
             }
             player.removeShield();
             player.equipShield(shield);
             shield.parentPlatform.removeShield();
+
+        }
+
+
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Jetpack) ||
+                (fixA.getUserData() instanceof Jetpack && fixB.getUserData() instanceof  Player)){
+
+
+            jetpack = (Jetpack) (fixA.getUserData() instanceof Jetpack ? fixA.getUserData() : fixB.getUserData());
+            player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
+            if (player.getJetpack() != null){
+                return;
+            }
+//            player.removeJetpack();
+            player.equipJetpack(jetpack);
+            jetpack.parentPlatform.removeJetpack();
 
         }
 
@@ -133,8 +166,6 @@ public class WorldContactListener implements ContactListener {
     private void jumpOffTrampoline(){
         trampoline.playerJump();
         player.jumpTrampoline();
-        Sound.playJumpSound();
-        Player.incScore();
     }
 }
 

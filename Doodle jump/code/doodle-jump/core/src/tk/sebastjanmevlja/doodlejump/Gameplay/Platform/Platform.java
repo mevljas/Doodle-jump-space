@@ -7,10 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Culling;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Shield;
-import tk.sebastjanmevlja.doodlejump.Gameplay.Trampoline;
+import tk.sebastjanmevlja.doodlejump.Gameplay.*;
 import tk.sebastjanmevlja.doodlejump.Level.Level1Screen;
 
 import java.util.Random;
@@ -36,6 +33,7 @@ public class Platform extends Actor {
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
     Trampoline trampoline;
     Shield shield;
+    Jetpack jetpack;
 
 
 
@@ -103,6 +101,14 @@ public class Platform extends Actor {
         return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
     }
 
+    float calculateJetpackPositionX(){
+        return sprite.getX() + PLATFORM_WIDTH / 2 -  Jetpack.JETPACK_WIDTH / 2;
+    }
+
+    float calculateJetpackPositionY(){
+        return sprite.getY() + PLATFORM_HEIGHT * 0.8f;
+    }
+
 
 
     @Override
@@ -131,6 +137,10 @@ public class Platform extends Actor {
 
         if (shield != null){
             shield.updatePos(calculateShieldPositionX(),calculateShieldPositionY());
+        }
+
+        if (jetpack != null){
+            jetpack.updatePos(calculateJetpackPositionX(),calculateJetpackPositionY());
         }
 
     }
@@ -170,9 +180,16 @@ public class Platform extends Actor {
         return shield;
     }
 
+    public Jetpack getJetpack() {
+        return jetpack;
+    }
+
 
     public void removeShield(){
         this.shield = null;
+    }
+    public void removeJetpack(){
+        this.jetpack = null;
     }
 
     @Override
@@ -205,8 +222,9 @@ public class Platform extends Actor {
             trampoline.incrementGlobalObjectCounter();
         }
 
-        if (shield != null){
-            shield.incrementGlobalObjectCounter();
+
+        if (jetpack != null){
+            jetpack.incrementGlobalObjectCounter();
         }
     }
 
@@ -245,6 +263,13 @@ public class Platform extends Actor {
             this.shield = null;
         }
 
+        Jetpack j = this.getJetpack();
+        if (j != null) {
+            j.addAction(Actions.removeActor());
+            world.destroyBody(j.getBody());
+            this.jetpack = null;
+        }
+
         generateItems();
     }
 
@@ -256,6 +281,10 @@ public class Platform extends Actor {
         else if (r.nextInt(40) == 20){
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
             Level1Screen.backgroundGroup.addActor(this.shield);
+        }
+        if (r.nextInt(40) == 39){
+            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
+            Level1Screen.backgroundGroup.addActor(this.jetpack);
         }
     }
 

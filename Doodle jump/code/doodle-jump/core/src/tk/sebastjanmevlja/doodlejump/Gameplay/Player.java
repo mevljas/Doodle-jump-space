@@ -25,6 +25,7 @@ public class Player extends Actor  {
     public static int lives;
     public static int score;
     public static ArrayList<Shield> removedShields;
+    public static ArrayList<Jetpack> removedJetpacks;
 
     Sprite sprite;
     World world;
@@ -35,13 +36,15 @@ public class Player extends Actor  {
 
     public static float JUMP_VELOCITY = Constants.HEIGHT * 0.0027f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
-    public static final float WORLD_VELOCITY = Constants.HEIGHT * 0.002f;
+    public static final float WORLD_VELOCITY = -Constants.HEIGHT * 0.002f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.5f;
+    public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
+    public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
+    public static final float WORLD_JETPACK_VELOCITY_STOP = WORLD_JETPACK_VELOCITY * 0.35f;
     public static final float WORLD_FALL_VELOCITY = -WORLD_VELOCITY * 4;
 
 
 
-//    public static float WIDTH = Constants.WIDTH / 5.3f;
     public static float HEIGHT = Constants.HEIGHT / 11.8f;
     public static float WIDTH = HEIGHT;
     private static float accelerometerSensitivity = 0.8f;
@@ -54,13 +57,15 @@ public class Player extends Actor  {
     private boolean rotating = false;
     public static ArrayList<Bullet> bullets;
     private Shield shield;
-    private int numberOfshields = 0;
+    private Jetpack jetpack;
+    private int numberOfShields = 0;
     private boolean imunity = false;
     private float bodyHeight = 0;
     private float bodyWidth = 0;
     private boolean falling = false;
     private Sprite fallingSprite;
     private long shieldExpirationTime = 3000;
+    private boolean movePlayerToCenter;
 
 
     public Player( World world, float x, float y) {
@@ -72,6 +77,7 @@ public class Player extends Actor  {
 
 
         this.world = world;
+        movePlayerToCenter = false;
 
         // Now create a BodyDefinition.  This defines the physics objects type and position in the simulation
         BodyDef bodyDef = new BodyDef();
@@ -103,7 +109,7 @@ public class Player extends Actor  {
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.TRAMPOLINE_BIT | Constants.SHIELD_BIT;
+        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.TRAMPOLINE_BIT | Constants.ITEM_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         Fixture fixture = body.createFixture(fixtureDef);
@@ -116,6 +122,7 @@ public class Player extends Actor  {
 
         bullets = new ArrayList<>();
         removedShields = new ArrayList<>();
+        removedJetpacks = new ArrayList<>();
         falling = false;
 
     }
@@ -154,6 +161,10 @@ public class Player extends Actor  {
         if (shield != null){
             shield.updatePos(calculateShieldPositionX(shield),calculateShieldPositionY(shield));
         }
+
+        if (jetpack != null){
+            jetpack.updatePos(calculateJetpackPositionX(jetpack),calculateJetpackPositionY(jetpack));
+        }
     }
 
     private void checkAccelerometer(){
@@ -172,6 +183,15 @@ public class Player extends Actor  {
 
     float calculateShieldPositionY(Shield shield){
         return sprite.getY() + HEIGHT / 2 -  shield.sprite.getHeight() * 0.6f;
+    }
+
+
+    float calculateJetpackPositionX(Jetpack jetpack){
+        return sprite.getX() + sprite.getWidth() / 2 -  jetpack.sprite.getWidth() / 2;
+    }
+
+    float calculateJetpackPositionY(Jetpack jetpack){
+        return sprite.getY() + HEIGHT / 2 -  jetpack.sprite.getHeight() * 1.2f;
     }
 
 
@@ -249,26 +269,53 @@ public class Player extends Actor  {
         if (shield != null){
             shield.draw(batch, parentAlpha);
         }
+        if (jetpack != null){
+            jetpack.draw(batch, parentAlpha);
+        }
         if (falling){
             fallingSprite.draw(batch);
         }
     }
 
     public void jump(){
-        verticalDirection = VerticalDirection.UP;
-        body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
-        PlatformFactory.moveWorld(WORLD_VELOCITY );
-        MonsterFactory.moveWorld(WORLD_VELOCITY);
+        if (this.jetpack == null){
+            verticalDirection = VerticalDirection.UP;
+            body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
+            PlatformFactory.moveWorld(WORLD_VELOCITY );
+            MonsterFactory.moveWorld(WORLD_VELOCITY);
+            Sound.playJumpSound();
+            Player.incScore();
+        }
+
 
 
     }
 
     public void jumpTrampoline() {
+        if (this.jetpack == null){
+            verticalDirection = VerticalDirection.UP;
+            body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
+            PlatformFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
+            MonsterFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
+            this.rotating = true;
+            Sound.playJumpSound();
+            Player.incScore();
+        }
+
+    }
+
+
+    public void jumpJetpack() {
         verticalDirection = VerticalDirection.UP;
-        body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
-        PlatformFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
-        MonsterFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
-        this.rotating = true;
+        PlatformFactory.moveWorld(WORLD_JETPACK_VELOCITY);
+        MonsterFactory.moveWorld(WORLD_JETPACK_VELOCITY);
+        this.movePlayerToCenter = true;
+
+
+    }
+
+    private void movePlayerScreenCenter(){
+        this.body.setTransform(body.getPosition().x, Constants.HEIGHT / 2f / PPM, 0);
     }
 
 
@@ -285,11 +332,19 @@ public class Player extends Actor  {
 
 
     void checkState(){
-
-        if (verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y <= 0){
+        if (jetpack == null && verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y <= 0){
             verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
+        }
+        else if (jetpack != null){
+            decreaseJetpackVelocity();
+            if (this.movePlayerToCenter){
+                this.movePlayerToCenter = false;
+                movePlayerScreenCenter();
+
+            }
+
         }
 //        if (sprite.getY() <= Constants.HEIGHT * 0.5f){
 //            PlatformFactory.stopWorld();
@@ -301,6 +356,23 @@ public class Player extends Actor  {
 //        }
 
 
+
+    }
+
+
+    private void decreaseJetpackVelocity(){
+        if (PlatformFactory.getYVelocity() >= WORLD_JETPACK_VELOCITY_STOP){
+            PlatformFactory.stopWorld();
+            MonsterFactory.stopWorld();
+            removeJetpack();
+            verticalDirection = VerticalDirection.DOWN;
+
+        }
+        else {
+            float velocity = PlatformFactory.getYVelocity() * WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO;
+            PlatformFactory.moveWorld(velocity);
+            MonsterFactory.moveWorld(velocity);
+        }
 
     }
 
@@ -351,14 +423,14 @@ public class Player extends Actor  {
         this.shield = shield;
         shield.sprite.setSize(shield.sprite.getWidth() * 2f, shield.sprite.getHeight() * 2f);
         this.imunity = true;
-        numberOfshields++;
+        numberOfShields++;
 
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
                     public void run() {
-                        numberOfshields--;
-                        if (numberOfshields == 0)
+                        numberOfShields--;
+                        if (numberOfShields == 0)
                             removeShield();
                     }
                 },
@@ -366,12 +438,34 @@ public class Player extends Actor  {
         );
     }
 
+    public void equipJetpack( Jetpack jetpack){
+        this.jetpack = jetpack;
+        jetpack.sprite.setSize(jetpack.sprite.getWidth() * 0.8f, jetpack.sprite.getHeight() * 0.8f);
+        body.setGravityScale(0);
+        jumpJetpack();
+        body.setLinearVelocity(body.getLinearVelocity().x, 0);
+        this.imunity = true;
+
+
+    }
+
     public void removeShield(){
         if (this.shield != null){
             removedShields.add(shield);
-//            this.shield.addAction(Actions.removeActor());
             this.shield = null;
             this.imunity = false;
+        }
+
+    }
+
+    public void removeJetpack(){
+        body.setGravityScale(1);
+        body.setLinearVelocity(body.getLinearVelocity().x, 0);
+        body.setAwake(true);
+        this.imunity = false;
+        if (this.jetpack != null){
+            removedJetpacks.add(jetpack);
+            this.jetpack = null;
         }
 
     }
@@ -411,6 +505,10 @@ public class Player extends Actor  {
             shield.incrementGlobalObjectCounter();
         }
 
+        if (jetpack != null) {
+            jetpack.incrementGlobalObjectCounter();
+        }
+
         for (Bullet b : bullets) {
             b.incrementGlobalObjectCounter();
 
@@ -428,5 +526,9 @@ public class Player extends Actor  {
 
     public void setLives(int lives) {
         this.lives = lives;
+    }
+
+    public Jetpack getJetpack() {
+        return this.jetpack;
     }
 }
