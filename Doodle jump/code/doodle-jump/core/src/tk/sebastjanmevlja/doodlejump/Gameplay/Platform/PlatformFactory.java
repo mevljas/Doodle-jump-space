@@ -94,8 +94,21 @@ public class PlatformFactory {
 
         for (Platform p: platforms) {
             if (!p.broken)
-                p.body.setLinearVelocity(p.body.getLinearVelocity().x,-velocity );
+                p.body.setLinearVelocity(p.body.getLinearVelocity().x,velocity );
         }
+    }
+
+
+    public static void applayForce(float x, float y){
+
+        for (Platform p: platforms) {
+            if (!p.broken)
+                p.body.applyForceToCenter(x, y, true);
+        }
+    }
+
+    public static float getYVelocity(){
+        return platforms.getFirst().body.getLinearVelocity().y;
     }
 
 
