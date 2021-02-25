@@ -6,12 +6,12 @@ import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 
 
-public class GreenPlatform extends Platform {
+public class GrayPlatform extends Platform {
 
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("platform_green");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("gray_platform");
 
 
-    public GreenPlatform(World world, float x, float y) {
+    public GrayPlatform(World world, float x, float y) {
         super(plaformTextureRegionGreen, world, x, y);
 
         generateItems();
@@ -32,8 +32,8 @@ public class GreenPlatform extends Platform {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch,parentAlpha);
         sprite.draw(batch);
-        if (trampoline != null){
-            trampoline.draw(batch, parentAlpha);
+        if (slime != null){
+            slime.draw(batch, parentAlpha);
         }
         if (shield != null){
             shield.draw(batch, parentAlpha);

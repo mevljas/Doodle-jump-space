@@ -9,22 +9,22 @@ import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Trampoline;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
 
 
-public class BrownPlatform extends Platform {
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("brown_platform");
+public class BrokenPlatform extends Platform {
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("broken_platform");
     private static final float FALLING_VELOCITY = VELOCITY * -3f;
     public Animation<TextureRegion> runningAnimation;
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    public BrownPlatform(World world, float x, float y) {
+    public BrokenPlatform(World world, float x, float y) {
         super(plaformTextureRegionBrown, world, x, y);
 
 
 
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("brown_platform"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("broken_platform"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
 
 
@@ -33,7 +33,7 @@ public class BrownPlatform extends Platform {
 
 
     float calculateTrampolinePositionX(){
-        return sprite.getX() + PLATFORM_WIDTH / 2 -  Trampoline.TRAMPOLINE_WIDTH / 2;
+        return sprite.getX() + PLATFORM_WIDTH / 2 -  Slime.TRAMPOLINE_WIDTH / 2;
     }
 
     float calculateTrampolinePositionY(){
@@ -76,8 +76,8 @@ public class BrownPlatform extends Platform {
         super.draw(batch,parentAlpha);
         if (!broken){
             sprite.draw(batch);
-            if (trampoline != null){
-                trampoline.draw(batch, parentAlpha);
+            if (slime != null){
+                slime.draw(batch, parentAlpha);
             }
             if (shield != null){
                 shield.draw(batch, parentAlpha);

@@ -1,14 +1,15 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
 
 import com.badlogic.gdx.physics.box2d.World;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 
 import java.util.LinkedList;
 import java.util.Random;
 
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+
 public class MonsterFactory {
 
-    public static LinkedList<Monster> monsters;
+    public static LinkedList<Enemy> enemies;
 
 
 
@@ -31,7 +32,7 @@ public class MonsterFactory {
         maxSpacingHeight = Constants.HEIGHT * 2f;
         minSpacingWidth = Constants.WIDTH * 0.2f;
         maxSpacingWidth = Constants.WIDTH * 0.6f;
-        monsters = new LinkedList<>();
+        enemies = new LinkedList<>();
         r = new Random();
     }
 
@@ -39,11 +40,11 @@ public class MonsterFactory {
 
         float y;
 
-        if (monsters.isEmpty()){
+        if (enemies.isEmpty()){
             y = maxSpacingHeight;
         }
         else {
-            y = monsters.getLast().sprite.getY();
+            y = enemies.getLast().sprite.getY();
         }
 
 
@@ -58,7 +59,7 @@ public class MonsterFactory {
         }
 
 
-        InitiaMonsterSize = monsters.size();
+        InitiaMonsterSize = enemies.size();
     }
 
     
@@ -67,23 +68,23 @@ public class MonsterFactory {
     public static void generateMonster(MonsterType type, World world, float x, float y) {
         switch (type){
             case BLUE:
-                monsters.add(new BlueMonster( world, x, y));
+                enemies.add(new BlueEnemy( world, x, y));
                 break;
 
             case GREEN:
-                monsters.add(new GreenMonster( world, x, y));
+                enemies.add(new GreenEnemy( world, x, y));
                 break;
 
             case RED:
-                monsters.add(new RedMonster( world, x, y));
+                enemies.add(new RedEnemy( world, x, y));
                 break;
 
-            case UFO:
-                monsters.add(new UfoMonster( world, x, y));
+            case MAGNET:
+                enemies.add(new MagnetEnemy( world, x, y));
                 break;
 
             case BLACKHOLE:
-                monsters.add(new BlackHoleMonster( world, x, y));
+                enemies.add(new BlackHole( world, x, y));
                 break;
 
 
@@ -100,7 +101,7 @@ public class MonsterFactory {
 
     public static void moveWorld(float velocity){
 
-        for (Monster m: monsters) {
+        for (Enemy m: enemies) {
             m.body.setLinearVelocity(m.body.getLinearVelocity().x,velocity );
         }
     }
@@ -108,12 +109,12 @@ public class MonsterFactory {
 
 
     public static float getYVelocity(){
-        return monsters.getFirst().body.getLinearVelocity().y;
+        return enemies.getFirst().body.getLinearVelocity().y;
     }
 
 
     public static void stopWorld(){
-        for (Monster m: monsters) {
+        for (Enemy m: enemies) {
             m.body.setLinearVelocity(m.body.getLinearVelocity().x,0f);
         }
     }
@@ -121,8 +122,8 @@ public class MonsterFactory {
 
 
 
-    public static void removeMonster(Monster m){
-        monsters.removeFirst();
+    public static void removeMonster(Enemy m){
+        enemies.removeFirst();
     }
 
 

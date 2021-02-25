@@ -1,7 +1,7 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Monster;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
@@ -31,7 +31,7 @@ public class Culling {
 
     public static void setAllObjectsCounter() {
         Player.player.incrementGlobalObjectCounter();
-        for (Monster m: MonsterFactory.monsters) {
+        for (Enemy m: MonsterFactory.enemies) {
             m.incrementGlobalObjectCounter();
         }
 

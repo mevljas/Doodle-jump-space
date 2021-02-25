@@ -39,7 +39,7 @@ public class PlatformFactory {
 
     public static void generatePlatforms(World world){
         y = 0;
-        platforms.add(new GreenPlatform(world, Constants.WIDTH / 2f, y));
+        platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y));
 
 
 
@@ -63,7 +63,7 @@ public class PlatformFactory {
     public static void recyclePlatform( Platform platform, float x, float y) {
         platform.changePosition(x,y);
         platform.reEnable();
-        if (platform instanceof GreenPlatform)
+        if (platform instanceof GrayPlatform)
             platform.resetItems();
         platforms.remove(platform);
         platforms.addLast(platform);
@@ -73,19 +73,19 @@ public class PlatformFactory {
         int value = r.nextInt(10);
         if (value < 2){
 
-            if (platforms.getLast() instanceof BrownPlatform){
-                platforms.add(new GreenPlatform(world, x, y));
+            if (platforms.getLast() instanceof BrokenPlatform){
+                platforms.add(new GrayPlatform(world, x, y));
             }
             else {
-                platforms.add(new BrownPlatform(world, x, y));
+                platforms.add(new BrokenPlatform(world, x, y));
             }
         }
         else if (value < 4){
-            platforms.add(new BluePlatform(world, x, y));
+            platforms.add(new WhitePlatform(world, x, y));
 
         }
         else{
-            platforms.add(new GreenPlatform(world, x, y));
+            platforms.add(new GrayPlatform(world, x, y));
         }
     }
 

@@ -13,10 +13,10 @@ import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
-public class BlackHoleMonster extends Monster {
+public class BlackHole extends Enemy {
 
 
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("hole");
+    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("blackhole");
 
     private static float playerMovingScale = Constants.HEIGHT * 0.0045f;
     private static float playerDetectingRange = Constants.HEIGHT * 0.0008f;
@@ -24,7 +24,7 @@ public class BlackHoleMonster extends Monster {
 
 
 
-    public BlackHoleMonster( World world, float x, float y) {
+    public BlackHole(World world, float x, float y) {
         super(texture, world, x, y);
         HEIGHT = Constants.HEIGHT * 0.1f;
         WIDTH = HEIGHT;

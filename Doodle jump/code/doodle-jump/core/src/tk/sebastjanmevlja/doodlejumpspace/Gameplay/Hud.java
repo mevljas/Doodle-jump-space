@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Hud extends Actor {
 
-    private static TextureAtlas.AtlasRegion playerTexture = Asset.atlas.findRegion("player_left");
+    private static TextureAtlas.AtlasRegion playerTexture = Asset.atlas.findRegion("Player_right_up");
 
     private Label score;
     private Label lives;

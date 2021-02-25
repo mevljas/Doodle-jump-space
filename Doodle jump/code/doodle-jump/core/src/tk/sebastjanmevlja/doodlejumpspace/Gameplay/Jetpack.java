@@ -23,7 +23,7 @@ public class Jetpack extends Actor {
 
 
     public Jetpack(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("jetpack"));
+        sprite = new Sprite(Asset.atlas.findRegion("jetpack_item"));
         sprite.setSize(JETPACK_WIDTH, JETPACK_HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);

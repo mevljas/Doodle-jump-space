@@ -14,7 +14,7 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
 
-public class Monster extends Actor {
+public class Enemy extends Actor {
 
     public Sprite sprite;
     World world;
@@ -41,7 +41,7 @@ public class Monster extends Actor {
     HorizontalDirection direction = HorizontalDirection.STILL;
 
 
-    public Monster( Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
+    public Enemy(Array<TextureAtlas.AtlasRegion> textures, World world, float x, float y) {
         sprite = new Sprite(textures.get(0));
         init(world, x, y);
 
@@ -51,7 +51,7 @@ public class Monster extends Actor {
 
 
 
-    public Monster( TextureAtlas.AtlasRegion texture, World world, float x, float y) {
+    public Enemy(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         sprite = new Sprite(texture);
         init(world, x, y);
     }

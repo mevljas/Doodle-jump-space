@@ -10,7 +10,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
-public class Trampoline extends Actor {
+public class Slime extends Actor {
 
     private float bodyWidth = 0;
     private float bodyHeight = 0;
@@ -28,8 +28,8 @@ public class Trampoline extends Actor {
     public boolean playerJumping = false;
 
 
-    public Trampoline( float x, float y, World world) {
-        sprite = new Sprite(Asset.atlas.findRegions("trampoline").get(1));
+    public Slime(float x, float y, World world) {
+        sprite = new Sprite(Asset.atlas.findRegions("slime").get(0));
         sprite.setSize(TRAMPOLINE_WIDTH, TRAMPOLINE_HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
@@ -71,7 +71,7 @@ public class Trampoline extends Actor {
         shape.dispose();
 
 
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("trampoline"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("slime"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
     }
 

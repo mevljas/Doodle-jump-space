@@ -14,7 +14,7 @@ public class Asset {
 
 
 //    Asset descriptors
-    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_jump.atlas", TextureAtlas.class);
+    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_Space.atlas", TextureAtlas.class);
     private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.jpg", Texture.class);
     private final AssetDescriptor<Texture> logoTextureDescriptor = new AssetDescriptor<>("images/logo.png", Texture.class);
     private final AssetDescriptor<Texture> pauseDescriptor = new AssetDescriptor<>("images/pause.png", Texture.class);

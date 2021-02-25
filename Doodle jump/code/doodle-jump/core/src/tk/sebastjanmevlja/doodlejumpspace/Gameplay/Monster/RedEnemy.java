@@ -8,16 +8,16 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
-public class RedMonster extends Monster {
+public class RedEnemy extends Enemy {
 
     private float leftLocation;
     private float rightLocation;
     private float VELOCITY = Constants.WIDTH * 0.003f;
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("monster");
+    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("red_enemy");
 
 
 
-    public RedMonster(World world, float x, float y) {
+    public RedEnemy(World world, float x, float y) {
         super(texture, world, x, y);
 
         WIDTH = Constants.WIDTH / 8f;

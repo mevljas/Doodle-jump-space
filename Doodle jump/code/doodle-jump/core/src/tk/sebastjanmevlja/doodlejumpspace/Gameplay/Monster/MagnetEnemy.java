@@ -9,7 +9,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 
 
-public class UfoMonster extends Monster {
+public class MagnetEnemy extends Enemy {
 
 
 
@@ -17,12 +17,12 @@ public class UfoMonster extends Monster {
     private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("ufo");
-    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("ufo_light");
+    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
+    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("magneto_zone");
 
 
 
-    public UfoMonster( World world, float x, float y) {
+    public MagnetEnemy(World world, float x, float y) {
         super(texture, world, x, y);
         WIDTH = Constants.WIDTH / 3f;
         HEIGHT = Constants.HEIGHT / 4f;

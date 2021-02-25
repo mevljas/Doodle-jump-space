@@ -8,9 +8,9 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
-public class BluePlatform extends Platform {
+public class WhitePlatform extends Platform {
 
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("platform__blue");
+    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("white_platform");
 
     private HorizontalDirection direction = HorizontalDirection.STILL;
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
@@ -18,7 +18,7 @@ public class BluePlatform extends Platform {
 
 
 
-    public BluePlatform( World world, float x, float y) {
+    public WhitePlatform(World world, float x, float y) {
         super(plaformTextureRegionLightBlue, world, x, y);
 
         body.setLinearVelocity(VELOCITY, 0);
@@ -56,8 +56,8 @@ public class BluePlatform extends Platform {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch,parentAlpha);
         sprite.draw(batch);
-        if (trampoline != null){
-            trampoline.draw(batch, parentAlpha);
+        if (slime != null){
+            slime.draw(batch, parentAlpha);
         }
         if (shield != null){
             shield.draw(batch, parentAlpha);

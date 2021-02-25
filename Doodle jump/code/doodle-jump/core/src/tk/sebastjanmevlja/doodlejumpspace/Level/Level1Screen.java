@@ -17,19 +17,31 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.*;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Monster;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
-import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 import java.util.ArrayList;
 
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Bullet;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Hud;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.WorldContactListener;
+import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
+
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.monsters;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.enemies;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.removeMonster;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.*;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.platforms;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.recyclePlatform;
 
 
 public class Level1Screen implements Screen {
@@ -113,8 +125,8 @@ public class Level1Screen implements Screen {
             backgroundGroup.addActor(platform);
         }
 
-        for (Monster monster : monsters) {
-            middleGroup.addActor(monster);
+        for (Enemy enemy : enemies) {
+            middleGroup.addActor(enemy);
         }
 
 
@@ -187,25 +199,25 @@ public class Level1Screen implements Screen {
 
 
     private void updateMonsters(){
-        ArrayList<Monster> removeMonsters = new ArrayList<>();
-        for(Monster monster : monsters)
+        ArrayList<Enemy> removeEnemies = new ArrayList<>();
+        for(Enemy enemy : enemies)
         {
-            Vector3 windowCoordinates = new Vector3(0, monster.getSprite().getY(), 0);
+            Vector3 windowCoordinates = new Vector3(0, enemy.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + monster.getSprite().getHeight() < 0 || !monster.isAlive()){
-                removeMonsters.add(monster);
+            if(windowCoordinates.y + enemy.getSprite().getHeight() < 0 || !enemy.isAlive()){
+                removeEnemies.add(enemy);
             }
 
         }
-        for (Monster m: removeMonsters) {
+        for (Enemy m: removeEnemies) {
             removeMonster(m);
             m.addAction(Actions.removeActor());
             world.destroyBody(m.getBody());
         }
 
-        if (monsters.size() < MonsterFactory.InitiaMonsterSize / 2){
+        if (enemies.size() < MonsterFactory.InitiaMonsterSize / 2){
             MonsterFactory.generateMonsters(world);
-            for (Monster m: monsters) {
+            for (Enemy m: enemies) {
                 if (m.getStage() == null){{
                     middleGroup.addActor(m);
 

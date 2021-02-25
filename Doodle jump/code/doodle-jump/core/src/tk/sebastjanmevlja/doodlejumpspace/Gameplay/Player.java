@@ -5,15 +5,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
+import java.util.ArrayList;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.VerticalDirection;
 import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
-
-import java.util.ArrayList;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
@@ -49,11 +55,11 @@ public class Player extends Actor  {
     public static float WIDTH = HEIGHT;
     private static float accelerometerSensitivity = 0.8f;
 
-    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
-    private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("player_left_jump");
-    private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("player_right_jump");
-    private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("player_left");
-    private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("player_right");
+    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("Player_right_up");
+    private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
+    private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
+    private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");
+    private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("Player_right_up");
     private boolean rotating = false;
     public static ArrayList<Bullet> bullets;
     private Shield shield;

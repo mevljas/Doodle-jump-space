@@ -4,13 +4,23 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.*;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 
 import java.util.Random;
+
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
+import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
@@ -31,7 +41,7 @@ public class Platform extends Actor {
     static Random r = new Random();
 
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
-    Trampoline trampoline;
+    Slime slime;
     Shield shield;
     Jetpack jetpack;
 
@@ -86,7 +96,7 @@ public class Platform extends Actor {
 
 
     float calculateTrampolinePositionX(){
-        return sprite.getX() + PLATFORM_WIDTH / 2 -  Trampoline.TRAMPOLINE_WIDTH / 2;
+        return sprite.getX() + PLATFORM_WIDTH / 2 -  Slime.TRAMPOLINE_WIDTH / 2;
     }
 
     float calculateTrampolinePositionY(){
@@ -131,8 +141,8 @@ public class Platform extends Actor {
                         getWidth()/2 ,
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
 
-        if (trampoline != null){
-            trampoline.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
+        if (slime != null){
+            slime.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
         }
 
         if (shield != null){
@@ -173,8 +183,8 @@ public class Platform extends Actor {
 
 
 
-    public Trampoline getTrampoline() {
-        return trampoline;
+    public Slime getSlime() {
+        return slime;
     }
     public Shield getShield() {
         return shield;
@@ -218,8 +228,8 @@ public class Platform extends Actor {
             shield.incrementGlobalObjectCounter();
         }
 
-        if (trampoline != null){
-            trampoline.incrementGlobalObjectCounter();
+        if (slime != null){
+            slime.incrementGlobalObjectCounter();
         }
 
 
@@ -249,11 +259,11 @@ public class Platform extends Actor {
     }
 
     public void resetItems() {
-        Trampoline t = this.getTrampoline();
+        Slime t = this.getSlime();
         if (t != null) {
             t.addAction(Actions.removeActor());
             world.destroyBody(t.getBody());
-            this.trampoline = null;
+            this.slime = null;
         }
 
         Shield s = this.getShield();
@@ -275,8 +285,8 @@ public class Platform extends Actor {
 
     void generateItems(){
         if (r.nextInt(40) == 1){
-            this.trampoline = new Trampoline(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-            Level1Screen.backgroundGroup.addActor(this.trampoline);
+            this.slime = new Slime(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
+            Level1Screen.backgroundGroup.addActor(this.slime);
         }
         else if (r.nextInt(40) == 20){
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);

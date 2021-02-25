@@ -11,11 +11,11 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
-public class GreenMonster extends Monster {
+public class GreenEnemy extends Enemy {
 
-    private  static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("aliens1");
+    private  static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("grey_enemy");
 
-    public GreenMonster( World world, float x, float y) {
+    public GreenEnemy(World world, float x, float y) {
         super(textures, world, x, y);
         WIDTH = Constants.WIDTH / 8f;
         HEIGHT = Constants.HEIGHT / 10f;

@@ -23,7 +23,7 @@ public class Shield extends Actor {
 
 
     public Shield(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("shield"));
+        sprite = new Sprite(Asset.atlas.findRegion("shiled"));
         sprite.setSize(SHIELD_WIDTH, SHIELD_HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);

@@ -1,19 +1,19 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
 import com.badlogic.gdx.physics.box2d.*;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.BlackHoleMonster;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Monster;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.UfoMonster;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.BrownPlatform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.BlackHole;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MagnetEnemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.BrokenPlatform;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 
 public class WorldContactListener implements ContactListener {
 
     private Player player;
     private Platform platform;
-    private Monster monster;
+    private Enemy enemy;
     private Bullet bullet;
-    private Trampoline trampoline;
+    private Slime slime;
     private Shield shield;
     private Jetpack jetpack;
     private boolean blackHoleMonster = false;
@@ -41,8 +41,8 @@ public class WorldContactListener implements ContactListener {
 
             if (player.getBodyPosition().y  > platform.getBodyPosition().y  + platform.getBodyHeight()) {
 //                Break brown platform
-                if (platform instanceof  BrownPlatform){
-                    ( (BrownPlatform) platform).breakPlatform();
+                if (platform instanceof BrokenPlatform){
+                    ( (BrokenPlatform) platform).breakPlatform();
                 }
                 else {
 //              Jump off a platform
@@ -52,24 +52,24 @@ public class WorldContactListener implements ContactListener {
             }
 
         }
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Trampoline) ||
-                (fixA.getUserData() instanceof Trampoline && fixB.getUserData() instanceof  Player)){
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Slime) ||
+                (fixA.getUserData() instanceof Slime && fixB.getUserData() instanceof  Player)){
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
-            trampoline = (Trampoline) (fixA.getUserData() instanceof Trampoline ? fixA.getUserData() : fixB.getUserData());
+            slime = (Slime) (fixA.getUserData() instanceof Slime ? fixA.getUserData() : fixB.getUserData());
 
             if (player.getJetpack() != null){
                 return;
             }
 
-            if (player.getBodyPosition().y  >= trampoline.getBodyPosition().y + trampoline.getBodyHeight()   ) {
+            if (player.getBodyPosition().y  >= slime.getBodyPosition().y + slime.getBodyHeight()   ) {
                 jumpOffTrampoline();
 
             }
         }
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Monster) ||
-                (fixA.getUserData() instanceof Monster && fixB.getUserData() instanceof  Player)){
+        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Enemy) ||
+                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof  Player)){
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
-            monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
+            enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
 
             if (player.getJetpack() != null){
                 return;
@@ -78,11 +78,11 @@ public class WorldContactListener implements ContactListener {
             if (player.isImunity()){
                 return;
             }
-            if (monster instanceof UfoMonster){
-                ((UfoMonster) monster).showLight();
-                ((UfoMonster) monster).movePlayerCloser();
+            if (enemy instanceof MagnetEnemy){
+                ((MagnetEnemy) enemy).showLight();
+                ((MagnetEnemy) enemy).movePlayerCloser();
             }
-            else if (monster instanceof BlackHoleMonster){
+            else if (enemy instanceof BlackHole){
                 blackHoleMonster = true;
             }
             else {
@@ -92,11 +92,11 @@ public class WorldContactListener implements ContactListener {
 
         }
 
-        else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof  Monster) ||
-                (fixA.getUserData() instanceof Monster && fixB.getUserData() instanceof  Bullet)){
+        else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof Enemy) ||
+                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof  Bullet)){
             bullet = (Bullet) (fixA.getUserData() instanceof Bullet ? fixA.getUserData() : fixB.getUserData());
-            monster = (Monster) (fixA.getUserData() instanceof Monster ? fixA.getUserData() : fixB.getUserData());
-            monster.kill();
+            enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
+            enemy.kill();
             bullet.deactivate();
 
         }
@@ -152,7 +152,7 @@ public class WorldContactListener implements ContactListener {
     public void preSolve(Contact contact, Manifold oldManifold) {
         contact.setEnabled(false);
         if (blackHoleMonster){
-            ((BlackHoleMonster) monster).movePlayerCloser();
+            ((BlackHole) enemy).movePlayerCloser();
         }
 
     }
@@ -164,7 +164,7 @@ public class WorldContactListener implements ContactListener {
     }
 
     private void jumpOffTrampoline(){
-        trampoline.playerJump();
+        slime.playerJump();
         player.jumpTrampoline();
     }
 }
