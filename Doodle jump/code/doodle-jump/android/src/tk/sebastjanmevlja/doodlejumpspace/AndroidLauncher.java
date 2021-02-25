@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+
+import de.golfgl.gdxgamesvcs.GpgsClient;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class AndroidLauncher extends AndroidApplication {
@@ -14,5 +16,12 @@ public class AndroidLauncher extends AndroidApplication {
 		config.useWakelock = true; //screen stays on
 		config.useAccelerometer = true;
 		initialize(new Game(), config);
+
+
+		Game game = new Game();
+		game.gsClient = new GpgsClient().initialize(this, false);
+		initialize(game, config);
+
+
 	}
 }

@@ -17,8 +17,8 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "tk.sebastjanmevlja.doodlejump"
-        minSdkVersion 14
+        applicationId "tk.sebastjanmevlja.doodlejumpspace"
+        minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"

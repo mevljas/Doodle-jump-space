@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
+import de.golfgl.gdxgamesvcs.GameServiceException;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
@@ -52,6 +54,11 @@ public class MenuScreen implements Screen {
         TextButton preferences = new TextButton("Preferences", skin);
         TextButton exit = new TextButton("Exit", skin);
         TextButton about = new TextButton("About", skin);
+        TextButton leaderboard = new TextButton("Leaderboard", skin);
+        TextButton logout = new TextButton("Logout", skin);
+        if (!game.gsClient.isSessionActive()){
+            logout.setText("Login");
+        }
         TextButton.TextButtonStyle textButtonStyle =  newGame.getStyle();
         textButtonStyle.font = Asset.fontMedium;
         continueGame.setStyle(textButtonStyle);
@@ -65,6 +72,8 @@ public class MenuScreen implements Screen {
 
 
         about.setStyle(textButtonStyle);
+        leaderboard.setStyle(textButtonStyle);
+        logout.setStyle(textButtonStyle);
 
         //add buttons to table
         if ((Level1Screen.paused != null && Level1Screen.paused) || Game.localStorage.getSavedData()){
@@ -73,9 +82,16 @@ public class MenuScreen implements Screen {
         }
         table.add(newGame);
         table.row().padTop(Value.percentWidth(.10F, table));
+        if (game.gsClient.isSessionActive()){
+            table.add(leaderboard);
+            table.row().padTop(Value.percentWidth(.10F, table));
+        }
+
         table.add(preferences);
         table.row().padTop(Value.percentWidth(.10F, table));
         table.add(about);
+        table.row().padTop(Value.percentWidth(.10F, table));
+        table.add(logout);
         table.row().padTop(Value.percentWidth(.10F, table));
         table.add(exit);
 
@@ -119,6 +135,27 @@ public class MenuScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.changeScreen(Screens.ABOUTSCREEN);
+            }
+        });
+
+        leaderboard.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                try {
+                    game.gsClient.showLeaderboards(Constants.leaderBoardId);
+                } catch (GameServiceException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        logout.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (game.gsClient.isSessionActive())
+                    game.gsClient.logOff();
+                else
+                    game.gsClient.logIn();
             }
         });
 

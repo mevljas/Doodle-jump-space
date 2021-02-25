@@ -3,15 +3,27 @@ package tk.sebastjanmevlja.doodlejumpspace.MyGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import de.golfgl.gdxgamesvcs.IGameServiceClient;
+import de.golfgl.gdxgamesvcs.IGameServiceListener;
+import de.golfgl.gdxgamesvcs.NoGameServiceClient;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.LocalStorage;
-import tk.sebastjanmevlja.doodlejumpspace.Level.*;
+import tk.sebastjanmevlja.doodlejumpspace.Level.AboutScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.EndScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.LoadingScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.MenuScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.PauseScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.PreferencesScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Level.Screens;
 
 
-public class Game extends com.badlogic.gdx.Game {
+public class Game extends com.badlogic.gdx.Game implements IGameServiceListener {
 
 
     public static Game game;
+    public IGameServiceClient gsClient;
 
 
     private SpriteBatch batch;
@@ -34,6 +46,17 @@ public class Game extends com.badlogic.gdx.Game {
 //        Gdx.input.setCatchBackKey(true); //back key doesnt the app close - deprecated
         Gdx.input.setCatchKey(Input.Keys.BACK, true);
         localStorage = new LocalStorage();
+
+        // ...awesome initialization code...
+
+        if (gsClient == null)
+            gsClient = new NoGameServiceClient();
+
+        // for getting callbacks from the client
+        gsClient.setListener((IGameServiceListener) this);
+
+        // establish a connection to the game service without error messages or login screens
+        gsClient.resumeSession();
 
 
 
@@ -113,4 +136,40 @@ public class Game extends com.badlogic.gdx.Game {
         return this.batch;
     }
 
+
+    @Override
+    public void pause() {
+        super.pause();
+
+        gsClient.pauseSession();
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+
+        gsClient.resumeSession();
+    }
+
+
+    @Override
+    public void gsOnSessionActive() {
+        System.out.println("SESSION ACTIVE");
+        if (getScreen() == menuScreen){
+            menuScreen.show();
+        }
+    }
+
+    @Override
+    public void gsOnSessionInactive() {
+        System.out.println("SESSION INACTIVE");
+        if (getScreen() == menuScreen){
+            menuScreen.show();
+        }
+    }
+
+    @Override
+    public void gsShowErrorToUser(GsErrorType et, String msg, Throwable t) {
+        System.out.println(msg);
+    }
 }

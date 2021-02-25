@@ -104,6 +104,11 @@ public class EndScreen implements Screen{
         scoreLabel.setText("Score: " + Player.getScore());
         highScoreLabel.setText("High score: " + Game.localStorage.getHighScore());
         Level1Screen.paused = false;
+
+
+        if (game.gsClient.isSessionActive()){
+            game.gsClient.submitToLeaderboard(Constants.leaderBoardId, Player.getScore(), null);
+        }
     }
 
     @Override
