@@ -29,6 +29,8 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.Planet;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
@@ -40,6 +42,8 @@ import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.enemies;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.removeMonster;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.planets;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.recyclePlanet;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.platforms;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.recyclePlatform;
 
@@ -55,6 +59,7 @@ public class Level1Screen implements Screen {
     private Viewport viewport;
     private PlatformFactory platformFactory;
     private MonsterFactory monsterFactory;
+    private PlanetFactory planetFactory;
     private Player player;
     private Hud hud;
     private TextureAtlas.AtlasRegion background;
@@ -89,6 +94,8 @@ public class Level1Screen implements Screen {
         PlatformFactory.generatePlatforms(world);
         monsterFactory = new MonsterFactory();
         MonsterFactory.generateMonsters(world);
+        planetFactory = new PlanetFactory();
+        PlanetFactory.generatePlanets(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
         hud = new Hud();
         
@@ -119,6 +126,10 @@ public class Level1Screen implements Screen {
         stage.addActor(foregroundGroup);
         stage.addActor(hudGroup);
 
+
+        for (Planet planet : planets) {
+            backgroundGroup.addActor(planet);
+        }
 
 
         for (Platform platform : platforms) {
@@ -165,35 +176,28 @@ public class Level1Screen implements Screen {
         }
         for (Platform p: removePlatforms) {
             recyclePlatform(p);
-//            p.addAction(Actions.removeActor());
-//            world.destroyBody(p.getBody());
-
-//            Trampoline t = p.getTrampoline();
-//            if (t != null) {
-//                t.addAction(Actions.removeActor());
-//                world.destroyBody(t.getBody());
-//            }
-//
-//            Shield s = p.getShield();
-//            if (s != null) {
-//                s.addAction(Actions.removeActor());
-//                world.destroyBody(s.getBody());
-//            }
 
         }
 
-//
-//        if (platforms.size() < PlatformFactory.InitiaPlatformSize / 2){
-//            PlatformFactory.generatePlatforms(world);
-//            for (Platform p: platforms) {
-//                if (p.getStage() == null){
-//                    backgroundGroup.addActor(p);
-//
-//                }
-//
-//            }
-//
-//        }
+
+    }
+
+    private void updatePlanets(){
+        ArrayList<Planet> removePlanets = new ArrayList<>();
+        for(Planet planet : planets)
+        {
+            Vector3 windowCoordinates = new Vector3(0, planet.getSprite().getY(), 0);
+            camera.project(windowCoordinates);
+            if(windowCoordinates.y + planet.getSprite().getHeight() < 0 ){
+                removePlanets.add(planet);
+            }
+
+        }
+        for (Planet p: removePlanets) {
+            recyclePlanet(p);
+
+        }
+
 
     }
 
@@ -273,6 +277,7 @@ public class Level1Screen implements Screen {
             updatePlatforms();
             updateMonsters();
             updateBullets();
+            updatePlanets();
             removeShields();
             removeJetpacks();
 

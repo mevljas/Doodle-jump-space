@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.ArrayList;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.VerticalDirection;
@@ -155,6 +156,7 @@ public class Player extends Actor  {
         else if (sprite.getY() <= 0 && !falling){
             PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
             MonsterFactory.moveWorld(WORLD_FALL_VELOCITY);
+            PlanetFactory.moveWorld(WORLD_FALL_VELOCITY);
             Sound.playFallingSound();
             falling = true;
             fallingSprite = new Sprite(up);
@@ -289,6 +291,7 @@ public class Player extends Actor  {
             body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
             PlatformFactory.moveWorld(WORLD_VELOCITY );
             MonsterFactory.moveWorld(WORLD_VELOCITY);
+            PlanetFactory.moveWorld(WORLD_VELOCITY);
             Sound.playJumpSound();
             Player.incScore();
         }
@@ -303,6 +306,7 @@ public class Player extends Actor  {
             body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
             PlatformFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
             MonsterFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
+            PlanetFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
             this.rotating = true;
             Sound.playJumpSound();
             Player.incScore();
@@ -315,6 +319,7 @@ public class Player extends Actor  {
         verticalDirection = VerticalDirection.UP;
         PlatformFactory.moveWorld(WORLD_JETPACK_VELOCITY);
         MonsterFactory.moveWorld(WORLD_JETPACK_VELOCITY);
+        PlanetFactory.moveWorld(WORLD_JETPACK_VELOCITY);
         this.movePlayerToCenter = true;
 
 
@@ -325,12 +330,6 @@ public class Player extends Actor  {
     }
 
 
-    public static void moveWorld(float velocity){
-
-        for (Bullet b: bullets) {
-            b.body.setLinearVelocity(b.body.getLinearVelocity().x,-velocity * 1.8f);
-        }
-    }
 
     private  float  calculateDynamicVelocity(){
         return sprite.getY() * 0.001f;
@@ -342,6 +341,7 @@ public class Player extends Actor  {
             verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
+            PlanetFactory.stopWorld();
         }
         else if (jetpack != null){
             decreaseJetpackVelocity();
@@ -352,14 +352,6 @@ public class Player extends Actor  {
             }
 
         }
-//        if (sprite.getY() <= Constants.HEIGHT * 0.5f){
-//            PlatformFactory.stopWorld();
-//            MonsterFactory.stopWorld();
-//        }
-//        else{
-//            PlatformFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
-//            MonsterFactory.moveWorld(WORLD_VELOCITY + player.sprite.getY()  * 0.001f);
-//        }
 
 
 
@@ -370,6 +362,7 @@ public class Player extends Actor  {
         if (PlatformFactory.getYVelocity() >= WORLD_JETPACK_VELOCITY_STOP){
             PlatformFactory.stopWorld();
             MonsterFactory.stopWorld();
+            PlanetFactory.stopWorld();
             removeJetpack();
             verticalDirection = VerticalDirection.DOWN;
 
@@ -378,6 +371,7 @@ public class Player extends Actor  {
             float velocity = PlatformFactory.getYVelocity() * WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO;
             PlatformFactory.moveWorld(velocity);
             MonsterFactory.moveWorld(velocity);
+            PlanetFactory.moveWorld(velocity);
         }
 
     }
