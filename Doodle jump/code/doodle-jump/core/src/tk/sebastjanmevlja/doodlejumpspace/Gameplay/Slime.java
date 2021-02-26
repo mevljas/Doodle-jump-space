@@ -71,7 +71,7 @@ public class Slime extends Actor {
         shape.dispose();
 
 
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("slime"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.1f, Asset.atlas.findRegions("slime"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
     }
 

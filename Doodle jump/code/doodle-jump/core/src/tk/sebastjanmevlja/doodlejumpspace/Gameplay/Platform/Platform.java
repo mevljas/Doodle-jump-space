@@ -285,20 +285,18 @@ public class Platform extends Actor {
     }
 
     void generateItems(){
-//        if (r.nextInt(40) == 1){
-//            this.slime = new Slime(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-//            Level1Screen.backgroundGroup.addActor(this.slime);
-//        }
-//        else if (r.nextInt(40) == 20){
-//            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
-//            Level1Screen.backgroundGroup.addActor(this.shield);
-//        }
-//        else if (r.nextInt(40) == 39){
-//            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
-//            Level1Screen.backgroundGroup.addActor(this.jetpack);
-//        }
-        this.slime = new Slime(calculateSlimePositionX(), calculateSlimePositionY(),world);
-        Level1Screen.backgroundGroup.addActor(this.slime);
+        if (r.nextInt(40) == 1){
+            this.slime = new Slime(calculateSlimePositionX(),calculateSlimePositionY(),world);
+            Level1Screen.backgroundGroup.addActor(this.slime);
+        }
+        else if (r.nextInt(40) == 20){
+            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
+            Level1Screen.backgroundGroup.addActor(this.shield);
+        }
+        else if (r.nextInt(40) == 39){
+            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
+            Level1Screen.backgroundGroup.addActor(this.jetpack);
+        }
     }
 
 
