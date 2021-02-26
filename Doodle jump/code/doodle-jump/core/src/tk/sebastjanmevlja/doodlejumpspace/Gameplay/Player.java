@@ -55,7 +55,7 @@ public class Player extends Actor  {
     public static float WIDTH = HEIGHT;
     private static float accelerometerSensitivity = 0.8f;
 
-    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("Player_right_up");
+    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
     private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
     private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
     private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");

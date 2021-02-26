@@ -6,28 +6,21 @@ filter: Nearest, Nearest
 repeat: none
 Player_left_down
   rotate: false
-  xy: 926, 56
+  xy: 1373, 51
   size: 440, 474
   orig: 440, 474
   offset: 0, 0
   index: -1
 Player_left_up
   rotate: false
-  xy: 933, 1033
+  xy: 926, 527
   size: 446, 500
   orig: 446, 500
   offset: 0, 0
   index: -1
-Player_right_down
-  rotate: false
-  xy: 1368, 56
-  size: 440, 474
-  orig: 440, 474
-  offset: 0, 0
-  index: -1
 Player_right_up
   rotate: false
-  xy: 926, 532
+  xy: 926, 26
   size: 445, 499
   orig: 445, 499
   offset: 0, 0
@@ -39,16 +32,23 @@ background
   orig: 640, 1024
   offset: 0, 0
   index: -1
+blackhole
+  rotate: false
+  xy: 1374, 535
+  size: 192, 187
+  orig: 192, 187
+  offset: 0, 0
+  index: -1
 blue_enemy
   rotate: false
-  xy: 1810, 375
+  xy: 1815, 375
   size: 200, 300
   orig: 200, 300
   offset: 0, 0
   index: 1
 blue_enemy
   rotate: false
-  xy: 1810, 73
+  xy: 1815, 73
   size: 200, 300
   orig: 200, 300
   offset: 0, 0
@@ -67,13 +67,6 @@ broken_platform
   orig: 245, 75
   offset: 0, 0
   index: 0
-broken_platform
-  rotate: false
-  xy: 1573, 583
-  size: 234, 92
-  orig: 234, 92
-  offset: 0, 0
-  index: 3
 bullet
   rotate: false
   xy: 933, 1535
@@ -83,7 +76,7 @@ bullet
   index: -1
 gray_platform
   rotate: false
-  xy: 644, 84
+  xy: 1568, 604
   size: 245, 71
   orig: 245, 71
   offset: 0, 0
@@ -111,7 +104,7 @@ jetpack_item
   index: -1
 magneto
   rotate: false
-  xy: 1629, 677
+  xy: 1633, 677
   size: 408, 396
   orig: 408, 396
   offset: 0, 0
@@ -125,14 +118,14 @@ magneto_zone
   index: -1
 planets_left
   rotate: false
-  xy: 1381, 724
+  xy: 1385, 724
   size: 124, 809
   orig: 124, 809
   offset: 0, 0
   index: 1
 planets_left
   rotate: false
-  xy: 1507, 751
+  xy: 1511, 751
   size: 120, 792
   orig: 120, 792
   offset: 0, 0
@@ -151,13 +144,27 @@ planets_right
   orig: 132, 859
   offset: 0, 0
   index: 0
+player_up
+  rotate: false
+  xy: 933, 1029
+  size: 450, 504
+  orig: 450, 504
+  offset: 0, 0
+  index: -1
 red_enemy
   rotate: false
-  xy: 1629, 1075
+  xy: 1633, 1075
   size: 364, 468
   orig: 364, 468
   offset: 0, 0
   index: 0
+shiled
+  rotate: false
+  xy: 792, 125
+  size: 104, 121
+  orig: 104, 121
+  offset: 0, 0
+  index: -1
 shiled_radius
   rotate: false
   xy: 1439, 1545
@@ -181,21 +188,21 @@ slime
   index: 1
 slime
   rotate: false
-  xy: 1573, 539
+  xy: 1373, 7
   size: 171, 42
   orig: 171, 42
   offset: 0, 0
   index: 2
-slime-icon
+slime
   rotate: false
-  xy: 1373, 533
-  size: 198, 189
-  orig: 198, 189
+  xy: 656, 30
+  size: 134, 125
+  orig: 134, 125
   offset: 0, 0
-  index: -1
+  index: 0
 white_platform
   rotate: false
-  xy: 656, 9
+  xy: 1568, 529
   size: 244, 73
   orig: 244, 73
   offset: 0, 0
@@ -206,80 +213,73 @@ size: 2048, 512
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
-blackhole
+Player_right_down
   rotate: false
-  xy: 1094, 282
-  size: 192, 187
-  orig: 192, 187
+  xy: 2, 2
+  size: 440, 474
+  orig: 440, 474
   offset: 0, 0
   index: -1
 broken_platform
   rotate: false
-  xy: 1288, 370
+  xy: 1536, 377
   size: 236, 99
   orig: 236, 99
   offset: 0, 0
   index: 2
 broken_platform
   rotate: false
-  xy: 1526, 377
+  xy: 1774, 384
   size: 239, 92
   orig: 239, 92
   offset: 0, 0
   index: 4
+broken_platform
+  rotate: false
+  xy: 1536, 283
+  size: 234, 92
+  orig: 234, 92
+  offset: 0, 0
+  index: 3
 grey_enemy
   rotate: false
-  xy: 734, 176
+  xy: 1176, 183
   size: 179, 293
   orig: 179, 293
   offset: 0, 0
   index: 1
 grey_enemy
   rotate: false
-  xy: 915, 186
+  xy: 1357, 193
   size: 177, 283
   orig: 177, 283
   offset: 0, 0
   index: 0
 jetpack
   rotate: false
-  xy: 734, 2
+  xy: 1176, 9
   size: 100, 172
   orig: 100, 172
   offset: 0, 0
   index: 2
 jetpack
   rotate: false
-  xy: 836, 3
+  xy: 1278, 10
   size: 99, 171
   orig: 99, 171
   offset: 0, 0
   index: 3
 red_enemy
   rotate: false
-  xy: 2, 9
+  xy: 444, 16
   size: 377, 460
   orig: 377, 460
   offset: 0, 0
   index: 2
 red_enemy
   rotate: false
-  xy: 381, 7
+  xy: 823, 14
   size: 351, 462
   orig: 351, 462
   offset: 0, 0
   index: 1
-shiled
-  rotate: false
-  xy: 1094, 159
-  size: 104, 121
-  orig: 104, 121
-  offset: 0, 0
-  index: -1
-slime
-  rotate: false
-  xy: 937, 59
-  size: 134, 125
-  orig: 134, 125
-  offset: 0, 0
-  index: 0
