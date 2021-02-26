@@ -32,11 +32,11 @@ public class BrokenPlatform extends Platform {
     }
 
 
-    float calculateTrampolinePositionX(){
+    float calculateSlimePositionX(){
         return sprite.getX() + PLATFORM_WIDTH / 2 -  Slime.TRAMPOLINE_WIDTH / 2;
     }
 
-    float calculateTrampolinePositionY(){
+    float calculateSlimePositionY(){
         return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
     }
 

@@ -95,12 +95,12 @@ public class Platform extends Actor {
 
 
 
-    float calculateTrampolinePositionX(){
+    float calculateSlimePositionX(){
         return sprite.getX() + PLATFORM_WIDTH / 2 -  Slime.TRAMPOLINE_WIDTH / 2;
     }
 
-    float calculateTrampolinePositionY(){
-        return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
+    float calculateSlimePositionY(){
+        return sprite.getY() + sprite.getHeight() * 0.9f;
     }
 
     float calculateShieldPositionX(){
@@ -108,7 +108,7 @@ public class Platform extends Actor {
     }
 
     float calculateShieldPositionY(){
-        return sprite.getY() + PLATFORM_HEIGHT * 0.7f;
+        return sprite.getY() + sprite.getHeight() * 0.7f;
     }
 
     float calculateJetpackPositionX(){
@@ -116,7 +116,7 @@ public class Platform extends Actor {
     }
 
     float calculateJetpackPositionY(){
-        return sprite.getY() + PLATFORM_HEIGHT * 0.8f;
+        return sprite.getY() + sprite.getHeight();
     }
 
 
@@ -142,7 +142,7 @@ public class Platform extends Actor {
                 (body.getPosition().y * PPM) -sprite.getHeight()/2 );
 
         if (slime != null){
-            slime.updatePos(calculateTrampolinePositionX(),calculateTrampolinePositionY());
+            slime.updatePos(calculateSlimePositionX(), calculateSlimePositionY());
         }
 
         if (shield != null){
@@ -285,18 +285,20 @@ public class Platform extends Actor {
     }
 
     void generateItems(){
-        if (r.nextInt(40) == 1){
-            this.slime = new Slime(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
-            Level1Screen.backgroundGroup.addActor(this.slime);
-        }
-        else if (r.nextInt(40) == 20){
-            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
-            Level1Screen.backgroundGroup.addActor(this.shield);
-        }
-        else if (r.nextInt(40) == 39){
-            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
-            Level1Screen.backgroundGroup.addActor(this.jetpack);
-        }
+//        if (r.nextInt(40) == 1){
+//            this.slime = new Slime(calculateTrampolinePositionX(),calculateTrampolinePositionY(),world);
+//            Level1Screen.backgroundGroup.addActor(this.slime);
+//        }
+//        else if (r.nextInt(40) == 20){
+//            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
+//            Level1Screen.backgroundGroup.addActor(this.shield);
+//        }
+//        else if (r.nextInt(40) == 39){
+//            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
+//            Level1Screen.backgroundGroup.addActor(this.jetpack);
+//        }
+        this.slime = new Slime(calculateSlimePositionX(), calculateSlimePositionY(),world);
+        Level1Screen.backgroundGroup.addActor(this.slime);
     }
 
 
