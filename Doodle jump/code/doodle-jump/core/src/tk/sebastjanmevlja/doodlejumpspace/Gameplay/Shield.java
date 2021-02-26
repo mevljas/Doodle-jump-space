@@ -2,9 +2,16 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
@@ -15,15 +22,16 @@ public class Shield extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    public static float SHIELD_WIDTH = Constants.WIDTH * 0.12f;
+    public static float SHIELD_WIDTH = Constants.WIDTH * 0.11f;
     public static float SHIELD_HEIGHT = SHIELD_WIDTH;
     public Platform parentPlatform;
+    TextureAtlas.AtlasRegion shieldActivatedAtlasRegion =  Asset.atlas.findRegion("shiled_radius");
 
 
 
 
     public Shield(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("shiled"));
+        sprite = new Sprite(Asset.atlas.findRegion("shiled_item"));
         sprite.setSize(SHIELD_WIDTH, SHIELD_HEIGHT);
         sprite.setPosition(x,y);
         sprite.setCenterX(x);
@@ -73,6 +81,10 @@ public class Shield extends Actor {
         this.body.setTransform((sprite.getX() + sprite.getWidth()/2) /PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM, 0 );
 
+    }
+
+    public void setRadiusTexture(){
+        this.sprite = new Sprite(shieldActivatedAtlasRegion);
     }
 
 

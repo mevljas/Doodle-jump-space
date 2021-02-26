@@ -421,7 +421,8 @@ public class Player extends Actor  {
 
     public void equipShield( Shield shield){
         this.shield = shield;
-        shield.sprite.setSize(shield.sprite.getWidth() * 2f, shield.sprite.getHeight() * 2f);
+        shield.setRadiusTexture();
+        shield.sprite.setSize(shield.sprite.getWidth() / 2 , shield.sprite.getHeight() / 2);
         this.imunity = true;
         numberOfShields++;
 
