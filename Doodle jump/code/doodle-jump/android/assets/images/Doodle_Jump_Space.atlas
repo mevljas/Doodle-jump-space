@@ -178,28 +178,28 @@ slime
   size: 157, 74
   orig: 157, 74
   offset: 0, 0
-  index: 3
+  index: 0
 slime
   rotate: false
   xy: 497, 7
   size: 157, 74
   orig: 157, 74
   offset: 0, 0
-  index: 1
+  index: 2
 slime
   rotate: false
   xy: 1373, 7
   size: 171, 42
   orig: 171, 42
   offset: 0, 0
-  index: 2
+  index: 1
 slime
   rotate: false
   xy: 656, 30
   size: 134, 125
   orig: 134, 125
   offset: 0, 0
-  index: 0
+  index: 3
 white_platform
   rotate: false
   xy: 1568, 529
