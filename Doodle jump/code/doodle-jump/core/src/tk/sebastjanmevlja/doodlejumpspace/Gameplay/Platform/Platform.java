@@ -292,7 +292,7 @@ public class Platform extends Actor {
             this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY(),world, this);
             Level1Screen.backgroundGroup.addActor(this.shield);
         }
-        if (r.nextInt(40) == 39){
+        else if (r.nextInt(40) == 39){
             this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
             Level1Screen.backgroundGroup.addActor(this.jetpack);
         }
