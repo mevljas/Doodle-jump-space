@@ -1,7 +1,10 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
@@ -28,6 +31,8 @@ public class RedEnemy extends Enemy {
         leftLocation = x - WIDTH * 0.8f;
         direction = HorizontalDirection.RIGHT;
         body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("red_enemy"), Animation.PlayMode.LOOP);
+        this.stateTime = 0f;
     }
 
 
@@ -40,6 +45,7 @@ public class RedEnemy extends Enemy {
     public void act(float delta) {
         super.act(delta);
         changeDirection();
+        updateAnimations();
     }
 
     public void changeDirection(){
@@ -55,12 +61,20 @@ public class RedEnemy extends Enemy {
         }
     }
 
+    public void updateAnimations(){
+        this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+    }
+
+
+
 
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (this.alive){
-            sprite.draw(batch);
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
+            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }
 
 

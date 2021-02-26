@@ -114,7 +114,7 @@ public class Jetpack extends Actor {
             sprite.draw(batch);
         else {
             // Get current frame of animation for the current stateTime
-            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }
 

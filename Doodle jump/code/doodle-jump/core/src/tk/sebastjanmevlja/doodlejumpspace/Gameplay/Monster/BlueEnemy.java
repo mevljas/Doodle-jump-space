@@ -52,7 +52,7 @@ public class BlueEnemy extends Enemy {
     public void draw(Batch batch, float parentAlpha) {
 //        super.draw(batch, parentAlpha);
         if (this.alive){
-            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }
 
