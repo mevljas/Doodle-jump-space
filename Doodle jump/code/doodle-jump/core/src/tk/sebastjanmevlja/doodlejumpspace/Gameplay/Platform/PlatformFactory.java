@@ -1,10 +1,11 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
 
 import com.badlogic.gdx.physics.box2d.World;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 
 import java.util.LinkedList;
 import java.util.Random;
+
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform.PLATFORM_HEIGHT;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform.PLATFORM_WIDTH;
@@ -30,7 +31,7 @@ public class PlatformFactory {
 
     public PlatformFactory() {
         platforms = new LinkedList<>();
-        maxSpacingHeight = PLATFORM_HEIGHT * 3.4f;
+        maxSpacingHeight = PLATFORM_HEIGHT * 3.2f;
         minSpacingHeight = PLATFORM_HEIGHT * 1.9f;
         maxSpacingWidth = Constants.WIDTH - PLATFORM_WIDTH;
         minSpacingWidth = PLATFORM_WIDTH * 0.1f;
