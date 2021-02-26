@@ -199,6 +199,7 @@ public class Platform extends Actor {
         this.shield = null;
     }
     public void removeJetpack(){
+        this.jetpack.parentPlatform = null;
         this.jetpack = null;
     }
 

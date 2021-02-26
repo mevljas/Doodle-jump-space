@@ -1,10 +1,19 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
@@ -18,6 +27,9 @@ public class Jetpack extends Actor {
     public static float JETPACK_WIDTH = Constants.WIDTH * 0.08f;
     public static float JETPACK_HEIGHT = Constants.HEIGHT * 0.040f;
     public Platform parentPlatform;
+    public Animation<TextureRegion> runningAnimation;
+    // A variable for tracking elapsed time for the animation
+    float stateTime;
 
 
 
@@ -65,6 +77,9 @@ public class Jetpack extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
+        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("jetpack"), Animation.PlayMode.LOOP);
+        this.stateTime = 0f;
+
     }
 
     public void updatePos(float x, float y){
@@ -72,6 +87,14 @@ public class Jetpack extends Actor {
         sprite.setPosition(x,y);
         this.body.setTransform((sprite.getX() + sprite.getWidth()/2) /PPM,
                 (sprite.getY() + sprite.getHeight()/2) / PPM, 0 );
+        updateAnimations();
+
+    }
+
+    private void updateAnimations(){
+        if (this.parentPlatform == null){
+            this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+        }
 
     }
 
@@ -87,8 +110,13 @@ public class Jetpack extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
-        sprite.draw(batch);
+        if (this.parentPlatform != null)
+            sprite.draw(batch);
+        else {
+            // Get current frame of animation for the current stateTime
+            TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
+            batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+        }
 
     }
 

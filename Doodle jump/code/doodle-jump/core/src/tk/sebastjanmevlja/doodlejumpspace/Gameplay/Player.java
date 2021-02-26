@@ -197,7 +197,7 @@ public class Player extends Actor  {
     }
 
     float calculateJetpackPositionY(Jetpack jetpack){
-        return sprite.getY() + HEIGHT / 2 -  jetpack.sprite.getHeight() * 1.2f;
+        return sprite.getY() - jetpack.sprite.getHeight() / 2f;
     }
 
 
@@ -446,7 +446,7 @@ public class Player extends Actor  {
 
     public void equipJetpack( Jetpack jetpack){
         this.jetpack = jetpack;
-        jetpack.sprite.setSize(jetpack.sprite.getWidth() * 0.8f, jetpack.sprite.getHeight() * 0.8f);
+        jetpack.sprite.setSize(jetpack.sprite.getWidth() * 0.8f, jetpack.sprite.getHeight());
         body.setGravityScale(0);
         jumpJetpack();
         body.setLinearVelocity(body.getLinearVelocity().x, 0);
