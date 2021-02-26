@@ -79,7 +79,7 @@ public class WorldContactListener implements ContactListener {
                 return;
             }
             if (enemy instanceof MagnetEnemy){
-                ((MagnetEnemy) enemy).showLight();
+                ((MagnetEnemy) enemy).enableZone();
                 ((MagnetEnemy) enemy).movePlayerCloser();
             }
             else if (enemy instanceof BlackHole){

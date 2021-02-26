@@ -18,15 +18,17 @@ public class MagnetEnemy extends Enemy {
     private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 
     private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
-    public  static final TextureAtlas.AtlasRegion alienUfoLight = Asset.atlas.findRegion("magneto_zone");
+    public  static final TextureAtlas.AtlasRegion zoneTexture = Asset.atlas.findRegion("magneto_zone");
+    private boolean zone = false;
 
 
 
     public MagnetEnemy(World world, float x, float y) {
         super(texture, world, x, y);
-        WIDTH = Constants.WIDTH / 3f;
-        HEIGHT = Constants.HEIGHT / 4f;
+        HEIGHT = Constants.HEIGHT * 0.1f;
+        WIDTH = HEIGHT;
         init( world, x, y);
+        zone = false;
     }
 
 
@@ -78,8 +80,13 @@ public class MagnetEnemy extends Enemy {
 
     }
 
-    public void showLight(){
-        sprite.setRegion(alienUfoLight);
+    public void enableZone(){
+        sprite.setRegion(zoneTexture);
+        if (!zone){
+            zone = true;
+            sprite.setSize(sprite.getWidth() * 2, sprite.getHeight() * 2);
+        }
+
     }
 
 
