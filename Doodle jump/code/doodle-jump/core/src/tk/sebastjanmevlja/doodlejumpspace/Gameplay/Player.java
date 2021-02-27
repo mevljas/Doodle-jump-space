@@ -158,13 +158,7 @@ public class Player extends Actor  {
             PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
             MonsterFactory.moveWorld(WORLD_FALL_VELOCITY);
             PlanetFactory.moveWorld(WORLD_FALL_VELOCITY);
-            Sound.playFallingSound();
-            falling = true;
-            fallingSprite = new Sprite(up);
-            fallingSprite.setSize(WIDTH, HEIGHT);
-            fallingSprite.setPosition(sprite.getX(), sprite.getY());
-            fallingSprite.setCenterX(sprite.getX());
-            fallingSprite.setOriginCenter();
+            fall();
         }
 
         if (shield != null){
@@ -174,6 +168,21 @@ public class Player extends Actor  {
         if (jetpack != null){
             jetpack.updatePos(calculateJetpackPositionX(jetpack),calculateJetpackPositionY(jetpack));
         }
+    }
+
+    public  void fall(){
+        Sound.playFallingSound();
+        falling = true;
+        fallingSprite = new Sprite(up);
+        fallingSprite.setSize(WIDTH, HEIGHT);
+        fallingSprite.setPosition(sprite.getX(), sprite.getY());
+        fallingSprite.setCenterX(sprite.getX());
+        fallingSprite.setOriginCenter();
+    }
+
+    public  void die(){
+        Sound.playFallingSound();
+        this.setLives(0);
     }
 
     private void checkAccelerometer(){
@@ -334,7 +343,7 @@ public class Player extends Actor  {
 
 
     private  float  calculateDynamicVelocity(){
-        return sprite.getY() * 0.001f;
+        return sprite.getY() * 0.0015f;
     }
 
 
