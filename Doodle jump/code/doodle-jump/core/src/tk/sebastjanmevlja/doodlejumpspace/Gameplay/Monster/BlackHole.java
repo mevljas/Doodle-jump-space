@@ -2,13 +2,14 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
@@ -17,12 +18,6 @@ public class BlackHole extends Enemy {
 
 
     private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("blackhole");
-
-    private static float playerMovingScale = Constants.HEIGHT * 0.0045f;
-    private static float playerDetectingRange = Constants.HEIGHT * 0.0008f;
-
-
-
 
     public BlackHole(World world, float x, float y) {
         super(texture, world, x, y);
@@ -56,9 +51,9 @@ public class BlackHole extends Enemy {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        bodyWidth = sprite.getWidth() * 0.38f / PPM;
         bodyHeight = sprite.getHeight()
-                * 0.4f / PPM;
+                * 0.38f / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
@@ -87,23 +82,6 @@ public class BlackHole extends Enemy {
         super.act(delta);
 
     }
-
-
-    public void movePlayerCloser(){
-        if (getPlayerDistance() < playerDetectingRange){
-            Player.player.setLives(0);
-            Sound.playFallingSound();
-            Level1Screen.gameOver();
-        }
-        Vector2 vectDirection = (body.getPosition()).sub(Player.player.body.getPosition()).nor().scl(playerMovingScale);
-        Player.player.body.setLinearVelocity(vectDirection);
-    }
-
-    double getPlayerDistance(){
-        return Math.sqrt(Math.pow((body.getPosition().x - Player.player.body.getPosition().x), 2) + Math.pow((body.getPosition().y - Player.player.body.getPosition().y), 2));
-    }
-
-
 
 
     @Override

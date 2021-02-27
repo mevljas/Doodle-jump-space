@@ -16,7 +16,6 @@ public class WorldContactListener implements ContactListener {
     private Slime slime;
     private Shield shield;
     private Jetpack jetpack;
-    private boolean blackHoleMonster = false;
 
     public WorldContactListener(Player player) {
         this.player = player;
@@ -83,7 +82,7 @@ public class WorldContactListener implements ContactListener {
                 ((MagnetEnemy) enemy).movePlayerCloser();
             }
             else if (enemy instanceof BlackHole){
-                blackHoleMonster = true;
+                player.die();
             }
             else {
                 Player.decLives();
@@ -151,9 +150,6 @@ public class WorldContactListener implements ContactListener {
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
         contact.setEnabled(false);
-        if (blackHoleMonster){
-            ((BlackHole) enemy).movePlayerCloser();
-        }
 
     }
 
