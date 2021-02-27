@@ -119,6 +119,7 @@ public class Player extends Actor  {
         fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.TRAMPOLINE_BIT | Constants.ITEM_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
+        fixtureDef.isSensor = true;
         Fixture fixture = body.createFixture(fixtureDef);
         fixture.setUserData(this);
         // Shape is the only disposable of the lot, so get rid of it
