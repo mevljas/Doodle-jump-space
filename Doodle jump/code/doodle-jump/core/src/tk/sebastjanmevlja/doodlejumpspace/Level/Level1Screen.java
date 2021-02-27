@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -68,7 +67,6 @@ public class Level1Screen implements Screen {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
-    public static Sprite pauseIcon;
     public static Boolean paused;
 
 
@@ -112,9 +110,7 @@ public class Level1Screen implements Screen {
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
 
-        pauseIcon = new Sprite(Asset.pauseTexture);
-        pauseIcon.setPosition(Constants.WIDTH * 0.02f, Constants.HEIGHT * 0.91f);
-        pauseIcon.setSize(Constants.WIDTH * 0.1f, Constants.WIDTH * 0.1f);
+
 
 
 
@@ -312,7 +308,6 @@ public class Level1Screen implements Screen {
 
 
         stage.getBatch().begin();
-        pauseIcon.draw(stage.getBatch());
         stage.getBatch().end();
 
 //        Display number of drawn objects.

@@ -8,7 +8,6 @@ import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejumpspace.Level.Screens;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen.pauseIcon;
 
 public class Input implements InputProcessor, GestureDetector.GestureListener {
 
@@ -66,8 +65,7 @@ public class Input implements InputProcessor, GestureDetector.GestureListener {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//        player.jump();
-        if(pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)){
+        if(Hud.pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)){
             Level1Screen.paused = true;
             Game.game.changeScreen(Screens.PAUSESCREEN);
         }
