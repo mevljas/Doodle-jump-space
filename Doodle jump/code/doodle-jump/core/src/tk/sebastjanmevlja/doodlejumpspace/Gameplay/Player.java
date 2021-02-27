@@ -273,16 +273,17 @@ public class Player extends Actor  {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch);
-//        drawBullets(batch, parentAlpha);
+        if (!falling) {
+            sprite.draw(batch);
+        }
+        else {
+            fallingSprite.draw(batch);
+        }
         if (shield != null){
             shield.draw(batch, parentAlpha);
         }
         if (jetpack != null){
             jetpack.draw(batch, parentAlpha);
-        }
-        if (falling){
-            fallingSprite.draw(batch);
         }
     }
 
