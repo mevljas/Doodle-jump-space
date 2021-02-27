@@ -78,21 +78,21 @@ public class MenuScreen implements Screen {
         //add buttons to table
         if ((Level1Screen.paused != null && Level1Screen.paused) || Game.localStorage.getSavedData()){
             table.add(continueGame);
-            table.row().padTop(Value.percentWidth(.10F, table));
+            table.row().padTop(Value.percentWidth(.05F, table));
         }
         table.add(newGame);
-        table.row().padTop(Value.percentWidth(.10F, table));
+        table.row().padTop(Value.percentWidth(.05F, table));
         if (game.gsClient.isSessionActive()){
             table.add(leaderboard);
-            table.row().padTop(Value.percentWidth(.10F, table));
+            table.row().padTop(Value.percentWidth(.05F, table));
         }
 
         table.add(preferences);
-        table.row().padTop(Value.percentWidth(.10F, table));
+        table.row().padTop(Value.percentWidth(.05F, table));
         table.add(about);
-        table.row().padTop(Value.percentWidth(.10F, table));
+        table.row().padTop(Value.percentWidth(.05F, table));
         table.add(logout);
-        table.row().padTop(Value.percentWidth(.10F, table));
+        table.row().padTop(Value.percentWidth(.05F, table));
         table.add(exit);
 
         // create button listeners
