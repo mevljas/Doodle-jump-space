@@ -11,10 +11,11 @@ public class GrayPlatform extends Platform {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("gray_platform");
 
 
-    public GrayPlatform(World world, float x, float y) {
+    public GrayPlatform(World world, float x, float y, boolean items) {
         super(plaformTextureRegionGreen, world, x, y);
 
-        generateItems();
+        if (items)
+            generateItems();
     }
 
 

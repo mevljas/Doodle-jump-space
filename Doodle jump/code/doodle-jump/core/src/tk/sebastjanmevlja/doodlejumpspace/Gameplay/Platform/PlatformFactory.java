@@ -40,7 +40,7 @@ public class PlatformFactory {
 
     public static void generatePlatforms(World world){
         y = 0;
-        platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y));
+        platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y, false));
 
 
 
@@ -75,7 +75,7 @@ public class PlatformFactory {
         if (value < 2){
 
             if (platforms.getLast() instanceof BrokenPlatform){
-                platforms.add(new GrayPlatform(world, x, y));
+                platforms.add(new GrayPlatform(world, x, y, false));
             }
             else {
                 platforms.add(new BrokenPlatform(world, x, y));
@@ -86,7 +86,7 @@ public class PlatformFactory {
 
         }
         else{
-            platforms.add(new GrayPlatform(world, x, y));
+            platforms.add(new GrayPlatform(world, x, y, true));
         }
     }
 
