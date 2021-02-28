@@ -103,5 +103,42 @@ public class Sound {
         }
     }
 
+    public static void playBlackHoleSound() {
+        if (soundEnabled) {
+            Asset.blackHoleSound.stop();
+            Asset.blackHoleSound.play();
+        }
+    }
+
+    public static void playJetpackSound() {
+        if (soundEnabled) {
+            Asset.jetpackSound.play();
+            Asset.jetpackSound.setLooping(true);
+            Asset.jetpackSound.setVolume(0.3f);
+        }
+    }
+
+    public static void stopJetpackSound() {
+        Asset.jetpackSound.stop();
+    }
+
+
+    public static void playMagnetoSound() {
+        if (soundEnabled && !Asset.magnetoSound.isPlaying()) {
+            Asset.magnetoSound.play();
+            Asset.jetpackSound.setVolume(0.5f);
+        }
+    }
+
+    public static void stopMagnetoSound() {
+        Asset.magnetoSound.stop();
+    }
+
+    public static void playSlimeSound() {
+        if (soundEnabled) {
+            Asset.slimeSound.play();
+        }
+    }
+
 
 }

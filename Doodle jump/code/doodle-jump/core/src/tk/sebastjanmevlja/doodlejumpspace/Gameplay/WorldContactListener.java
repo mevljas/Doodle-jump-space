@@ -82,6 +82,7 @@ public class WorldContactListener implements ContactListener {
                 ((MagnetoEnemy) enemy).movePlayerCloser();
             }
             else if (enemy instanceof BlackHole){
+//                Sound.playBlackHoleSound();
                 player.die();
             }
             else {
@@ -97,6 +98,9 @@ public class WorldContactListener implements ContactListener {
             enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
             enemy.kill();
             bullet.deactivate();
+            if (enemy instanceof MagnetoEnemy){
+                Sound.stopMagnetoSound();
+            }
 
         }
 

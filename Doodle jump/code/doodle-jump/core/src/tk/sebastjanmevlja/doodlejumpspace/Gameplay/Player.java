@@ -323,6 +323,7 @@ public class Player extends Actor  {
             this.rotating = true;
             Sound.playJumpSound();
             Player.incScore();
+            Sound.playSlimeSound();
         }
 
     }
@@ -461,6 +462,7 @@ public class Player extends Actor  {
         jumpJetpack();
         body.setLinearVelocity(body.getLinearVelocity().x, 0);
         this.imunity = true;
+        Sound.playJetpackSound();
 
 
     }
@@ -479,6 +481,7 @@ public class Player extends Actor  {
         body.setLinearVelocity(body.getLinearVelocity().x, 0);
         body.setAwake(true);
         this.imunity = false;
+        Sound.stopJetpackSound();
         if (this.jetpack != null){
             removedJetpacks.add(jetpack);
             this.jetpack = null;

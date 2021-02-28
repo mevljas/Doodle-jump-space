@@ -28,6 +28,10 @@ public class Asset {
     private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
     private final AssetDescriptor<Music> shieldSoundDescriptor = new AssetDescriptor<>("sounds/shieldSound.mp3", Music.class);
     private final AssetDescriptor<Music> bulletSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
+    private final AssetDescriptor<Music> blackHoleSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
+    private final AssetDescriptor<Music> jetpackDescriptor = new AssetDescriptor<>("sounds/jetpackSound.mp3", Music.class);
+    private final AssetDescriptor<Music> magnetoSoundDescriptor = new AssetDescriptor<>("sounds/magnetoSound.mp3", Music.class);
+    private final AssetDescriptor<Music> slimeSoundDescriptor = new AssetDescriptor<>("sounds/slimeSound.mp3", Music.class);
 
 //    Assets
     public static Texture loadingBackgroundTexture;
@@ -45,6 +49,10 @@ public class Asset {
     public static Music startSound;
     public static Music shieldSound;
     public static Music bulletSound;
+    public static Music blackHoleSound;
+    public static Music jetpackSound;
+    public static Music magnetoSound;
+    public static Music slimeSound;
 
 //    public static FreeType.Bitmap freeTypeFont;
 
@@ -73,6 +81,10 @@ public class Asset {
         assetManager.load(pauseDescriptor);
         assetManager.load(shieldSoundDescriptor);
         assetManager.load(bulletSoundDescriptor);
+        assetManager.load(blackHoleSoundDescriptor);
+        assetManager.load(jetpackDescriptor);
+        assetManager.load(magnetoSoundDescriptor);
+        assetManager.load(slimeSoundDescriptor);
 //        assetManager.load(fontDescriptor);
 
         assetManager.finishLoading();
@@ -89,6 +101,10 @@ public class Asset {
         startSound = assetManager.get(startSoundDescriptor);
         shieldSound = assetManager.get(shieldSoundDescriptor);
         bulletSound = assetManager.get(bulletSoundDescriptor);
+        blackHoleSound = assetManager.get(blackHoleSoundDescriptor);
+        jetpackSound = assetManager.get(jetpackDescriptor);
+        magnetoSound = assetManager.get(magnetoSoundDescriptor);
+        slimeSound = assetManager.get(slimeSoundDescriptor);
 //        freeTypeFont = assetManager.get(fontDescriptor);
 
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
@@ -88,8 +89,9 @@ public class MagnetoEnemy extends Enemy {
     }
 
     public void enableZone(){
-        sprite.setRegion(zoneTexture);
+        Sound.playMagnetoSound();
         if (!zone){
+            sprite.setRegion(zoneTexture);
             zone = true;
             sprite.setSize(sprite.getWidth() * 2, sprite.getHeight() * 2);
         }
