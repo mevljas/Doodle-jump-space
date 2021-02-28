@@ -27,7 +27,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Hud;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.Planet;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
@@ -39,8 +39,8 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.WorldContactListener;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.enemies;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory.removeMonster;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory.enemies;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory.removeMonster;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.planets;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.recyclePlanet;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.platforms;
@@ -57,7 +57,7 @@ public class Level1Screen implements Screen {
     Group hudGroup;        // group to be draw last
     private Viewport viewport;
     private PlatformFactory platformFactory;
-    private MonsterFactory monsterFactory;
+    private EnemyFactory monsterFactory;
     private PlanetFactory planetFactory;
     private Player player;
     private Hud hud;
@@ -90,8 +90,8 @@ public class Level1Screen implements Screen {
         world = new World(new Vector2(0, - Constants.HEIGHT * 0.0036f), true);
         platformFactory = new PlatformFactory();
         PlatformFactory.generatePlatforms(world);
-        monsterFactory = new MonsterFactory();
-        MonsterFactory.generateMonsters(world);
+        monsterFactory = new EnemyFactory();
+        EnemyFactory.generateMonsters(world);
         planetFactory = new PlanetFactory();
         PlanetFactory.generatePlanets(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
@@ -215,8 +215,8 @@ public class Level1Screen implements Screen {
             world.destroyBody(m.getBody());
         }
 
-        if (enemies.size() < MonsterFactory.InitiaMonsterSize / 2){
-            MonsterFactory.generateMonsters(world);
+        if (enemies.size() < EnemyFactory.numberOfEnemies / 2){
+            EnemyFactory.generateMonsters(world);
             for (Enemy m: enemies) {
                 if (m.getStage() == null){{
                     middleGroup.addActor(m);

@@ -7,13 +7,14 @@ import com.badlogic.gdx.physics.box2d.World;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
-public class MagnetEnemy extends Enemy {
+public class MagnetoEnemy extends Enemy {
 
 
 
-    private static float playerMovingScale = Constants.HEIGHT * 0.002f;
+    private static float playerMovingScale = Constants.HEIGHT * 0.003f;
     private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 
@@ -23,7 +24,7 @@ public class MagnetEnemy extends Enemy {
 
 
 
-    public MagnetEnemy(World world, float x, float y) {
+    public MagnetoEnemy(World world, float x, float y) {
         super(texture, world, x, y);
         HEIGHT = Constants.HEIGHT * 0.1f;
         WIDTH = HEIGHT;
@@ -56,6 +57,12 @@ public class MagnetEnemy extends Enemy {
     private void moveTowardsPlayer(){
         Vector2 vectDirection = Player.player.body.getPosition().sub(body.getPosition()).nor().scl(monsterMovingScale);
         body.setLinearVelocity(vectDirection);
+        if (vectDirection.x < 0){
+            direction = HorizontalDirection.LEFT;
+        }
+        else {
+            direction = HorizontalDirection.RIGHT;
+        }
     }
 
 

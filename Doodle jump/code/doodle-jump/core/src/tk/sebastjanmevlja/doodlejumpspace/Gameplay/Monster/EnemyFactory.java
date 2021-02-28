@@ -7,7 +7,7 @@ import java.util.Random;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 
-public class MonsterFactory {
+public class EnemyFactory {
 
     public static LinkedList<Enemy> enemies;
 
@@ -22,12 +22,12 @@ public class MonsterFactory {
     private static  float maxSpacingWidth;
     private static  float minSpacingHeight;
     private static  float maxSpacingHeight;
-    public static int InitiaMonsterSize;
+    public static int numberOfEnemies;
 
     private static Random r = new Random();
 
 
-    public MonsterFactory() {
+    public EnemyFactory() {
         minSpacingHeight = Constants.HEIGHT * 0.8f ;
         maxSpacingHeight = Constants.HEIGHT * 2f;
         minSpacingWidth = Constants.WIDTH * 0.2f;
@@ -59,7 +59,7 @@ public class MonsterFactory {
         }
 
 
-        InitiaMonsterSize = enemies.size();
+        numberOfEnemies = enemies.size();
     }
 
     
@@ -80,14 +80,12 @@ public class MonsterFactory {
                 break;
 
             case MAGNET:
-                enemies.add(new MagnetEnemy( world, x, y));
+                enemies.add(new MagnetoEnemy( world, x, y));
                 break;
 
             case BLACKHOLE:
                 enemies.add(new BlackHole( world, x, y));
                 break;
-
-
         }
 
     }

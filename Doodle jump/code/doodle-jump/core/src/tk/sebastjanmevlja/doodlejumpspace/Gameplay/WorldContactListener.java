@@ -3,7 +3,7 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 import com.badlogic.gdx.physics.box2d.*;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.BlackHole;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MagnetEnemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MagnetoEnemy;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.BrokenPlatform;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 
@@ -77,9 +77,9 @@ public class WorldContactListener implements ContactListener {
             if (player.isImunity()){
                 return;
             }
-            if (enemy instanceof MagnetEnemy){
-                ((MagnetEnemy) enemy).enableZone();
-                ((MagnetEnemy) enemy).movePlayerCloser();
+            if (enemy instanceof MagnetoEnemy){
+                ((MagnetoEnemy) enemy).enableZone();
+                ((MagnetoEnemy) enemy).movePlayerCloser();
             }
             else if (enemy instanceof BlackHole){
                 player.die();

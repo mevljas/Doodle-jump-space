@@ -2,7 +2,7 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MonsterFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
@@ -31,7 +31,7 @@ public class Culling {
 
     public static void setAllObjectsCounter() {
         Player.player.incrementGlobalObjectCounter();
-        for (Enemy m: MonsterFactory.enemies) {
+        for (Enemy m: EnemyFactory.enemies) {
             m.incrementGlobalObjectCounter();
         }
 
