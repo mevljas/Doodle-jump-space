@@ -14,7 +14,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
 
 public class BrokenPlatform extends Platform {
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("broken_platform");
-    private static final float FALLING_VELOCITY = VELOCITY * -3f;
+    private static final float FALLING_VELOCITY = VELOCITY * -4f;
     public Animation<TextureRegion> runningAnimation;
     // A variable for tracking elapsed time for the animation
     float stateTime;
