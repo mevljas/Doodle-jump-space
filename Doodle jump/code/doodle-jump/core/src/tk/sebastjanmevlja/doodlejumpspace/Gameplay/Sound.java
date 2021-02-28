@@ -89,5 +89,19 @@ public class Sound {
         }
     }
 
+    public static void playShieldSound() {
+        if (soundEnabled) {
+            Asset.shieldSound.stop();
+            Asset.shieldSound.play();
+        }
+    }
+
+    public static void playBulletSound() {
+        if (soundEnabled) {
+            Asset.bulletSound.stop();
+            Asset.bulletSound.play();
+        }
+    }
+
 
 }

@@ -24,10 +24,10 @@ public class Asset {
     private final AssetDescriptor<Music> fallingSoundDescriptor = new AssetDescriptor<>("sounds/fallingSound.mp3", Music.class);
     private final AssetDescriptor<Music> jumpSoundDescriptor = new AssetDescriptor<>("sounds/jumpSound.wav", Music.class);
     private final AssetDescriptor<Music> monsterSoundDescriptor = new AssetDescriptor<>("sounds/monsterSound.mp3", Music.class);
-    private final AssetDescriptor<Music> platformBreakingSoundDescriptor = new AssetDescriptor<>("sounds/platformBreakingSound.mp3", Music.class);
+    private final AssetDescriptor<Music> platformBreakingSoundDescriptor = new AssetDescriptor<>("sounds/platformBreakingSound.wav", Music.class);
     private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
-//    private final AssetDescriptor<FreeType.Bitmap> fontDescriptor= new AssetDescriptor<>("fonts/al-seana.ttf", FreeType.Bitmap.class);
-
+    private final AssetDescriptor<Music> shieldSoundDescriptor = new AssetDescriptor<>("sounds/shieldSound.mp3", Music.class);
+    private final AssetDescriptor<Music> bulletSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
 
 //    Assets
     public static Texture loadingBackgroundTexture;
@@ -43,6 +43,8 @@ public class Asset {
     public static Music monsterSound;
     public static Music platformBreakingSound;
     public static Music startSound;
+    public static Music shieldSound;
+    public static Music bulletSound;
 
 //    public static FreeType.Bitmap freeTypeFont;
 
@@ -69,6 +71,8 @@ public class Asset {
         assetManager.load(platformBreakingSoundDescriptor);
         assetManager.load(startSoundDescriptor);
         assetManager.load(pauseDescriptor);
+        assetManager.load(shieldSoundDescriptor);
+        assetManager.load(bulletSoundDescriptor);
 //        assetManager.load(fontDescriptor);
 
         assetManager.finishLoading();
@@ -83,6 +87,8 @@ public class Asset {
         monsterSound = assetManager.get(monsterSoundDescriptor);
         platformBreakingSound = assetManager.get(platformBreakingSoundDescriptor);
         startSound = assetManager.get(startSoundDescriptor);
+        shieldSound = assetManager.get(shieldSoundDescriptor);
+        bulletSound = assetManager.get(bulletSoundDescriptor);
 //        freeTypeFont = assetManager.get(fontDescriptor);
 
 

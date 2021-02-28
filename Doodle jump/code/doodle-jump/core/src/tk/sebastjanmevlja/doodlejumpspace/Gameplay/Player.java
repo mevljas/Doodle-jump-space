@@ -23,6 +23,8 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.VerticalDirection;
 import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playBulletSound;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 
 
 public class Player extends Actor  {
@@ -424,6 +426,7 @@ public class Player extends Actor  {
         Bullet b = new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt);
         Level1Screen.middleGroup.addActor(b);
         bullets.add(b);
+        playBulletSound();
     }
 
     public void removeBullet(Bullet bullet){
@@ -436,6 +439,7 @@ public class Player extends Actor  {
         shield.sprite.setSize(shield.sprite.getWidth() / 2 , shield.sprite.getHeight() / 2);
         this.imunity = true;
         numberOfShields++;
+        playShieldSound();
 
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
