@@ -37,7 +37,7 @@ public class PauseScreen implements Screen{
         //table.setDebug(true);
         stage.addActor(table);
 
-        Label titleLabel = new Label("Pause", skin, "title");
+        Label titleLabel = new Label("Paused", skin, "title");
         Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
         labelStyleTitle.font = Asset.fontBig;
         titleLabel.setStyle(labelStyleTitle);
