@@ -70,7 +70,7 @@ public class Platform extends Actor {
 
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
-        bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        bodyWidth = sprite.getWidth() * 0.45f / PPM;
         bodyHeight = sprite.getHeight() /2 / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // Basically set the physics polygon to a box with the same dimensions as our sprite

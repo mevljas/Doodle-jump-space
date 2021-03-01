@@ -316,7 +316,7 @@ public class Level1Screen implements Screen {
 
         // Now render the physics world using our scaled down matrix
         // Note, this is strictly optional and is, as the name suggests, just  for debugging purposes
-        debugRenderer.render(world, debugMatrix);
+//        debugRenderer.render(world, debugMatrix);
 
 
 

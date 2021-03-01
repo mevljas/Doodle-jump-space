@@ -53,7 +53,7 @@ public class Slime extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        bodyWidth = sprite.getWidth() * 0.5f / PPM;
         bodyHeight = sprite.getHeight() * 0.3f / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties

@@ -51,9 +51,9 @@ public class BlackHole extends Enemy {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        bodyWidth = sprite.getWidth() * 0.38f / PPM;
+        bodyWidth = sprite.getWidth() * 0.36f / PPM;
         bodyHeight = sprite.getHeight()
-                * 0.38f / PPM;
+                * 0.36f / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
