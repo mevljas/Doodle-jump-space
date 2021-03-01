@@ -52,7 +52,7 @@ public class Hud extends Actor {
         score.draw(batch, parentAlpha);
         lives.draw(batch, parentAlpha);
         for (int i = 1; i <= Player.lives; i++) {
-            batch.draw(playerTexture, Constants.WIDTH * 0.12f + i * Constants.HEIGHT * 0.025f, Constants.HEIGHT * 0.97f, Constants.HEIGHT * 0.02f, Constants.HEIGHT * 0.02f);
+            batch.draw(playerTexture, Constants.WIDTH * 0.13f + i * Constants.HEIGHT * 0.025f, Constants.HEIGHT * 0.97f, Constants.HEIGHT * 0.02f, Constants.HEIGHT * 0.02f);
         }
         pauseIcon.draw(batch);
 
