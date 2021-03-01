@@ -69,7 +69,7 @@ public class AboutScreen implements Screen {
 
         table.add(titleLabel).center().width(Value.percentWidth(.30F, table));
         table.row().padTop(Value.percentHeight(.1F, table));
-        table.add(new Image(Asset.logoTexture)).width(Value.percentWidth(.40F, table)).height(Value.percentWidth(.40F, table)).center();
+        table.add(new Image(Asset.atlas.findRegion("logo"))).width(Value.percentWidth(.40F, table)).height(Value.percentWidth(.40F, table)).center();
         table.row().padTop(Value.percentHeight(.1F, table));
         table.add(versionLable).width(Value.percentWidth(.90F, table));
         table.row();
@@ -96,7 +96,7 @@ public class AboutScreen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.atlas.findRegion("background"), 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself

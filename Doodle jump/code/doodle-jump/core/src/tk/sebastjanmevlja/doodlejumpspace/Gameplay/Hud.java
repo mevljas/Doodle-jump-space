@@ -31,7 +31,7 @@ public class Hud extends Actor {
         labelStyle.font = Asset.fontHud;
         this.score.setStyle(labelStyle);
         this.lives.setStyle(labelStyle);
-        pauseIcon = new Sprite(Asset.pauseTexture);
+        pauseIcon = new Sprite(Asset.atlas.findRegion("pause"));
         pauseIcon.setSize(Constants.HEIGHT * 0.05f, Constants.HEIGHT * 0.05f);
         pauseIcon.setPosition(Constants.WIDTH - pauseIcon.getWidth() * 1.5f, Constants.HEIGHT - pauseIcon.getHeight() * 1.45f);
         shapeRenderer = new ShapeRenderer();

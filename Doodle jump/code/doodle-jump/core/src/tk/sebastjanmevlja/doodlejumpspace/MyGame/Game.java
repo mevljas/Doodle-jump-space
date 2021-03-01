@@ -127,7 +127,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
 
         batch.dispose();
         assets.dispose();
-        Asset.loadingBackgroundTexture.dispose();
+        Asset.background.dispose();
         Asset.skin.dispose();
     }
 

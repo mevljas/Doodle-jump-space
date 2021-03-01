@@ -300,7 +300,7 @@ public class Level1Screen implements Screen {
 
 
         stage.getBatch().begin();
-        stage.getBatch().draw(background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        stage.getBatch().draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         stage.getBatch().end();
 
 

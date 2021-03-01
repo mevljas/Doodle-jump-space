@@ -14,10 +14,8 @@ public class Asset {
 
 
 //    Asset descriptors
-    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_Space.atlas", TextureAtlas.class);
-    private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.jpg", Texture.class);
-    private final AssetDescriptor<Texture> logoTextureDescriptor = new AssetDescriptor<>("images/logo.png", Texture.class);
-    private final AssetDescriptor<Texture> pauseDescriptor = new AssetDescriptor<>("images/pause.png", Texture.class);
+    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_space.atlas", TextureAtlas.class);
+    private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.png", Texture.class);
     private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/flat-earth-ui.json", Skin.class);
 
     private final AssetDescriptor<Music> backgroundMusicDescriptor = new AssetDescriptor<>("sounds/backgroundMusic.mp3", Music.class);
@@ -34,7 +32,7 @@ public class Asset {
     private final AssetDescriptor<Music> slimeSoundDescriptor = new AssetDescriptor<>("sounds/slimeSound.mp3", Music.class);
 
 //    Assets
-    public static Texture loadingBackgroundTexture;
+    public static Texture background;
     public static Texture logoTexture;
     public static Texture pauseTexture;
     public static TextureAtlas atlas;
@@ -71,14 +69,12 @@ public class Asset {
     {
         assetManager.load(skinDescriptor);
         assetManager.load(backgroundImageDescriptor);
-        assetManager.load(logoTextureDescriptor);
         assetManager.load(backgroundMusicDescriptor);
         assetManager.load(fallingSoundDescriptor);
         assetManager.load(jumpSoundDescriptor);
         assetManager.load(monsterSoundDescriptor);
         assetManager.load(platformBreakingSoundDescriptor);
         assetManager.load(startSoundDescriptor);
-        assetManager.load(pauseDescriptor);
         assetManager.load(shieldSoundDescriptor);
         assetManager.load(bulletSoundDescriptor);
         assetManager.load(blackHoleSoundDescriptor);
@@ -89,10 +85,8 @@ public class Asset {
 
         assetManager.finishLoading();
 
-        loadingBackgroundTexture = assetManager.get(backgroundImageDescriptor);
-        logoTexture = assetManager.get(logoTextureDescriptor);
+        background = assetManager.get(backgroundImageDescriptor);
         skin = assetManager.get(skinDescriptor);
-        pauseTexture = assetManager.get(pauseDescriptor);
         backgroundMusic = assetManager.get(backgroundMusicDescriptor);
         fallingSound = assetManager.get(fallingSoundDescriptor);
         jumpSound = assetManager.get(jumpSoundDescriptor);

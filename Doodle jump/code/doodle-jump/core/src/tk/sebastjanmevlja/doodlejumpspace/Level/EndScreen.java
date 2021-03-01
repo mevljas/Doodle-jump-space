@@ -123,7 +123,7 @@ public class EndScreen implements Screen{
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.atlas.findRegion("background"), 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself

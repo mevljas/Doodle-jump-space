@@ -67,7 +67,7 @@ public class LoadingScreen implements Screen {
 
         gameBatch.begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.loadingBackgroundTexture, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
 
