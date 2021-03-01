@@ -100,6 +100,7 @@ public class Sound {
         if (soundEnabled) {
             Asset.bulletSound.stop();
             Asset.bulletSound.play();
+            Asset.bulletSound.setVolume(0.5f);
         }
     }
 
