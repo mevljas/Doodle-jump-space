@@ -46,7 +46,7 @@ public class Player extends Actor  {
     public static float JUMP_VELOCITY = Constants.HEIGHT * 0.0027f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
     public static final float WORLD_VELOCITY = -Constants.HEIGHT * 0.002f;
-    public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.5f;
+    public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.7f;
     public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
     public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
     public static final float WORLD_JETPACK_VELOCITY_STOP = WORLD_JETPACK_VELOCITY * 0.35f;
