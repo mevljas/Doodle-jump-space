@@ -441,6 +441,7 @@ public class Player extends Actor  {
         this.imunity = true;
         numberOfShields++;
         playShieldSound();
+        this.score += 20;
 
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
