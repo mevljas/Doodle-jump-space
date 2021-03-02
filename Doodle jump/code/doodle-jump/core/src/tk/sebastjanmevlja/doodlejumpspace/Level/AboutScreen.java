@@ -58,7 +58,7 @@ public class AboutScreen implements Screen {
 
         Label label = new Label("Gameteam presents " +
                 "Doodle Jump Space " +
-                "featuring Sebastjan Mevlja et al " +
+                "featuring Sebastjan Mevlja. " +
                 "Done within TINR course. " +
                 "Faculty of Computer and Information Science, " +
                 "University of Ljubljana, " +
