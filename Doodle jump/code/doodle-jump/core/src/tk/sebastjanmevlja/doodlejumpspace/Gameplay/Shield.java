@@ -22,7 +22,7 @@ public class Shield extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    public static float SHIELD_WIDTH = Constants.WIDTH * 0.11f;
+    public static float SHIELD_WIDTH = Constants.WIDTH * 0.09f;
     public static float SHIELD_HEIGHT = SHIELD_WIDTH;
     public Platform parentPlatform;
     TextureAtlas.AtlasRegion shieldActivatedAtlasRegion =  Asset.atlas.findRegion("shiled_radius");
