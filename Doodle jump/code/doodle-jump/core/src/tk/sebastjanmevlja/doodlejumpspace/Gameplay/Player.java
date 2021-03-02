@@ -156,7 +156,7 @@ public class Player extends Actor  {
         if (sprite.getY() <= - Constants.HEIGHT){
             lives = 0;
         }
-        else if (sprite.getY() <= 0 && !falling){
+        else if (sprite.getY() + sprite.getHeight() / 2 <= 0 && !falling){
             PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
             EnemyFactory.moveWorld(WORLD_FALL_VELOCITY);
             PlanetFactory.moveWorld(WORLD_FALL_VELOCITY);
@@ -177,7 +177,7 @@ public class Player extends Actor  {
         falling = true;
         fallingSprite = new Sprite(up);
         fallingSprite.setSize(WIDTH, HEIGHT);
-        fallingSprite.setPosition(sprite.getX(), sprite.getY());
+        fallingSprite.setPosition(sprite.getX(), 0);
         fallingSprite.setCenterX(sprite.getX());
         fallingSprite.setOriginCenter();
     }
