@@ -28,8 +28,8 @@ public class EnemyFactory {
 
 
     public EnemyFactory() {
-        minSpacingHeight = Constants.HEIGHT * 0.8f ;
-        maxSpacingHeight = Constants.HEIGHT * 2f;
+        minSpacingHeight = Constants.HEIGHT * 0.7f ;
+        maxSpacingHeight = Constants.HEIGHT * 1.5f;
         minSpacingWidth = Constants.WIDTH * 0.2f;
         maxSpacingWidth = Constants.WIDTH * 0.6f;
         enemies = new LinkedList<>();
@@ -65,7 +65,7 @@ public class EnemyFactory {
     
     
 
-    public static void generateMonster(MonsterType type, World world, float x, float y) {
+    public static void generateMonster(EnemyType type, World world, float x, float y) {
         switch (type){
             case BLUE:
                 enemies.add(new BlueEnemy( world, x, y));
@@ -92,8 +92,8 @@ public class EnemyFactory {
 
 
 
-    private static MonsterType randomType(){
-        return MonsterType.values()[new Random().nextInt(MonsterType.values().length)];
+    private static EnemyType randomType(){
+        return EnemyType.values()[new Random().nextInt(EnemyType.values().length)];
     }
 
 
