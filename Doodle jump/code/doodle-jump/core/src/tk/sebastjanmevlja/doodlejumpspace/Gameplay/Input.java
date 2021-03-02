@@ -27,10 +27,6 @@ public class Input implements InputProcessor, GestureDetector.GestureListener {
     @Override
     public boolean keyDown(int keycode) {
         switch (keycode) {
-//            case com.badlogic.gdx.Input.Keys.UP:
-//                player.jump();
-//                break;
-
             case com.badlogic.gdx.Input.Keys.LEFT:
                 player.moveLeft();
                 break;
@@ -68,6 +64,9 @@ public class Input implements InputProcessor, GestureDetector.GestureListener {
         if(Hud.pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)){
             Level1Screen.paused = true;
             Game.game.changeScreen(Screens.PAUSESCREEN);
+            if (player.getJetpack() != null){
+                Sound.stopJetpackSound();
+            }
         }
         else {
             player.createBullet(screenX, screenY);
