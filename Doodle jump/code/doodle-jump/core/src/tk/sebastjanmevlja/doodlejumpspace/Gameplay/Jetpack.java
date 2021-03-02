@@ -24,8 +24,8 @@ public class Jetpack extends Actor {
     Sprite sprite;
     World world;
     Body body;
-    public static float JETPACK_WIDTH = Constants.WIDTH * 0.08f;
-    public static float JETPACK_HEIGHT = Constants.HEIGHT * 0.040f;
+    public static float JETPACK_WIDTH = Constants.WIDTH * 0.1f;
+    public static float JETPACK_HEIGHT = Constants.HEIGHT * 0.050f;
     public Platform parentPlatform;
     public Animation<TextureRegion> runningAnimation;
     // A variable for tracking elapsed time for the animation

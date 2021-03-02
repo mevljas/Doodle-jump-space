@@ -211,7 +211,7 @@ public class Player extends Actor  {
     }
 
     float calculateJetpackPositionY(Jetpack jetpack){
-        return sprite.getY() - jetpack.sprite.getHeight() / 2f;
+        return sprite.getY() - jetpack.sprite.getHeight() * 0.3f;
     }
 
 
