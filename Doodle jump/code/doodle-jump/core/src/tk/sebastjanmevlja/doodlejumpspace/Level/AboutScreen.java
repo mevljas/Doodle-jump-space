@@ -56,25 +56,34 @@ public class AboutScreen implements Screen {
         titleLabel.setStyle(LabelStyleBig);
 
 
-        Label versionLable = new Label("Version: 0.5.0", skin, "default");
-        Label authorLable = new Label("Author: Sebastjan Mevlja", skin, "default");
+        Label label = new Label("Gameteam presents " +
+                "Doodle Jump Space " +
+                "featuring Sebastjan Mevlja et al " +
+                "Done within TINR course. " +
+                "Faculty of Computer and Information Science, " +
+                "University of Ljubljana, " +
+                "Slovenia, " +
+                "2021.\n" +
+                "\n" +
+                "Sound from Zapsplat.com.\n" +
+                "Skin from Raymond \"Raeleus\" Buckley.\n" +
+                "Game textures by Pompam on itch.io.\n" +
+                "Music by Benjamin Tissot.", skin);
+        label.setWrap(true);
         Label.LabelStyle LabelStyleSmall =  titleLabel.getStyle();
-        LabelStyleSmall.font = Asset.fontSmall;
-        versionLable.setStyle(LabelStyleSmall);
-        authorLable.setStyle(LabelStyleSmall);
+        LabelStyleSmall.font = Asset.fontVerySmall;
+        label.setStyle(LabelStyleSmall);
 
 
-        table.defaults().width(Value.percentWidth(.90F, table));
+        table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
         table.add(titleLabel).center().width(Value.percentWidth(.30F, table));
-        table.row().padTop(Value.percentHeight(.1F, table));
-        table.add(new Image(Asset.atlas.findRegion("logo"))).width(Value.percentWidth(.40F, table)).height(Value.percentWidth(.40F, table)).center();
-        table.row().padTop(Value.percentHeight(.1F, table));
-        table.add(versionLable).width(Value.percentWidth(.90F, table));
-        table.row();
-        table.add(authorLable).width(Value.percentWidth(.90F, table));
-        table.row().padTop(Value.percentHeight(.1F, table));
+        table.row().padTop(Value.percentHeight(.05F, table));
+        table.add(new Image(Asset.atlas.findRegion("logo"))).width(Value.percentWidth(.30F, table)).height(Value.percentWidth(.30F, table)).center();
+        table.row().padTop(Value.percentHeight(.2F, table));
+        table.add(label).width(Value.percentWidth(.90F, table));
+        table.row().padTop(Value.percentHeight(.2F, table));
         table.add(backButton).center().width(Value.percentWidth(.50F, table));
     }
 
