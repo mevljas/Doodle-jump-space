@@ -50,12 +50,14 @@ public class PreferencesScreen implements Screen {
         stage.addActor(table);
 
 
+
         // music volume
         final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusicSlider.setValue(Sound.musicVolume);
         volumeMusicSlider.getStyle().background.setMinHeight(Constants.HEIGHT * 0.03f);
         volumeMusicSlider.getStyle().knob.setMinHeight(Constants.HEIGHT * 0.04f);
         volumeMusicSlider.getStyle().knob.setMinWidth(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.setWidth(1);
         volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
