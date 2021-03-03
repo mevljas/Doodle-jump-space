@@ -210,7 +210,7 @@ public class Level1Screen implements Screen {
 
         }
         for (Enemy m: removeEnemies) {
-            removeMonster(m);
+            removeMonster();
             m.addAction(Actions.removeActor());
             world.destroyBody(m.getBody());
         }

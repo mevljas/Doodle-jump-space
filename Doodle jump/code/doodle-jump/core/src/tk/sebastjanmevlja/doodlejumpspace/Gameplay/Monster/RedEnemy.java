@@ -14,9 +14,9 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 public class RedEnemy extends Enemy {
 
-    private float leftLocation;
-    private float rightLocation;
-    private float VELOCITY = Constants.WIDTH * 0.003f;
+    private final float leftLocation;
+    private final float rightLocation;
+    private final float VELOCITY = Constants.WIDTH * 0.003f;
     private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("red_enemy");
 
 
@@ -25,6 +25,7 @@ public class RedEnemy extends Enemy {
         super(texture, world, x, y);
 
         WIDTH = Constants.WIDTH / 8f;
+        //noinspection SuspiciousNameCombination
         HEIGHT = WIDTH;
         init(world, x, y);
 

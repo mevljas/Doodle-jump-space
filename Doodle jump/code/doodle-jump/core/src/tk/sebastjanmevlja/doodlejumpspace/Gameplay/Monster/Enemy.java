@@ -228,7 +228,4 @@ public class Enemy extends Actor {
         Culling.incrementObjectsCounter();
     }
 
-    public float getBodyWidth() {
-        return this.bodyWidth;
-    }
 }

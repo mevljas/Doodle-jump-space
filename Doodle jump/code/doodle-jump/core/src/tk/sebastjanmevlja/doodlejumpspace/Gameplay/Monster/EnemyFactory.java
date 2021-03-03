@@ -105,12 +105,6 @@ public class EnemyFactory {
     }
 
 
-
-    public static float getYVelocity(){
-        return enemies.getFirst().body.getLinearVelocity().y;
-    }
-
-
     public static void stopWorld(){
         for (Enemy m: enemies) {
             m.body.setLinearVelocity(m.body.getLinearVelocity().x,0f);
@@ -120,7 +114,7 @@ public class EnemyFactory {
 
 
 
-    public static void removeMonster(Enemy m){
+    public static void removeMonster(){
         enemies.removeFirst();
     }
 

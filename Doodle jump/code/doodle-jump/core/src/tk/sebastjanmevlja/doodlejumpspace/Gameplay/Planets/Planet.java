@@ -3,7 +3,6 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -12,26 +11,18 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import java.util.Random;
-
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
 public class Planet extends Actor {
 
-    private final float bodyWidth, bodyHeight;
     public Sprite sprite;
     World world;
     Body body;
     public static float PLANET_WIDTH = Constants.WIDTH * 0.08f;
     public static float PLANET_HEIGHT = Constants.HEIGHT * 0.4f;
-    static Random r = new Random();
-
-
-
 
 
     public Planet(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
@@ -57,8 +48,8 @@ public class Planet extends Actor {
 
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
-        bodyWidth = sprite.getWidth() * 0.4f / PPM;
-        bodyHeight = sprite.getHeight() /2 / PPM;
+        float bodyWidth = sprite.getWidth() * 0.4f / PPM;
+        float bodyHeight = sprite.getHeight() / 2 / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // Basically set the physics polygon to a box with the same dimensions as our sprite
         // FixtureDef is a confusing expression for physical properties
@@ -108,18 +99,6 @@ public class Planet extends Actor {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
-
-    public float spriteWidth(){
-        return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition(){
-        return body.getPosition();
-    }
-
     public Sprite getSprite() {
         return sprite;
     }
@@ -150,15 +129,6 @@ public class Planet extends Actor {
         return sprite.getHeight();
     }
 
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
-
-
-
-    public void changeTexture(TextureAtlas.AtlasRegion atlasRegion) {
-        sprite = new Sprite(atlasRegion);
-    }
 
     public void changePosition( float y) {
         sprite.setSize(PLANET_WIDTH, PLANET_HEIGHT);
@@ -169,9 +139,4 @@ public class Planet extends Actor {
     }
 
 
-
-
-    public float getBodyHeight() {
-        return this.bodyHeight;
-    }
 }

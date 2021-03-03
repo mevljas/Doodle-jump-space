@@ -11,8 +11,6 @@ public class PlanetFactory {
 
     public static LinkedList<Planet> planets;
 
-    static Random random = new Random();
-
 
     public static int InitiaPlanetsSize;
 
@@ -67,23 +65,12 @@ public class PlanetFactory {
     }
 
 
-    public static float getYVelocity(){
-        return planets.getFirst().body.getLinearVelocity().y;
-    }
-
-
     public static void stopWorld(){
         for (Planet p: planets) {
             p.body.setLinearVelocity(0,0);
         }
     }
 
-
-
-
-    public static void removePlatform(Planet p){
-        planets.remove(p);
-    }
 
     public static void recyclePlanet(Planet p){
         y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);

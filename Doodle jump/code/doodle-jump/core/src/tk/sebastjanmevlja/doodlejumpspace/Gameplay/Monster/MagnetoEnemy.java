@@ -16,19 +16,20 @@ public class MagnetoEnemy extends Enemy {
 
 
 
-    private static float playerMovingScale = Constants.HEIGHT * 0.003f;
-    private static float monsterMovingScale = Constants.HEIGHT * 0.002f;
-    private static float playerDetectingRange = Constants.HEIGHT * 0.0048f;
+    private static final float playerMovingScale = Constants.HEIGHT * 0.003f;
+    private static final float monsterMovingScale = Constants.HEIGHT * 0.002f;
+    private static final float playerDetectingRange = Constants.HEIGHT * 0.0048f;
 
     private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
     public  static final TextureAtlas.AtlasRegion zoneTexture = Asset.atlas.findRegion("magneto_zone");
-    private boolean zone = false;
+    private boolean zone;
 
 
 
     public MagnetoEnemy(World world, float x, float y) {
         super(texture, world, x, y);
         HEIGHT = Constants.HEIGHT * 0.1f;
+        //noinspection SuspiciousNameCombination
         WIDTH = HEIGHT;
         init( world, x, y);
         zone = false;

@@ -30,7 +30,7 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Platform extends Actor {
 
-    private final float bodyWidth, bodyHeight;
+    private final float bodyHeight;
     public Sprite sprite;
     World world;
     Body body;
@@ -70,7 +70,7 @@ public class Platform extends Actor {
 
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
-        bodyWidth = sprite.getWidth() * 0.45f / PPM;
+        float bodyWidth = sprite.getWidth() * 0.45f / PPM;
         bodyHeight = sprite.getHeight() /2 / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // Basically set the physics polygon to a box with the same dimensions as our sprite
@@ -239,11 +239,6 @@ public class Platform extends Actor {
         }
     }
 
-
-
-    public void changeTexture(TextureAtlas.AtlasRegion atlasRegion) {
-        sprite = new Sprite(atlasRegion);
-    }
 
     public void changePosition(float x, float y) {
         sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
