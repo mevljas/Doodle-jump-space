@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
+package tk.sebastjanmevlja.doodlejumpspace.Helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public class Asset {
+public class Assets {
 
 
     //    Assets
@@ -34,7 +34,8 @@ public class Asset {
     public static BitmapFont fontHud;
     public static BitmapFont fontMedium;
     public static BitmapFont fontBig;
-    //    Asset descriptors
+
+    //    Assets descriptors
     private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_space.atlas", TextureAtlas.class);
     private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.png", Texture.class);
     private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/flat-earth-ui.json", Skin.class);
@@ -46,7 +47,6 @@ public class Asset {
     private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
     private final AssetDescriptor<Music> shieldSoundDescriptor = new AssetDescriptor<>("sounds/shieldSound.mp3", Music.class);
 
-//    public static FreeType.Bitmap freeTypeFont;
     private final AssetDescriptor<Music> bulletSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
     private final AssetDescriptor<Music> blackHoleSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
     private final AssetDescriptor<Music> jetpackDescriptor = new AssetDescriptor<>("sounds/jetpackSound.mp3", Music.class);
@@ -54,7 +54,7 @@ public class Asset {
     private final AssetDescriptor<Music> slimeSoundDescriptor = new AssetDescriptor<>("sounds/slimeSound.mp3", Music.class);
     private final AssetManager assetManager = new AssetManager();
 
-    public Asset() {
+    public Assets() {
     }
 
     public void loadGame() {
@@ -72,7 +72,6 @@ public class Asset {
         assetManager.load(jetpackDescriptor);
         assetManager.load(magnetoSoundDescriptor);
         assetManager.load(slimeSoundDescriptor);
-//        assetManager.load(fontDescriptor);
 
         assetManager.finishLoading();
 
@@ -90,14 +89,12 @@ public class Asset {
         jetpackSound = assetManager.get(jetpackDescriptor);
         magnetoSound = assetManager.get(magnetoSoundDescriptor);
         slimeSound = assetManager.get(slimeSoundDescriptor);
-//        freeTypeFont = assetManager.get(fontDescriptor);
 
 
         initFonts();
     }
 
     private void initFonts() {
-//        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DoodleJump.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 

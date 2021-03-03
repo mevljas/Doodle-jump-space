@@ -1,14 +1,14 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms;
 
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform.PLATFORM_HEIGHT;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform.PLATFORM_WIDTH;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform.PLATFORM_HEIGHT;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform.PLATFORM_WIDTH;
 
 public class PlatformFactory {
 

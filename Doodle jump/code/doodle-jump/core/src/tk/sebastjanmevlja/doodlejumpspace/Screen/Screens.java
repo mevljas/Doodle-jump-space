@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 public enum Screens {
     LEVEL1SCREEN,

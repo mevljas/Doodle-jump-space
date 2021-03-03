@@ -6,21 +6,16 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.BlackHole;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.MagnetoEnemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.BrokenPlatform;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.BlackHole;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.Enemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.MagnetoEnemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.BrokenPlatform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform;
 
 public class WorldContactListener implements ContactListener {
 
     private Player player;
-    private Platform platform;
-    private Enemy enemy;
-    private Bullet bullet;
     private Slime slime;
-    private Shield shield;
-    private Jetpack jetpack;
 
     public WorldContactListener(Player player) {
         this.player = player;
@@ -33,10 +28,11 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
 
+        Enemy enemy;
         if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Platform) ||
                 (fixA.getUserData() instanceof Platform && fixB.getUserData() instanceof Player)) {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
-            platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
+            Platform platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
 
             if (player.getJetpack() != null) {
                 return;
@@ -91,7 +87,7 @@ public class WorldContactListener implements ContactListener {
 
         } else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof Enemy) ||
                 (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof Bullet)) {
-            bullet = (Bullet) (fixA.getUserData() instanceof Bullet ? fixA.getUserData() : fixB.getUserData());
+            Bullet bullet = (Bullet) (fixA.getUserData() instanceof Bullet ? fixA.getUserData() : fixB.getUserData());
             enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
             enemy.kill();
             bullet.deactivate();
@@ -103,7 +99,7 @@ public class WorldContactListener implements ContactListener {
                 (fixA.getUserData() instanceof Shield && fixB.getUserData() instanceof Player)) {
 
 
-            shield = (Shield) (fixA.getUserData() instanceof Shield ? fixA.getUserData() : fixB.getUserData());
+            Shield shield = (Shield) (fixA.getUserData() instanceof Shield ? fixA.getUserData() : fixB.getUserData());
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
 
             if (player.getJetpack() != null) {
@@ -121,12 +117,11 @@ public class WorldContactListener implements ContactListener {
                 (fixA.getUserData() instanceof Jetpack && fixB.getUserData() instanceof Player)) {
 
 
-            jetpack = (Jetpack) (fixA.getUserData() instanceof Jetpack ? fixA.getUserData() : fixB.getUserData());
+            Jetpack jetpack = (Jetpack) (fixA.getUserData() instanceof Jetpack ? fixA.getUserData() : fixB.getUserData());
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             if (player.getJetpack() != null) {
                 return;
             }
-//            player.removeJetpack();
             player.equipJetpack(jetpack);
             jetpack.parentPlatform.removeJetpack();
 

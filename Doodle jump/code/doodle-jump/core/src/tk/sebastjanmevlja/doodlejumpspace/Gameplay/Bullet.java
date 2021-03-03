@@ -11,13 +11,16 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
+
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Bullet extends Actor {
 
-    private static final float bulletMovingScale = Constants.HEIGHT * 0.008f;
-    public static float BULLET_HEIGHT = Constants.HEIGHT * 0.015f;
+    private static final float bulletMovingScale = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.008f;
+    public static float BULLET_HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.015f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float BULLET_WIDTH = BULLET_HEIGHT;
     public boolean alive;
@@ -27,7 +30,7 @@ public class Bullet extends Actor {
 
 
     public Bullet(float xs, float ys, World world, float xt, float yt) {
-        sprite = new Sprite(Asset.atlas.findRegion("bullet"));
+        sprite = new Sprite(Assets.atlas.findRegion("bullet"));
         sprite.setSize(BULLET_WIDTH, BULLET_HEIGHT);
         sprite.setPosition(xs, ys);
         sprite.setCenterX(xs);
@@ -57,8 +60,8 @@ public class Bullet extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.BULLET_BIT;
-        fixtureDef.filter.maskBits = Constants.MONSTER_BIT;
+        fixtureDef.filter.categoryBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.BULLET_BIT;
+        fixtureDef.filter.maskBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.MONSTER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         fixtureDef.isSensor = true;
@@ -80,7 +83,7 @@ public class Bullet extends Actor {
                             getWidth() / 2,
                     (body.getPosition().y * PPM) - sprite.getHeight() / 2);
 
-            if (sprite.getX() + sprite.getWidth() > Constants.WIDTH || sprite.getX() < 0 ||
+            if (sprite.getX() + sprite.getWidth() > tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH || sprite.getX() < 0 ||
                     sprite.getY() + sprite.getHeight() > Constants.HEIGHT || sprite.getY() < 0) {
                 this.deactivate();
             }

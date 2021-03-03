@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -8,16 +8,16 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class BlackHole extends Enemy {
 
 
-    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("blackhole");
+    private static final TextureAtlas.AtlasRegion texture = Assets.atlas.findRegion("blackhole");
 
     public BlackHole(World world, float x, float y) {
         super(texture, world, x, y);

@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 
 
 public class BrokenPlatform extends Platform {
-    private static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Asset.atlas.findRegion("broken_platform");
+    private static final TextureAtlas.AtlasRegion plaformTextureRegionBrown = Assets.atlas.findRegion("broken_platform");
     private static final float FALLING_VELOCITY = VELOCITY * -4f;
     public Animation<TextureRegion> runningAnimation;
     // A variable for tracking elapsed time for the animation
@@ -24,7 +24,7 @@ public class BrokenPlatform extends Platform {
         super(plaformTextureRegionBrown, world, x, y);
 
 
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("broken_platform"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Assets.atlas.findRegions("broken_platform"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
 
 

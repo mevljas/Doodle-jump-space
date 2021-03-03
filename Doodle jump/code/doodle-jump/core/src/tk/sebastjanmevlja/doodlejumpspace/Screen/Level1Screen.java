@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -18,31 +17,31 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Bullet;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.Enemy;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.EnemyFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Hud;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.InputListener;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.Enemy;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.Planet;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.WorldContactListener;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory.enemies;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory.removeMonster;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.EnemyFactory.enemies;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.EnemyFactory.removeMonster;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.planets;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory.recyclePlanet;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.platforms;
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory.recyclePlatform;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.PlatformFactory.platforms;
+import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.PlatformFactory.recyclePlatform;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Level1Screen implements Screen {
@@ -56,7 +55,6 @@ public class Level1Screen implements Screen {
     Group foregroundGroup;
     Group hudGroup;        // group to be draw last
     World world;
-    Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
 
@@ -86,15 +84,12 @@ public class Level1Screen implements Screen {
         Hud hud = new Hud();
 
 
-        new Input(player);
+        new InputListener(player);
 
 
 //        Set contact listener
         world.setContactListener(new WorldContactListener(player));
 
-
-//       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
-        debugRenderer = new Box2DDebugRenderer();
 
 
         stage.addActor(backgroundGroup);
@@ -134,7 +129,7 @@ public class Level1Screen implements Screen {
     @Override
     public void show() { //create, setup method
 
-        Gdx.input.setInputProcessor(tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input.im);
+        Gdx.input.setInputProcessor(InputListener.im);
 
         Sound.playStartSound();
 
@@ -273,7 +268,7 @@ public class Level1Screen implements Screen {
 
 
         stage.getBatch().begin();
-        stage.getBatch().draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        stage.getBatch().draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         stage.getBatch().end();
 
 

@@ -1,12 +1,12 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
@@ -15,11 +15,11 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 public class MagnetoEnemy extends Enemy {
 
 
-    public static final TextureAtlas.AtlasRegion zoneTexture = Asset.atlas.findRegion("magneto_zone");
+    public static final TextureAtlas.AtlasRegion zoneTexture = Assets.atlas.findRegion("magneto_zone");
     private static final float playerMovingScale = Constants.HEIGHT * 0.003f;
     private static final float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static final float playerDetectingRange = Constants.HEIGHT * 0.0048f;
-    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
+    private static final TextureAtlas.AtlasRegion texture = Assets.atlas.findRegion("magneto");
     private boolean zone;
 
 

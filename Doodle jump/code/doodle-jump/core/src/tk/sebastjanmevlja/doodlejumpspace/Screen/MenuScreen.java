@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,8 +15,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import de.golfgl.gdxgamesvcs.GameServiceException;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class MenuScreen implements Screen {
@@ -31,7 +31,7 @@ public class MenuScreen implements Screen {
         this.game = game;
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-        skin = Asset.skin;
+        skin = Assets.skin;
 
     }
 
@@ -42,7 +42,6 @@ public class MenuScreen implements Screen {
         // Create a table that fills the screen. Everything else will go inside this table.
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
         stage.addActor(table);
 
         table.defaults().width(Value.percentWidth(.75F, table));
@@ -62,7 +61,7 @@ public class MenuScreen implements Screen {
             logout.setText("Login");
         }
         TextButton.TextButtonStyle textButtonStyle = newGame.getStyle();
-        textButtonStyle.font = Asset.fontMedium;
+        textButtonStyle.font = Assets.fontMedium;
         continueGame.setStyle(textButtonStyle);
         newGame.setStyle(textButtonStyle);
 
@@ -168,11 +167,10 @@ public class MenuScreen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself
-//        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 

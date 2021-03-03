@@ -10,16 +10,16 @@ import de.golfgl.gdxgamesvcs.IGameServiceListener;
 import de.golfgl.gdxgamesvcs.MockGameServiceClient;
 import de.golfgl.gdxgamesvcs.achievement.IAchievement;
 import de.golfgl.gdxgamesvcs.leaderboard.ILeaderBoardEntry;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.LocalStorage;
-import tk.sebastjanmevlja.doodlejumpspace.Level.AboutScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.EndScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.LoadingScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.MenuScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.PauseScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.PreferencesScreen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Screens;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.EndScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.LoadingScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.MenuScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.PauseScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.PreferencesScreen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Screens;
 
 
 public class Game extends com.badlogic.gdx.Game implements IGameServiceListener {
@@ -29,7 +29,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     public static LocalStorage localStorage;
     public IGameServiceClient gsClient;
     public Level1Screen level1Screen;
-    public Asset assets;
+    public Assets assets;
     private SpriteBatch batch;
     private LoadingScreen loadingScreen;
     private PreferencesScreen preferencesScreen;
@@ -42,14 +42,14 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     public void create() {
         batch = new SpriteBatch();
         game = this;
-        assets = new Asset();
+        assets = new Assets();
         assets.loadGame();
+
 //        Gdx.input.setCatchBackKey(true); //back key doesnt the app close - deprecated
         Gdx.input.setCatchKey(Input.Keys.BACK, true);
         localStorage = new LocalStorage();
 
-        // ...awesome initialization code...
-
+//        For desktop client
         if (gsClient == null)
             gsClient = new MockGameServiceClient(1) {
                 @Override
@@ -150,8 +150,8 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
 
         batch.dispose();
         assets.dispose();
-        Asset.background.dispose();
-        Asset.skin.dispose();
+        Assets.background.dispose();
+        Assets.skin.dispose();
     }
 
 
@@ -177,7 +177,6 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
 
     @Override
     public void gsOnSessionActive() {
-        System.out.println("SESSION ACTIVE");
         if (getScreen() == menuScreen) {
             menuScreen.show();
         }
@@ -185,7 +184,6 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
 
     @Override
     public void gsOnSessionInactive() {
-        System.out.println("SESSION INACTIVE");
         if (getScreen() == menuScreen) {
             menuScreen.show();
         }

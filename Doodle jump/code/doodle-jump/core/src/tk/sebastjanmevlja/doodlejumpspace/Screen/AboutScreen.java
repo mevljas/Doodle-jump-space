@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 
 import com.badlogic.gdx.Gdx;
@@ -18,8 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 
@@ -33,7 +33,7 @@ public class AboutScreen implements Screen {
         this.game = game;
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-        Skin skin = Asset.skin;
+        Skin skin = Assets.skin;
 
         // Create a table that fills the screen. Everything else will go inside
         // this table.
@@ -49,7 +49,7 @@ public class AboutScreen implements Screen {
         final TextButton backButton = new TextButton("Back", skin);
         final TextButton retryButton = new TextButton("Continue", skin);
         TextButton.TextButtonStyle textButtonStyle = retryButton.getStyle();
-        textButtonStyle.font = Asset.fontMedium;
+        textButtonStyle.font = Assets.fontMedium;
         retryButton.setStyle(textButtonStyle);
         backButton.addListener(new ChangeListener() {
             @Override
@@ -61,7 +61,7 @@ public class AboutScreen implements Screen {
 
         Label titleLabel = new Label("About", skin, "title");
         Label.LabelStyle LabelStyleBig = titleLabel.getStyle();
-        LabelStyleBig.font = Asset.fontBig;
+        LabelStyleBig.font = Assets.fontBig;
         titleLabel.setStyle(LabelStyleBig);
 
 
@@ -80,7 +80,7 @@ public class AboutScreen implements Screen {
                 "Music by Benjamin Tissot.", skin);
         label.setWrap(true);
         Label.LabelStyle LabelStyleSmall = titleLabel.getStyle();
-        LabelStyleSmall.font = Asset.fontVerySmall;
+        LabelStyleSmall.font = Assets.fontVerySmall;
         label.setStyle(LabelStyleSmall);
 
 
@@ -89,7 +89,7 @@ public class AboutScreen implements Screen {
 
         table.add(titleLabel).center().width(Value.percentWidth(.30F, table));
         table.row().padTop(Value.percentHeight(.05F, table));
-        table.add(new Image(Asset.atlas.findRegion("logo"))).width(Value.percentWidth(.30F, table)).height(Value.percentWidth(.30F, table)).center();
+        table.add(new Image(Assets.atlas.findRegion("logo"))).width(Value.percentWidth(.30F, table)).height(Value.percentWidth(.30F, table)).center();
         table.row().padTop(Value.percentHeight(.2F, table));
         table.add(label).width(Value.percentWidth(.90F, table));
         table.row().padTop(Value.percentHeight(.2F, table));
@@ -114,7 +114,7 @@ public class AboutScreen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself

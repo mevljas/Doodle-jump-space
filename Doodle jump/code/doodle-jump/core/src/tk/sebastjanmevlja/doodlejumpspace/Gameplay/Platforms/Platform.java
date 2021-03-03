@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -15,13 +15,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 import java.util.Random;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Platform extends Actor {

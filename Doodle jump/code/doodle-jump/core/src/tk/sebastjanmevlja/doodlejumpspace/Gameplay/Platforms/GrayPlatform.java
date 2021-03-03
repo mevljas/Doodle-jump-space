@@ -1,15 +1,15 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 
 
 public class GrayPlatform extends Platform {
 
-    private static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("gray_platform");
+    private static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Assets.atlas.findRegion("gray_platform");
 
 
     public GrayPlatform(World world, float x, float y, boolean items) {

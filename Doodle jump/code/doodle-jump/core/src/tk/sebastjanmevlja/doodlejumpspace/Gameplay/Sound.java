@@ -1,5 +1,6 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class Sound {
@@ -12,16 +13,16 @@ public class Sound {
 
     public static void changeMusicState() {
         if (musicEnabled) {
-            if (!Asset.backgroundMusic.isPlaying()) {
-                Asset.backgroundMusic.play();
-                Asset.backgroundMusic.setLooping(true);
-                Asset.backgroundMusic.setVolume(musicVolume);
+            if (!Assets.backgroundMusic.isPlaying()) {
+                Assets.backgroundMusic.play();
+                Assets.backgroundMusic.setLooping(true);
+                Assets.backgroundMusic.setVolume(musicVolume);
 
             }
         } else {
-            if (Asset.backgroundMusic.isPlaying()) {
-                Asset.backgroundMusic.stop();
-                Asset.backgroundMusic.setLooping(false);
+            if (Assets.backgroundMusic.isPlaying()) {
+                Assets.backgroundMusic.stop();
+                Assets.backgroundMusic.setLooping(false);
             }
         }
     }
@@ -34,7 +35,7 @@ public class Sound {
 
     public static void changeMusicVolume(float volume) {
         musicVolume = volume;
-        Asset.backgroundMusic.setVolume(musicVolume);
+        Assets.backgroundMusic.setVolume(musicVolume);
         Game.localStorage.setMusicVolume(musicVolume);
     }
 
@@ -45,99 +46,92 @@ public class Sound {
 
     public static void changeSoundVolume(float volume) {
         soundVolume = volume;
-        Asset.fallingSound.setVolume(volume);
-        Asset.jumpSound.setVolume(volume);
-        Asset.monsterSound.setVolume(volume);
-        Asset.platformBreakingSound.setVolume(volume);
-        Asset.startSound.setVolume(volume);
+        Assets.fallingSound.setVolume(volume);
+        Assets.jumpSound.setVolume(volume);
+        Assets.monsterSound.setVolume(volume);
+        Assets.platformBreakingSound.setVolume(volume);
+        Assets.startSound.setVolume(volume);
         Game.localStorage.setSoundVolume(soundVolume);
     }
 
     public static void playFallingSound() {
         if (soundEnabled) {
-            Asset.fallingSound.stop();
-            Asset.fallingSound.play();
+            Assets.fallingSound.stop();
+            Assets.fallingSound.play();
         }
 
     }
 
     public static void playJumpSound() {
         if (soundEnabled) {
-            Asset.jumpSound.stop();
-            Asset.jumpSound.play();
+            Assets.jumpSound.stop();
+            Assets.jumpSound.play();
         }
     }
 
     public static void playMonsterSound() {
         if (soundEnabled) {
-            Asset.monsterSound.stop();
-            Asset.monsterSound.play();
+            Assets.monsterSound.stop();
+            Assets.monsterSound.play();
         }
     }
 
     public static void playPlatformBreakingSound() {
         if (soundEnabled) {
-            Asset.platformBreakingSound.stop();
-            Asset.platformBreakingSound.play();
+            Assets.platformBreakingSound.stop();
+            Assets.platformBreakingSound.play();
         }
     }
 
     public static void playStartSound() {
         if (soundEnabled) {
-            Asset.startSound.stop();
-            Asset.startSound.play();
+            Assets.startSound.stop();
+            Assets.startSound.play();
         }
     }
 
     public static void playShieldSound() {
         if (soundEnabled) {
-            Asset.shieldSound.stop();
-            Asset.shieldSound.play();
+            Assets.shieldSound.stop();
+            Assets.shieldSound.play();
         }
     }
 
     public static void playBulletSound() {
         if (soundEnabled) {
-            Asset.bulletSound.stop();
-            Asset.bulletSound.play();
-            Asset.bulletSound.setVolume(0.5f);
-        }
-    }
-
-    public static void playBlackHoleSound() {
-        if (soundEnabled) {
-            Asset.blackHoleSound.stop();
-            Asset.blackHoleSound.play();
+            Assets.bulletSound.stop();
+            Assets.bulletSound.play();
+            Assets.bulletSound.setVolume(0.5f);
         }
     }
 
     public static void playJetpackSound() {
         if (soundEnabled) {
-            Asset.jetpackSound.play();
-            Asset.jetpackSound.setLooping(true);
-            Asset.jetpackSound.setVolume(0.3f);
+            Assets.jetpackSound.play();
+            Assets.jetpackSound.setLooping(true);
+            Assets.jetpackSound.setVolume(0.3f);
         }
     }
 
     public static void stopJetpackSound() {
-        Asset.jetpackSound.stop();
+        Assets.jetpackSound.stop();
     }
 
 
     public static void playMagnetoSound() {
-        if (soundEnabled && !Asset.magnetoSound.isPlaying()) {
-            Asset.magnetoSound.play();
-            Asset.jetpackSound.setVolume(0.5f);
+        if (soundEnabled && !Assets.magnetoSound.isPlaying()) {
+            Assets.magnetoSound.play();
+            Assets.jetpackSound.setVolume(0.5f);
         }
     }
 
     public static void stopMagnetoSound() {
-        Asset.magnetoSound.stop();
+        Assets.magnetoSound.stop();
     }
 
     public static void playSlimeSound() {
         if (soundEnabled) {
-            Asset.slimeSound.play();
+            Assets.slimeSound.play();
         }
     }
 

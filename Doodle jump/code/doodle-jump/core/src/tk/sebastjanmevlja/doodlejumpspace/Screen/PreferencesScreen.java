@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 
 import com.badlogic.gdx.Gdx;
@@ -21,8 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
@@ -36,7 +36,7 @@ public class PreferencesScreen implements Screen {
         this.game = game;
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-        Skin skin = Asset.skin;
+        Skin skin = Assets.skin;
 
         // Create a table that fills the screen. Everything else will go inside
         // this table.
@@ -107,7 +107,7 @@ public class PreferencesScreen implements Screen {
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);
         TextButton.TextButtonStyle textButtonStyle = backButton.getStyle();
-        textButtonStyle.font = Asset.fontMedium;
+        textButtonStyle.font = Assets.fontMedium;
         backButton.setStyle(textButtonStyle);
 
         backButton.addListener(new ChangeListener() {
@@ -125,11 +125,11 @@ public class PreferencesScreen implements Screen {
         Label soundOnOffLabel = new Label(" Sound Effect", skin, "default");
 
         Label.LabelStyle labelStyleTitle = titleLabel.getStyle();
-        labelStyleTitle.font = Asset.fontBig;
+        labelStyleTitle.font = Assets.fontBig;
         titleLabel.setStyle(labelStyleTitle);
 
         Label.LabelStyle labelStyleText = titleLabel.getStyle();
-        labelStyleText.font = Asset.fontSmall;
+        labelStyleText.font = Assets.fontSmall;
         volumeMusicLabel.setStyle(labelStyleText);
         volumeSoundLabel.setStyle(labelStyleText);
         musicOnOffLabel.setStyle(labelStyleText);
@@ -175,7 +175,7 @@ public class PreferencesScreen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself

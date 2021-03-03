@@ -14,9 +14,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Slime extends Actor {
@@ -34,7 +36,7 @@ public class Slime extends Actor {
 
 
     public Slime(float x, float y, World world) {
-        sprite = new Sprite(Asset.atlas.findRegions("slime").get(0));
+        sprite = new Sprite(Assets.atlas.findRegions("slime").get(0));
         sprite.setSize(TRAMPOLINE_WIDTH, TRAMPOLINE_HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
@@ -66,7 +68,7 @@ public class Slime extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.TRAMPOLINE_BIT;
+        fixtureDef.filter.categoryBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.TRAMPOLINE_BIT;
         fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
@@ -77,7 +79,7 @@ public class Slime extends Actor {
         shape.dispose();
 
 
-        runningAnimation = new Animation<TextureRegion>(0.1f, Asset.atlas.findRegions("slime"), Animation.PlayMode.NORMAL);
+        runningAnimation = new Animation<TextureRegion>(0.1f, Assets.atlas.findRegions("slime"), Animation.PlayMode.NORMAL);
         this.stateTime = 0f;
     }
 

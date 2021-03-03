@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
 public class GreenEnemy extends Enemy {
 
-    private static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("grey_enemy");
+    private static final Array<TextureAtlas.AtlasRegion> textures = Assets.atlas.findRegions("grey_enemy");
 
     public GreenEnemy(World world, float x, float y) {
         super(textures, world, x, y);
@@ -42,7 +42,6 @@ public class GreenEnemy extends Enemy {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-//        super.draw(batch, parentAlpha);
         if (this.alive) {
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());

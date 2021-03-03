@@ -15,14 +15,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.ArrayList;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster.EnemyFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.EnemyFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.PlanetFactory;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.PlatformFactory;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.VerticalDirection;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playBulletSound;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 
@@ -30,25 +32,25 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 public class Player extends Actor {
 
 
-    public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
-    public static final float WORLD_VELOCITY = -Constants.HEIGHT * 0.002f;
+    public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.005f;
+    public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.002f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.7f;
     public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
     public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
     public static final float WORLD_JETPACK_VELOCITY_STOP = WORLD_JETPACK_VELOCITY * 0.35f;
     public static final float WORLD_FALL_VELOCITY = -WORLD_VELOCITY * 4;
-    private static final TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
-    private static final TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
-    private static final TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
-    private static final TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");
-    private static final TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("Player_right_up");
+    private static final TextureAtlas.AtlasRegion up = Assets.atlas.findRegion("player_up");
+    private static final TextureAtlas.AtlasRegion leftFall = Assets.atlas.findRegion("Player_left_down");
+    private static final TextureAtlas.AtlasRegion rightFall = Assets.atlas.findRegion("Player_right_down");
+    private static final TextureAtlas.AtlasRegion leftJump = Assets.atlas.findRegion("Player_left_up");
+    private static final TextureAtlas.AtlasRegion rightJump = Assets.atlas.findRegion("Player_right_up");
     public static Player player;
     public static int lives;
     public static int score;
     public static ArrayList<Shield> removedShields;
     public static ArrayList<Jetpack> removedJetpacks;
-    public static float JUMP_VELOCITY = Constants.HEIGHT * 0.0027f;
-    public static float HEIGHT = Constants.HEIGHT / 11.8f;
+    public static float JUMP_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0027f;
+    public static float HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 11.8f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float WIDTH = HEIGHT;
     public static ArrayList<Bullet> bullets;
@@ -106,8 +108,8 @@ public class Player extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.PLAYER_BIT;
-        fixtureDef.filter.maskBits = Constants.PLATFORM_BIT | Constants.MONSTER_BIT | Constants.TRAMPOLINE_BIT | Constants.ITEM_BIT;
+        fixtureDef.filter.categoryBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PLAYER_BIT;
+        fixtureDef.filter.maskBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PLATFORM_BIT | tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.MONSTER_BIT | tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.TRAMPOLINE_BIT | tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.ITEM_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
         fixtureDef.isSensor = true;
@@ -157,7 +159,7 @@ public class Player extends Actor {
                 (body.getPosition().y * PPM) - sprite.getHeight() * 0.36f);
 
 
-        if (sprite.getY() <= -Constants.HEIGHT) {
+        if (sprite.getY() <= -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT) {
             lives = 0;
         } else if (sprite.getY() + sprite.getHeight() / 2 <= 0 && !falling) {
             PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
@@ -251,7 +253,7 @@ public class Player extends Actor {
     }
 
     void checkBorderCollision() {
-        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH || horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0) {
+        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH || horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0) {
             resolveBorderCollision();
         }
     }
@@ -326,7 +328,7 @@ public class Player extends Actor {
     }
 
     private void movePlayerScreenCenter() {
-        this.body.setTransform(body.getPosition().x, Constants.HEIGHT / 2f / PPM, 0);
+        this.body.setTransform(body.getPosition().x, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 2f / PPM, 0);
     }
 
     private float calculateDynamicVelocity() {

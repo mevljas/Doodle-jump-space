@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 
 import com.badlogic.gdx.Gdx;
@@ -17,88 +17,103 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
-public class PauseScreen implements Screen {
+public class EndScreen implements Screen {
 
     private final Game game;
     private final Stage stage;
+    private final Label scoreLabel;
+    private final Label highScoreLabel;
 
 
-    public PauseScreen(final Game game) {
+    public EndScreen(final Game game) {
         this.game = game;
 
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-        Skin skin = Asset.skin;
+        Skin skin = Assets.skin;
 
         // Create a table that fills the screen. Everything else will go inside
         // this table.
         Table table = new Table();
         table.setFillParent(true);
-        table.align(Align.center);
+        //table.setDebug(true);
         stage.addActor(table);
 
-        Label titleLabel = new Label("Paused", skin, "title");
-        Label.LabelStyle labelStyleTitle = titleLabel.getStyle();
-        labelStyleTitle.font = Asset.fontBig;
-        titleLabel.setStyle(labelStyleTitle);
+        table.align(Align.center);
 
-        Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
-        Label.LabelStyle labelStyleText = titleLabel.getStyle();
-        labelStyleTitle.font = Asset.fontSmall;
-        scoreLabel.setStyle(labelStyleText);
+        Label titleLabel = new Label("Game over", skin, "title");
+        Label textLabel = new Label("Better luck next time!", skin, "default");
+        scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
+        highScoreLabel = new Label("High score: " + Game.localStorage.getHighScore(), skin, "default");
+        Label.LabelStyle labelStyleBig = titleLabel.getStyle();
+        labelStyleBig.font = Assets.fontBig;
+        titleLabel.setStyle(labelStyleBig);
+
+        Label.LabelStyle labelStyleSmall = textLabel.getStyle();
+        labelStyleSmall.font = Assets.fontSmall;
+        textLabel.setStyle(labelStyleSmall);
+        scoreLabel.setStyle(labelStyleSmall);
+        highScoreLabel.setStyle(labelStyleSmall);
 
         // return to main screen button
-        final TextButton retryButton = new TextButton("Continue", skin);
+        final TextButton retryButton = new TextButton("Retry", skin);
+        TextButton.TextButtonStyle buttonStyle = retryButton.getStyle();
+        buttonStyle.font = Assets.fontMedium;
+        retryButton.setStyle(buttonStyle);
         retryButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 //                Sound.changeMusicState();
-                if (Player.player.getJetpack() != null) {
-                    Sound.playJetpackSound();
-                }
-                PauseScreen.this.game.changeScreen(Screens.LEVEL1SCREEN);
+                EndScreen.this.game.changeScreen(Screens.LEVEL1SCREEN);
 
             }
         });
 
         final TextButton backButton = new TextButton("Menu", skin);
+        backButton.setStyle(buttonStyle);
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 //                Sound.changeMusicState();
-                PauseScreen.this.game.changeScreen(Screens.MENUSCREEN);
+                EndScreen.this.game.changeScreen(Screens.MENUSCREEN);
 
             }
         });
-
-        TextButton.TextButtonStyle textButtonStyle = retryButton.getStyle();
-        textButtonStyle.font = Asset.fontMedium;
-        retryButton.setStyle(textButtonStyle);
-        backButton.setStyle(textButtonStyle);
 
 
         table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).center().width(Value.percentWidth(.40F, table));
-        table.row().padTop(Value.percentHeight(.2F, table));
-
-        table.add(scoreLabel).center().width(Value.percentWidth(.40F, table));
-        table.row().padTop(Value.percentHeight(.2F, table));
-        table.add(retryButton).center().width(Value.percentWidth(.70F, table));
+        table.add(titleLabel).center().width(Value.percentWidth(.50F, table));
+        table.row().padTop(Value.percentHeight(.1F, table));
+        table.add(textLabel).center().width(Value.percentWidth(.80F, table));
+        table.row().padTop(Value.percentHeight(.02F, table));
+        table.add(scoreLabel).center().width(Value.percentWidth(.80F, table));
+        table.row().padTop(Value.percentHeight(.02F, table));
+        table.add(highScoreLabel).center().width(Value.percentWidth(.80F, table));
+        table.row().padTop(Value.percentHeight(.1F, table));
+        table.add(retryButton).center().width(Value.percentWidth(.50F, table));
         table.row().padTop(Value.percentHeight(.05F, table));
-        table.add(backButton).center().width(Value.percentWidth(.70F, table));
+        table.add(backButton).center().width(Value.percentWidth(.50F, table));
     }
 
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+        scoreLabel.setText("Score: " + Player.getScore());
+        highScoreLabel.setText("High score: " + Game.localStorage.getHighScore());
+        Level1Screen.paused = false;
+
+
+        if (game.gsClient.isSessionActive()) {
+            game.gsClient.submitToLeaderboard(Constants.leaderBoardId, Player.getScore(), null);
+        }
     }
 
     @Override
@@ -113,7 +128,7 @@ public class PauseScreen implements Screen {
 
         gameBatch.begin(); //kdr zacenmo rendirat klicemo begin
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+        gameBatch.draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
         gameBatch.end();
 
         // tell our stage to do actions and draw itself

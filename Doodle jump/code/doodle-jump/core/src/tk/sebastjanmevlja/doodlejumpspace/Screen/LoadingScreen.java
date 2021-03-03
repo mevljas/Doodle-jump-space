@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Level;
+package tk.sebastjanmevlja.doodlejumpspace.Screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
@@ -26,7 +26,7 @@ public class LoadingScreen implements Screen {
         stage = new Stage(new ScreenViewport());
 
 
-        progressBar = new ProgressBar(0, 5, 1, false, Asset.skin);
+        progressBar = new ProgressBar(0, 5, 1, false, Assets.skin);
         progressBar.setValue(0);
         progressBar.setWidth(Constants.WIDTH * 0.7f);
         progressBar.getStyle().background.setMinHeight(Constants.HEIGHT * 0.06f);
@@ -67,7 +67,7 @@ public class LoadingScreen implements Screen {
             Batch gameBatch = main.getBatch();
             gameBatch.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+            gameBatch.draw(Assets.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
             gameBatch.end();
 
             float progress = main.assets.getProgress();
@@ -102,7 +102,7 @@ public class LoadingScreen implements Screen {
     @Override
     public void dispose() {
         stage.dispose();
-        Asset.atlas.dispose();
+        Assets.atlas.dispose();
     }
 
 }

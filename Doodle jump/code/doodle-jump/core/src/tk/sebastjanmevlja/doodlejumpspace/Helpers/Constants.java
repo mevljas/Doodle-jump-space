@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
+package tk.sebastjanmevlja.doodlejumpspace.Helpers;
 
 import com.badlogic.gdx.Gdx;
 

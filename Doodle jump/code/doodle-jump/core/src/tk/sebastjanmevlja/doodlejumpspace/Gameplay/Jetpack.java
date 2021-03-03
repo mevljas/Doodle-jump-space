@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -14,15 +13,17 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Jetpack extends Actor {
 
-    public static float JETPACK_WIDTH = Constants.WIDTH * 0.1f;
-    public static float JETPACK_HEIGHT = Constants.HEIGHT * 0.050f;
+    public static float JETPACK_WIDTH = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.1f;
+    public static float JETPACK_HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.050f;
     public Platform parentPlatform;
     public Animation<TextureRegion> runningAnimation;
     Sprite sprite;
@@ -33,7 +34,7 @@ public class Jetpack extends Actor {
 
 
     public Jetpack(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("jetpack_item"));
+        sprite = new Sprite(Assets.atlas.findRegion("jetpack_item"));
         sprite.setSize(JETPACK_WIDTH, JETPACK_HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
@@ -64,7 +65,7 @@ public class Jetpack extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.ITEM_BIT;
+        fixtureDef.filter.categoryBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.ITEM_BIT;
         fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;
@@ -75,7 +76,7 @@ public class Jetpack extends Actor {
         // Shape is the only disposable of the lot, so get rid of it
         shape.dispose();
 
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("jetpack"), Animation.PlayMode.LOOP);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Assets.atlas.findRegions("jetpack"), Animation.PlayMode.LOOP);
         this.stateTime = 0f;
 
     }
@@ -113,18 +114,6 @@ public class Jetpack extends Actor {
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }
 
-    }
-
-    public float spriteHeight() {
-        return this.sprite.getHeight();
-    }
-
-    public float spriteWidth() {
-        return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition() {
-        return body.getPosition();
     }
 
     public Sprite getSprite() {

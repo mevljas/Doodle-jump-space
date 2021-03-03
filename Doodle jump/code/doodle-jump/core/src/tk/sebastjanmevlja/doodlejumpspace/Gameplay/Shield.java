@@ -11,25 +11,27 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
-import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
+import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
 
 
 public class Shield extends Actor {
 
-    public static float SHIELD_WIDTH = Constants.WIDTH * 0.09f;
+    public static float SHIELD_WIDTH = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.09f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float SHIELD_HEIGHT = SHIELD_WIDTH;
     public Platform parentPlatform;
     Sprite sprite;
     World world;
     Body body;
-    TextureAtlas.AtlasRegion shieldActivatedAtlasRegion = Asset.atlas.findRegion("shiled_radius");
+    TextureAtlas.AtlasRegion shieldActivatedAtlasRegion = Assets.atlas.findRegion("shiled_radius");
 
 
     public Shield(float x, float y, World world, Platform platform) {
-        sprite = new Sprite(Asset.atlas.findRegion("shiled_item"));
+        sprite = new Sprite(Assets.atlas.findRegion("shiled_item"));
         sprite.setSize(SHIELD_WIDTH, SHIELD_HEIGHT);
         sprite.setPosition(x, y);
         sprite.setCenterX(x);
@@ -60,7 +62,7 @@ public class Shield extends Actor {
         // you also define it's properties like density, restitution and others
         // Density and area are used to calculate over all mass
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.filter.categoryBits = Constants.ITEM_BIT;
+        fixtureDef.filter.categoryBits = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.ITEM_BIT;
         fixtureDef.filter.maskBits = Constants.PLAYER_BIT;
         fixtureDef.shape = shape;
         fixtureDef.density = 0.1f;

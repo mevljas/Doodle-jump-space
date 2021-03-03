@@ -1,18 +1,18 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
 public class WhitePlatform extends Platform {
 
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
-    private static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("white_platform");
+    private static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Assets.atlas.findRegion("white_platform");
     private HorizontalDirection direction;
 
 

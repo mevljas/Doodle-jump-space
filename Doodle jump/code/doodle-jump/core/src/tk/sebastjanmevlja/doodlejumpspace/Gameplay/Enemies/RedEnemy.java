@@ -1,4 +1,4 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -7,14 +7,14 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 
 public class RedEnemy extends Enemy {
 
-    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("red_enemy");
+    private static final TextureAtlas.AtlasRegion texture = Assets.atlas.findRegion("red_enemy");
     private final float leftLocation;
     private final float rightLocation;
     private final float VELOCITY = Constants.WIDTH * 0.003f;
@@ -32,7 +32,7 @@ public class RedEnemy extends Enemy {
         leftLocation = x - WIDTH * 0.8f;
         direction = HorizontalDirection.RIGHT;
         body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
-        runningAnimation = new Animation<TextureRegion>(0.15f, Asset.atlas.findRegions("red_enemy"), Animation.PlayMode.LOOP);
+        runningAnimation = new Animation<TextureRegion>(0.15f, Assets.atlas.findRegions("red_enemy"), Animation.PlayMode.LOOP);
         this.stateTime = 0f;
     }
 

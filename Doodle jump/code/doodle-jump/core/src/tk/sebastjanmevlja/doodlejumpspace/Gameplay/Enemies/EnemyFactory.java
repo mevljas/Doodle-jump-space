@@ -1,11 +1,11 @@
-package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
+package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies;
 
 import com.badlogic.gdx.physics.box2d.World;
 
 import java.util.LinkedList;
 import java.util.Random;
 
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 
 public class EnemyFactory {
 

@@ -5,17 +5,18 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 
-import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
-import tk.sebastjanmevlja.doodlejumpspace.Level.Screens;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen;
+import tk.sebastjanmevlja.doodlejumpspace.Screen.Screens;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 
-public class Input implements InputProcessor, GestureDetector.GestureListener {
+public class InputListener implements InputProcessor, GestureDetector.GestureListener {
 
     public static InputMultiplexer im;
     private final Player player;
 
-    public Input(Player player) {
+    public InputListener(Player player) {
         this.player = player;
         im = new InputMultiplexer();
         GestureDetector gd = new GestureDetector(this);
