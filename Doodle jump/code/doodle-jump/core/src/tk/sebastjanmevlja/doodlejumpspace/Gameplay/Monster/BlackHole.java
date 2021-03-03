@@ -22,6 +22,7 @@ public class BlackHole extends Enemy {
     public BlackHole(World world, float x, float y) {
         super(texture, world, x, y);
         HEIGHT = Constants.HEIGHT * 0.1f;
+        //noinspection SuspiciousNameCombination
         WIDTH = HEIGHT;
         init( world, x, y);
     }

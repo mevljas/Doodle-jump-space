@@ -3,10 +3,13 @@ package tk.sebastjanmevlja.doodlejumpspace.MyGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 
 import de.golfgl.gdxgamesvcs.IGameServiceClient;
 import de.golfgl.gdxgamesvcs.IGameServiceListener;
-import de.golfgl.gdxgamesvcs.NoGameServiceClient;
+import de.golfgl.gdxgamesvcs.MockGameServiceClient;
+import de.golfgl.gdxgamesvcs.achievement.IAchievement;
+import de.golfgl.gdxgamesvcs.leaderboard.ILeaderBoardEntry;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.LocalStorage;
 import tk.sebastjanmevlja.doodlejumpspace.Level.AboutScreen;
@@ -50,14 +53,38 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
         // ...awesome initialization code...
 
         if (gsClient == null)
-            gsClient = new NoGameServiceClient();
+            gsClient = new MockGameServiceClient(1) {
+                @Override
+                protected Array<ILeaderBoardEntry> getLeaderboardEntries() {
+                    return null;
+                }
+
+                @Override
+                protected Array<String> getGameStates() {
+                    return null;
+                }
+
+                @Override
+                protected byte[] getGameState() {
+                    return new byte[0];
+                }
+
+                @Override
+                protected Array<IAchievement> getAchievements() {
+                    return null;
+                }
+
+                @Override
+                protected String getPlayerName() {
+                    return null;
+                }
+            };
 
         // for getting callbacks from the client
         gsClient.setListener((IGameServiceListener) this);
 
         // establish a connection to the game service without error messages or login screens
         gsClient.resumeSession();
-
 
 
         changeScreen(Screens.LOADINGSCREEN);
