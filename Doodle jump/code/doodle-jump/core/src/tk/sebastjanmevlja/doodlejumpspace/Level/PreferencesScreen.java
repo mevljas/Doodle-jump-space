@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
@@ -47,6 +48,7 @@ public class PreferencesScreen implements Screen {
         // this table.
         Table table = new Table();
         table.setFillParent(true);
+        table.align(Align.center);
         stage.addActor(table);
 
 
@@ -54,10 +56,9 @@ public class PreferencesScreen implements Screen {
         // music volume
         final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusicSlider.setValue(Sound.musicVolume);
-        volumeMusicSlider.getStyle().background.setMinHeight(Constants.HEIGHT * 0.03f);
-        volumeMusicSlider.getStyle().knob.setMinHeight(Constants.HEIGHT * 0.04f);
-        volumeMusicSlider.getStyle().knob.setMinWidth(Constants.HEIGHT * 0.04f);
-        volumeMusicSlider.setWidth(1);
+//        volumeMusicSlider.getStyle().background.setMinHeight(Constants.HEIGHT * 0.01f);
+        volumeMusicSlider.getStyle().knob.setMinHeight(Constants.HEIGHT * 0.01f);
+        volumeMusicSlider.getStyle().knob.setMinWidth(Constants.HEIGHT * 0.01f);
         volumeMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -68,7 +69,12 @@ public class PreferencesScreen implements Screen {
 
         // sound volume
         final Slider soundMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
-        soundMusicSlider.setValue(Sound.soundVolume);
+        volumeMusicSlider.setValue(Sound.musicVolume);
+//        volumeMusicSlider.getStyle().background.setMinHeight(Constants.HEIGHT * 0.03f);
+        volumeMusicSlider.getStyle().knob.setMinHeight(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.getStyle().knob.setMinWidth(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.getStyle().knobDown.setMinHeight(Constants.HEIGHT * 0.04f);
+        volumeMusicSlider.getStyle().knobDown.setMinWidth(Constants.HEIGHT * 0.04f);
         soundMusicSlider.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -81,10 +87,10 @@ public class PreferencesScreen implements Screen {
         // music on/off
         final CheckBox musicCheckbox = new CheckBox(null, skin);
         musicCheckbox.setChecked(Sound.musicEnabled);
-        musicCheckbox.getStyle().checkboxOn.setMinWidth(Constants.WIDTH * 0.08f);
-        musicCheckbox.getStyle().checkboxOn.setMinHeight(Constants.WIDTH * 0.08f);
-        musicCheckbox.getStyle().checkboxOff.setMinWidth(Constants.WIDTH * 0.08f);
-        musicCheckbox.getStyle().checkboxOff.setMinHeight(Constants.WIDTH * 0.08f);
+        musicCheckbox.getStyle().checkboxOn.setMinWidth(Constants.HEIGHT * 0.04f);
+        musicCheckbox.getStyle().checkboxOn.setMinHeight(Constants.HEIGHT * 0.04f);
+        musicCheckbox.getStyle().checkboxOff.setMinWidth(Constants.HEIGHT * 0.04f);
+        musicCheckbox.getStyle().checkboxOff.setMinHeight(Constants.HEIGHT * 0.04f);
         musicCheckbox.addListener(new EventListener() {
             @Override
             public boolean handle(Event event) {
@@ -136,23 +142,23 @@ public class PreferencesScreen implements Screen {
         musicOnOffLabel.setStyle(labelStyleText);
         soundOnOffLabel.setStyle(labelStyleText);
 
-        table.defaults().width(Value.percentWidth(.5F, table));
-        table.defaults().height(Value.percentHeight(.1F, table));
+        table.defaults().width(Value.percentWidth(.50F, table));
+        table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).colspan(2).center().padRight(Value.percentWidth(.1F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.add(titleLabel).colspan(2).center();
+        table.row().padTop(Value.percentHeight(.1F, table));
         table.add(volumeMusicLabel).left();
-        table.add(volumeMusicSlider).right();
-        table.row().padTop(Value.percentWidth(.01F, table));
+        table.add(volumeMusicSlider).width(Value.percentWidth(.45F, table)).left();
+        table.row().padTop(Value.percentHeight(.01F, table));
         table.add(musicOnOffLabel).left();
         table.add(musicCheckbox).right();
-        table.row().padTop(Value.percentWidth(.01F, table));
+        table.row().padTop(Value.percentHeight(.01F, table));
         table.add(volumeSoundLabel).left();
-        table.add(soundMusicSlider).right();
-        table.row().padTop(Value.percentWidth(.01F, table));
+        table.add(soundMusicSlider).width(Value.percentWidth(.45F, table)).left();
+        table.row().padTop(Value.percentHeight(.01F, table));
         table.add(soundOnOffLabel).left();
         table.add(soundEffectsCheckbox).right();
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentHeight(.1F, table));
 
         table.add(backButton).colspan(2);
 

@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
@@ -34,6 +35,8 @@ public class AboutScreen implements Screen {
         table.setFillParent(true);
         //table.setDebug(true);
         stage.addActor(table);
+
+        table.align(Align.center);
 
 
         // return to main screen button
@@ -65,7 +68,7 @@ public class AboutScreen implements Screen {
                 "Slovenia, " +
                 "2021.\n" +
                 "\n" +
-                "Sound from Zapsplat.com.\n" +
+                "Sound effects from Zapsplat.com.\n" +
                 "Skin from Raymond \"Raeleus\" Buckley.\n" +
                 "Game textures by Pompam on itch.io.\n" +
                 "Music by Benjamin Tissot.", skin);

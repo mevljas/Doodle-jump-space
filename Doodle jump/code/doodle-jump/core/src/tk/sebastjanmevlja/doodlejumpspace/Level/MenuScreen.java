@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import de.golfgl.gdxgamesvcs.GameServiceException;
@@ -46,6 +47,7 @@ public class MenuScreen implements Screen {
 
         table.defaults().width(Value.percentWidth(.75F, table));
         table.defaults().height(Value.percentHeight(.1F, table));
+        table.align(Align.center);
 
 
         //create buttons
@@ -78,21 +80,21 @@ public class MenuScreen implements Screen {
         //add buttons to table
         if ((Level1Screen.paused != null && Level1Screen.paused) || Game.localStorage.getSavedData()){
             table.add(continueGame);
-            table.row().padTop(Value.percentWidth(.05F, table));
+            table.row().padTop(Value.percentHeight(.03F, table));
         }
         table.add(newGame);
-        table.row().padTop(Value.percentWidth(.05F, table));
+        table.row().padTop(Value.percentHeight(.03F, table));
         if (game.gsClient.isSessionActive()){
             table.add(leaderboard);
-            table.row().padTop(Value.percentWidth(.05F, table));
+            table.row().padTop(Value.percentHeight(.03F, table));
         }
 
         table.add(preferences);
-        table.row().padTop(Value.percentWidth(.05F, table));
+        table.row().padTop(Value.percentHeight(.03F, table));
         table.add(about);
-        table.row().padTop(Value.percentWidth(.05F, table));
+        table.row().padTop(Value.percentHeight(.03F, table));
         table.add(logout);
-        table.row().padTop(Value.percentWidth(.05F, table));
+        table.row().padTop(Value.percentHeight(.03F, table));
         table.add(exit);
 
         // create button listeners
@@ -171,7 +173,7 @@ public class MenuScreen implements Screen {
         gameBatch.end();
 
         // tell our stage to do actions and draw itself
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+//        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         stage.draw();
     }
 

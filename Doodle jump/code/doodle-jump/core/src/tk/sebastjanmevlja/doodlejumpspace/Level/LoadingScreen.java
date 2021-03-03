@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
@@ -37,13 +38,15 @@ public class LoadingScreen implements Screen {
         progressBar.setX(Constants.WIDTH / 2f - progressBar.getWidth() / 2);
         progressBar.setY(Constants.HEIGHT * 0.2f);
         stage.addActor(progressBar);
-        addAssets();
 
+        addAssets();
         Sound.setMusicEnabled(Game.localStorage.getMusicEnabled());
         Sound.setSoundEnabled(Game.localStorage.getSoundEnabled());
         Sound.changeMusicVolume(Game.localStorage.getMusicVolume());
         Sound.changeSoundVolume(Game.localStorage.getSoundVolume());
         Sound.changeMusicState();
+
+
     }
 
     private void addAssets() {
@@ -63,15 +66,12 @@ public class LoadingScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        Batch gameBatch = main.getBatch();
-
-        gameBatch.begin();
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
-        gameBatch.end();
-
-
         while(!main.assets.update()) {
+            Batch gameBatch = main.getBatch();
+            gameBatch.begin();
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            gameBatch.draw(Asset.background, 0, 0, Constants.WIDTH, Constants.HEIGHT);
+            gameBatch.end();
 
             float progress = main.assets.getProgress();
             progressBar.setValue(progress);

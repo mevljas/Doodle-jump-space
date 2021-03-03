@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
@@ -39,7 +40,7 @@ public class PauseScreen implements Screen{
         // this table.
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
+        table.align(Align.center);
         stage.addActor(table);
 
         Label titleLabel = new Label("Paused", skin, "title");
@@ -86,12 +87,12 @@ public class PauseScreen implements Screen{
         table.defaults().height(Value.percentHeight(.10F, table));
 
         table.add(titleLabel).center().width(Value.percentWidth(.40F, table));
-        table.row().padTop(Value.percentWidth(.5F, table));
+        table.row().padTop(Value.percentHeight(.2F, table));
 
         table.add(scoreLabel).center().width(Value.percentWidth(.25F, table));
-        table.row().padTop(Value.percentWidth(.2F, table));
+        table.row().padTop(Value.percentHeight(.2F, table));
         table.add(retryButton).center().width(Value.percentWidth(.70F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentHeight(.05F, table));
         table.add(backButton).center().width(Value.percentWidth(.70F, table));
     }
 

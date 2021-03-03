@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
@@ -40,6 +41,8 @@ public class EndScreen implements Screen{
         table.setFillParent(true);
         //table.setDebug(true);
         stage.addActor(table);
+
+        table.align(Align.center);
 
         titleLabel = new Label("Game over", skin, "title");
         textLabel = new Label("Better luck next time!", skin, "default");
@@ -85,16 +88,16 @@ public class EndScreen implements Screen{
         table.defaults().width(Value.percentWidth(.100F, table));
         table.defaults().height(Value.percentHeight(.10F, table));
 
-        table.add(titleLabel).center().width(Value.percentWidth(.60F, table));
-        table.row().padTop(Value.percentWidth(.3F, table));
+        table.add(titleLabel).center().width(Value.percentWidth(.50F, table));
+        table.row().padTop(Value.percentHeight(.1F, table));
         table.add(textLabel).center().width(Value.percentWidth(.80F, table));
-        table.row().padTop(Value.percentWidth(.05F, table));
+        table.row().padTop(Value.percentHeight(.02F, table));
         table.add(scoreLabel).center().width(Value.percentWidth(.80F, table));
-        table.row().padTop(Value.percentWidth(.025F, table));
+        table.row().padTop(Value.percentHeight(.02F, table));
         table.add(highScoreLabel).center().width(Value.percentWidth(.80F, table));
-        table.row().padTop(Value.percentWidth(.15F, table));
+        table.row().padTop(Value.percentHeight(.1F, table));
         table.add(retryButton).center().width(Value.percentWidth(.50F, table));
-        table.row().padTop(Value.percentWidth(.1F, table));
+        table.row().padTop(Value.percentHeight(.05F, table));
         table.add(backButton).center().width(Value.percentWidth(.50F, table));
     }
 
