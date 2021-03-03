@@ -1,12 +1,24 @@
 package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Monster;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.*;
+
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
@@ -169,16 +181,8 @@ public class Enemy extends Actor {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
-
     public float spriteWidth(){
         return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition(){
-        return body.getPosition();
     }
 
     public Sprite getSprite() {
@@ -222,9 +226,6 @@ public class Enemy extends Actor {
 
     public void incrementGlobalObjectCounter(){
         Culling.incrementObjectsCounter();
-    }
-    public float getBodyHeight() {
-        return this.bodyHeight;
     }
 
     public float getBodyWidth() {
