@@ -89,7 +89,7 @@ public class PauseScreen implements Screen{
         table.add(titleLabel).center().width(Value.percentWidth(.40F, table));
         table.row().padTop(Value.percentHeight(.2F, table));
 
-        table.add(scoreLabel).center().width(Value.percentWidth(.25F, table));
+        table.add(scoreLabel).center().width(Value.percentWidth(.40F, table));
         table.row().padTop(Value.percentHeight(.2F, table));
         table.add(retryButton).center().width(Value.percentWidth(.70F, table));
         table.row().padTop(Value.percentHeight(.05F, table));

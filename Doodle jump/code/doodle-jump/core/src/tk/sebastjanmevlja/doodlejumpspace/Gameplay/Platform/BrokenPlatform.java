@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 
 
 public class BrokenPlatform extends Platform {

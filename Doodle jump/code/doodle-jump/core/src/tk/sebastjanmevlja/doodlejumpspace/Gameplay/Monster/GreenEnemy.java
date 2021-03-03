@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;

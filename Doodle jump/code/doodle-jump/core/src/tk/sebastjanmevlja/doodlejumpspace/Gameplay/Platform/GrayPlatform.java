@@ -3,6 +3,7 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.World;
+
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 
 

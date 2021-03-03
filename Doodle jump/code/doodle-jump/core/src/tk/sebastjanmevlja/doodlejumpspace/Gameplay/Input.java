@@ -4,6 +4,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+
 import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 import tk.sebastjanmevlja.doodlejumpspace.Level.Screens;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
