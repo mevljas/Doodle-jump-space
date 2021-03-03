@@ -25,8 +25,8 @@ import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class AboutScreen implements Screen {
 
-    private Game game;
-    private Stage stage;
+    private final Game game;
+    private final Stage stage;
 
 
     public AboutScreen(final Game game) {
@@ -48,7 +48,7 @@ public class AboutScreen implements Screen {
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);
         final TextButton retryButton = new TextButton("Continue", skin);
-        TextButton.TextButtonStyle textButtonStyle =  retryButton.getStyle();
+        TextButton.TextButtonStyle textButtonStyle = retryButton.getStyle();
         textButtonStyle.font = Asset.fontMedium;
         retryButton.setStyle(textButtonStyle);
         backButton.addListener(new ChangeListener() {
@@ -60,7 +60,7 @@ public class AboutScreen implements Screen {
         });
 
         Label titleLabel = new Label("About", skin, "title");
-        Label.LabelStyle LabelStyleBig =  titleLabel.getStyle();
+        Label.LabelStyle LabelStyleBig = titleLabel.getStyle();
         LabelStyleBig.font = Asset.fontBig;
         titleLabel.setStyle(LabelStyleBig);
 
@@ -79,7 +79,7 @@ public class AboutScreen implements Screen {
                 "Game textures by Pompam on itch.io.\n" +
                 "Music by Benjamin Tissot.", skin);
         label.setWrap(true);
-        Label.LabelStyle LabelStyleSmall =  titleLabel.getStyle();
+        Label.LabelStyle LabelStyleSmall = titleLabel.getStyle();
         LabelStyleSmall.font = Asset.fontVerySmall;
         label.setStyle(LabelStyleSmall);
 
@@ -128,13 +128,16 @@ public class AboutScreen implements Screen {
     }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

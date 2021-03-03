@@ -6,9 +6,9 @@ import com.badlogic.gdx.utils.Array;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 
-public class LeftPlanet extends Planet{
+public class LeftPlanet extends Planet {
 
-    public static Array<TextureAtlas.AtlasRegion> leftPlanets =  Asset.atlas.findRegions("planets_left");
+    public static Array<TextureAtlas.AtlasRegion> leftPlanets = Asset.atlas.findRegions("planets_left");
 
     public LeftPlanet(TextureAtlas.AtlasRegion texture, World world, float y) {
         super(texture, world, 0, y);

@@ -21,23 +21,21 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Jetpack extends Actor {
 
-    Sprite sprite;
-    World world;
-    Body body;
     public static float JETPACK_WIDTH = Constants.WIDTH * 0.1f;
     public static float JETPACK_HEIGHT = Constants.HEIGHT * 0.050f;
     public Platform parentPlatform;
     public Animation<TextureRegion> runningAnimation;
+    Sprite sprite;
+    World world;
+    Body body;
     // A variable for tracking elapsed time for the animation
     float stateTime;
-
-
 
 
     public Jetpack(float x, float y, World world, Platform platform) {
         sprite = new Sprite(Asset.atlas.findRegion("jetpack_item"));
         sprite.setSize(JETPACK_WIDTH, JETPACK_HEIGHT);
-        sprite.setPosition(x,y);
+        sprite.setPosition(x, y);
         sprite.setCenterX(x);
         this.parentPlatform = platform;
 
@@ -49,9 +47,9 @@ public class Jetpack extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -82,30 +80,27 @@ public class Jetpack extends Actor {
 
     }
 
-    public void updatePos(float x, float y){
+    public void updatePos(float x, float y) {
         // Set the sprite's position from the updated physics body location
-        sprite.setPosition(x,y);
-        this.body.setTransform((sprite.getX() + sprite.getWidth()/2) /PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM, 0 );
+        sprite.setPosition(x, y);
+        this.body.setTransform((sprite.getX() + sprite.getWidth() / 2) / PPM,
+                (sprite.getY() + sprite.getHeight() / 2) / PPM, 0);
         updateAnimations();
 
     }
 
-    private void updateAnimations(){
-        if (this.parentPlatform == null){
+    private void updateAnimations() {
+        if (this.parentPlatform == null) {
             this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
         }
 
     }
 
 
-
     @Override
     public void act(float delta) {
         super.act(delta);
     }
-
-
 
 
     @Override
@@ -120,15 +115,15 @@ public class Jetpack extends Actor {
 
     }
 
-    public float spriteHeight(){
+    public float spriteHeight() {
         return this.sprite.getHeight();
     }
 
-    public float spriteWidth(){
+    public float spriteWidth() {
         return this.sprite.getWidth();
     }
 
-    public Vector2 getBodyPosition(){
+    public Vector2 getBodyPosition() {
         return body.getPosition();
     }
 
@@ -139,7 +134,6 @@ public class Jetpack extends Actor {
     public Body getBody() {
         return body;
     }
-
 
 
     @Override
@@ -161,10 +155,6 @@ public class Jetpack extends Actor {
     public float getHeight() {
         return sprite.getHeight();
     }
-
-
-
-
 
 
 }

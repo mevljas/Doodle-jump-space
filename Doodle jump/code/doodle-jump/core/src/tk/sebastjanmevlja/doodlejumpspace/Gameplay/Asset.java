@@ -13,30 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class Asset {
 
 
-//    Asset descriptors
-    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_space.atlas", TextureAtlas.class);
-    private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.png", Texture.class);
-    private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/flat-earth-ui.json", Skin.class);
-
-    private final AssetDescriptor<Music> backgroundMusicDescriptor = new AssetDescriptor<>("sounds/backgroundMusic.mp3", Music.class);
-    private final AssetDescriptor<Music> fallingSoundDescriptor = new AssetDescriptor<>("sounds/fallingSound.mp3", Music.class);
-    private final AssetDescriptor<Music> jumpSoundDescriptor = new AssetDescriptor<>("sounds/jumpSound.wav", Music.class);
-    private final AssetDescriptor<Music> monsterSoundDescriptor = new AssetDescriptor<>("sounds/monsterSound.mp3", Music.class);
-    private final AssetDescriptor<Music> platformBreakingSoundDescriptor = new AssetDescriptor<>("sounds/platformBreakingSound.wav", Music.class);
-    private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
-    private final AssetDescriptor<Music> shieldSoundDescriptor = new AssetDescriptor<>("sounds/shieldSound.mp3", Music.class);
-    private final AssetDescriptor<Music> bulletSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
-    private final AssetDescriptor<Music> blackHoleSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
-    private final AssetDescriptor<Music> jetpackDescriptor = new AssetDescriptor<>("sounds/jetpackSound.mp3", Music.class);
-    private final AssetDescriptor<Music> magnetoSoundDescriptor = new AssetDescriptor<>("sounds/magnetoSound.mp3", Music.class);
-    private final AssetDescriptor<Music> slimeSoundDescriptor = new AssetDescriptor<>("sounds/slimeSound.mp3", Music.class);
-
-//    Assets
+    //    Assets
     public static Texture background;
     public static TextureAtlas atlas;
     public static Skin skin;
-
-
     public static Music backgroundMusic;
     public static Music fallingSound;
     public static Music jumpSound;
@@ -49,23 +29,35 @@ public class Asset {
     public static Music jetpackSound;
     public static Music magnetoSound;
     public static Music slimeSound;
-
-//    public static FreeType.Bitmap freeTypeFont;
-
     public static BitmapFont fontSmall;
     public static BitmapFont fontVerySmall;
     public static BitmapFont fontHud;
     public static BitmapFont fontMedium;
     public static BitmapFont fontBig;
+    //    Asset descriptors
+    private final AssetDescriptor<TextureAtlas> atlasDescriptor = new AssetDescriptor<>("images/Doodle_Jump_space.atlas", TextureAtlas.class);
+    private final AssetDescriptor<Texture> backgroundImageDescriptor = new AssetDescriptor<>("images/loadingBackground.png", Texture.class);
+    private final AssetDescriptor<Skin> skinDescriptor = new AssetDescriptor<>("skin/flat-earth-ui.json", Skin.class);
+    private final AssetDescriptor<Music> backgroundMusicDescriptor = new AssetDescriptor<>("sounds/backgroundMusic.mp3", Music.class);
+    private final AssetDescriptor<Music> fallingSoundDescriptor = new AssetDescriptor<>("sounds/fallingSound.mp3", Music.class);
+    private final AssetDescriptor<Music> jumpSoundDescriptor = new AssetDescriptor<>("sounds/jumpSound.wav", Music.class);
+    private final AssetDescriptor<Music> monsterSoundDescriptor = new AssetDescriptor<>("sounds/monsterSound.mp3", Music.class);
+    private final AssetDescriptor<Music> platformBreakingSoundDescriptor = new AssetDescriptor<>("sounds/platformBreakingSound.wav", Music.class);
+    private final AssetDescriptor<Music> startSoundDescriptor = new AssetDescriptor<>("sounds/startSound.wav", Music.class);
+    private final AssetDescriptor<Music> shieldSoundDescriptor = new AssetDescriptor<>("sounds/shieldSound.mp3", Music.class);
 
-
+//    public static FreeType.Bitmap freeTypeFont;
+    private final AssetDescriptor<Music> bulletSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
+    private final AssetDescriptor<Music> blackHoleSoundDescriptor = new AssetDescriptor<>("sounds/bulletSound.mp3", Music.class);
+    private final AssetDescriptor<Music> jetpackDescriptor = new AssetDescriptor<>("sounds/jetpackSound.mp3", Music.class);
+    private final AssetDescriptor<Music> magnetoSoundDescriptor = new AssetDescriptor<>("sounds/magnetoSound.mp3", Music.class);
+    private final AssetDescriptor<Music> slimeSoundDescriptor = new AssetDescriptor<>("sounds/slimeSound.mp3", Music.class);
     private final AssetManager assetManager = new AssetManager();
 
     public Asset() {
     }
 
-    public void loadGame()
-    {
+    public void loadGame() {
         assetManager.load(skinDescriptor);
         assetManager.load(backgroundImageDescriptor);
         assetManager.load(backgroundMusicDescriptor);
@@ -104,7 +96,7 @@ public class Asset {
         initFonts();
     }
 
-    private  void initFonts(){
+    private void initFonts() {
 //        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/al-seana.ttf"));
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DoodleJump.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -126,26 +118,25 @@ public class Asset {
         generator.dispose();
     }
 
-    public void loadAtlas(){
+    public void loadAtlas() {
         assetManager.load(atlasDescriptor);
     }
-    public void getAtlas(){
+
+    public void getAtlas() {
         atlas = assetManager.get(atlasDescriptor);
     }
 
-    public void dispose()
-    {
+    public void dispose() {
         assetManager.dispose();
     }
 
-    public boolean update(){
+    public boolean update() {
         return assetManager.update();
     }
 
-    public float getProgress(){
+    public float getProgress() {
         return assetManager.getProgress();
     }
-
 
 
 }

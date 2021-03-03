@@ -27,23 +27,9 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playBulletSound;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 
 
-public class Player extends Actor  {
+public class Player extends Actor {
 
 
-    public static Player player;
-    public static int lives;
-    public static int score;
-    public static ArrayList<Shield> removedShields;
-    public static ArrayList<Jetpack> removedJetpacks;
-
-    Sprite sprite;
-    World world;
-    public Body body;
-
-    VerticalDirection verticalDirection = VerticalDirection.STILL;
-    HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
-
-    public static float JUMP_VELOCITY = Constants.HEIGHT * 0.0027f;
     public static final float HORIZONTAL_VELOCITY = Constants.WIDTH * 0.005f;
     public static final float WORLD_VELOCITY = -Constants.HEIGHT * 0.002f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.7f;
@@ -51,20 +37,27 @@ public class Player extends Actor  {
     public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
     public static final float WORLD_JETPACK_VELOCITY_STOP = WORLD_JETPACK_VELOCITY * 0.35f;
     public static final float WORLD_FALL_VELOCITY = -WORLD_VELOCITY * 4;
-
-
-
-    public static float HEIGHT = Constants.HEIGHT / 11.8f;
-    @SuppressWarnings("SuspiciousNameCombination")
-    public static float WIDTH = HEIGHT;
-
     private static final TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
     private static final TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
     private static final TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
     private static final TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");
     private static final TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("Player_right_up");
-    private boolean rotating = false;
+    public static Player player;
+    public static int lives;
+    public static int score;
+    public static ArrayList<Shield> removedShields;
+    public static ArrayList<Jetpack> removedJetpacks;
+    public static float JUMP_VELOCITY = Constants.HEIGHT * 0.0027f;
+    public static float HEIGHT = Constants.HEIGHT / 11.8f;
+    @SuppressWarnings("SuspiciousNameCombination")
+    public static float WIDTH = HEIGHT;
     public static ArrayList<Bullet> bullets;
+    public Body body;
+    Sprite sprite;
+    World world;
+    VerticalDirection verticalDirection = VerticalDirection.STILL;
+    HorizontalDirection horizontalDirection = HorizontalDirection.STILL;
+    private boolean rotating = false;
     private Shield shield;
     private Jetpack jetpack;
     private int numberOfShields = 0;
@@ -74,7 +67,7 @@ public class Player extends Actor  {
     private boolean movePlayerToCenter;
 
 
-    public Player( World world, float x, float y) {
+    public Player(World world, float x, float y) {
         sprite = new Sprite(up);
         sprite.setSize(WIDTH, HEIGHT);
         sprite.setPosition(x, y);
@@ -91,12 +84,11 @@ public class Player extends Actor  {
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
 //        bodyDef.position.set(sprite.getX() + sprite.getWidth() / 2f , sprite.getY() + sprite.getHeight() / 2f);
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         bodyDef.fixedRotation = true;
-
 
 
         // Create a body in the world using our definition
@@ -134,42 +126,56 @@ public class Player extends Actor  {
 
     }
 
-    public Vector2 getBodyPosition(){
+    public static void incScore() {
+        score++;
+    }
+
+    public static void decLives() {
+        lives--;
+    }
+
+    public static int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        Player.lives = lives;
+    }
+
+    public static int getScore() {
+        return score;
+    }
+
+    public Vector2 getBodyPosition() {
         return body.getPosition();
     }
 
-
-
-
-
-
-    public void updatePos(){
+    public void updatePos() {
         // Set the sprite's position from the updated physics body location
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight() * 0.36f );
+                        getWidth() / 2,
+                (body.getPosition().y * PPM) - sprite.getHeight() * 0.36f);
 
 
-        if (sprite.getY() <= - Constants.HEIGHT){
+        if (sprite.getY() <= -Constants.HEIGHT) {
             lives = 0;
-        }
-        else if (sprite.getY() + sprite.getHeight() / 2 <= 0 && !falling){
+        } else if (sprite.getY() + sprite.getHeight() / 2 <= 0 && !falling) {
             PlatformFactory.moveWorld(WORLD_FALL_VELOCITY);
             EnemyFactory.moveWorld(WORLD_FALL_VELOCITY);
             PlanetFactory.moveWorld(WORLD_FALL_VELOCITY);
             fall();
         }
 
-        if (shield != null){
-            shield.updatePos(calculateShieldPositionX(shield),calculateShieldPositionY(shield));
+        if (shield != null) {
+            shield.updatePos(calculateShieldPositionX(shield), calculateShieldPositionY(shield));
         }
 
-        if (jetpack != null){
-            jetpack.updatePos(calculateJetpackPositionX(jetpack),calculateJetpackPositionY(jetpack));
+        if (jetpack != null) {
+            jetpack.updatePos(calculateJetpackPositionX(jetpack), calculateJetpackPositionY(jetpack));
         }
     }
 
-    public  void fall(){
+    public void fall() {
         Sound.playFallingSound();
         falling = true;
         fallingSprite = new Sprite(up);
@@ -179,60 +185,51 @@ public class Player extends Actor  {
         fallingSprite.setOriginCenter();
     }
 
-    public  void die(){
+    public void die() {
         Sound.playFallingSound();
         this.setLives(0);
     }
 
-    private void checkAccelerometer(){
+    private void checkAccelerometer() {
         float accelX = Gdx.input.getAccelerometerX();
         float accelerometerSensitivity = 0.8f;
-        if (accelX > accelerometerSensitivity){
+        if (accelX > accelerometerSensitivity) {
             this.moveLeft();
-        }
-        else if (accelX < -accelerometerSensitivity){
+        } else if (accelX < -accelerometerSensitivity) {
             this.moveRight();
         }
     }
 
-    float calculateShieldPositionX(Shield shield){
-        return sprite.getX() + sprite.getWidth() / 2 -  shield.sprite.getWidth() / 2;
+    float calculateShieldPositionX(Shield shield) {
+        return sprite.getX() + sprite.getWidth() / 2 - shield.sprite.getWidth() / 2;
     }
 
-    float calculateShieldPositionY(Shield shield){
-        return sprite.getY() + HEIGHT / 2 -  shield.sprite.getHeight() * 0.6f;
+    float calculateShieldPositionY(Shield shield) {
+        return sprite.getY() + HEIGHT / 2 - shield.sprite.getHeight() * 0.6f;
     }
 
-
-    float calculateJetpackPositionX(Jetpack jetpack){
-        return sprite.getX() + sprite.getWidth() / 2 -  jetpack.sprite.getWidth() / 2;
+    float calculateJetpackPositionX(Jetpack jetpack) {
+        return sprite.getX() + sprite.getWidth() / 2 - jetpack.sprite.getWidth() / 2;
     }
 
-    float calculateJetpackPositionY(Jetpack jetpack){
+    float calculateJetpackPositionY(Jetpack jetpack) {
         return sprite.getY() - jetpack.sprite.getHeight() * 0.3f;
     }
 
-
-
-
-    void updateSprite(){
-        if (verticalDirection == VerticalDirection.UP){
-            if (horizontalDirection == HorizontalDirection.LEFT){
+    void updateSprite() {
+        if (verticalDirection == VerticalDirection.UP) {
+            if (horizontalDirection == HorizontalDirection.LEFT) {
                 sprite.setRegion(leftJump);
-            }
-            else if (horizontalDirection == HorizontalDirection.RIGHT){
+            } else if (horizontalDirection == HorizontalDirection.RIGHT) {
                 sprite.setRegion(rightJump);
-            }
-            else {
+            } else {
                 sprite.setRegion(up);
             }
 
-        }
-        else {
-            if (horizontalDirection == HorizontalDirection.LEFT){
+        } else {
+            if (horizontalDirection == HorizontalDirection.LEFT) {
                 sprite.setRegion(leftFall);
-            }
-            else if (horizontalDirection == HorizontalDirection.RIGHT){
+            } else if (horizontalDirection == HorizontalDirection.RIGHT) {
                 sprite.setRegion(rightFall);
             }
         }
@@ -245,37 +242,31 @@ public class Player extends Actor  {
         updatePos();
         updateSprite();
         checkBorderCollision();
-        if (!falling){
+        if (!falling) {
             checkState();
             rotate();
         }
 
 
-
     }
 
     void checkBorderCollision() {
-        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH  || horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0){
+        if (horizontalDirection == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= Constants.WIDTH || horizontalDirection == HorizontalDirection.LEFT && sprite.getX() < 0) {
             resolveBorderCollision();
         }
     }
 
-    void resolveBorderCollision(){
+    void resolveBorderCollision() {
         body.setLinearVelocity(0, body.getLinearVelocity().y);
     }
 
-
-
-
-
-
-    private void rotate(){
-        if (this.rotating){
+    private void rotate() {
+        if (this.rotating) {
             sprite.setRotation((sprite.getRotation() + 5) % 360);
-            body.setTransform( body.getPosition(),body.getAngle() + (float) Math.toRadians(5) );
-            if (sprite.getRotation() == 0){
+            body.setTransform(body.getPosition(), body.getAngle() + (float) Math.toRadians(5));
+            if (sprite.getRotation() == 0) {
                 this.rotating = false;
-                body.setTransform( body.getPosition(), 0);
+                body.setTransform(body.getPosition(), 0);
             }
         }
     }
@@ -284,23 +275,22 @@ public class Player extends Actor  {
     public void draw(Batch batch, float parentAlpha) {
         if (!falling) {
             sprite.draw(batch);
-        }
-        else {
+        } else {
             fallingSprite.draw(batch);
         }
-        if (shield != null){
+        if (shield != null) {
             shield.draw(batch, parentAlpha);
         }
-        if (jetpack != null){
+        if (jetpack != null) {
             jetpack.draw(batch, parentAlpha);
         }
     }
 
-    public void jump(){
-        if (this.jetpack == null){
+    public void jump() {
+        if (this.jetpack == null) {
             verticalDirection = VerticalDirection.UP;
             body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
-            PlatformFactory.moveWorld(WORLD_VELOCITY );
+            PlatformFactory.moveWorld(WORLD_VELOCITY);
             EnemyFactory.moveWorld(WORLD_VELOCITY);
             PlanetFactory.moveWorld(WORLD_VELOCITY);
             Sound.playJumpSound();
@@ -308,11 +298,10 @@ public class Player extends Actor  {
         }
 
 
-
     }
 
     public void jumpTrampoline() {
-        if (this.jetpack == null){
+        if (this.jetpack == null) {
             verticalDirection = VerticalDirection.UP;
             body.setLinearVelocity(body.getLinearVelocity().x, JUMP_VELOCITY - calculateDynamicVelocity());
             PlatformFactory.moveWorld(WORLD_TRAMPOLINE_VELOCITY);
@@ -326,7 +315,6 @@ public class Player extends Actor  {
 
     }
 
-
     public void jumpJetpack() {
         verticalDirection = VerticalDirection.UP;
         PlatformFactory.moveWorld(WORLD_JETPACK_VELOCITY);
@@ -337,27 +325,23 @@ public class Player extends Actor  {
 
     }
 
-    private void movePlayerScreenCenter(){
+    private void movePlayerScreenCenter() {
         this.body.setTransform(body.getPosition().x, Constants.HEIGHT / 2f / PPM, 0);
     }
 
-
-
-    private  float  calculateDynamicVelocity(){
+    private float calculateDynamicVelocity() {
         return sprite.getY() * 0.0015f;
     }
 
-
-    void checkState(){
-        if (jetpack == null && verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y <= 0){
+    void checkState() {
+        if (jetpack == null && verticalDirection != VerticalDirection.DOWN && body.getLinearVelocity().y <= 0) {
             verticalDirection = VerticalDirection.DOWN;
             PlatformFactory.stopWorld();
             EnemyFactory.stopWorld();
             PlanetFactory.stopWorld();
-        }
-        else if (jetpack != null){
+        } else if (jetpack != null) {
             decreaseJetpackVelocity();
-            if (this.movePlayerToCenter){
+            if (this.movePlayerToCenter) {
                 this.movePlayerToCenter = false;
                 movePlayerScreenCenter();
 
@@ -366,20 +350,17 @@ public class Player extends Actor  {
         }
 
 
-
     }
 
-
-    private void decreaseJetpackVelocity(){
-        if (PlatformFactory.getYVelocity() >= WORLD_JETPACK_VELOCITY_STOP){
+    private void decreaseJetpackVelocity() {
+        if (PlatformFactory.getYVelocity() >= WORLD_JETPACK_VELOCITY_STOP) {
             PlatformFactory.stopWorld();
             EnemyFactory.stopWorld();
             PlanetFactory.stopWorld();
             removeJetpack();
             verticalDirection = VerticalDirection.DOWN;
 
-        }
-        else {
+        } else {
             float velocity = PlatformFactory.getYVelocity() * WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO;
             PlatformFactory.moveWorld(velocity);
             EnemyFactory.moveWorld(velocity);
@@ -388,50 +369,32 @@ public class Player extends Actor  {
 
     }
 
-    public void moveLeft(){
+    public void moveLeft() {
         body.setLinearVelocity(-HORIZONTAL_VELOCITY, body.getLinearVelocity().y);
         horizontalDirection = HorizontalDirection.LEFT;
     }
 
-    public void moveRight(){
+    public void moveRight() {
 //        body.applyForceToCenter(new Vector2(HORIZONTAL_VELOCITY, 0), true);
         body.setLinearVelocity(HORIZONTAL_VELOCITY, body.getLinearVelocity().y);
         horizontalDirection = HorizontalDirection.RIGHT;
     }
 
-
-    public static void incScore(){
-        score++;
-    }
-
-    public static void decLives(){
-        lives--;
-    }
-
-
-    public static int getLives() {
-        return lives;
-    }
-
-    public static int getScore() {
-        return score;
-    }
-
-    public void createBullet(int xt, int yt){
-        Bullet b = new Bullet(this.sprite.getX() +  WIDTH / 2, this.sprite.getY() +  HEIGHT / 2, world,  xt,  Constants.HEIGHT - yt);
+    public void createBullet(int xt, int yt) {
+        Bullet b = new Bullet(this.sprite.getX() + WIDTH / 2, this.sprite.getY() + HEIGHT / 2, world, xt, Constants.HEIGHT - yt);
         Level1Screen.middleGroup.addActor(b);
         bullets.add(b);
         playBulletSound();
     }
 
-    public void removeBullet(Bullet bullet){
+    public void removeBullet(Bullet bullet) {
         bullets.remove(bullet);
     }
 
-    public void equipShield( Shield shield){
+    public void equipShield(Shield shield) {
         this.shield = shield;
         shield.setRadiusTexture();
-        shield.sprite.setSize(shield.sprite.getWidth() / 2 , shield.sprite.getHeight() / 2);
+        shield.sprite.setSize(shield.sprite.getWidth() / 2, shield.sprite.getHeight() / 2);
         this.imunity = true;
         numberOfShields++;
         playShieldSound();
@@ -451,7 +414,7 @@ public class Player extends Actor  {
         );
     }
 
-    public void equipJetpack( Jetpack jetpack){
+    public void equipJetpack(Jetpack jetpack) {
         this.jetpack = jetpack;
         jetpack.sprite.setSize(jetpack.sprite.getWidth() * 0.8f, jetpack.sprite.getHeight());
         body.setGravityScale(0);
@@ -463,8 +426,8 @@ public class Player extends Actor  {
 
     }
 
-    public void removeShield(){
-        if (this.shield != null){
+    public void removeShield() {
+        if (this.shield != null) {
             removedShields.add(shield);
             this.shield = null;
             this.imunity = false;
@@ -472,19 +435,18 @@ public class Player extends Actor  {
 
     }
 
-    public void removeJetpack(){
+    public void removeJetpack() {
         body.setGravityScale(1);
         body.setLinearVelocity(body.getLinearVelocity().x, 0);
         body.setAwake(true);
         this.imunity = false;
         Sound.stopJetpackSound();
-        if (this.jetpack != null){
+        if (this.jetpack != null) {
             removedJetpacks.add(jetpack);
             this.jetpack = null;
         }
 
     }
-
 
     public Shield getshield() {
         return this.shield;
@@ -512,11 +474,6 @@ public class Player extends Actor  {
     @Override
     public float getHeight() {
         return sprite.getHeight();
-    }
-
-
-    public void setLives(int lives) {
-        Player.lives = lives;
     }
 
     public Jetpack getJetpack() {

@@ -26,19 +26,17 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
 
 
     public static Game game;
+    public static LocalStorage localStorage;
     public IGameServiceClient gsClient;
-
-
+    public Level1Screen level1Screen;
+    public Asset assets;
     private SpriteBatch batch;
     private LoadingScreen loadingScreen;
     private PreferencesScreen preferencesScreen;
     private MenuScreen menuScreen;
-    public Level1Screen level1Screen;
     private AboutScreen aboutScreen;
     private EndScreen endScreen;
     private PauseScreen pauseScreen;
-    public Asset assets;
-    public static LocalStorage localStorage;
 
     @Override
     public void create() {
@@ -115,7 +113,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
                     level1Screen.dispose();
                     level1Screen = null;
                 }
-                if (level1Screen == null){
+                if (level1Screen == null) {
                     level1Screen = new Level1Screen();
                 }
 
@@ -145,8 +143,6 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     public void render() {
         super.render();
     }
-
-
 
 
     @Override
@@ -182,7 +178,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     @Override
     public void gsOnSessionActive() {
         System.out.println("SESSION ACTIVE");
-        if (getScreen() == menuScreen){
+        if (getScreen() == menuScreen) {
             menuScreen.show();
         }
     }
@@ -190,7 +186,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     @Override
     public void gsOnSessionInactive() {
         System.out.println("SESSION INACTIVE");
-        if (getScreen() == menuScreen){
+        if (getScreen() == menuScreen) {
             menuScreen.show();
         }
     }

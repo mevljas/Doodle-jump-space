@@ -23,13 +23,13 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
-public class PauseScreen implements Screen{
+public class PauseScreen implements Screen {
 
     private final Game game;
     private final Stage stage;
 
 
-    public PauseScreen(final Game game){
+    public PauseScreen(final Game game) {
         this.game = game;
 
         /// create stage and set it as input processor
@@ -44,12 +44,12 @@ public class PauseScreen implements Screen{
         stage.addActor(table);
 
         Label titleLabel = new Label("Paused", skin, "title");
-        Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
+        Label.LabelStyle labelStyleTitle = titleLabel.getStyle();
         labelStyleTitle.font = Asset.fontBig;
         titleLabel.setStyle(labelStyleTitle);
 
         Label scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
-        Label.LabelStyle labelStyleText =  titleLabel.getStyle();
+        Label.LabelStyle labelStyleText = titleLabel.getStyle();
         labelStyleTitle.font = Asset.fontSmall;
         scoreLabel.setStyle(labelStyleText);
 
@@ -59,7 +59,7 @@ public class PauseScreen implements Screen{
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 //                Sound.changeMusicState();
-                if (Player.player.getJetpack() != null){
+                if (Player.player.getJetpack() != null) {
                     Sound.playJetpackSound();
                 }
                 PauseScreen.this.game.changeScreen(Screens.LEVEL1SCREEN);
@@ -77,7 +77,7 @@ public class PauseScreen implements Screen{
             }
         });
 
-        TextButton.TextButtonStyle textButtonStyle =  retryButton.getStyle();
+        TextButton.TextButtonStyle textButtonStyle = retryButton.getStyle();
         textButtonStyle.font = Asset.fontMedium;
         retryButton.setStyle(textButtonStyle);
         backButton.setStyle(textButtonStyle);
@@ -104,7 +104,7 @@ public class PauseScreen implements Screen{
     @Override
     public void render(float delta) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             Sound.changeMusicState();
             game.changeScreen(Screens.MENUSCREEN);
         }
@@ -123,16 +123,20 @@ public class PauseScreen implements Screen{
     }
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

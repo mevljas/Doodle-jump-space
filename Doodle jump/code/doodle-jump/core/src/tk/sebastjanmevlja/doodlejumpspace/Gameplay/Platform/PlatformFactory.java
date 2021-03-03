@@ -13,12 +13,8 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.Platform.PLAT
 public class PlatformFactory {
 
     public static LinkedList<Platform> platforms;
-
-    static Random random = new Random();
-
-
     public static int InitiaPlatformSize;
-
+    static Random random = new Random();
     private static float maxSpacingHeight;
     private static float minSpacingHeight;
     private static float maxSpacingWidth;
@@ -38,17 +34,16 @@ public class PlatformFactory {
         r = new Random();
     }
 
-    public static void generatePlatforms(World world){
+    public static void generatePlatforms(World world) {
         y = 0;
         platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y, false));
         platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y += minSpacingHeight, false));
         platforms.add(new GrayPlatform(world, Constants.WIDTH / 2f, y += minSpacingHeight, false));
 
 
-
         while (y < Constants.HEIGHT * 5) {
             float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
-            y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+            y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
 
             generateRandomPlatform(world, x, y);
 
@@ -59,12 +54,9 @@ public class PlatformFactory {
         InitiaPlatformSize = platforms.size();
     }
 
-    
-    
 
-
-    public static void recyclePlatform( Platform platform, float x, float y) {
-        platform.changePosition(x,y);
+    public static void recyclePlatform(Platform platform, float x, float y) {
+        platform.changePosition(x, y);
         platform.reEnable();
         if (platform instanceof GrayPlatform)
             platform.resetItems();
@@ -72,53 +64,50 @@ public class PlatformFactory {
         platforms.addLast(platform);
     }
 
-    private static void generateRandomPlatform(World world, float x, float y){
+    private static void generateRandomPlatform(World world, float x, float y) {
         int value = r.nextInt(10);
-        if (value < 2){
+        if (value < 2) {
 
-            if (platforms.getLast() instanceof BrokenPlatform){
+            if (platforms.getLast() instanceof BrokenPlatform) {
                 platforms.add(new GrayPlatform(world, x, y, false));
-            }
-            else {
+            } else {
                 platforms.add(new BrokenPlatform(world, x, y));
             }
-        }
-        else if (value < 4){
+        } else if (value < 4) {
             platforms.add(new WhitePlatform(world, x, y));
 
-        }
-        else{
+        } else {
             platforms.add(new GrayPlatform(world, x, y, true));
         }
     }
 
 
-    public static void moveWorld(float velocity){
+    public static void moveWorld(float velocity) {
 
-        for (Platform p: platforms) {
+        for (Platform p : platforms) {
             if (!p.broken)
-                p.body.setLinearVelocity(p.body.getLinearVelocity().x,velocity );
+                p.body.setLinearVelocity(p.body.getLinearVelocity().x, velocity);
         }
     }
 
 
-    public static float getYVelocity(){
+    public static float getYVelocity() {
         return platforms.getFirst().body.getLinearVelocity().y;
     }
 
 
-    public static void stopWorld(){
-        for (Platform p: platforms) {
+    public static void stopWorld() {
+        for (Platform p : platforms) {
             if (!p.broken)
-                p.body.setLinearVelocity(p.body.getLinearVelocity().x,0f);
+                p.body.setLinearVelocity(p.body.getLinearVelocity().x, 0f);
         }
     }
 
 
-    public static void recyclePlatform(Platform p){
-        float y = platforms.getLast().sprite.getY() + minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+    public static void recyclePlatform(Platform p) {
+        float y = platforms.getLast().sprite.getY() + minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
         float x = minSpacingWidth + random.nextFloat() * (maxSpacingWidth - minSpacingWidth);
-        recyclePlatform(p, x, y );
+        recyclePlatform(p, x, y);
     }
 
     public static float getY() {

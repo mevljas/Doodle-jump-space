@@ -46,7 +46,6 @@ public class PreferencesScreen implements Screen {
         stage.addActor(table);
 
 
-
         // music volume
         final Slider volumeMusicSlider = new Slider(0f, 1f, 0.1f, false, skin);
         volumeMusicSlider.setValue(Sound.musicVolume);
@@ -107,7 +106,7 @@ public class PreferencesScreen implements Screen {
 
         // return to main screen button
         final TextButton backButton = new TextButton("Back", skin);
-        TextButton.TextButtonStyle textButtonStyle =  backButton.getStyle();
+        TextButton.TextButtonStyle textButtonStyle = backButton.getStyle();
         textButtonStyle.font = Asset.fontMedium;
         backButton.setStyle(textButtonStyle);
 
@@ -125,11 +124,11 @@ public class PreferencesScreen implements Screen {
         Label musicOnOffLabel = new Label(" Music", skin, "default");
         Label soundOnOffLabel = new Label(" Sound Effect", skin, "default");
 
-        Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
+        Label.LabelStyle labelStyleTitle = titleLabel.getStyle();
         labelStyleTitle.font = Asset.fontBig;
         titleLabel.setStyle(labelStyleTitle);
 
-        Label.LabelStyle labelStyleText =  titleLabel.getStyle();
+        Label.LabelStyle labelStyleText = titleLabel.getStyle();
         labelStyleText.font = Asset.fontSmall;
         volumeMusicLabel.setStyle(labelStyleText);
         volumeSoundLabel.setStyle(labelStyleText);
@@ -190,13 +189,16 @@ public class PreferencesScreen implements Screen {
     }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

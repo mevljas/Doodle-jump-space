@@ -11,12 +11,9 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 public class WhitePlatform extends Platform {
 
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("white_platform");
-
-    private HorizontalDirection direction;
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
-
-
+    private static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("white_platform");
+    private HorizontalDirection direction;
 
 
     public WhitePlatform(World world, float x, float y) {
@@ -29,11 +26,6 @@ public class WhitePlatform extends Platform {
     }
 
 
-
-
-
-
-
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -43,45 +35,38 @@ public class WhitePlatform extends Platform {
     }
 
     private void checkWallColision() {
-        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH ) {
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH) {
             changeDirection();
-        }
-        else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0){
+        } else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0) {
             changeDirection();
         }
     }
 
 
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
         sprite.draw(batch);
-        if (slime != null){
+        if (slime != null) {
             slime.draw(batch, parentAlpha);
         }
-        if (shield != null){
+        if (shield != null) {
             shield.draw(batch, parentAlpha);
         }
 
     }
 
 
-
-
-    public void changeDirection(){
+    public void changeDirection() {
         if (direction == HorizontalDirection.RIGHT) {
             body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
             direction = HorizontalDirection.LEFT;
-        }
-        else if (direction == HorizontalDirection.LEFT){
+        } else if (direction == HorizontalDirection.LEFT) {
             body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
             direction = HorizontalDirection.RIGHT;
         }
 
     }
-
-
 
 
 }

@@ -10,25 +10,16 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 public class EnemyFactory {
 
     public static LinkedList<Enemy> enemies;
-
-
-
-
-
-
-
-
-    private static  float minSpacingWidth;
-    private static  float maxSpacingWidth;
-    private static  float minSpacingHeight;
-    private static  float maxSpacingHeight;
     public static int numberOfEnemies;
-
+    private static float minSpacingWidth;
+    private static float maxSpacingWidth;
+    private static float minSpacingHeight;
+    private static float maxSpacingHeight;
     private static Random r = new Random();
 
 
     public EnemyFactory() {
-        minSpacingHeight = Constants.HEIGHT * 0.7f ;
+        minSpacingHeight = Constants.HEIGHT * 0.7f;
         maxSpacingHeight = Constants.HEIGHT * 1.5f;
         minSpacingWidth = Constants.WIDTH * 0.2f;
         maxSpacingWidth = Constants.WIDTH * 0.6f;
@@ -36,14 +27,13 @@ public class EnemyFactory {
         r = new Random();
     }
 
-    public static void generateMonsters(World world){
+    public static void generateMonsters(World world) {
 
         float y;
 
-        if (enemies.isEmpty()){
+        if (enemies.isEmpty()) {
             y = maxSpacingHeight;
-        }
-        else {
+        } else {
             y = enemies.getLast().sprite.getY();
         }
 
@@ -52,7 +42,7 @@ public class EnemyFactory {
             float x = minSpacingWidth + r.nextFloat() * (maxSpacingWidth - minSpacingWidth);
 
 
-            y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+            y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
             generateMonster(randomType(), world, x, y);
 
 
@@ -62,64 +52,56 @@ public class EnemyFactory {
         numberOfEnemies = enemies.size();
     }
 
-    
-    
 
     public static void generateMonster(EnemyType type, World world, float x, float y) {
-        switch (type){
+        switch (type) {
             case BLUE:
-                enemies.add(new BlueEnemy( world, x, y));
+                enemies.add(new BlueEnemy(world, x, y));
                 break;
 
             case GREEN:
-                enemies.add(new GreenEnemy( world, x, y));
+                enemies.add(new GreenEnemy(world, x, y));
                 break;
 
             case RED:
-                enemies.add(new RedEnemy( world, x, y));
+                enemies.add(new RedEnemy(world, x, y));
                 break;
 
             case MAGNET:
-                enemies.add(new MagnetoEnemy( world, x, y));
+                enemies.add(new MagnetoEnemy(world, x, y));
                 break;
 
             case BLACKHOLE:
-                enemies.add(new BlackHole( world, x, y));
+                enemies.add(new BlackHole(world, x, y));
                 break;
         }
 
     }
 
 
-
-    private static EnemyType randomType(){
+    private static EnemyType randomType() {
         return EnemyType.values()[new Random().nextInt(EnemyType.values().length)];
     }
 
 
-    public static void moveWorld(float velocity){
+    public static void moveWorld(float velocity) {
 
-        for (Enemy m: enemies) {
-            m.body.setLinearVelocity(m.body.getLinearVelocity().x,velocity );
+        for (Enemy m : enemies) {
+            m.body.setLinearVelocity(m.body.getLinearVelocity().x, velocity);
         }
     }
 
 
-    public static void stopWorld(){
-        for (Enemy m: enemies) {
-            m.body.setLinearVelocity(m.body.getLinearVelocity().x,0f);
+    public static void stopWorld() {
+        for (Enemy m : enemies) {
+            m.body.setLinearVelocity(m.body.getLinearVelocity().x, 0f);
         }
     }
 
 
-
-
-    public static void removeMonster(){
+    public static void removeMonster() {
         enemies.removeFirst();
     }
-
-
-
 
 
 }

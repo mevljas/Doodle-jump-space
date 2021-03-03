@@ -47,43 +47,42 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFacto
 
 public class Level1Screen implements Screen {
 
-    private static Stage stage;
     public static Group backgroundGroup;        // Group to be draw first
     public static Group middleGroup;
-    Group foregroundGroup;
-    Group hudGroup;        // group to be draw last
+    public static Boolean paused;
+    private static Stage stage;
     private final Viewport viewport;
     private final Player player;
+    Group foregroundGroup;
+    Group hudGroup;        // group to be draw last
     World world;
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
-    public static Boolean paused;
-
 
 
     @SuppressWarnings("InstantiationOfUtilityClass")
     public Level1Screen() {
 
         backgroundGroup = new Group();        // Group to be draw first
-         middleGroup = new Group();
-         foregroundGroup = new Group();
-         hudGroup = new Group();
+        middleGroup = new Group();
+        foregroundGroup = new Group();
+        hudGroup = new Group();
 
 
         camera = new OrthographicCamera(Constants.WIDTH, Constants.HEIGHT);
-        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
+        viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT, camera);
         stage = new Stage(viewport);
 
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
-        world = new World(new Vector2(0, - Constants.HEIGHT * 0.0036f), true);
+        world = new World(new Vector2(0, -Constants.HEIGHT * 0.0036f), true);
         new PlatformFactory();
         PlatformFactory.generatePlatforms(world);
         new EnemyFactory();
         EnemyFactory.generateMonsters(world);
         new PlanetFactory();
         PlanetFactory.generatePlanets(world);
-        player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
+        player = new Player(world, Constants.WIDTH / 2f, platforms.get(0).spriteHeight() * 1.1f);
         Hud hud = new Hud();
 
 
@@ -94,16 +93,8 @@ public class Level1Screen implements Screen {
         world.setContactListener(new WorldContactListener(player));
 
 
-
-
 //       Create a Box2DDebugRenderer, this allows us to see the physics  simulation controlling the scene
         debugRenderer = new Box2DDebugRenderer();
-
-
-
-
-
-
 
 
         stage.addActor(backgroundGroup);
@@ -133,8 +124,12 @@ public class Level1Screen implements Screen {
 
     }
 
-
-
+    public static void gameOver() {
+        if (Player.getScore() > Game.localStorage.getHighScore())
+            Game.localStorage.setHighScore(Player.getScore());
+        Game.localStorage.setSavedData(false);
+        Game.game.changeScreen(Screens.ENDSCREEN);
+    }
 
     @Override
     public void show() { //create, setup method
@@ -146,20 +141,17 @@ public class Level1Screen implements Screen {
         paused = false;
     }
 
-
-
-    private void updatePlatforms(){
+    private void updatePlatforms() {
         ArrayList<Platform> removePlatforms = new ArrayList<>();
-        for(Platform platform : platforms)
-        {
+        for (Platform platform : platforms) {
             Vector3 windowCoordinates = new Vector3(0, platform.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + platform.getSprite().getHeight() < 0 || !platform.isAlive()){
+            if (windowCoordinates.y + platform.getSprite().getHeight() < 0 || !platform.isAlive()) {
                 removePlatforms.add(platform);
             }
 
         }
-        for (Platform p: removePlatforms) {
+        for (Platform p : removePlatforms) {
             recyclePlatform(p);
 
         }
@@ -167,18 +159,17 @@ public class Level1Screen implements Screen {
 
     }
 
-    private void updatePlanets(){
+    private void updatePlanets() {
         ArrayList<Planet> removePlanets = new ArrayList<>();
-        for(Planet planet : planets)
-        {
+        for (Planet planet : planets) {
             Vector3 windowCoordinates = new Vector3(0, planet.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + planet.getSprite().getHeight() < 0 ){
+            if (windowCoordinates.y + planet.getSprite().getHeight() < 0) {
                 removePlanets.add(planet);
             }
 
         }
-        for (Planet p: removePlanets) {
+        for (Planet p : removePlanets) {
             recyclePlanet(p);
 
         }
@@ -186,54 +177,54 @@ public class Level1Screen implements Screen {
 
     }
 
-
-    private void updateMonsters(){
+    private void updateMonsters() {
         ArrayList<Enemy> removeEnemies = new ArrayList<>();
-        for(Enemy enemy : enemies)
-        {
+        for (Enemy enemy : enemies) {
             Vector3 windowCoordinates = new Vector3(0, enemy.getSprite().getY(), 0);
             camera.project(windowCoordinates);
-            if(windowCoordinates.y + enemy.getSprite().getHeight() < 0 || !enemy.isAlive()){
+            if (windowCoordinates.y + enemy.getSprite().getHeight() < 0 || !enemy.isAlive()) {
                 removeEnemies.add(enemy);
             }
 
         }
-        for (Enemy m: removeEnemies) {
+        for (Enemy m : removeEnemies) {
             removeMonster();
             m.addAction(Actions.removeActor());
             world.destroyBody(m.getBody());
         }
 
-        if (enemies.size() < EnemyFactory.numberOfEnemies / 2){
+        if (enemies.size() < EnemyFactory.numberOfEnemies / 2) {
             EnemyFactory.generateMonsters(world);
-            for (Enemy m: enemies) {
-                if (m.getStage() == null){{
-                    middleGroup.addActor(m);
+            for (Enemy m : enemies) {
+                if (m.getStage() == null) {
+                    {
+                        middleGroup.addActor(m);
 
-                }}
+                    }
+                }
 
             }
 
         }
     }
 
-    private void updateBullets(){
+    private void updateBullets() {
         ArrayList<Bullet> removedBullets = new ArrayList<>();
-        for (Bullet b: Player.bullets) {
-            if (!b.alive){
+        for (Bullet b : Player.bullets) {
+            if (!b.alive) {
                 removedBullets.add(b);
             }
         }
 
-        for (Bullet b: removedBullets) {
+        for (Bullet b : removedBullets) {
             player.removeBullet(b);
             b.addAction(Actions.removeActor());
             world.destroyBody(b.getBody());
         }
     }
 
-    private void removeShields(){
-        for (Shield s: Player.removedShields) {
+    private void removeShields() {
+        for (Shield s : Player.removedShields) {
             s.addAction(Actions.removeActor());
             Body b = s.getBody();
             world.destroyBody(b);
@@ -241,9 +232,8 @@ public class Level1Screen implements Screen {
         Player.removedShields.clear();
     }
 
-
-    private void removeJetpacks(){
-        for (Jetpack j: Player.removedJetpacks) {
+    private void removeJetpacks() {
+        for (Jetpack j : Player.removedJetpacks) {
             j.addAction(Actions.removeActor());
             Body b = j.getBody();
             world.destroyBody(b);
@@ -251,11 +241,9 @@ public class Level1Screen implements Screen {
         Player.removedJetpacks.clear();
     }
 
-
-
     @Override
     public void render(float delta) {   //draw, loop called every frame
-        if (!paused){
+        if (!paused) {
             checkGameState();
             camera.update();
             updatePlatforms();
@@ -274,8 +262,6 @@ public class Level1Screen implements Screen {
         }
 
 
-
-
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -284,7 +270,6 @@ public class Level1Screen implements Screen {
         // Scale down the sprite batches projection matrix to box2D size
         debugMatrix = stage.getBatch().getProjectionMatrix().cpy().scale(PPM,
                 PPM, 0);
-
 
 
         stage.getBatch().begin();
@@ -307,9 +292,7 @@ public class Level1Screen implements Screen {
 //        debugRenderer.render(world, debugMatrix);
 
 
-
     }
-
 
     @Override
     public void resize(int width, int height) {
@@ -322,7 +305,6 @@ public class Level1Screen implements Screen {
         paused = !paused;
 
     }
-
 
     @Override
     public void resume() {
@@ -344,22 +326,14 @@ public class Level1Screen implements Screen {
 
     }
 
-    private void checkGameState(){
-        if (Player.getLives() <= 0){
+    private void checkGameState() {
+        if (Player.getLives() <= 0) {
             gameOver();
         }
     }
 
-    public static void gameOver(){
-        if (Player.getScore() > Game.localStorage.getHighScore())
-            Game.localStorage.setHighScore(Player.getScore());
-        Game.localStorage.setSavedData(false);
-        Game.game.changeScreen(Screens.ENDSCREEN);
-    }
-
-
-    private void saveObjects(){
-        if (Player.getScore() == 0 || Player.getLives() <= 0){
+    private void saveObjects() {
+        if (Player.getScore() == 0 || Player.getLives() <= 0) {
             return;
         }
         Game.localStorage.setScore(Player.getScore());
@@ -367,8 +341,8 @@ public class Level1Screen implements Screen {
         Game.localStorage.setSavedData(true);
     }
 
-    private void loadObjects(){
-        if ( Game.localStorage.getSavedData()){
+    private void loadObjects() {
+        if (Game.localStorage.getSavedData()) {
             Player.score = Game.localStorage.getScore();
             Player.lives = Game.localStorage.getLives();
             Game.localStorage.setScore(0);
@@ -377,7 +351,6 @@ public class Level1Screen implements Screen {
         }
 
     }
-
 
 
 }

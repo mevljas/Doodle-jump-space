@@ -17,19 +17,19 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 public class BlackHole extends Enemy {
 
 
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("blackhole");
+    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("blackhole");
 
     public BlackHole(World world, float x, float y) {
         super(texture, world, x, y);
         HEIGHT = Constants.HEIGHT * 0.1f;
         //noinspection SuspiciousNameCombination
         WIDTH = HEIGHT;
-        init( world, x, y);
+        init(world, x, y);
     }
 
     void init(World world, float x, float y) {
         sprite.setSize(WIDTH, HEIGHT);
-        sprite.setPosition(x,y);
+        sprite.setPosition(x, y);
         sprite.setCenterX(x);
 
 
@@ -41,9 +41,9 @@ public class BlackHole extends Enemy {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -72,10 +72,6 @@ public class BlackHole extends Enemy {
         shape.dispose();
 
     }
-
-
-
-
 
 
     @Override

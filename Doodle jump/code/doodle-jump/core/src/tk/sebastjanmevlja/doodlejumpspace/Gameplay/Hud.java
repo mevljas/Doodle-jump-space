@@ -12,12 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class Hud extends Actor {
 
-    private static TextureAtlas.AtlasRegion playerTexture = Asset.atlas.findRegion("player_up");
-
-    private Label score;
-    private Label lives;
     public static Sprite pauseIcon;
-    private ShapeRenderer shapeRenderer;
+    private static final TextureAtlas.AtlasRegion playerTexture = Asset.atlas.findRegion("player_up");
+    private final Label score;
+    private final Label lives;
+    private final ShapeRenderer shapeRenderer;
 
 
     public Hud() {
@@ -27,7 +26,7 @@ public class Hud extends Actor {
         this.lives.setBounds(Constants.WIDTH * 0.03f, Constants.HEIGHT * 0.88f, Constants.WIDTH * 0.8f, Constants.HEIGHT * 0.2f);
         score.setColor(Color.BLACK);
         lives.setColor(Color.BLACK);
-        Label.LabelStyle labelStyle =  this.score.getStyle();
+        Label.LabelStyle labelStyle = this.score.getStyle();
         labelStyle.font = Asset.fontHud;
         this.score.setStyle(labelStyle);
         this.lives.setStyle(labelStyle);
@@ -61,7 +60,7 @@ public class Hud extends Actor {
     @Override
     public void act(float delta) {
         super.act(delta);
-        score.setText("Score: " +  Player.score);
+        score.setText("Score: " + Player.score);
     }
 
 

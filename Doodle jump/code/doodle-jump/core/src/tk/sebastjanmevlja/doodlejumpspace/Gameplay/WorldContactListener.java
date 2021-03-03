@@ -33,110 +33,97 @@ public class WorldContactListener implements ContactListener {
         Fixture fixB = contact.getFixtureB();
 
 
-
-        if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Platform) ||
-                (fixA.getUserData() instanceof Platform && fixB.getUserData() instanceof  Player)){
+        if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Platform) ||
+                (fixA.getUserData() instanceof Platform && fixB.getUserData() instanceof Player)) {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             platform = (Platform) (fixA.getUserData() instanceof Platform ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 return;
             }
 
-            if (player.getBodyPosition().y  > platform.getBodyPosition().y  + platform.getBodyHeight()) {
+            if (player.getBodyPosition().y > platform.getBodyPosition().y + platform.getBodyHeight()) {
 //                Break brown platform
-                if (platform instanceof BrokenPlatform){
-                    ( (BrokenPlatform) platform).breakPlatform();
-                }
-                else {
+                if (platform instanceof BrokenPlatform) {
+                    ((BrokenPlatform) platform).breakPlatform();
+                } else {
 //              Jump off a platform
                     player.jump();
                 }
 
             }
 
-        }
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Slime) ||
-                (fixA.getUserData() instanceof Slime && fixB.getUserData() instanceof  Player)){
+        } else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Slime) ||
+                (fixA.getUserData() instanceof Slime && fixB.getUserData() instanceof Player)) {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             slime = (Slime) (fixA.getUserData() instanceof Slime ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 return;
             }
 
-            if (player.getBodyPosition().y  >= slime.getBodyPosition().y + slime.getBodyHeight()   ) {
+            if (player.getBodyPosition().y >= slime.getBodyPosition().y + slime.getBodyHeight()) {
                 jumpOffTrampoline();
 
             }
-        }
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Enemy) ||
-                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof  Player)){
+        } else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Enemy) ||
+                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof Player)) {
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
             enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 return;
             }
 
-            if (player.isImunity()){
+            if (player.isImunity()) {
                 return;
             }
-            if (enemy instanceof MagnetoEnemy){
+            if (enemy instanceof MagnetoEnemy) {
                 ((MagnetoEnemy) enemy).enableZone();
                 ((MagnetoEnemy) enemy).movePlayerCloser();
-            }
-            else if (enemy instanceof BlackHole){
+            } else if (enemy instanceof BlackHole) {
 //                Sound.playBlackHoleSound();
                 player.die();
-            }
-            else {
+            } else {
                 Player.decLives();
                 Sound.playMonsterSound();
             }
 
-        }
-
-        else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof Enemy) ||
-                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof  Bullet)){
+        } else if ((fixA.getUserData() instanceof Bullet && fixB.getUserData() instanceof Enemy) ||
+                (fixA.getUserData() instanceof Enemy && fixB.getUserData() instanceof Bullet)) {
             bullet = (Bullet) (fixA.getUserData() instanceof Bullet ? fixA.getUserData() : fixB.getUserData());
             enemy = (Enemy) (fixA.getUserData() instanceof Enemy ? fixA.getUserData() : fixB.getUserData());
             enemy.kill();
             bullet.deactivate();
-            if (enemy instanceof MagnetoEnemy){
+            if (enemy instanceof MagnetoEnemy) {
                 Sound.stopMagnetoSound();
             }
 
-        }
-
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Shield) ||
-                (fixA.getUserData() instanceof Shield && fixB.getUserData() instanceof  Player)){
+        } else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Shield) ||
+                (fixA.getUserData() instanceof Shield && fixB.getUserData() instanceof Player)) {
 
 
             shield = (Shield) (fixA.getUserData() instanceof Shield ? fixA.getUserData() : fixB.getUserData());
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
 
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 return;
             }
 
-            if (shield == player.getshield()){
+            if (shield == player.getshield()) {
                 return;
             }
             player.removeShield();
             player.equipShield(shield);
             shield.parentPlatform.removeShield();
 
-        }
-
-
-        else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof  Jetpack) ||
-                (fixA.getUserData() instanceof Jetpack && fixB.getUserData() instanceof  Player)){
+        } else if ((fixA.getUserData() instanceof Player && fixB.getUserData() instanceof Jetpack) ||
+                (fixA.getUserData() instanceof Jetpack && fixB.getUserData() instanceof Player)) {
 
 
             jetpack = (Jetpack) (fixA.getUserData() instanceof Jetpack ? fixA.getUserData() : fixB.getUserData());
             player = (Player) (fixA.getUserData() instanceof Player ? fixA.getUserData() : fixB.getUserData());
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 return;
             }
 //            player.removeJetpack();
@@ -144,8 +131,6 @@ public class WorldContactListener implements ContactListener {
             jetpack.parentPlatform.removeJetpack();
 
         }
-
-
 
 
     }
@@ -168,7 +153,7 @@ public class WorldContactListener implements ContactListener {
 
     }
 
-    private void jumpOffTrampoline(){
+    private void jumpOffTrampoline() {
         slime.playerJump();
         player.jumpTrampoline();
     }

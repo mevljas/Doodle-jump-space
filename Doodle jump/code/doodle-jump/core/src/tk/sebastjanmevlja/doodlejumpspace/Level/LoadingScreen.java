@@ -20,13 +20,10 @@ public class LoadingScreen implements Screen {
     private final ProgressBar progressBar;
 
 
-
     public LoadingScreen(Game main) {
         this.main = main;
 
         stage = new Stage(new ScreenViewport());
-
-
 
 
         progressBar = new ProgressBar(0, 5, 1, false, Asset.skin);
@@ -55,7 +52,7 @@ public class LoadingScreen implements Screen {
 
     }
 
-    private void getAssets(){
+    private void getAssets() {
         main.assets.getAtlas();
     }
 
@@ -66,7 +63,7 @@ public class LoadingScreen implements Screen {
     @Override
     public void render(float delta) {
 
-        while(!main.assets.update()) {
+        while (!main.assets.update()) {
             Batch gameBatch = main.getBatch();
             gameBatch.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -82,8 +79,6 @@ public class LoadingScreen implements Screen {
 
         getAssets();
         main.changeScreen(Screens.MENUSCREEN);
-
-
 
 
     }

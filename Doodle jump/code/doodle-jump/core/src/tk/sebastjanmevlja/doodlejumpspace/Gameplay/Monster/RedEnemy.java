@@ -14,11 +14,10 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 public class RedEnemy extends Enemy {
 
+    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("red_enemy");
     private final float leftLocation;
     private final float rightLocation;
     private final float VELOCITY = Constants.WIDTH * 0.003f;
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("red_enemy");
-
 
 
     public RedEnemy(World world, float x, float y) {
@@ -38,11 +37,6 @@ public class RedEnemy extends Enemy {
     }
 
 
-
-
-
-
-
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -50,31 +44,27 @@ public class RedEnemy extends Enemy {
         updateAnimations();
     }
 
-    public void changeDirection(){
-        if (direction == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= rightLocation){
+    public void changeDirection() {
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + sprite.getWidth() >= rightLocation) {
             direction = HorizontalDirection.LEFT;
             body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
 
-        }
-        else if (direction == HorizontalDirection.LEFT && sprite.getX() <= leftLocation){
+        } else if (direction == HorizontalDirection.LEFT && sprite.getX() <= leftLocation) {
             direction = HorizontalDirection.RIGHT;
             body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
 
         }
     }
 
-    public void updateAnimations(){
+    public void updateAnimations() {
         this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
 
     }
 
 
-
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (this.alive){
+        if (this.alive) {
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }

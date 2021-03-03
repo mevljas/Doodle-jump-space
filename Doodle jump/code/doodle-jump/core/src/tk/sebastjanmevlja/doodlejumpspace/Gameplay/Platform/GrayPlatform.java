@@ -9,7 +9,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 
 public class GrayPlatform extends Platform {
 
-    private  static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("gray_platform");
+    private static final TextureAtlas.AtlasRegion plaformTextureRegionGreen = Asset.atlas.findRegion("gray_platform");
 
 
     public GrayPlatform(World world, float x, float y, boolean items) {
@@ -20,8 +20,6 @@ public class GrayPlatform extends Platform {
     }
 
 
-
-
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -29,20 +27,18 @@ public class GrayPlatform extends Platform {
     }
 
 
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
         sprite.draw(batch);
-        if (slime != null){
+        if (slime != null) {
             slime.draw(batch, parentAlpha);
         }
-        if (shield != null){
+        if (shield != null) {
             shield.draw(batch, parentAlpha);
         }
 
     }
-
 
 
 }

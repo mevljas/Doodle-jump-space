@@ -7,9 +7,9 @@ import com.badlogic.gdx.utils.Array;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
 
-public class RightPlanet extends Planet{
+public class RightPlanet extends Planet {
 
-    public static Array<TextureAtlas.AtlasRegion> RightPlanets =  Asset.atlas.findRegions("planets_right");
+    public static Array<TextureAtlas.AtlasRegion> RightPlanets = Asset.atlas.findRegions("planets_right");
 
     public RightPlanet(TextureAtlas.AtlasRegion texture, World world, float y) {
         super(texture, world, Constants.WIDTH - Planet.PLANET_WIDTH, y);

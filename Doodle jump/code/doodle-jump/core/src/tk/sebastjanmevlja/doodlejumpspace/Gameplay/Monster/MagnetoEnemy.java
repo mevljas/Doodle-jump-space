@@ -15,15 +15,12 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 public class MagnetoEnemy extends Enemy {
 
 
-
+    public static final TextureAtlas.AtlasRegion zoneTexture = Asset.atlas.findRegion("magneto_zone");
     private static final float playerMovingScale = Constants.HEIGHT * 0.003f;
     private static final float monsterMovingScale = Constants.HEIGHT * 0.002f;
     private static final float playerDetectingRange = Constants.HEIGHT * 0.0048f;
-
-    private  static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
-    public  static final TextureAtlas.AtlasRegion zoneTexture = Asset.atlas.findRegion("magneto_zone");
+    private static final TextureAtlas.AtlasRegion texture = Asset.atlas.findRegion("magneto");
     private boolean zone;
-
 
 
     public MagnetoEnemy(World world, float x, float y) {
@@ -31,19 +28,15 @@ public class MagnetoEnemy extends Enemy {
         HEIGHT = Constants.HEIGHT * 0.1f;
         //noinspection SuspiciousNameCombination
         WIDTH = HEIGHT;
-        init( world, x, y);
+        init(world, x, y);
         zone = false;
     }
-
-
-
-
 
 
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (this.alive){
+        if (this.alive) {
             checkPlayerDistance();
             checkWallColision();
         }
@@ -51,48 +44,45 @@ public class MagnetoEnemy extends Enemy {
     }
 
 
-    private void checkPlayerDistance(){
-        if (body.getLinearVelocity().y == 0 && getPlayerDistance() < playerDetectingRange){
+    private void checkPlayerDistance() {
+        if (body.getLinearVelocity().y == 0 && getPlayerDistance() < playerDetectingRange) {
             moveTowardsPlayer();
         }
     }
 
-    private void moveTowardsPlayer(){
+    private void moveTowardsPlayer() {
         Vector2 vectDirection = Player.player.body.getPosition().sub(body.getPosition()).nor().scl(monsterMovingScale);
         body.setLinearVelocity(vectDirection);
-        if (vectDirection.x < 0){
+        if (vectDirection.x < 0) {
             direction = HorizontalDirection.LEFT;
-        }
-        else {
+        } else {
             direction = HorizontalDirection.RIGHT;
         }
     }
 
 
-    public void movePlayerCloser(){
+    public void movePlayerCloser() {
         Vector2 vectDirection = body.getPosition().sub(Player.player.body.getPosition()).nor().scl(playerMovingScale);
         Player.player.body.setLinearVelocity(vectDirection);
     }
 
-    double getPlayerDistance(){
+    double getPlayerDistance() {
         return Math.sqrt(Math.pow((body.getPosition().x - Player.player.body.getPosition().x), 2) + Math.pow((body.getPosition().y - Player.player.body.getPosition().y), 2));
     }
 
 
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (this.alive){
+        if (this.alive) {
             sprite.draw(batch);
         }
 
 
     }
 
-    public void enableZone(){
+    public void enableZone() {
         Sound.playMagnetoSound();
-        if (!zone){
+        if (!zone) {
             sprite.setRegion(zoneTexture);
             zone = true;
             sprite.setSize(sprite.getWidth() * 2, sprite.getHeight() * 2);

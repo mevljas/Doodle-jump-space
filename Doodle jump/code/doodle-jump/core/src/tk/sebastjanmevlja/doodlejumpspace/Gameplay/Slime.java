@@ -21,25 +21,22 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Slime extends Actor {
 
+    public static float TRAMPOLINE_WIDTH = Platform.PLATFORM_WIDTH * 0.7f;
+    public static float TRAMPOLINE_HEIGHT = Platform.PLATFORM_HEIGHT * 1.3f;
     private final float bodyHeight;
+    public Animation<TextureRegion> runningAnimation;
+    public boolean playerJumping = false;
     Sprite sprite;
     World world;
     Body body;
-    public static float TRAMPOLINE_WIDTH = Platform.PLATFORM_WIDTH * 0.7f;
-    public static float TRAMPOLINE_HEIGHT = Platform.PLATFORM_HEIGHT * 1.3f;
-    public Animation<TextureRegion> runningAnimation;
-
-
     // A variable for tracking elapsed time for the animation
     float stateTime;
-
-    public boolean playerJumping = false;
 
 
     public Slime(float x, float y, World world) {
         sprite = new Sprite(Asset.atlas.findRegions("slime").get(0));
         sprite.setSize(TRAMPOLINE_WIDTH, TRAMPOLINE_HEIGHT);
-        sprite.setPosition(x,y);
+        sprite.setPosition(x, y);
         sprite.setCenterX(x);
 
         this.world = world;
@@ -50,9 +47,9 @@ public class Slime extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -84,15 +81,14 @@ public class Slime extends Actor {
         this.stateTime = 0f;
     }
 
-    public void updatePos(float x, float y){
+    public void updatePos(float x, float y) {
         // Set the sprite's position from the updated physics body location
-        sprite.setPosition(x,y);
-        this.body.setTransform((sprite.getX() + sprite.getWidth()/2) /PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM, 0 );
+        sprite.setPosition(x, y);
+        this.body.setTransform((sprite.getX() + sprite.getWidth() / 2) / PPM,
+                (sprite.getY() + sprite.getHeight() / 2) / PPM, 0);
 
         updateAnimations();
     }
-
 
 
     @Override
@@ -101,11 +97,10 @@ public class Slime extends Actor {
     }
 
 
-
-    private void updateAnimations(){
-        if (this.playerJumping){
+    private void updateAnimations() {
+        if (this.playerJumping) {
             this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-            if (this.runningAnimation.isAnimationFinished(this.stateTime)){
+            if (this.runningAnimation.isAnimationFinished(this.stateTime)) {
                 this.playerJumping = false;
             }
         }
@@ -114,10 +109,9 @@ public class Slime extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (!playerJumping){
+        if (!playerJumping) {
             sprite.draw(batch);
-        }
-        else {
+        } else {
             // Get current frame of animation for the current stateTime
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, false);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), TRAMPOLINE_WIDTH, TRAMPOLINE_HEIGHT);
@@ -126,7 +120,7 @@ public class Slime extends Actor {
 
     }
 
-    public Vector2 getBodyPosition(){
+    public Vector2 getBodyPosition() {
         return body.getPosition();
     }
 
@@ -138,7 +132,7 @@ public class Slime extends Actor {
         return body;
     }
 
-    public void playerJump(){
+    public void playerJump() {
         this.playerJumping = true;
         this.stateTime = 0f;
 

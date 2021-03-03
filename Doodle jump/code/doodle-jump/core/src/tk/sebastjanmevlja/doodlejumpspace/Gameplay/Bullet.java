@@ -16,21 +16,20 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Bullet extends Actor {
 
-    Sprite sprite;
-    World world;
-    Body body;
+    private static final float bulletMovingScale = Constants.HEIGHT * 0.008f;
     public static float BULLET_HEIGHT = Constants.HEIGHT * 0.015f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float BULLET_WIDTH = BULLET_HEIGHT;
-    private static final float bulletMovingScale = Constants.HEIGHT * 0.008f;
     public boolean alive;
-
+    Sprite sprite;
+    World world;
+    Body body;
 
 
     public Bullet(float xs, float ys, World world, float xt, float yt) {
         sprite = new Sprite(Asset.atlas.findRegion("bullet"));
         sprite.setSize(BULLET_WIDTH, BULLET_HEIGHT);
-        sprite.setPosition(xs,ys);
+        sprite.setPosition(xs, ys);
         sprite.setCenterX(xs);
 
         this.world = world;
@@ -41,9 +40,9 @@ public class Bullet extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -74,23 +73,21 @@ public class Bullet extends Actor {
 
     }
 
-    public void updatePos(){
-        if (alive){
+    public void updatePos() {
+        if (alive) {
             // Set the sprite's position from the updated physics body location
             sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                            getWidth()/2 ,
-                    (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+                            getWidth() / 2,
+                    (body.getPosition().y * PPM) - sprite.getHeight() / 2);
 
             if (sprite.getX() + sprite.getWidth() > Constants.WIDTH || sprite.getX() < 0 ||
-                    sprite.getY() + sprite.getHeight() > Constants.HEIGHT || sprite.getY() < 0){
+                    sprite.getY() + sprite.getHeight() > Constants.HEIGHT || sprite.getY() < 0) {
                 this.deactivate();
             }
         }
 
 
-
     }
-
 
 
     @Override
@@ -100,10 +97,9 @@ public class Bullet extends Actor {
     }
 
 
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (alive){
+        if (alive) {
             sprite.draw(batch);
         }
 

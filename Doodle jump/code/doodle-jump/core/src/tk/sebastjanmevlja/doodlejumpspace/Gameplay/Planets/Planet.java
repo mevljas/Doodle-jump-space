@@ -18,17 +18,17 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Planet extends Actor {
 
+    public static float PLANET_WIDTH = Constants.WIDTH * 0.08f;
+    public static float PLANET_HEIGHT = Constants.HEIGHT * 0.4f;
     public Sprite sprite;
     World world;
     Body body;
-    public static float PLANET_WIDTH = Constants.WIDTH * 0.08f;
-    public static float PLANET_HEIGHT = Constants.HEIGHT * 0.4f;
 
 
     public Planet(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         this.sprite = new Sprite(texture);
         this.sprite.setSize(PLANET_WIDTH, PLANET_HEIGHT);
-        this.sprite.setPosition(x,y);
+        this.sprite.setPosition(x, y);
 
         this.world = world;
 
@@ -38,9 +38,9 @@ public class Planet extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -67,12 +67,7 @@ public class Planet extends Actor {
         shape.dispose();
 
 
-
     }
-
-
-
-
 
 
     @Override
@@ -82,19 +77,17 @@ public class Planet extends Actor {
     }
 
 
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
         sprite.draw(batch);
     }
 
-    public void updatePos(){
+    public void updatePos() {
         // Set the sprite's position from the updated physics body location
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+                        getWidth() / 2,
+                (body.getPosition().y * PPM) - sprite.getHeight() / 2);
 
 
     }
@@ -106,7 +99,6 @@ public class Planet extends Actor {
     public Body getBody() {
         return body;
     }
-
 
 
     @Override
@@ -130,12 +122,12 @@ public class Planet extends Actor {
     }
 
 
-    public void changePosition( float y) {
+    public void changePosition(float y) {
         sprite.setSize(PLANET_WIDTH, PLANET_HEIGHT);
         sprite.setY(y);
-        body.setTransform((sprite.getX() + sprite.getWidth()/2) /
+        body.setTransform((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM,0);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM, 0);
     }
 
 

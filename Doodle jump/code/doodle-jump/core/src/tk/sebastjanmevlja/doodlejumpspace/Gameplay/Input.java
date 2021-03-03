@@ -12,15 +12,15 @@ import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class Input implements InputProcessor, GestureDetector.GestureListener {
 
-    private Player player;
     public static InputMultiplexer im;
+    private final Player player;
+
     public Input(Player player) {
         this.player = player;
         im = new InputMultiplexer();
         GestureDetector gd = new GestureDetector(this);
         im.addProcessor(gd);
         im.addProcessor(this);
-
 
 
     }
@@ -62,14 +62,13 @@ public class Input implements InputProcessor, GestureDetector.GestureListener {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(Hud.pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)){
+        if (Hud.pauseIcon.getBoundingRectangle().contains(screenX, Constants.HEIGHT - screenY)) {
             Level1Screen.paused = true;
             Game.game.changeScreen(Screens.PAUSESCREEN);
-            if (player.getJetpack() != null){
+            if (player.getJetpack() != null) {
                 Sound.stopJetpackSound();
             }
-        }
-        else {
+        } else {
             player.createBullet(screenX, screenY);
         }
 

@@ -58,10 +58,10 @@ public class MenuScreen implements Screen {
         TextButton about = new TextButton("About", skin);
         TextButton leaderboard = new TextButton("Leaderboard", skin);
         TextButton logout = new TextButton("Logout", skin);
-        if (!game.gsClient.isSessionActive()){
+        if (!game.gsClient.isSessionActive()) {
             logout.setText("Login");
         }
-        TextButton.TextButtonStyle textButtonStyle =  newGame.getStyle();
+        TextButton.TextButtonStyle textButtonStyle = newGame.getStyle();
         textButtonStyle.font = Asset.fontMedium;
         continueGame.setStyle(textButtonStyle);
         newGame.setStyle(textButtonStyle);
@@ -78,13 +78,13 @@ public class MenuScreen implements Screen {
         logout.setStyle(textButtonStyle);
 
         //add buttons to table
-        if ((Level1Screen.paused != null && Level1Screen.paused) || Game.localStorage.getSavedData()){
+        if ((Level1Screen.paused != null && Level1Screen.paused) || Game.localStorage.getSavedData()) {
             table.add(continueGame);
             table.row().padTop(Value.percentHeight(.03F, table));
         }
         table.add(newGame);
         table.row().padTop(Value.percentHeight(.03F, table));
-        if (game.gsClient.isSessionActive()){
+        if (game.gsClient.isSessionActive()) {
             table.add(leaderboard);
             table.row().padTop(Value.percentHeight(.03F, table));
         }
@@ -119,11 +119,10 @@ public class MenuScreen implements Screen {
                 Game.localStorage.setSavedData(false);
                 if (game.level1Screen != null)
                     game.level1Screen.dispose();
-                    game.level1Screen = null;
+                game.level1Screen = null;
                 game.changeScreen(Screens.LEVEL1SCREEN);
             }
         });
-
 
 
         preferences.addListener(new ChangeListener() {
@@ -184,13 +183,16 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

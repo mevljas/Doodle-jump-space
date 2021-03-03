@@ -24,32 +24,27 @@ import tk.sebastjanmevlja.doodlejumpspace.Level.Level1Screen;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
-
-
-
 public class Platform extends Actor {
 
+    public static float PLATFORM_WIDTH = Constants.WIDTH / 5f;
+    public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
+    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 33f;
+    static Random r = new Random();
     private final float bodyHeight;
     public Sprite sprite;
     World world;
     Body body;
-    public static float PLATFORM_WIDTH = Constants.WIDTH / 5f;
-    public static float PLATFORM_HEIGHT = Constants.HEIGHT / 33f;
     boolean broken = false;
     boolean alive = true;
-    static Random r = new Random();
-
-    public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
     Slime slime;
     Shield shield;
     Jetpack jetpack;
 
 
-
     public Platform(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
         this.sprite = new Sprite(texture);
         this.sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
-        this.sprite.setPosition(x,y);
+        this.sprite.setPosition(x, y);
 
         this.world = world;
 
@@ -59,9 +54,9 @@ public class Platform extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -70,7 +65,7 @@ public class Platform extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         float bodyWidth = sprite.getWidth() * 0.45f / PPM;
-        bodyHeight = sprite.getHeight() /2 / PPM;
+        bodyHeight = sprite.getHeight() / 2 / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // Basically set the physics polygon to a box with the same dimensions as our sprite
         // FixtureDef is a confusing expression for physical properties
@@ -89,35 +84,32 @@ public class Platform extends Actor {
         shape.dispose();
 
 
-
     }
 
 
-
-    float calculateSlimePositionX(){
-        return sprite.getX() + PLATFORM_WIDTH / 2 -  Slime.TRAMPOLINE_WIDTH / 2;
+    float calculateSlimePositionX() {
+        return sprite.getX() + PLATFORM_WIDTH / 2 - Slime.TRAMPOLINE_WIDTH / 2;
     }
 
-    float calculateSlimePositionY(){
+    float calculateSlimePositionY() {
         return sprite.getY() + sprite.getHeight() * 0.9f;
     }
 
-    float calculateShieldPositionX(){
-        return sprite.getX() + PLATFORM_WIDTH / 2 -  Shield.SHIELD_WIDTH / 2;
+    float calculateShieldPositionX() {
+        return sprite.getX() + PLATFORM_WIDTH / 2 - Shield.SHIELD_WIDTH / 2;
     }
 
-    float calculateShieldPositionY(){
+    float calculateShieldPositionY() {
         return sprite.getY() + sprite.getHeight();
     }
 
-    float calculateJetpackPositionX(){
-        return sprite.getX() + PLATFORM_WIDTH / 2 -  Jetpack.JETPACK_WIDTH / 2;
+    float calculateJetpackPositionX() {
+        return sprite.getX() + PLATFORM_WIDTH / 2 - Jetpack.JETPACK_WIDTH / 2;
     }
 
-    float calculateJetpackPositionY(){
+    float calculateJetpackPositionY() {
         return sprite.getY() + sprite.getHeight();
     }
-
 
 
     @Override
@@ -127,42 +119,40 @@ public class Platform extends Actor {
     }
 
 
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch,parentAlpha);
+        super.draw(batch, parentAlpha);
     }
 
-    public void updatePos(){
+    public void updatePos() {
         // Set the sprite's position from the updated physics body location
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+                        getWidth() / 2,
+                (body.getPosition().y * PPM) - sprite.getHeight() / 2);
 
-        if (slime != null){
+        if (slime != null) {
             slime.updatePos(calculateSlimePositionX(), calculateSlimePositionY());
         }
 
-        if (shield != null){
-            shield.updatePos(calculateShieldPositionX(),calculateShieldPositionY());
+        if (shield != null) {
+            shield.updatePos(calculateShieldPositionX(), calculateShieldPositionY());
         }
 
-        if (jetpack != null){
-            jetpack.updatePos(calculateJetpackPositionX(),calculateJetpackPositionY());
+        if (jetpack != null) {
+            jetpack.updatePos(calculateJetpackPositionX(), calculateJetpackPositionY());
         }
 
     }
 
-    public float spriteHeight(){
+    public float spriteHeight() {
         return this.sprite.getHeight();
     }
 
-    public float spriteWidth(){
+    public float spriteWidth() {
         return this.sprite.getWidth();
     }
 
-    public Vector2 getBodyPosition(){
+    public Vector2 getBodyPosition() {
         return body.getPosition();
     }
 
@@ -175,16 +165,15 @@ public class Platform extends Actor {
     }
 
 
-
     public boolean isAlive() {
         return alive;
     }
 
 
-
     public Slime getSlime() {
         return slime;
     }
+
     public Shield getShield() {
         return shield;
     }
@@ -194,10 +183,11 @@ public class Platform extends Actor {
     }
 
 
-    public void removeShield(){
+    public void removeShield() {
         this.shield = null;
     }
-    public void removeJetpack(){
+
+    public void removeJetpack() {
         this.jetpack.parentPlatform = null;
         this.jetpack = null;
     }
@@ -223,17 +213,16 @@ public class Platform extends Actor {
     }
 
 
-
     public void changePosition(float x, float y) {
         sprite.setSize(PLATFORM_WIDTH, PLATFORM_HEIGHT);
-        sprite.setPosition(x,y);
-        body.setTransform((sprite.getX() + sprite.getWidth()/2) /
+        sprite.setPosition(x, y);
+        body.setTransform((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM,0);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM, 0);
     }
 
 
-    public void reEnable(){
+    public void reEnable() {
         this.broken = false;
         this.alive = true;
     }
@@ -263,18 +252,16 @@ public class Platform extends Actor {
         generateItems();
     }
 
-    void generateItems(){
+    void generateItems() {
         int value = r.nextInt(40);
-        if (value < 4){
-            this.slime = new Slime(calculateSlimePositionX(),calculateSlimePositionY(),world);
+        if (value < 4) {
+            this.slime = new Slime(calculateSlimePositionX(), calculateSlimePositionY(), world);
             Level1Screen.backgroundGroup.addActor(this.slime);
-        }
-        else if (value< 9){
-            this.shield = new Shield(calculateShieldPositionX(),calculateShieldPositionY() ,world, this);
+        } else if (value < 9) {
+            this.shield = new Shield(calculateShieldPositionX(), calculateShieldPositionY(), world, this);
             Level1Screen.backgroundGroup.addActor(this.shield);
-        }
-        else if (value < 11){
-            this.jetpack = new Jetpack(calculateJetpackPositionX(),calculateJetpackPositionY(),world, this);
+        } else if (value < 11) {
+            this.jetpack = new Jetpack(calculateJetpackPositionX(), calculateJetpackPositionY(), world, this);
             Level1Screen.backgroundGroup.addActor(this.jetpack);
         }
     }

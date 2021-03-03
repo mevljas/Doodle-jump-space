@@ -23,17 +23,17 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
-public class EndScreen implements Screen{
+public class EndScreen implements Screen {
 
-    private Game game;
-    private Stage stage;
-    private Label titleLabel;
-    private Label textLabel;
-    private Label scoreLabel;
-    private Label highScoreLabel;
+    private final Game game;
+    private final Stage stage;
+    private final Label titleLabel;
+    private final Label textLabel;
+    private final Label scoreLabel;
+    private final Label highScoreLabel;
 
 
-    public EndScreen(final Game game){
+    public EndScreen(final Game game) {
         this.game = game;
 
         /// create stage and set it as input processor
@@ -53,11 +53,11 @@ public class EndScreen implements Screen{
         textLabel = new Label("Better luck next time!", skin, "default");
         scoreLabel = new Label("Score: " + Player.getScore(), skin, "default");
         highScoreLabel = new Label("High score: " + Game.localStorage.getHighScore(), skin, "default");
-        Label.LabelStyle labelStyleBig =  titleLabel.getStyle();
+        Label.LabelStyle labelStyleBig = titleLabel.getStyle();
         labelStyleBig.font = Asset.fontBig;
         titleLabel.setStyle(labelStyleBig);
 
-        Label.LabelStyle labelStyleSmall =  textLabel.getStyle();
+        Label.LabelStyle labelStyleSmall = textLabel.getStyle();
         labelStyleSmall.font = Asset.fontSmall;
         textLabel.setStyle(labelStyleSmall);
         scoreLabel.setStyle(labelStyleSmall);
@@ -65,7 +65,7 @@ public class EndScreen implements Screen{
 
         // return to main screen button
         final TextButton retryButton = new TextButton("Retry", skin);
-        TextButton.TextButtonStyle buttonStyle =  retryButton.getStyle();
+        TextButton.TextButtonStyle buttonStyle = retryButton.getStyle();
         buttonStyle.font = Asset.fontMedium;
         retryButton.setStyle(buttonStyle);
         retryButton.addListener(new ChangeListener() {
@@ -87,7 +87,6 @@ public class EndScreen implements Screen{
 
             }
         });
-
 
 
         table.defaults().width(Value.percentWidth(.100F, table));
@@ -114,7 +113,7 @@ public class EndScreen implements Screen{
         Level1Screen.paused = false;
 
 
-        if (game.gsClient.isSessionActive()){
+        if (game.gsClient.isSessionActive()) {
             game.gsClient.submitToLeaderboard(Constants.leaderBoardId, Player.getScore(), null);
         }
     }
@@ -122,7 +121,7 @@ public class EndScreen implements Screen{
     @Override
     public void render(float delta) {
 
-        if (Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if (Gdx.input.isKeyPressed(Input.Keys.BACK)) {
             Sound.changeMusicState();
             game.changeScreen(Screens.MENUSCREEN);
         }
@@ -141,16 +140,20 @@ public class EndScreen implements Screen{
     }
 
     @Override
-    public void resize(int width, int height) {}
+    public void resize(int width, int height) {
+    }
 
     @Override
-    public void pause() { }
+    public void pause() {
+    }
 
     @Override
-    public void resume() { }
+    public void resume() {
+    }
 
     @Override
-    public void hide() { }
+    public void hide() {
+    }
 
     @Override
     public void dispose() {

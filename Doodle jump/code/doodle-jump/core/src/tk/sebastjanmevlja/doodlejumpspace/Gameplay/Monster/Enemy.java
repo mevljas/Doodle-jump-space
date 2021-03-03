@@ -23,29 +23,19 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 
-
-
 public class Enemy extends Actor {
 
-    public Sprite sprite;
-    World world;
-    public Body body;
-    float bodyWidth = 0;
-    float bodyHeight = 0;
-
-
+    public static final float VELOCITY = Constants.HEIGHT * 0.0015f;
     public static float WIDTH;
     public static float HEIGHT;
-
-
-    boolean alive = true;
-
-
-    public static final float VELOCITY = Constants.HEIGHT * 0.0015f;
-
+    public Sprite sprite;
+    public Body body;
     //    private boolean broken = false;
     public Animation<TextureRegion> runningAnimation;
-
+    World world;
+    float bodyWidth = 0;
+    float bodyHeight = 0;
+    boolean alive = true;
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
@@ -57,9 +47,7 @@ public class Enemy extends Actor {
         init(world, x, y);
 
 
-
     }
-
 
 
     public Enemy(TextureAtlas.AtlasRegion texture, World world, float x, float y) {
@@ -70,7 +58,7 @@ public class Enemy extends Actor {
 
     void init(World world, float x, float y) {
         sprite.setSize(WIDTH, HEIGHT);
-        sprite.setPosition(x,y);
+        sprite.setPosition(x, y);
         sprite.setCenterX(x);
 
 
@@ -82,9 +70,9 @@ public class Enemy extends Actor {
         bodyDef.gravityScale = 0.0f;
         // We are going to use 1 to 1 dimensions.  Meaning 1 in physics engine  is 1 pixel
         // Set our body to the same position as our sprite
-        bodyDef.position.set((sprite.getX() + sprite.getWidth()/2) /
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2) /
                         PPM,
-                (sprite.getY() + sprite.getHeight()/2) / PPM);
+                (sprite.getY() + sprite.getHeight() / 2) / PPM);
 
         // Create a body in the world using our definition
         body = world.createBody(bodyDef);
@@ -115,40 +103,33 @@ public class Enemy extends Actor {
     }
 
 
-
-
-
-    public void updatePos(){
+    public void updatePos() {
         // Set the sprite's position from the updated physics body location
         sprite.setPosition((body.getPosition().x * PPM) - sprite.
-                        getWidth()/2 ,
-                (body.getPosition().y * PPM) -sprite.getHeight()/2 );
+                        getWidth() / 2,
+                (body.getPosition().y * PPM) - sprite.getHeight() / 2);
     }
 
 
-
-    void updateAnimations(){
+    void updateAnimations() {
         this.stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
 
     }
 
 
-
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (this.alive){
+        if (this.alive) {
             updatePos();
         }
 
     }
 
 
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (this.alive){
+        if (this.alive) {
             sprite.draw(batch);
         }
 
@@ -156,31 +137,26 @@ public class Enemy extends Actor {
     }
 
     void checkWallColision() {
-        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH ) {
+        if (direction == HorizontalDirection.RIGHT && sprite.getX() + spriteWidth() >= Constants.WIDTH) {
             changeDirection();
-        }
-        else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0){
+        } else if (direction == HorizontalDirection.LEFT && sprite.getX() < 0) {
             changeDirection();
         }
     }
 
 
-
-
-
-    public void changeDirection(){
+    public void changeDirection() {
         if (direction == HorizontalDirection.RIGHT) {
             body.setLinearVelocity(-VELOCITY, body.getLinearVelocity().y);
             direction = HorizontalDirection.LEFT;
-        }
-        else if (direction == HorizontalDirection.LEFT){
+        } else if (direction == HorizontalDirection.LEFT) {
             body.setLinearVelocity(VELOCITY, body.getLinearVelocity().y);
             direction = HorizontalDirection.RIGHT;
         }
 
     }
 
-    public float spriteWidth(){
+    public float spriteWidth() {
         return this.sprite.getWidth();
     }
 
@@ -222,7 +198,6 @@ public class Enemy extends Actor {
     public float getHeight() {
         return sprite.getHeight();
     }
-
 
 
 }

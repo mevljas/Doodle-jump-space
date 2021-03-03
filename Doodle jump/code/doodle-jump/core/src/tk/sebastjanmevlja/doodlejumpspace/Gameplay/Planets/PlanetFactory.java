@@ -29,26 +29,22 @@ public class PlanetFactory {
         r = new Random();
     }
 
-    public static void generatePlanets(World world){
+    public static void generatePlanets(World world) {
         y = Constants.HEIGHT * 2;
         planets.add(new RedPlanet(world, y));
 
-        y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+        y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
         planets.add(new YellowPlanet(world, y));
 
-        y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+        y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
         planets.add(new DeathStarPlanet(world, y));
 
-        y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
+        y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
         planets.add(new EarthPlanet(world, y));
-
 
 
         InitiaPlanetsSize = planets.size();
     }
-
-
-
 
 
     public static void recyclePlanet(Planet planet, float y) {
@@ -57,24 +53,24 @@ public class PlanetFactory {
         planets.addLast(planet);
     }
 
-    public static void moveWorld(float velocity){
+    public static void moveWorld(float velocity) {
 
-        for (Planet p: planets) {
-            p.body.setLinearVelocity(0,velocity );
+        for (Planet p : planets) {
+            p.body.setLinearVelocity(0, velocity);
         }
     }
 
 
-    public static void stopWorld(){
-        for (Planet p: planets) {
-            p.body.setLinearVelocity(0,0);
+    public static void stopWorld() {
+        for (Planet p : planets) {
+            p.body.setLinearVelocity(0, 0);
         }
     }
 
 
-    public static void recyclePlanet(Planet p){
-        y += minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);
-        recyclePlanet(p, y );
+    public static void recyclePlanet(Planet p) {
+        y += minSpacingHeight + r.nextFloat() * (maxSpacingHeight - minSpacingHeight);
+        recyclePlanet(p, y);
     }
 
     public static float getY() {

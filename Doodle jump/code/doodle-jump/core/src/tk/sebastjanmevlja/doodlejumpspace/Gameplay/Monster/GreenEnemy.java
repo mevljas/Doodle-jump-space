@@ -14,7 +14,7 @@ import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
 
 public class GreenEnemy extends Enemy {
 
-    private  static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("grey_enemy");
+    private static final Array<TextureAtlas.AtlasRegion> textures = Asset.atlas.findRegions("grey_enemy");
 
     public GreenEnemy(World world, float x, float y) {
         super(textures, world, x, y);
@@ -22,25 +22,16 @@ public class GreenEnemy extends Enemy {
         HEIGHT = Constants.HEIGHT / 10f;
         runningAnimation = new Animation<TextureRegion>(0.08f, textures, Animation.PlayMode.LOOP);
         this.stateTime = 0f;
-        init( world, x, y);
+        init(world, x, y);
         body.setLinearVelocity(VELOCITY, 0);
         this.direction = HorizontalDirection.RIGHT;
     }
 
 
-
-
-
-
-
-
-
-
-
     @Override
     public void act(float delta) {
         super.act(delta);
-        if (this.alive){
+        if (this.alive) {
             checkWallColision();
             updateAnimations();
 
@@ -49,12 +40,10 @@ public class GreenEnemy extends Enemy {
     }
 
 
-
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
 //        super.draw(batch, parentAlpha);
-        if (this.alive){
+        if (this.alive) {
             TextureRegion currentFrame = runningAnimation.getKeyFrame(stateTime, true);
             batch.draw(currentFrame, sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
         }
