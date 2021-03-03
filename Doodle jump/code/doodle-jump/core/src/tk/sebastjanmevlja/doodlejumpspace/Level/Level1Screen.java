@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -22,7 +21,6 @@ import java.util.ArrayList;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Asset;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Bullet;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Hud;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Input;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
@@ -50,20 +48,13 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platform.PlatformFacto
 public class Level1Screen implements Screen {
 
     private static Stage stage;
-    private final Game game;
     public static Group backgroundGroup;        // Group to be draw first
     public static Group middleGroup;
     Group foregroundGroup;
     Group hudGroup;        // group to be draw last
-    private Viewport viewport;
-    private PlatformFactory platformFactory;
-    private EnemyFactory monsterFactory;
-    private PlanetFactory planetFactory;
-    private Player player;
-    private Hud hud;
-    private TextureAtlas.AtlasRegion background;
+    private final Viewport viewport;
+    private final Player player;
     World world;
-    private Input Input;
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
     OrthographicCamera camera;
@@ -71,10 +62,10 @@ public class Level1Screen implements Screen {
 
 
 
-    public Level1Screen(Game game) {
-        this.game = game;
+    @SuppressWarnings("InstantiationOfUtilityClass")
+    public Level1Screen() {
 
-         backgroundGroup = new Group();        // Group to be draw first
+        backgroundGroup = new Group();        // Group to be draw first
          middleGroup = new Group();
          foregroundGroup = new Group();
          hudGroup = new Group();
@@ -84,21 +75,19 @@ public class Level1Screen implements Screen {
         viewport = new FitViewport(Constants.WIDTH, Constants.HEIGHT,camera);
         stage = new Stage(viewport);
 
-        background = Asset.atlas.findRegion("background");
-
         // Create a physics world, the heart of the simulation.  The Vector passed in is gravity
         world = new World(new Vector2(0, - Constants.HEIGHT * 0.0036f), true);
-        platformFactory = new PlatformFactory();
+        new PlatformFactory();
         PlatformFactory.generatePlatforms(world);
-        monsterFactory = new EnemyFactory();
+        new EnemyFactory();
         EnemyFactory.generateMonsters(world);
-        planetFactory = new PlanetFactory();
+        new PlanetFactory();
         PlanetFactory.generatePlanets(world);
         player = new Player( world, Constants.WIDTH / 2f,  platforms.get(0).spriteHeight() * 1.1f);
-        hud = new Hud();
-        
+        Hud hud = new Hud();
 
-        Input = new Input(player);
+
+        new Input(player);
 
 
 //        Set contact listener
@@ -267,7 +256,6 @@ public class Level1Screen implements Screen {
     @Override
     public void render(float delta) {   //draw, loop called every frame
         if (!paused){
-//            Culling.countObjects();
             checkGameState();
             camera.update();
             updatePlatforms();
@@ -323,11 +311,6 @@ public class Level1Screen implements Screen {
     }
 
 
-    private void printCullingStatus(){
-        System.out.println("Objects drawn: " + Culling.getDrawnObjectsCounter() + "/" + Culling.getAllObjectsCounter());
-    }
-
-
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);
@@ -372,10 +355,6 @@ public class Level1Screen implements Screen {
             Game.localStorage.setHighScore(Player.getScore());
         Game.localStorage.setSavedData(false);
         Game.game.changeScreen(Screens.ENDSCREEN);
-    }
-
-    public static Stage getStage() {
-        return stage;
     }
 
 

@@ -163,9 +163,7 @@ public class Jetpack extends Actor {
     }
 
 
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
+
 
 
 

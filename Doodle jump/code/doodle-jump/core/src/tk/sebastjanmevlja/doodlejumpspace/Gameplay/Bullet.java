@@ -20,8 +20,9 @@ public class Bullet extends Actor {
     World world;
     Body body;
     public static float BULLET_HEIGHT = Constants.HEIGHT * 0.015f;
+    @SuppressWarnings("SuspiciousNameCombination")
     public static float BULLET_WIDTH = BULLET_HEIGHT;
-    private static float bulletMovingScale = Constants.HEIGHT * 0.008f;
+    private static final float bulletMovingScale = Constants.HEIGHT * 0.008f;
     public boolean alive;
 
 
@@ -109,18 +110,6 @@ public class Bullet extends Actor {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
-
-    public float spriteWidth(){
-        return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition(){
-        return body.getPosition();
-    }
-
     public Sprite getSprite() {
         return sprite;
     }
@@ -155,7 +144,5 @@ public class Bullet extends Actor {
         return sprite.getHeight();
     }
 
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
+
 }

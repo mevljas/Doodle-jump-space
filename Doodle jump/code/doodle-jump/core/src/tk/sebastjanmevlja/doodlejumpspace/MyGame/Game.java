@@ -81,7 +81,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
             };
 
         // for getting callbacks from the client
-        gsClient.setListener((IGameServiceListener) this);
+        gsClient.setListener(this);
 
         // establish a connection to the game service without error messages or login screens
         gsClient.resumeSession();
@@ -116,7 +116,7 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
                     level1Screen = null;
                 }
                 if (level1Screen == null){
-                    level1Screen = new Level1Screen(this);
+                    level1Screen = new Level1Screen();
                 }
 
 

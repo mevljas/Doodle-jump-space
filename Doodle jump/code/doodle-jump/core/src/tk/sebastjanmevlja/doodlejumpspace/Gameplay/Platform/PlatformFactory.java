@@ -102,14 +102,6 @@ public class PlatformFactory {
     }
 
 
-    public static void applayForce(float x, float y){
-
-        for (Platform p: platforms) {
-            if (!p.broken)
-                p.body.applyForceToCenter(x, y, true);
-        }
-    }
-
     public static float getYVelocity(){
         return platforms.getFirst().body.getLinearVelocity().y;
     }
@@ -122,12 +114,6 @@ public class PlatformFactory {
         }
     }
 
-
-
-
-    public static void removePlatform(Platform p){
-        platforms.remove(p);
-    }
 
     public static void recyclePlatform(Platform p){
         float y = platforms.getLast().sprite.getY() + minSpacingHeight + r.nextFloat()  * (maxSpacingHeight - minSpacingHeight);

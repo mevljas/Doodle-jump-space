@@ -28,21 +28,15 @@ import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class PreferencesScreen implements Screen {
 
-    private Game game;
-    private Stage stage;
-    private Label titleLabel;
-    private Label volumeMusicLabel;
-    private Label volumeSoundLabel;
-    private Label musicOnOffLabel;
-    private Label soundOnOffLabel;
-    private Skin skin;
+    private final Game game;
+    private final Stage stage;
 
 
     public PreferencesScreen(final Game game) {
         this.game = game;
         /// create stage and set it as input processor
         stage = new Stage(new ScreenViewport());
-        skin = Asset.skin;
+        Skin skin = Asset.skin;
 
         // Create a table that fills the screen. Everything else will go inside
         // this table.
@@ -125,11 +119,11 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        titleLabel = new Label("Preferences", skin, "title");
-        volumeMusicLabel = new Label(" Music Volume", skin, "default");
-        volumeSoundLabel = new Label(" Sound Volume", skin, "default");
-        musicOnOffLabel = new Label(" Music", skin, "default");
-        soundOnOffLabel = new Label(" Sound Effect", skin, "default");
+        Label titleLabel = new Label("Preferences", skin, "title");
+        Label volumeMusicLabel = new Label(" Music Volume", skin, "default");
+        Label volumeSoundLabel = new Label(" Sound Volume", skin, "default");
+        Label musicOnOffLabel = new Label(" Music", skin, "default");
+        Label soundOnOffLabel = new Label(" Sound Effect", skin, "default");
 
         Label.LabelStyle labelStyleTitle =  titleLabel.getStyle();
         labelStyleTitle.font = Asset.fontBig;

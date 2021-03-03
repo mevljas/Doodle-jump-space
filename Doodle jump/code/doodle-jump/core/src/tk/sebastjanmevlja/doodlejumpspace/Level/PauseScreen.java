@@ -25,8 +25,8 @@ import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 
 public class PauseScreen implements Screen{
 
-    private Game game;
-    private Stage stage;
+    private final Game game;
+    private final Stage stage;
 
 
     public PauseScreen(final Game game){

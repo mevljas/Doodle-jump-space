@@ -3,7 +3,6 @@ package tk.sebastjanmevlja.doodlejumpspace.Gameplay;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
@@ -23,6 +22,7 @@ public class Shield extends Actor {
     World world;
     Body body;
     public static float SHIELD_WIDTH = Constants.WIDTH * 0.09f;
+    @SuppressWarnings("SuspiciousNameCombination")
     public static float SHIELD_HEIGHT = SHIELD_WIDTH;
     public Platform parentPlatform;
     TextureAtlas.AtlasRegion shieldActivatedAtlasRegion =  Asset.atlas.findRegion("shiled_radius");
@@ -104,18 +104,6 @@ public class Shield extends Actor {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
-
-    public float spriteWidth(){
-        return this.sprite.getWidth();
-    }
-
-    public Vector2 getBodyPosition(){
-        return body.getPosition();
-    }
-
     public Sprite getSprite() {
         return sprite;
     }
@@ -146,10 +134,6 @@ public class Shield extends Actor {
         return sprite.getHeight();
     }
 
-
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
 
 
 

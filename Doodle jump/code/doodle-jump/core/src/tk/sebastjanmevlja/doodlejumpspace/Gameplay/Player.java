@@ -55,25 +55,22 @@ public class Player extends Actor  {
 
 
     public static float HEIGHT = Constants.HEIGHT / 11.8f;
+    @SuppressWarnings("SuspiciousNameCombination")
     public static float WIDTH = HEIGHT;
-    private static float accelerometerSensitivity = 0.8f;
 
-    private static TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
-    private static TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
-    private static TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
-    private static TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");
-    private static TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("Player_right_up");
+    private static final TextureAtlas.AtlasRegion up = Asset.atlas.findRegion("player_up");
+    private static final TextureAtlas.AtlasRegion leftFall = Asset.atlas.findRegion("Player_left_down");
+    private static final TextureAtlas.AtlasRegion rightFall = Asset.atlas.findRegion("Player_right_down");
+    private static final TextureAtlas.AtlasRegion leftJump = Asset.atlas.findRegion("Player_left_up");
+    private static final TextureAtlas.AtlasRegion rightJump = Asset.atlas.findRegion("Player_right_up");
     private boolean rotating = false;
     public static ArrayList<Bullet> bullets;
     private Shield shield;
     private Jetpack jetpack;
     private int numberOfShields = 0;
     private boolean imunity = false;
-    private float bodyHeight = 0;
-    private float bodyWidth = 0;
-    private boolean falling = false;
+    private boolean falling;
     private Sprite fallingSprite;
-    private long shieldExpirationTime = 3000;
     private boolean movePlayerToCenter;
 
 
@@ -109,8 +106,8 @@ public class Player extends Actor  {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        bodyWidth = sprite.getWidth() / 4 / PPM;
-        bodyHeight = sprite.getHeight() * 0.33f / PPM;
+        float bodyWidth = sprite.getWidth() / 4 / PPM;
+        float bodyHeight = sprite.getHeight() * 0.33f / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
         // Basically this is where you, in addition to defining the shape of the body
@@ -189,6 +186,7 @@ public class Player extends Actor  {
 
     private void checkAccelerometer(){
         float accelX = Gdx.input.getAccelerometerX();
+        float accelerometerSensitivity = 0.8f;
         if (accelX > accelerometerSensitivity){
             this.moveLeft();
         }
@@ -402,10 +400,6 @@ public class Player extends Actor  {
     }
 
 
-    public void stopMovingHorizontally(){
-        body.setLinearVelocity(0, body.getLinearVelocity().y);
-    }
-
     public static void incScore(){
         score++;
     }
@@ -441,8 +435,9 @@ public class Player extends Actor  {
         this.imunity = true;
         numberOfShields++;
         playShieldSound();
-        this.score += 20;
+        score += 20;
 
+        long shieldExpirationTime = 3000;
         new java.util.Timer().schedule(
                 new java.util.TimerTask() {
                     @Override
@@ -519,33 +514,9 @@ public class Player extends Actor  {
         return sprite.getHeight();
     }
 
-    public void incrementGlobalObjectCounter() {
-        Culling.incrementObjectsCounter();
-        if (shield != null) {
-            shield.incrementGlobalObjectCounter();
-        }
-
-        if (jetpack != null) {
-            jetpack.incrementGlobalObjectCounter();
-        }
-
-        for (Bullet b : bullets) {
-            b.incrementGlobalObjectCounter();
-
-        }
-
-    }
-
-    public float getBodyHeight() {
-        return this.bodyHeight;
-    }
-
-    public float getBodyWidth() {
-        return this.bodyWidth;
-    }
 
     public void setLives(int lives) {
-        this.lives = lives;
+        Player.lives = lives;
     }
 
     public Jetpack getJetpack() {

@@ -21,8 +21,7 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants.PPM;
 
 public class Slime extends Actor {
 
-    private float bodyWidth = 0;
-    private float bodyHeight = 0;
+    private final float bodyHeight;
     Sprite sprite;
     World world;
     Body body;
@@ -62,7 +61,7 @@ public class Slime extends Actor {
         // Now define the dimensions of the physics shape
         PolygonShape shape = new PolygonShape();
         // Basically set the physics polygon to a box with the same dimensions as our sprite
-        bodyWidth = sprite.getWidth() * 0.5f / PPM;
+        float bodyWidth = sprite.getWidth() * 0.5f / PPM;
         bodyHeight = sprite.getHeight() * 0.3f / PPM;
         shape.setAsBox(bodyWidth, bodyHeight);
         // FixtureDef is a confusing expression for physical properties
@@ -127,14 +126,6 @@ public class Slime extends Actor {
 
     }
 
-    public float spriteHeight(){
-        return this.sprite.getHeight();
-    }
-
-    public float spriteWidth(){
-        return this.sprite.getWidth();
-    }
-
     public Vector2 getBodyPosition(){
         return body.getPosition();
     }
@@ -151,10 +142,6 @@ public class Slime extends Actor {
         this.playerJumping = true;
         this.stateTime = 0f;
 
-    }
-
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
     }
 
 

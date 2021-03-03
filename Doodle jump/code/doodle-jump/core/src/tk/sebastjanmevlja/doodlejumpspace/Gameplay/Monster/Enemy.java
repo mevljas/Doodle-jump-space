@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
@@ -224,8 +223,6 @@ public class Enemy extends Actor {
         return sprite.getHeight();
     }
 
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-    }
+
 
 }

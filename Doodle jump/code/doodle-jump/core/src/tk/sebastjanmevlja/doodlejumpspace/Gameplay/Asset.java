@@ -33,8 +33,6 @@ public class Asset {
 
 //    Assets
     public static Texture background;
-    public static Texture logoTexture;
-    public static Texture pauseTexture;
     public static TextureAtlas atlas;
     public static Skin skin;
 

@@ -24,8 +24,8 @@ public class MenuScreen implements Screen {
 //    TODO: font scaling
 
     private final Game game;
-    private Stage stage;
-    private Skin skin;
+    private final Stage stage;
+    private final Skin skin;
 
     public MenuScreen(Game game) {
         this.game = game;

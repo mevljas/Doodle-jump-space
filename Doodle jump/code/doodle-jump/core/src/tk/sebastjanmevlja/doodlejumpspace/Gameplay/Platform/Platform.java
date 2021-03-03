@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import java.util.Random;
 
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Constants;
-import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Culling;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Jetpack;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield;
 import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime;
@@ -223,21 +222,6 @@ public class Platform extends Actor {
         return sprite.getHeight();
     }
 
-    public void incrementGlobalObjectCounter(){
-        Culling.incrementObjectsCounter();
-        if (shield != null){
-            shield.incrementGlobalObjectCounter();
-        }
-
-        if (slime != null){
-            slime.incrementGlobalObjectCounter();
-        }
-
-
-        if (jetpack != null){
-            jetpack.incrementGlobalObjectCounter();
-        }
-    }
 
 
     public void changePosition(float x, float y) {

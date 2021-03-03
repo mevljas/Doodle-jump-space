@@ -13,7 +13,7 @@ public class WhitePlatform extends Platform {
 
     private  static final TextureAtlas.AtlasRegion plaformTextureRegionLightBlue = Asset.atlas.findRegion("white_platform");
 
-    private HorizontalDirection direction = HorizontalDirection.STILL;
+    private HorizontalDirection direction;
     public static final float VELOCITY = PLATFORM_WIDTH * 0.005f;
 
 
