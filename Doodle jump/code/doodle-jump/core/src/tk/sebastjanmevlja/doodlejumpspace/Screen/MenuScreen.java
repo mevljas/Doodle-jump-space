@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import de.golfgl.gdxgamesvcs.GameServiceException;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
@@ -158,6 +159,9 @@ public class MenuScreen implements Screen {
                     game.gsClient.logIn();
             }
         });
+
+
+        Sound.changeMusicState();
 
     }
 
