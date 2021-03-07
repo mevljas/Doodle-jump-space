@@ -27,14 +27,15 @@ tk/sebastjanmevlja/doodlejumpspace/Gameplay/Planets/RightPlanet.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Planets.RightPlanet
 tk/sebastjanmevlja/doodlejumpspace/Gameplay/Enemies/BlackHole.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Enemies.BlackHole
-tk/sebastjanmevlja/doodlejumpspace/Screen/Level1Screen.java
- tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen
+tk/sebastjanmevlja/doodlejumpspace/Screen/AboutScreen.java
+ tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen
+ tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen$1
 tk/sebastjanmevlja/doodlejumpspace/Gameplay/Platforms/Platform.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.Platform
 tk/sebastjanmevlja/doodlejumpspace/Gameplay/Sound.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound
-tk/sebastjanmevlja/doodlejumpspace/Gameplay/InputListener.java
- tk.sebastjanmevlja.doodlejumpspace.Gameplay.InputListener
+tk/sebastjanmevlja/doodlejumpspace/Gameplay/Platforms/GrayPlatform.java
+ tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.GrayPlatform
 tk/sebastjanmevlja/doodlejumpspace/Screen/Screens.java
  tk.sebastjanmevlja.doodlejumpspace.Screen.Screens
 tk/sebastjanmevlja/doodlejumpspace/Gameplay/Planets/YellowPlanet.java
@@ -102,8 +103,7 @@ tk/sebastjanmevlja/doodlejumpspace/Gameplay/Shield.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Shield
 tk/sebastjanmevlja/doodlejumpspace/Gameplay/Slime.java
  tk.sebastjanmevlja.doodlejumpspace.Gameplay.Slime
-tk/sebastjanmevlja/doodlejumpspace/Gameplay/Platforms/GrayPlatform.java
- tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.GrayPlatform
-tk/sebastjanmevlja/doodlejumpspace/Screen/AboutScreen.java
- tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen
- tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen$1
+tk/sebastjanmevlja/doodlejumpspace/Screen/Level1Screen.java
+ tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen
+tk/sebastjanmevlja/doodlejumpspace/Gameplay/InputListener.java
+ tk.sebastjanmevlja.doodlejumpspace.Gameplay.InputListener

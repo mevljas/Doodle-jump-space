@@ -28,7 +28,7 @@ public class InputListener implements InputProcessor, GestureDetector.GestureLis
 
     @Override
     public boolean keyDown(int keycode) {
-        switch (keycode) {
+/*        switch (keycode) {
             case com.badlogic.gdx.Input.Keys.LEFT:
                 player.moveLeft();
                 break;
@@ -38,12 +38,13 @@ public class InputListener implements InputProcessor, GestureDetector.GestureLis
                 break;
 
         }
-        return true;
+        return true;*/
+        return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        switch (keycode) {
+/*        switch (keycode) {
             case com.badlogic.gdx.Input.Keys.LEFT:
                 player.moveLeft();
                 break;
@@ -53,7 +54,8 @@ public class InputListener implements InputProcessor, GestureDetector.GestureLis
                 break;
 
         }
-        return true;
+        return true;*/
+        return false;
     }
 
     @Override
