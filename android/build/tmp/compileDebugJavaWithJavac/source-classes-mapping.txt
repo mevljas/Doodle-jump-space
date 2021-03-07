@@ -1,0 +1,4 @@
+tk/sebastjanmevlja/doodlejumpspace/BuildConfig.java
+ tk.sebastjanmevlja.doodlejumpspace.BuildConfig
+tk/sebastjanmevlja/doodlejumpspace/AndroidLauncher.java
+ tk.sebastjanmevlja.doodlejumpspace.AndroidLauncher

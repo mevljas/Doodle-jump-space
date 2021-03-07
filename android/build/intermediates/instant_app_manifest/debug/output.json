@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "applicationId": "tk.sebastjanmevlja.doodlejumpspace",
+  "variantType": "BASE_APK",
+  "elements": [
+    {
+      "outputType": {
+        "type": "INSTANT_APP_MANIFEST"
+      },
+      "apkData": {
+        "type": "MAIN",
+        "splits": [],
+        "versionCode": 2,
+        "versionName": "0.2",
+        "outputFile": "android-debug.apk",
+        "fullName": "debug",
+        "baseName": "debug",
+        "dirName": ""
+      },
+      "path": "AndroidManifest.xml",
+      "properties": {
+        "packageId": "tk.sebastjanmevlja.doodlejumpspace",
+        "split": "",
+        "minSdkVersion": "15"
+      }
+    }
+  ]
+}
