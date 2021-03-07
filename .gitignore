@@ -216,4 +216,5 @@ fabric.properties
 
 
 # Libgdx
-android/build/
+android&build/
+core/build/
