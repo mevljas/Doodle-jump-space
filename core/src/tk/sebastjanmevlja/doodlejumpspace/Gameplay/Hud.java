@@ -54,7 +54,7 @@ public class Hud extends Actor {
         score.draw(batch, parentAlpha);
         lives.draw(batch, parentAlpha);
         for (int i = 1; i <= Player.lives; i++) {
-            batch.draw(playerTexture, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.13f + i * tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.025f, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.97f, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.02f, Constants.HEIGHT * 0.02f);
+            batch.draw(playerTexture, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.16f + i * tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.025f, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.97f, tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.02f, Constants.HEIGHT * 0.02f);
         }
         pauseIcon.draw(batch);
 
