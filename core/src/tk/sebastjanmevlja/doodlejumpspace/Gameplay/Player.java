@@ -32,7 +32,7 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 public class Player extends Actor {
 
 
-    public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.005f;
+    public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.0055f;
     public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0022f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.8f;
     public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
@@ -194,7 +194,7 @@ public class Player extends Actor {
 
     private void checkAccelerometer() {
         float accelX = Gdx.input.getAccelerometerX();
-        float accelerometerSensitivity = 0.8f;
+        float accelerometerSensitivity = 0.5f;
         if (accelX > accelerometerSensitivity) {
             this.moveLeft();
         } else if (accelX < -accelerometerSensitivity) {
