@@ -125,6 +125,11 @@ public class Assets {
 
     public void dispose() {
         assetManager.dispose();
+        fontBig.dispose();
+        fontHud.dispose();
+        fontMedium.dispose();
+        fontSmall.dispose();
+        fontVerySmall.dispose();
     }
 
     public boolean update() {

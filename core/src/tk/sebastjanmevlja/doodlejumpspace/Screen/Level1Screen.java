@@ -137,16 +137,16 @@ public class Level1Screen implements Screen {
     }
 
     private void updatePlatforms() {
-        ArrayList<Platform> removePlatforms = new ArrayList<>();
+        ArrayList<Platform> recyclePlatforms = new ArrayList<>();
         for (Platform platform : platforms) {
             Vector3 windowCoordinates = new Vector3(0, platform.getSprite().getY(), 0);
             camera.project(windowCoordinates);
             if (windowCoordinates.y + platform.getSprite().getHeight() < 0 || !platform.isAlive()) {
-                removePlatforms.add(platform);
+                recyclePlatforms.add(platform);
             }
 
         }
-        for (Platform p : removePlatforms) {
+        for (Platform p : recyclePlatforms) {
             recyclePlatform(p);
 
         }
@@ -155,16 +155,16 @@ public class Level1Screen implements Screen {
     }
 
     private void updatePlanets() {
-        ArrayList<Planet> removePlanets = new ArrayList<>();
+        ArrayList<Planet> recyclePlanets = new ArrayList<>();
         for (Planet planet : planets) {
             Vector3 windowCoordinates = new Vector3(0, planet.getSprite().getY(), 0);
             camera.project(windowCoordinates);
             if (windowCoordinates.y + planet.getSprite().getHeight() < 0) {
-                removePlanets.add(planet);
+                recyclePlanets.add(planet);
             }
 
         }
-        for (Planet p : removePlanets) {
+        for (Planet p : recyclePlanets) {
             recyclePlanet(p);
 
         }
@@ -172,17 +172,17 @@ public class Level1Screen implements Screen {
 
     }
 
-    private void updateMonsters() {
-        ArrayList<Enemy> removeEnemies = new ArrayList<>();
+    private void updateEnemies() {
+        ArrayList<Enemy> recycleEnemies = new ArrayList<>();
         for (Enemy enemy : enemies) {
             Vector3 windowCoordinates = new Vector3(0, enemy.getSprite().getY(), 0);
             camera.project(windowCoordinates);
             if (windowCoordinates.y + enemy.getSprite().getHeight() < 0 || !enemy.isAlive()) {
-                removeEnemies.add(enemy);
+                recycleEnemies.add(enemy);
             }
 
         }
-        for (Enemy m : removeEnemies) {
+        for (Enemy m : recycleEnemies) {
             removeMonster();
             m.addAction(Actions.removeActor());
             world.destroyBody(m.getBody());
@@ -242,7 +242,7 @@ public class Level1Screen implements Screen {
             checkGameState();
             camera.update();
             updatePlatforms();
-            updateMonsters();
+            updateEnemies();
             updateBullets();
             updatePlanets();
             removeShields();
@@ -250,8 +250,6 @@ public class Level1Screen implements Screen {
 
 
             // Advance the world, by the amount of time that has elapsed since the  last frame
-            // Generally in a real game, dont do this in the render loop, as you are  tying the physics
-            // update rate to the frame rate, and vice versa
             world.step(Gdx.graphics.getDeltaTime(), 6, 2);
             stage.act(Gdx.graphics.getDeltaTime());
         }
@@ -277,15 +275,6 @@ public class Level1Screen implements Screen {
 
         stage.getBatch().begin();
         stage.getBatch().end();
-
-//        Display number of drawn objects.
-//        printCullingStatus();
-
-
-        // Now render the physics world using our scaled down matrix
-        // Note, this is strictly optional and is, as the name suggests, just  for debugging purposes
-//        debugRenderer.render(world, debugMatrix);
-
 
     }
 
@@ -315,7 +304,6 @@ public class Level1Screen implements Screen {
 
     @Override
     public void dispose() {
-//        saveObjects();
         stage.dispose();
         world.dispose();
 
