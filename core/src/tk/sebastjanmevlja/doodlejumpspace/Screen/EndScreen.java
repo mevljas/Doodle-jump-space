@@ -54,6 +54,7 @@ public class EndScreen implements Screen {
         Label.LabelStyle labelStyleBig = titleLabel.getStyle();
         labelStyleBig.font = Assets.fontBig;
         titleLabel.setStyle(labelStyleBig);
+        titleLabel.setAlignment(Align.center);
 
         Label.LabelStyle labelStyleSmall = textLabel.getStyle();
         labelStyleSmall.font = Assets.fontSmall;

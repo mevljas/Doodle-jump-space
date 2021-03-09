@@ -98,16 +98,16 @@ public class Assets {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/DoodleJump.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
-        parameter.size = (int) (Constants.HEIGHT * 0.05);
+        parameter.size = (int) (Constants.HEIGHT * 0.04);
         fontSmall = generator.generateFont(parameter);
 
-        parameter.size = (int) (Constants.HEIGHT * 0.03);
+        parameter.size = (int) (Constants.HEIGHT * 0.024);
         fontVerySmall = generator.generateFont(parameter);
 
-        parameter.size = (int) (Constants.HEIGHT * 0.065);
+        parameter.size = (int) (Constants.HEIGHT * 0.055);
         fontMedium = generator.generateFont(parameter);
 
-        parameter.size = (int) (Constants.HEIGHT * 0.08);
+        parameter.size = (int) (Constants.HEIGHT * 0.07);
         fontBig = generator.generateFont(parameter);
 
         parameter.size = (int) (Constants.HEIGHT * 0.035);

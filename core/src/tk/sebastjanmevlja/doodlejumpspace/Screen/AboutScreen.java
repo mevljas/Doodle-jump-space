@@ -39,7 +39,6 @@ public class AboutScreen implements Screen {
         // this table.
         Table table = new Table();
         table.setFillParent(true);
-        //table.setDebug(true);
         stage.addActor(table);
 
         table.align(Align.center);
@@ -63,6 +62,7 @@ public class AboutScreen implements Screen {
         Label.LabelStyle LabelStyleBig = titleLabel.getStyle();
         LabelStyleBig.font = Assets.fontBig;
         titleLabel.setStyle(LabelStyleBig);
+        titleLabel.setAlignment(Align.center);
 
 
         Label label = new Label("Gameteam presents " +

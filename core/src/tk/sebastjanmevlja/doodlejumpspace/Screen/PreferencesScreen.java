@@ -127,6 +127,7 @@ public class PreferencesScreen implements Screen {
         Label.LabelStyle labelStyleTitle = titleLabel.getStyle();
         labelStyleTitle.font = Assets.fontBig;
         titleLabel.setStyle(labelStyleTitle);
+        titleLabel.setAlignment(Align.center);
 
         Label.LabelStyle labelStyleText = titleLabel.getStyle();
         labelStyleText.font = Assets.fontSmall;
