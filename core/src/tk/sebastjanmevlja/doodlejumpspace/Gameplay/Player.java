@@ -207,7 +207,7 @@ public class Player extends Actor {
     }
 
     float calculateShieldPositionY(Shield shield) {
-        return sprite.getY() + HEIGHT / 2 - shield.sprite.getHeight() * 0.6f;
+        return sprite.getY() + HEIGHT / 2 - shield.sprite.getHeight() * 0.5f;
     }
 
     float calculateJetpackPositionX(Jetpack jetpack) {
