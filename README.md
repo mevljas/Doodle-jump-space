@@ -16,5 +16,5 @@ University of Ljubljana, Slovenia,
 The game is made in Java using the LibGDX library and fully supports Google Play Games Services. The application is available
 on the [Google Play store](https://play.google.com/store/apps/details?id=tk.sebastjanmevlja.doodlejumpspace). 
   
-<img src="https://github.com/mevljas/Doodle-jump-space/blob/main/image.png" width="40%" height="80%" />  
+<img src="https://github.com/mevljas/Doodle-jump-space/blob/main/images/image.png" width="40%" height="80%" />  
 
