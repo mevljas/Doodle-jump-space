@@ -19,9 +19,9 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
-    version = '0.3'
+    version = '0.4'
     ext {
-        appName = "doodle-juimp"
+        appName = "doodle-jump-space"
         gdxVersion = '1.9.13'
         gamesvcsVersion = '1.1.0'
         roboVMVersion = '2.3.11'
