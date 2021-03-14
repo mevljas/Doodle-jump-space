@@ -21,7 +21,9 @@ import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Platforms.PlatformFactory;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.HorizontalDirection;
+import tk.sebastjanmevlja.doodlejumpspace.Helpers.LocalStorage;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.VerticalDirection;
+import tk.sebastjanmevlja.doodlejumpspace.MyGame.Game;
 import tk.sebastjanmevlja.doodlejumpspace.Screen.Level1Screen;
 
 import static tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.PPM;
@@ -480,5 +482,11 @@ public class Player extends Actor {
 
     public Jetpack getJetpack() {
         return this.jetpack;
+    }
+
+    public void clearScore() {
+        score = 0;
+        Game.localStorage.setHighScore(0);
+
     }
 }

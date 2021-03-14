@@ -10,6 +10,7 @@ import de.golfgl.gdxgamesvcs.IGameServiceListener;
 import de.golfgl.gdxgamesvcs.MockGameServiceClient;
 import de.golfgl.gdxgamesvcs.achievement.IAchievement;
 import de.golfgl.gdxgamesvcs.leaderboard.ILeaderBoardEntry;
+import tk.sebastjanmevlja.doodlejumpspace.Gameplay.Player;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.Assets;
 import tk.sebastjanmevlja.doodlejumpspace.Helpers.LocalStorage;
 import tk.sebastjanmevlja.doodlejumpspace.Screen.AboutScreen;
@@ -191,6 +192,8 @@ public class Game extends com.badlogic.gdx.Game implements IGameServiceListener 
     public void gsOnSessionInactive() {
         if (getScreen() == menuScreen) {
             menuScreen.show();
+            if (Player.player != null)
+                Player.player.clearScore();
         }
     }
 
