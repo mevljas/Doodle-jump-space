@@ -20,8 +20,8 @@ android {
         applicationId "tk.sebastjanmevlja.doodlejumpspace"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 5
-        versionName "0.41"
+        versionCode 6
+        versionName "0.42"
         android.ndkVersion  "22.0.7026061"
     }
     buildTypes {
