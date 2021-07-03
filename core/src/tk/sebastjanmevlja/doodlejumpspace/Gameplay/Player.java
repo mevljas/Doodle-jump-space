@@ -52,7 +52,7 @@ public class Player extends Actor {
     public static ArrayList<Shield> removedShields;
     public static ArrayList<Jetpack> removedJetpacks;
     public static float JUMP_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0027f;
-    public static float HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 11.8f;
+    public static float HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 15f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float WIDTH = HEIGHT;
     public static ArrayList<Bullet> bullets;
