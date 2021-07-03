@@ -34,8 +34,8 @@ import static tk.sebastjanmevlja.doodlejumpspace.Gameplay.Sound.playShieldSound;
 public class Player extends Actor {
 
 
-    public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.0055f;
-    public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0022f;
+    public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.006f;
+    public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0025f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.8f;
     public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
     public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
@@ -52,7 +52,7 @@ public class Player extends Actor {
     public static ArrayList<Shield> removedShields;
     public static ArrayList<Jetpack> removedJetpacks;
     public static float JUMP_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0027f;
-    public static float HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 11.8f;
+    public static float HEIGHT = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT / 15f;
     @SuppressWarnings("SuspiciousNameCombination")
     public static float WIDTH = HEIGHT;
     public static ArrayList<Bullet> bullets;
