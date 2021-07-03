@@ -35,7 +35,7 @@ public class Player extends Actor {
 
 
     public static final float HORIZONTAL_VELOCITY = tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.WIDTH * 0.006f;
-    public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0022f;
+    public static final float WORLD_VELOCITY = -tk.sebastjanmevlja.doodlejumpspace.Helpers.Constants.HEIGHT * 0.0025f;
     public static final float WORLD_TRAMPOLINE_VELOCITY = WORLD_VELOCITY * 1.8f;
     public static final float WORLD_JETPACK_VELOCITY = WORLD_VELOCITY * 7f;
     public static final float WORLD_JETPACK_VELOCITY_SUBSTRACTION_RATIO = 0.997f;
