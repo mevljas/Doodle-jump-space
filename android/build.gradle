@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "29.0.2"
-    compileSdkVersion 29
+    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         applicationId "tk.sebastjanmevlja.doodlejumpspace"
         minSdkVersion 15
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 6
         versionName "0.42"
         android.ndkVersion  "22.0.7026061"
