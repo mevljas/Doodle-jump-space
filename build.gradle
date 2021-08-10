@@ -19,7 +19,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
-    version = '0.43'
+    version = '0.44'
     ext {
         appName = "doodle-jump-space"
         gdxVersion = '1.9.13'
