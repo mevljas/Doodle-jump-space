@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.utils.Null;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -220,18 +221,24 @@ public class Level1Screen implements Screen {
 
     private void removeShields() {
         for (Shield s : Player.removedShields) {
-            s.addAction(Actions.removeActor());
-            Body b = s.getBody();
-            world.destroyBody(b);
+            try {
+                s.addAction(Actions.removeActor());
+                Body b = s.getBody();
+                world.destroyBody(b);
+            } catch (NullPointerException ignored){}
+
         }
         Player.removedShields.clear();
     }
 
     private void removeJetpacks() {
         for (Jetpack j : Player.removedJetpacks) {
-            j.addAction(Actions.removeActor());
-            Body b = j.getBody();
-            world.destroyBody(b);
+            try {
+                j.addAction(Actions.removeActor());
+                Body b = j.getBody();
+                world.destroyBody(b);
+            } catch (NullPointerException ignored){}
+
         }
         Player.removedJetpacks.clear();
     }
